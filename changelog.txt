@@ -1,0 +1,28 @@
+3.10
+Fixed: reviving with Medikit
+Fixed: countermeasures at helicopters and vehicles
+Fixed: throwing nades into tank
+Fixed: attaching satchel charge to vehicles
+Fixed: selecting rifle grenade selection with '2' button
+Added: buying quadbikes near MHQ
+
+3.01
+UAV code removed
+SPY removed
+MJH removed
+JDAM removed
+radar blocking removed
+
+3.0 public alpha
+Port to ArmA 3 Alpha
+
+1.05 release
+
+Fixed: reloading UAV countermeasures
+Fixed: view distance in outro
+Fixed: multiple UAV repairs message now shown properly
+Fixed: statistics window (I) works better
+Fixed: missing GUI sounds
+Changed: max speed of tanks with low gear = 35 km/h
+Removed: unused handler of tank 'engine on|off' event
++various smaller fixes and cleanups

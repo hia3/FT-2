@@ -1,0 +1,25 @@
+#include "resource\A3.hpp"
+#include "resource\Ressources.hpp"
+#include "resource\Dialogs.hpp"
+#include "resource\Titles.hpp"
+#include "resource\Sounds.hpp"
+#include "resource\Params.hpp"
+
+respawn=3;
+respawndelay=0;
+disabledAI=true;
+respawnDialog = 0;
+onLoadMissionTime=false;
+loadScreen="pic\hia3logo.paa";
+joinUnassigned  = false;
+
+onLoadName="www.hia3.com";
+author="sms and mid16";
+onLoadMission="Based on the Valhalla map by WINSE and Roman.val";
+
+class Header
+{
+	gameType=Hold;
+	minPlayers=1;
+	maxPlayers=120;
+};

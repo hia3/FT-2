@@ -1,0 +1,32 @@
+Credits
+
+Mission engine & design:
+	WINSE
+Mission design & beta testing:
+	Roman.val
+Mission localization:
+	WINSE
+Maintenance and porting to ArmA 3:
+	sms
+
+In mission used script code by:
+	Nuxil
+	Benny
+	AAS Team (Kju, Crowe2Extreme, [GNC]Lord-MDB)
+	General Barron
+	vektorboson
+
+
+WINSE
+withAGun@ymail.com
+26.09.2010
+Volgograd, Russia
+
+Note: You are free to do what you want with scripts of this mission 
+without asking any permissions but with specifying of the script origin. 
+(Though I can say all of this only about my scripts - not about scripts
+ of another coders.)
+
+The only requirement: if you make some changes to mission don't forget 
+also to change name to show mission is not original and has your changes.
+And don't please remove original authors names from mission start screen
