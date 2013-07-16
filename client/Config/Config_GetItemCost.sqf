@@ -58,7 +58,7 @@ if (isNil "Global_CostMap") then
 		["arifle_Katiba_F",80],
 		["arifle_Katiba_GL_F",120],
 		["arifle_Mk20_F",70],
-		["arifle_Mk20_GL_F",100],
+		["arifle_Mk20_GL_F",130],
 		["arifle_Mk20C_F",50],
 		["arifle_MX_F",80],
 		["arifle_MX_GL_F",150],
