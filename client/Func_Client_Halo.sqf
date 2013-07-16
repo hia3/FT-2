@@ -1,39 +1,45 @@
 /**/
 Halo_Marker_Init = 
 {
-	_markerName = format["%1_Halo",name player];	
+	private ["_markerName","_marker"];
+	_markerName = format["%1_Halo", Local_PlayerName];	
 	_marker = createMarker [_markerName ,  [-1,-1,0]];
 	_marker setMarkerShapeLocal "ICON";
 	_markerName setMarkerTypeLocal "mil_dot";
 	_marker setmarkerColor "ColorOrange";
-	_marker setMarkerText format["Halo %1",name player];
+	_marker setMarkerText format["Halo %1", Local_PlayerName];
 	
-	onMapSingleClick {format['%1_Halo',name player] setMarkerPosLocal _pos; true;};
+	onMapSingleClick {format['%1_Halo', Local_PlayerName] setMarkerPosLocal _pos; true;};
 };
 
 Halo_Marker_Remove = 
 {
-	deleteMarker format["%1_Halo",name player];
+	deleteMarker format["%1_Halo", Local_PlayerName];
 };
 
 Halo_Jump_F = {
+	private ["_parashute","_haloCost","_HaloHeight","_name","_pos","_cash","_pic"];
 	_parashute = "B_parachute";
 	_haloCost = 400;
-	_HaloHeight = 1500;
+	_HaloHeight = 2000;
 	
 	// Firstly, checks all conditions 
 	if((secondaryWeapon player) !="")exitWith
 	{
-		hint format ["You cant use halo if you have secondary weapon.\nRemove %1.",secondaryWeapon player];
+		_name = getText(configFile >> "cfgWeapons" >> (secondaryWeapon player) >> "displayName");
+		_pic = getText(configFile >> "cfgWeapons" >> (secondaryWeapon player) >> "picture");
+		[localize "STR_HINT_Warning",localize "STR_HINT_HALO_RemoveSecondaryWeapon" + _name,_pic ,1.0,"error_sound"] call Func_Client_ShowCustomMessage;
 	};
 	if( ((backpack player)!="" && ((backpack player)!=_parashute)) )exitWith
 	{
-		hint format ["You cant use halo if you have backpack.\nRemove %1.",(backpack player)];
+		_name = getText(configFile >> "cfgVehicles" >> (backpack player) >> "displayName");	
+		_pic = if((backpack player)!="")then{getText(configFile >> "cfgVehicles" >> (backpack player)  >> "picture")}else{ "pic\no.paa"};
+		[localize "STR_HINT_Warning",localize "STR_HINT_HALO_RemoveBackpack" + _name,_pic,1.0,"error_sound"] call Func_Client_ShowCustomMessage;
 	};
-	_pos = getMarkerpos format["%1_Halo",(name player)]; 
+	_pos = getMarkerpos format["%1_Halo",( Local_PlayerName)]; 
 	if( ((_pos select 0)<=0) &&  ((_pos select 1)<=0) ) exitWith
 	{
-		hint "Select coordinate on the minimap.";
+	[localize "STR_HINT_Warning",localize "STR_HINT_HALO_SelectCoorinate","pic\no.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage;
 	};
 	if( (backpack player)==_parashute ) then
 	{ 
@@ -45,22 +51,22 @@ Halo_Jump_F = {
 	_cash = [] call Func_Client_GetPlayerFunds;
 	if(_cash < _haloCost )exitWith
 	{
-		hint format["You can not afford to Halo\nMissing %1",_haloCost - _cash];
+		[localize "STR_HINT_Warning",localize "STR_HINT_LowFunds","pic\no.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage;
 	};
 	
 	// YOU CAN
 	closedialog 0;
 	-_haloCost call Func_Client_ChangePlayerFunds;
-	titleText ["Get Ready", "BLACK OUT",2];
+	titleText [localize "STR_HINT_HALO_GetReady", "BLACK OUT",2];
 	sleep 2.2;
 	player setpos [_pos select 0,_pos select 1, _HaloHeight];
-	titleText ["Don't forget about parashute", "BLACK IN",7];
+	titleText [localize "STR_HINT_HALO_DontForget", "BLACK IN",7];
 	[] call Halo_Fall;
 };
 
 Halo_Fall = 
-{
-	_unit = player; 
+{	
+	private ["_vehicle"];
 	[] spawn
 	{
 		// FREEFALL 
