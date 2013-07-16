@@ -93,14 +93,17 @@ Local_IndirectFireMode=false;
 Local_InjuredByEnemy=false;
 Local_ReviverUnit=objNull;
 Local_PlayerBody=objNull;
-Local_TankDrivePos=[];
-Local_TankFirePos=[];
 Local_CrosshairShow=false;
 Local_HighClimbingModeOn=false;
 Local_RadarGuidanceOn=false;
 Local_LastDeathTime=0;
 Local_PlayerInSafeZone=2;//0-out of safe zone; 1-in bufer zone; 2-in safezone
 Local_PlayerIsMedic=false;
+
+Local_TankDrivePos=[];
+Local_TankFirePos=[];
+Func_Client_AssignDrivePos = { Local_TankDrivePos = _this };
+Func_Client_AssignFirePos  = { Local_TankFirePos  = _this };
 
 
 Func_Client_AddIncome=compile preprocessFile ("client\Func_Client_AddIncome.sqf");
@@ -109,6 +112,7 @@ Func_Client_AproachingRespawnArea=compile preprocessFile ("client\Func_Client_Ap
 Func_Client_CalculateSpawnPos=compile preprocessFile ("client\Func_Client_CalculateSpawnPos.sqf");
 Func_Client_ChangePlayerFunds=compile preprocessFile ("client\Func_Client_ChangePlayerFunds.sqf");
 Func_Client_CheckPointCaptured=compile preprocessFile ("client\Func_Client_CheckPointCaptured.sqf");
+Func_Client_CommanderSendPosition=compile preprocessFile ("client\Func_Client_CommanderSendPosition.sqf");
 Func_Client_CompileScoreStatistics=compile preprocessFile ("client\Func_Client_CompileScoreStatistics.sqf");
 Func_Client_ConvertToArray=compile preprocessFile ("client\Func_Client_ConvertToArray.sqf");
 Func_Client_ConvertToDirection=compile preprocessFile ("client\Func_Client_ConvertToDirection.sqf");	
@@ -210,6 +214,24 @@ onEachFrame
 					drawIcon3D ["\A3\ui_f\data\map\vehicleicons\pictureHeal_ca.paa", [1,0,0,1], _pos, (1 + (0.2 * sin((400*diag_tickTime) mod 360))), (1 + (0.2 * cos((400*diag_tickTime) mod 360))), 0, (str _distance) + "m", 1, 0.04, "TahomaB"];
 				};
 			} forEach allDeadMen;
+		};
+		
+		if ((count Local_TankDrivePos) != 0) then
+		{
+			private ["_distance"];
+			
+			_distance = round (player distance Local_TankDrivePos);
+		
+			drawIcon3D ["a3\ui_f\data\map\Markers\Military\marker_ca.paa", [0,1,0,1], Local_TankDrivePos, 0.7, 0.7, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
+		};
+		
+		if ((count Local_TankFirePos) != 0) then
+		{
+			private ["_distance"];
+			
+			_distance = round (player distance Local_TankFirePos);
+		
+			drawIcon3D ["a3\ui_f\data\map\GroupIcons\selector_selectedmission_ca.paa", [1,0,0,1], Local_TankFirePos, 0.7, 0.7, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
 		};
 	};
 };
@@ -314,8 +336,6 @@ onEachFrame
 	"Public_UnitRegistered" addPublicVariableEventHandler {if (((_this select 1) getVariable "ft2_wf_side")==Local_PlayerSide) then {Local_RegisteredObjects=Local_RegisteredObjects+[_this select 1];};};
 	"Public_TankExploded" addPublicVariableEventHandler {(_this select 1) spawn Func_System_TankExploded};		
 	"Public_DeadUnit" addPublicVariableEventHandler {if (((_this select 1) select 0) getVariable "ft2_wf_side"==Local_PlayerSide) then {private["_name"];_name=format["body%1",((_this select 1) select 0) getVariable "playername"]; if ((_this select 1) select 1) then {createMarkerLocal[_name,position ((_this select 1) select 0)];_name setMarkerColorLocal Local_FriendlyColor;_name setMarkerTypeLocal "waypoint";_name setMarkerSizeLocal [1.3,1.3]} else {deleteMarkerLocal _name}}};
-	"Public_TankDrivePos" addPublicVariableEventHandler {if ((((_this select 1) select 0)==Local_PlayerVehicle) && ((player==driver Local_PlayerVehicle) || (player==gunner Local_PlayerVehicle))) then {_varname=_this select 1;_varname=_varname-[_varname select 0];Local_TankDrivePos=_varname}};
-	"Public_TankFirePos" addPublicVariableEventHandler {if ((((_this select 1) select 0)==Local_PlayerVehicle) && ((player==driver Local_PlayerVehicle) || (player==gunner Local_PlayerVehicle))) then {_varname=_this select 1;_varname=_varname-[_varname select 0];Local_TankFirePos=_varname}};	
 	"Public_UnitHealed" addPublicVariableEventHandler {(_this select 1) spawn Func_Client_SomeUnitHealed};
 	"Public_ReviveRequest" addPublicVariableEventHandler {if (((_this select 1) select 1)==Local_PlayerBody) then {((_this select 1) select 0) spawn Func_Client_ReviveRequest}};
 	"Public_AircraftAttacked" addPublicVariableEventHandler {private["_veh","_cnt"]; _veh=_this select 1; if (player in _veh) then {_cnt=_veh getVariable "flaresleft"; [localize "STR_HINT_Warning",localize "STR_HINT_IncomingMissile","pic\ui_notfreeze_ca.01.paa",1.0] call Func_Client_ShowCustomMessage; Public_AircraftAttacked=objNull; if (_cnt > 0) then {_veh vehicleChat format [localize "STR_MES_FlaresLaunched",_cnt-1];};_veh vehicleRadio "air_alarm"}};

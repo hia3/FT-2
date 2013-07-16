@@ -30,7 +30,7 @@ _ctrl=_this select 3;
 _alt=_this select 4;
 		
 _denyaction=false;
-	
+
 switch (_key) do
 {
 	case KEY_TANK_SMOKE:
@@ -171,37 +171,26 @@ switch (_key) do
 	};
 	case KEY_TANK_ORDERS:
 	{
-		if (_shift) then
+		if ((cameraView == "GUNNER") && (player==commander Local_PlayerVehicle)) then
 		{
-			if ((player==commander Local_PlayerVehicle) && (({Local_PlayerVehicle isKindOf _x} count System_HaveScannerVehicleTypes)>0)) then
+			if (_shift) then
 			{
-				Local_TankDrivePos=screenToWorld [0.5,0.5];
-				Public_TankDrivePos=[Local_PlayerVehicle]+Local_TankDrivePos;
-				publicVariable "Public_TankDrivePos";
-				_denyaction=true;
-			};
-		}else{
-			if (_ctrl) then
-			{
-				if ((player==commander Local_PlayerVehicle) && (({Local_PlayerVehicle isKindOf _x} count System_HaveScannerVehicleTypes)>0)) then
-				{
-					Local_TankFirePos=screenToWorld [0.5,0.5];
-					Public_TankFirePos=[Local_PlayerVehicle]+Local_TankFirePos;
-					publicVariable "Public_TankFirePos";
+					Local_TankDrivePos = [driver Local_PlayerVehicle, screenToWorld [0.5,0.5], "Func_Client_AssignDrivePos"] call Func_Client_CommanderSendPosition;					
 					_denyaction=true;
-				};
-			}else{
-				if (_alt) then
+			}
+			else
+			{
+				if (_ctrl) then
 				{
-					if ((player==commander Local_PlayerVehicle) && (({Local_PlayerVehicle isKindOf _x} count System_HaveScannerVehicleTypes)>0)) then
+					Local_TankFirePos = [gunner Local_PlayerVehicle, screenToWorld [0.5,0.5], "Func_Client_AssignFirePos"] call Func_Client_CommanderSendPosition;
+					_denyaction=true;
+				}
+				else
+				{
+					if (_alt) then
 					{
-						Local_TankDrivePos=[];
-						Public_TankDrivePos=[Local_PlayerVehicle];
-						publicVariable "Public_TankDrivePos";
-						
-						Local_TankFirePos=[];
-						Public_TankFirePos=[Local_PlayerVehicle];
-						publicVariable "Public_TankFirePos";
+						Local_TankDrivePos = [driver Local_PlayerVehicle, [], "Func_Client_AssignDrivePos"] call Func_Client_CommanderSendPosition;
+						Local_TankFirePos  = [gunner Local_PlayerVehicle, [], "Func_Client_AssignFirePos"]  call Func_Client_CommanderSendPosition;	
 						_denyaction=true;
 					};
 				};

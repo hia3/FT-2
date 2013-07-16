@@ -91,7 +91,9 @@ Local_PlayerVehicle addEventHandler ["Fired","_this call Func_Client_PlayerFired
 			[] spawn Func_System_HeliCargoManager;			
 		};
 	
-	}else{		
+	}
+	else
+	{		
 		_actions=["FT2_WF_ACT_GpsOn","FT2_WF_ACT_GpsOff","FT2_WF_ACT_BailOut","FT2_WF_ACT_Repair","FT2_WF_ACT_Reammo","FT2_WF_ACT_Refuel","FT2_WF_ACT_TakeOff","FT2_WF_ACT_Landing","FT2_WF_ACT_ClosedPosS","FT2_WF_ACT_ClosedPosC","FT2_WF_ACT_IgnitionOff","FT2_WF_ACT_IgnitionOn","FT2_WF_ACT_CursorOff","FT2_WF_ACT_CursorOn","FT2_WF_ACT_LowGearOff","FT2_WF_ACT_LowGearOn","FT2_WF_ACT_RadarGuidanceOff","FT2_WF_ACT_RadarGuidanceOn","STR_ACT_ManualFlareOff","STR_ACT_ManualFlareOn"];
 		
 		{
@@ -108,7 +110,4 @@ Local_PlayerVehicle addEventHandler ["Fired","_this call Func_Client_PlayerFired
 		};
 		
 		Local_PlayerVehicle=vehicle player;
-		
-		Local_TankDrivePos=[];
-		Local_TankFirePos=[];
 	};

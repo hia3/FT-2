@@ -1,7 +1,7 @@
 _veh = _this;
 
 _veh addEventHandler['killed',       "_this call Func_Common_DestroyUnitAward"];
-_veh addEventHandler['HandleDamage', "_this call Func_Common_HandleDamage"];    
+_veh addEventHandler['HandleDamage', "_this call Func_Common_HandleDamage"];
 
 if (false) then
 {

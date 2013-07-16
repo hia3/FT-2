@@ -44,8 +44,6 @@ System_HandGrenadeAmmoTypes=["HandGrenade"];
 System_ExplosiveAmmoTypes=["SatchelCharge_Remote_Ammo", "DemoCharge_Remote_Ammo"];*/
 System_DisposableRPGTypes=["M136","RPG18"];
 
-System_HaveScannerVehicleTypes=["O_Boat_Armed_01_hmg_F", "B_Boat_Armed_01_minigun_F", "I_MRAP_03_gmg_F", "I_MRAP_03_hmg_F"];
-
 System_HaveDesignatorVehicleTypes=["AH1_Base","AH64_base_EP1","A10","AV8B2","F35B","Mi17_rockets_RU","Mi24_Base","Kamov_Base","Su25_base","Su34","L39_base","AW159_Lynx_BAF"];
 
 System_HaveAARadarVehicleTypes=[["2S6M_Tunguska",["2A38M"],2500],["ZSU_INS",["AZP85"],2500],["M6_EP1",["M242BC"],2500],["HMMWV_Avenger",["M3P"],1500],["HMMWV_Avenger_DES_EP1",["M3P"],1500]];

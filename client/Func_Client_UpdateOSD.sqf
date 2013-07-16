@@ -33,7 +33,6 @@
 	_playerInVehicle=false;
 	_commanderScanner=false;
 	_hasLaserScanner=false;
-	_hasCommander=false;
 	_hasAARadar=false;
 	_hasGuidedMissile=false;
 	
@@ -41,8 +40,6 @@
 	_teamMarkersShown=false;
 	_medicMarkersShown=false;
 	_laserTargetsShown=false;
-	_gunnerOrdersShown=false;
-	_driverOrdersShown=false;
 	_radarTargetShown=false;
 	_missileTargetShown=false;
 	
@@ -84,24 +81,40 @@
 				};
 			};
 			
+			if (_playerInVehicle) then
+			{
+			
+				private ["_destination_reached", "_is_commander_not_here", "_is_driver_not_here", "_is_gunner_not_here"];
+					
+				_destination_reached   = if ((count Local_TankDrivePos) == 0) then { false } else { (player distance Local_TankDrivePos) < 3 };
+				_is_commander_not_here = isNull (commander Local_PlayerVehicle);
+				_is_driver_not_here    = isNull (driver    Local_PlayerVehicle);
+				_is_gunner_not_here    = isNull (gunner Local_PlayerVehicle);
+			
+				if (_destination_reached || _is_driver_not_here || _is_commander_not_here) then
+				{
+					Local_TankDrivePos=[];
+				};
+				
+				if (_is_gunner_not_here || _is_commander_not_here) then
+				{
+					Local_TankFirePos=[];
+				};
+			}
+			else
+			{
+				Local_TankDrivePos=[];
+				Local_TankFirePos=[];
+			};
+			
 
-			if (_playerInVehicle && (player==(commander Local_PlayerVehicle)) && (cameraView=="Gunner") && (({Local_PlayerVehicle isKindOf _x} count System_HaveScannerVehicleTypes)>0)) then
+			if (_playerInVehicle && (player==(commander Local_PlayerVehicle)) && (cameraView=="Gunner")) then
 			{
 				_commanderScanner=true;
 			}
 			else
 			{
 				_commanderScanner=false;
-			};
-
-			
-			if (_playerInVehicle && (({Local_PlayerVehicle isKindOf _x} count System_HaveScannerVehicleTypes)>0)) then
-			{
-				_hasCommander=true;
-			}
-			else
-			{
-				_hasCommander=false;
 			};
 			
 			Local_PlayerIsMedic = ("Medikit" in (items player));
@@ -199,73 +212,6 @@
 				};
 				_commanderMarkersShown=false;
 			};			
-		};
-
-		
-		if (_hasCommander) then
-		{
-			if ((count Local_TankDrivePos) > 0) then
-			{
-				_control=_display displayCtrl 6091;
-				_pos=worldToScreen Local_TankDrivePos;
-				if ((count _pos)!=0) then
-				{
-					_pos set [1,(_pos select 1)-0.06];
-					_name=parseText format["<t size='1' shadow='true' align='center' color='#FFFFFF'>%1m</t><br/><t size='1.2' color='#00FF00' align='center'><img image='a3\ui_f\data\map\Markers\Military\marker_ca.paa'></t>",round(Local_TankDrivePos distance Local_PlayerVehicle)];
-					[_control,_name,_pos] call _showcontrol;					
-					_driverOrdersShown=true;
-				}				
-				else
-				{
-					_control call _hidecontrol;
-				};
-			}
-			else
-			{
-				if (_driverOrdersShown) then
-				{
-					_control=_display displayCtrl 6091;
-					_control call _hidecontrol;	
-					_driverOrdersShown=false;
-				};				
-			};
-			if ((count Local_TankFirePos) > 0) then
-			{
-				_control=_display displayCtrl 6092;
-				_pos=worldToScreen Local_TankFirePos;
-				if ((count _pos)!=0) then
-				{
-					_pos set [1,(_pos select 1)-0.06];
-					_name=parseText format["<t size='1' shadow='true' align='center' color='#FFFFFF'>%1m</t><br/><t size='2.0' color='#FF0000' align='center'><img image='a3\ui_f\data\map\GroupIcons\selector_selectedmission_ca.paa'></t>",round(Local_TankFirePos distance Local_PlayerVehicle)];
-					[_control,_name,_pos] call _showcontrol;
-					_gunnerOrdersShown=true;
-				}
-				else
-				{
-					_control call _hidecontrol;
-				};
-			}
-			else
-			{
-				if (_gunnerOrdersShown) then
-				{
-					_control=_display displayCtrl 6092;
-					_control call _hidecontrol;
-					_gunnerOrdersShown=false;
-				};				
-			};
-		}
-		else
-		{
-			if (_gunnerOrdersShown || _driverOrdersShown) then
-			{
-				_control=_display displayCtrl 6091;
-				_control call _hidecontrol;
-				_control=_display displayCtrl 6092;
-				_control call _hidecontrol;
-				_gunnerOrdersShown=false;
-				_driverOrdersShown=false;
-			};				
 		};
 		
 		if (_hasLaserScanner) then
