@@ -1,37 +1,37 @@
 
 System_AntiAirMissileTypes=[["M_RPG32_AA_F",true],["M_Titan_AA",true],["M_Air_AA",true]];
-System_AntiAirVehicleTypes=[["Man",0.165],["Helicopter",0]];
+System_AntiAirVehicleTypes=[["Man",0.33],["Helicopter",0]];
 
 System_AntiTankMissileTypes=[["M_RPG32_F",true],["M_NLAW_AT_F",true],["M_Titan_AT",true],["M_PG_AT",true]];
-System_AntiTankVehicleTypes=[["Man",0.15],["Helicopter",0.30]];
+System_AntiTankVehicleTypes=[["Man",0.33],["Helicopter",0.5]];
 
 System_ArmoredVehicleTypes=
 [
-	["O_MRAP_02_F",3],
-	["O_MRAP_02_hmg_F",3],
-	["O_MRAP_02_gmg_F",3],
+	["O_MRAP_02_F",1],
+	["O_MRAP_02_hmg_F",1],
+	["O_MRAP_02_gmg_F",1],
 	
-	["O_APC_Wheeled_02_rcws_F",4],
+	["O_APC_Wheeled_02_rcws_F",2],
 	
-	["B_MRAP_01_F",3],
-	["B_MRAP_01_gmg_F",3],
-	["B_MRAP_01_hmg_F",3],
+	["B_MRAP_01_F",1],
+	["B_MRAP_01_gmg_F",1],
+	["B_MRAP_01_hmg_F",1],
 	
-	["B_APC_Wheeled_01_cannon_F",4],
+	["B_APC_Wheeled_01_cannon_F",2],
 	
 	
-	["I_MRAP_03_F",3],
-	["I_MRAP_03_gmg_F",3],
-	["I_MRAP_03_hmg_F",3],
+	["I_MRAP_03_F",1],
+	["I_MRAP_03_gmg_F",1],
+	["I_MRAP_03_hmg_F",1],
 	
-	["O_Boat_Armed_01_hmg_F",3],
-	["B_Boat_Armed_01_minigun_F",3]
+	["O_Boat_Armed_01_hmg_F",2],
+	["B_Boat_Armed_01_minigun_F",2]
 ];
 System_AircraftVehicleTypes=
 [
-	["B_Heli_Light_01_F",2],["B_Heli_Light_01_armed_F",5],["B_Heli_Attack_01_F",10],["B_Heli_Transport_01_F",2],
-	["I_Heli_Transport_02_F",2],
-	["O_Heli_Light_02_unarmed_F",2],["O_Heli_Light_02_F",2],["O_Heli_Attack_02_F",10],["O_Heli_Attack_02_black_F",10]
+	["B_Heli_Light_01_F",0],["B_Heli_Light_01_armed_F",1],["B_Heli_Attack_01_F",3],["B_Heli_Transport_01_F",0],
+	["I_Heli_Transport_02_F",0],
+	["O_Heli_Light_02_unarmed_F",0],["O_Heli_Light_02_F",1],["O_Heli_Attack_02_F",3],["O_Heli_Attack_02_black_F",3]
 ];
 
 System_GuidedMissileTypes=[];
