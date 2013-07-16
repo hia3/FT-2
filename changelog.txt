@@ -1,6 +1,3 @@
-3.11
-
-
 3.10
 Fixed: reviving with Medikit
 Fixed: countermeasures at helicopters and vehicles
