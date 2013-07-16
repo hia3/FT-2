@@ -1,133 +1,76 @@
-	deleteVehicle _this;
+/**/
+Halo_Marker_Init = {
+	if((isServer)&& (!(localplayer))) exitWith{};
 	
-	_unit = player;
+	_markerName = format["%1_Halo",name player];	
+	_marker = createMarker [_markerName ,  [-1,-1,0]];
+	_marker setMarkerShapeLocal "ICON";
+	_markerName setMarkerTypeLocal "mil_dot";
+	_marker setmarkerColor "ColorOrange";
+	_marker setMarkerText format["Halo %1",name player];
 	
-	_unit setVehicleInit "this switchMove 'HaloFreeFall_non'";
-	processInitCommands;
+	onMapSingleClick {format['%1_Halo',name player] setMarkerPosLocal _pos; true;};
+};
+
+Halo_Marker_Remove = {
+	deleteMarker format["%1_Halo",name player];
+};
+
+Halo_Jump_F = {
+	_parashute = "B_parachute";
+	_haloCost = 400;
+	_HaloHeight = 1500;
 	
-	_unit setDir (getDir _unit);
-		
-	_times=["5","4","3","2","1"];
-	for [{_i=0}, {_i<5}, {_i=_i+1}] do
-	{
-		hintSilent composeText [parseText format ["<t align='left' size='%4'><img image='%3'></t>"+"<t align='center' size='1.25' shadow='true'>%1</t><t align='right' size='%4'><img image='%3'></t>" +"<br/>" +"<t align='center' size='1.5' shadow='true'>%2</t>",localize "STR_HINT_ParaOpen",_times select _i,"\ca\air\data\ico\Para_CA.paa",1.0]];
-		sleep 0.2;
+	// Firstly, checks all conditions 
+	if((secondaryWeapon player) !="")exitWith{
+		hint format ["You cant use halo if you have secondary weapon.\nRemove %1.",secondaryWeapon player];
+	};
+	if( ((backpack player)!="" && ((backpack player)!=_parashute)) )exitWith{
+		hint format ["You cant use halo if you have backpack.\nRemove %1.",(backpack player)];
+	};
+	_pos = getMarkerpos format["%1_Halo",(name player)]; 
+	if( ((_pos select 0)<=0) &&  ((_pos select 1)<=0) ) exitWith{
+		hint "Select coordinate on the minimap.";
+	};
+	if( (backpack player)==_parashute ) then{ 
+		_haloCost = _haloCost - (_parashute call Func_Client_GetItemCost);
+	}else{
+		player addBackpack _parashute;
+	};
+	_cash = [] call Func_Client_GetPlayerFunds;
+	if(_cash < _haloCost )exitWith{
+		hint format["You can not afford to Halo\nMissing %1",_haloCost - _cash];
 	};
 	
-	hintSilent "";
-	
-	_unit setVehicleInit "this switchMove ''";
-	processInitCommands;
-	
-	if (!alive _unit) exitWith{};
+	// YOU CAN
+	closedialog 0;
+	-_haloCost call Func_Client_ChangePlayerFunds;
+	titleText ["Get Ready", "BLACK OUT",2];
+	sleep 2.2;
+	player setpos [_pos select 0,_pos select 1, _HaloHeight];
+	titleText ["Don't forget about parashute", "BLACK IN",7];
+	[] call Halo_Fall;
+};
 
-	_para = "ParachuteC" createVehicle position _unit;	
-	_para setpos position _unit;
-	_para setdir direction _unit;
-	_vel = velocity _unit;
-	_unit moveindriver _para;
-
-	_para lock false;
-
-	bis_fnc_halo_para_dirAbs = direction _para;
-
-	if (_unit == player) then 
-	{
-		_para setvelocity [(_vel select 0),(_vel select 1),(_vel select 2)*1];
-
-		bis_fnc_halo_para_vel = 0;
-		bis_fnc_halo_para_velLimit = 0.5;
-		bis_fnc_halo_para_velAdd = 0.01;
-		bis_fnc_halo_para_dir = 0;
-		bis_fnc_halo_para_dirLimit = 1.5;
-		bis_fnc_halo_para_dirAdd = 0.03;
-
-		bis_fnc_halo_para_keydown = 
-		{
-			_key = _this select 1;
-
-			if (_key in (actionkeys 'MoveForward')) then {
-				if (bis_fnc_halo_para_vel < +bis_fnc_halo_para_velLimit) then {bis_fnc_halo_para_vel = bis_fnc_halo_para_vel + bis_fnc_halo_para_velAdd};
-			};
-
-			if (_key in (actionkeys 'MoveBack')) then {
-				if (bis_fnc_halo_para_vel > 0) then {bis_fnc_halo_para_vel = bis_fnc_halo_para_vel - bis_fnc_halo_para_velAdd};
-			};
-		
-			if (_key in (actionkeys 'TurnLeft')) then {
-				if (bis_fnc_halo_para_dir > -bis_fnc_halo_para_dirLimit) then {bis_fnc_halo_para_dir = bis_fnc_halo_para_dir - bis_fnc_halo_para_dirAdd};
-			};
-
-			if (_key in (actionkeys 'TurnRight')) then {
-				if (bis_fnc_halo_para_dir < +bis_fnc_halo_para_dirLimit) then {bis_fnc_halo_para_dir = bis_fnc_halo_para_dir + bis_fnc_halo_para_dirAdd};
-			};
-		};
-		bis_fnc_halo_para_loop_time = time - 0.1;
-		bis_fnc_halo_para_velZ = velocity _para select 2;
-		bis_fnc_halo_para_loop = 
-		{
-				if (time == bis_fnc_halo_para_loop_time) exitwith {};
-
-				_para = vehicle player;
-
-				_fpsCoef = ((time - bis_fnc_halo_para_loop_time) * 20) / acctime;
-				bis_fnc_halo_para_loop_time = time;
-
-				bis_fnc_halo_para_velLimit = 0.3 * _fpsCoef;
-				bis_fnc_halo_para_velAdd = 0.002 * _fpsCoef;
-				bis_fnc_halo_para_dirLimit = 1.5 * _fpsCoef;
-				bis_fnc_halo_para_dirAdd = 0.03 * _fpsCoef;
-
-				bis_fnc_halo_para_dir = bis_fnc_halo_para_dir * 0.98;
-				bis_fnc_halo_para_dirAbs = bis_fnc_halo_para_dirAbs + bis_fnc_halo_para_dir;
-				_para setdir bis_fnc_halo_para_dirAbs;
-				_dir = direction _para;
-
-				_velZ = velocity _para select 2;
-				if ((_velZ - bis_fnc_halo_para_velZ) > 7 && (getposatl _para select 2) < 100) then {player setdamage 1;debuglog ["Log::::::::::::::",(_velZ - bis_fnc_halo_para_velZ)];};
-				bis_fnc_halo_para_velZ = _velZ;
-
-				_para setposasl [
-					(getposasl _para select 0) + (sin _dir * (0.1 + bis_fnc_halo_para_vel)),
-					(getposasl _para select 1) + (cos _dir * (0.1 + bis_fnc_halo_para_vel)),
-					(getposasl _para select 2) - 0.01 - 0.1 * abs bis_fnc_halo_para_vel
-				];
-
-				[
-					_para,
-					(-bis_fnc_halo_para_vel * 75) + 0.5*(sin (time * 180)),
-					(+bis_fnc_halo_para_dir * 25) + 0.5*(cos (time * 180))
-				] call Func_System_SetPitchBank;
+Halo_Fall = {
+	_unit = player; 
+	[] spawn{
+		// FREEFALL 
+		while { (alive player) && (vehicle player) == player} do {
+			sleep 0.2;
 		};
 
-		bis_fnc_halo_para_mousemoving_eh = (finddisplay 46) displayaddeventhandler ["mousemoving","_this call bis_fnc_halo_para_loop;"];
-		bis_fnc_halo_para_mouseholding_eh = (finddisplay 46) displayaddeventhandler ["mouseholding","_this call bis_fnc_halo_para_loop;"];
-
-		sleep 4;
-		
-		bis_fnc_halo_para_keydown_eh = (finddisplay 46) displayaddeventhandler ["keydown","_this call bis_fnc_halo_para_keydown;"];
-		
-		waitUntil{((position vehicle _unit select 2) < 3) || !(alive _unit)};		
-		waitUntil{((vehicle _unit)==_unit) || !(alive _unit)};
-			
-		if (alive _unit) then
-		{
-			_unit playMove "amovppnemstpsraswrfldnon";
+		//OPEN PARASHUTE
+		_vehicle = vehicle player;
+		while { alive player && ((position player) select 2)>2} do {
+			sleep 0.2;
 		};
-		
-		(finddisplay 46) displayremoveeventhandler ["keydown",bis_fnc_halo_para_keydown_eh];
-		(finddisplay 46) displayremoveeventhandler ["mousemoving",bis_fnc_halo_para_mousemoving_eh];
-		(finddisplay 46) displayremoveeventhandler ["mouseholding",bis_fnc_halo_para_mouseholding_eh];
 
-		bis_fnc_halo_para_vel = nil;
-		bis_fnc_halo_para_velLimit = nil;
-		bis_fnc_halo_para_velAdd = nil;
-		bis_fnc_halo_para_dir = nil;
-		bis_fnc_halo_para_dirLimit = nil;
-		bis_fnc_halo_para_dirAdd = nil;
-		bis_fnc_halo_para_keydown = nil;
-		bis_fnc_halo_para_loop = nil;
-		bis_fnc_halo_para_keydown_eh = nil;
-		bis_fnc_halo_para_mousemoving_eh = nil;
-		bis_fnc_halo_para_mouseholding_eh = nil;
+		//TOUCH
+		while {alive player &&  _vehicle == (vehicle player)}do{
+			sleep 0.1;
+		};
+		//delete parachute to avoid explosion
+		deleteVehicle _vehicle;
 	};
+};

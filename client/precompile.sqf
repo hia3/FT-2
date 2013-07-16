@@ -1,5 +1,5 @@
 #include "Func_Client_CosmeticMarkers.sqf";
-#include "Func_Client_HaloSystem.sqf";
+#include "Func_Client_Halo.sqf";
 
 
 //cosmetic rings around base..
@@ -127,7 +127,6 @@ Func_Client_GetItemsMass=compile preprocessFile ("client\Func_Client_GetItemsMas
 Func_Client_GetPlayerFunds=compile preprocessFile ("client\Func_Client_GetPlayerFunds.sqf");
 Func_Client_GetPlayerInventory=compile preprocessFile ("client\Func_Client_GetPlayerInventory.sqf");
 Func_Client_GetPosition=compile preprocessFile ("client\Func_Client_GetPosition.sqf");
-//Func_Client_Halo=compile preprocessFile ("client\Func_Client_Halo.sqf");
 Func_Client_InventoryToArray=compile preprocessFile ("client\Func_Client_InventoryToArray.sqf");
 Func_Client_IsBackpack=compile preprocessFile ("client\Func_Client_IsBackpack.sqf");
 Func_Client_LimitExternalView=compile preprocessFile ("client\Func_Client_LimitExternalView.sqf");
