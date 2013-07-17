@@ -10,7 +10,7 @@ if (isServer) then
 	//diag_log ["_damage_sources, _damage_values", _damage_sources, _damage_values];
 
 	_full_award  = _victim getVariable "kill_award";
-	_victim_side = side _victim;
+	_victim_side = _victim getVariable "ft2_wf_side";
 	if (_victim in (call Config_EastMHQ)) then { _victim_side = east };
 	if (_victim in (call Config_WestMHQ)) then { _victim_side = west };
 
