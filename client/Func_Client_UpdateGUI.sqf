@@ -120,7 +120,15 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 	_position=getPos Local_PlayerVehicle;
 	_direction=round direction Local_PlayerVehicle;
 
-	_lowertext ctrlSetStructuredText composeText([parseText(format ['<t align="left" color="%3" size="1.4" shadow="true">%1  %2</t>',mapGridPosition Local_PlayerVehicle,_direction,Dialog_GUIColorActive]),parseText(format ['<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',localize "STR_DLG_GPSTime",[Param_RoundDuration-_timing,true] call Func_Client_ConvertToTime,Dialog_GUIColorActive])]);
+	if(Dialog_GUIType in [0,2])then
+	{
+		//GPS on 
+		_lowertext ctrlSetStructuredText composeText([parseText(format ['<t align="left" color="%3" size="1.4" shadow="true">%1  %2</t>',mapGridPosition Local_PlayerVehicle,_direction,Dialog_GUIColorActive]),parseText(format ['<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',localize "STR_DLG_GPSTime",[Param_RoundDuration-_timing,true] call Func_Client_ConvertToTime,Dialog_GUIColorActive])]);
+	}else
+	{
+		//GPS off
+		_lowertext ctrlSetStructuredText composeText([parseText(format ['<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',localize "STR_DLG_GPSTime",[Param_RoundDuration-_timing,true] call Func_Client_ConvertToTime,Dialog_GUIColorActive])]);
+	};
 		
 	//---VEHICLE-CREW-START---
 	if(_TimerC<=_timing)then
