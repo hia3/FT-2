@@ -2,19 +2,19 @@ _veh = _this select 0;
 
 if (isServer) then
 {
-	//diag_log ["Func_Common_HandleDamage", _this];
+	["Func_Common_HandleDamage", _this] call Server_diag_log;
 
 	_src = _this select 1;
 	_dam = _this select 2;
 
-	//diag_log ["_src, _dam", _src, _dam];
+	["_src, _dam", _src, _dam] call Server_diag_log;
 
 	if ((!(isNull _src)) && (_veh != _src)) then
 	{
 		_ss = _veh getVariable ["damage_sources", []];
 		_sv = _veh getVariable ["damage_values",  []];
 
-		//diag_log ["_ss, _sv", _ss, _sv];
+		["_ss, _sv", _ss, _sv] call Server_diag_log;
 		
 		{
 			_attacker = _x;
@@ -39,7 +39,7 @@ if (isServer) then
 			_veh setVariable ["damage_sources", _ss];
 			_veh setVariable ["damage_values",  _sv];
 
-			//diag_log ["_attacker, _idx, _sum, _ss, _sv", _attacker, _idx, _sum, _ss, _sv];
+			["_attacker, _idx, _sum, _ss, _sv", _attacker, _idx, _sum, _ss, _sv] call Server_diag_log;
 
 		} forEach (crew _src);
 	};

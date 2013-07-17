@@ -1,20 +1,20 @@
 if (isServer) then
 {
-	//diag_log ["Func_Common_DestroyUnitAward", _this];
+	["Func_Common_DestroyUnitAward", _this] call Server_diag_log;
 
 	_victim=_this select 0;
 
 	_damage_sources = _victim getVariable ["damage_sources", []];
 	_damage_values  = _victim getVariable ["damage_values",  []];
 
-	//diag_log ["_damage_sources, _damage_values", _damage_sources, _damage_values];
+	["_damage_sources, _damage_values", _damage_sources, _damage_values] call Server_diag_log;
 
 	_full_award  = _victim getVariable "kill_award";
 	_victim_side = _victim getVariable "ft2_wf_side";
 	if (_victim in (call Config_EastMHQ)) then { _victim_side = east };
 	if (_victim in (call Config_WestMHQ)) then { _victim_side = west };
 
-	//diag_log ["_full_award, _victim_side", _full_award, _victim_side];
+	["_full_award, _victim_side", _full_award, _victim_side] call Server_diag_log;
 
 	_full_damage = 0;
 	{
@@ -50,7 +50,7 @@ if (isServer) then
 		
 		_attacker setVariable [_message, _attacker_award, true];
 
-		//diag_log ["_attacker, _attacker_damage, _attacker_side, _attacker_name, _attacker_award, _attacker_funds_name, _attacker_funds, _message", _attacker, _attacker_damage, _attacker_side, _attacker_name, _attacker_award, _attacker_funds_name, _attacker_funds, _message];
+		["_attacker, _attacker_damage, _attacker_side, _attacker_name, _attacker_award, _attacker_funds_name, _attacker_funds, _message", _attacker, _attacker_damage, _attacker_side, _attacker_name, _attacker_award, _attacker_funds_name, _attacker_funds, _message] call Server_diag_log;
 	};
 
 	_victim setVariable ["damage_sources", []];
