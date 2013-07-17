@@ -1,44 +1,46 @@
-_veh     = _this select 0;
-_section = _this select 1;
-_src     = _this select 3;
-_ammo    = _this select 4;
+_veh = _this select 0;
 
-_prev_damage = damage _veh;
-
-if ((_section == "") && (!(isNull _src)) && (_veh != _src) && (_ammo != "") && (_prev_damage <= 1)) then
+if (isServer) then
 {
-	_dam = ((_this select 2) - _prev_damage);
+	//diag_log ["Func_Common_HandleDamage", _this];
 
-	_ss = _veh getVariable ["damage_sources", []];
-	_sv = _veh getVariable ["damage_values",  []];
-	
-	_attackers = crew _src;
-	
+	_src = _this select 1;
+	_dam = _this select 2;
+
+	//diag_log ["_src, _dam", _src, _dam];
+
+	if ((!(isNull _src)) && (_veh != _src)) then
 	{
-		_attacker = _x;
+		_ss = _veh getVariable ["damage_sources", []];
+		_sv = _veh getVariable ["damage_values",  []];
+
+		//diag_log ["_ss, _sv", _ss, _sv];
 		
-		_idx = _ss find _attacker;
-
-		_sum = 
-	
-		if (_idx == -1) then
 		{
-			_idx = count _ss;
-			_dam
-		}
-		else
-		{
-			(_sv select _idx) + _dam
-		};
+			_attacker = _x;
+			
+			_idx = _ss find _attacker;
 
-		_ss set [_idx, _attacker]; 
-		_sv set [_idx, _sum min 1];
+			_sum = 
+		
+			if (_idx == -1) then
+			{
+				_idx = count _ss;
+				_dam
+			}
+			else
+			{
+				(_sv select _idx) + _dam
+			};
 
-		_veh setVariable ["damage_sources", _ss, true];
-		_veh setVariable ["damage_values",  _sv, true];
+			_ss set [_idx, _attacker]; 
+			_sv set [_idx, _sum min 1];
 
-		//[[_ss, _sv, _dam],"SMS_Func",nil,true] spawn BIS_fnc_MP;
-	} forEach _attackers;
+			_veh setVariable ["damage_sources", _ss];
+			_veh setVariable ["damage_values",  _sv];
+
+			//diag_log ["_attacker, _idx, _sum, _ss, _sv", _attacker, _idx, _sum, _ss, _sv];
+
+		} forEach (crew _src);
+	};
 };
-
-_this select 2;

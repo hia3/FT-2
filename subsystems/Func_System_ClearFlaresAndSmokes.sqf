@@ -4,7 +4,7 @@ _rearm=_this select 1;
 
 if (_veh isKindOf "air") then
 {
-	{_veh removeMagazinesTurret[_x,[-1]]} forEach System_FlareLauncherMagazines;	
+	{_veh removeMagazinesTurret[_x,[-1]]} forEach System_FlareLauncherMagazines;
 	if (_rearm) then
 	{
 		_index=System_AircraftVehicleTypes find (typeOf _veh);
