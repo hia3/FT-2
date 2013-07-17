@@ -30,7 +30,7 @@ if (Dialog_RespawnDeathTime==0) then
 	_playerWasDead=true;		
 	_teamspeak_timing=player getVariable "ts_message_timing";
 	Dialog_RespawnDeathTime=time;
-	_this call Func_Common_DestroyUnitAward;
+	
 	[] call Func_Client_CreateRespawnCamera;
 	
 	//obtain data for possible reviver awarding

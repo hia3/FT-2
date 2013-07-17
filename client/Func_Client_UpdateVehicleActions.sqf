@@ -23,7 +23,14 @@ if (_param) then
 	Local_PlayerVehicle=vehicle player;		
 	if (Local_PlayerVehicle isKindOf "ParachuteBase") exitWith {Local_PlayerVehicle=player};
 
-Local_PlayerVehicle setVariable ["ft2_wf_side", Local_PlayerSide, true];
+if ((Local_PlayerVehicle in (call Config_EastMHQ)) || (Local_PlayerVehicle in (call Config_WestMHQ))) then
+{
+	// do nothing
+}
+else
+{
+	Local_PlayerVehicle setVariable ["ft2_wf_side", Local_PlayerSide, true];
+};
 
 _action=Local_PlayerVehicle addAction ["<t color='#4C4FFF'>"+(localize "STR_ACT_Repair")+"</t>","client\Script_Client_Actions.sqf",[8],96,false,true,"", "(alive player) && (local _target) && ((speed _target)<5) && (((getPosATL _target select 2) < 5) || (_target isKindOf 'StaticWeapon')) && (({((_target distance _x) < Config_ServiceVehicleRange) && (alive _x)} count nearestObjects [_target,Local_FriendlyRepairVehicleTypes,Config_ServiceVehicleRange]>0) || ((_target distance Local_FriendlyBaseFlag)<Config_RespawnSize)) && !(Local_TechnicalService)"];
 Local_PlayerVehicle setVariable ["FT2_WF_ACT_Repair",_action];		

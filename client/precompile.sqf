@@ -316,7 +316,8 @@ onEachFrame
 	};
 		
 	player addEventHandler ['killed',       "_this spawn Func_Client_PlayerRespawn"];
-	player addEventHandler ['HandleDamage', Func_Common_HandleDamage];
+	
+	player call Func_Common_AddHandlers;
 	
 	player addEventHandler ['fired', Func_Client_PlayerFired];
 
