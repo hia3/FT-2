@@ -1,14 +1,5 @@
 /**/
 
-Server_EnableDebugging = false;
-Server_diag_log = 
-{
-	if (Server_EnableDebugging) then
-	{
-		diag_log _this;
-	};
-};
-
 Global_GameEnded=false;
 Server_RegisteredObjects=[];
 
