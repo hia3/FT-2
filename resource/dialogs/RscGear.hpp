@@ -56,7 +56,7 @@ class RscGear
     objects[] = {};
 
     onLoad            = "Local_ShowRespawnDialogOnUnload = (Dialog_RespawnState=='changeloadout'); ['RscGear_onLoad', _this] call Func_Dialog_HandleGearDialog;";
-    onUnload          = "Local_RscGear_Running = false; if (Local_ShowRespawnDialogOnUnload) then {[] spawn Func_Dialog_CreateRespawnDialog}";
+    onUnload          = "Local_RscGear_Running = false; ['RscGear_onUnload', _this] call Func_Dialog_HandleGearDialog; if (Local_ShowRespawnDialogOnUnload) then {[] spawn Func_Dialog_CreateRespawnDialog}";
     onMouseButtonDown = "['RscGear_onMouseButtonDown', _this] call Func_Dialog_HandleGearDialog;";
     onMouseButtonUp   = "['RscGear_onMouseButtonUp',   _this] call Func_Dialog_HandleGearDialog;";
 

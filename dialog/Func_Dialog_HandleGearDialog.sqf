@@ -1,3 +1,8 @@
+#define PERF_BEGIN(fun) /**/
+//private ["_perf_time_begin", "_perf_time_end"]; if !(fun in Global_GearDialog_AllProfFunctionNames) then { private["_perf_func_idx"]; _perf_func_idx = count Global_GearDialog_AllProfFunctionNames; Global_GearDialog_AllProfFunctionNames set [_perf_func_idx, fun]; Global_GearDialog_AllProfFunctionTimes set [_perf_func_idx, 0]; Global_GearDialog_AllProfFunctionConts set [_perf_func_idx, 0]; }; _perf_time_begin = diag_tickTime;
+#define PERF_END(fun) /**/
+//_perf_time_end = diag_tickTime; if ((_perf_time_end - _perf_time_begin) > 0.02) then { diag_log ["perf:", fun, _perf_time_end - _perf_time_begin]; }; private["_perf_func_idx", "_perf_prev_time", "_perf_prev_cnt"]; _perf_func_idx = Global_GearDialog_AllProfFunctionNames find fun; _perf_prev_time = Global_GearDialog_AllProfFunctionTimes select _perf_func_idx; _perf_prev_cnt = Global_GearDialog_AllProfFunctionConts select _perf_func_idx; Global_GearDialog_AllProfFunctionTimes set [_perf_func_idx, _perf_prev_time + (_perf_time_end - _perf_time_begin)]; Global_GearDialog_AllProfFunctionConts set [_perf_func_idx, _perf_prev_cnt + 1];
+
 // canCarryBackPack == 1
 // glassesEnabled == 1
 
@@ -13,7 +18,15 @@ _action = _this select 0;
 
 _get_item_cost_str = 
 {
-	"$" + str (_this call Func_Client_GetItemCost);
+PERF_BEGIN("_get_item_cost_str")
+
+	private ["_result"];
+
+	_result = "$" + str (_this call Func_Client_GetItemCost);
+
+PERF_END("_get_item_cost_str")
+
+	_result
 };
 
 _get_empty_inventory_from_player = 
@@ -23,7 +36,7 @@ _get_empty_inventory_from_player =
 
 /*01*/		"",
 /*02*/		[],
-/*03*/	    "RESERVED",
+/*03*/		"RESERVED",
 
 /*04*/		"",
 /*05*/		[],
@@ -55,18 +68,24 @@ _get_empty_inventory_from_player =
 
 _is_entity_of_type = 
 {
+PERF_BEGIN("_is_entity_of_type")
+
 	private ["_config", "_base", "_parents"];
 
 	_config = _this select 0;
 	_base = _this select 1;
 
 	_parents = [_config, true] call BIS_fnc_returnParents;
+
+PERF_END("_is_entity_of_type")
 	
 	_base in _parents
 };
 
 _is_primary_weapon = 
 {
+PERF_BEGIN("_is_primary_weapon")
+
 	private ["_result", "_item", "_is_weapon"];
 
 	_result = false;
@@ -79,11 +98,15 @@ _is_primary_weapon =
 		_result = [configFile >> "CfgWeapons" >> _item, "RifleCore"] call _is_entity_of_type;
 	};
 
+PERF_END("_is_primary_weapon")
+
 	_result
 };
 
 _is_compatible_obves = 
 {
+PERF_BEGIN("_is_compatible_obves")
+
 	private ["_result", "_item", "_inventory_index", "_inventory", "_weapon", "_weapon_slot", "_compatibles"];
 
 	_result = false;
@@ -108,6 +131,8 @@ _is_compatible_obves =
 		};
 	};
 
+PERF_END("_is_compatible_obves")
+
 	_result
 
 };
@@ -131,6 +156,8 @@ _is_compatible_primary_optics =
 
 _get_weapon_compatible_magazines = 
 {
+PERF_BEGIN("_get_weapon_compatible_magazines")
+
 	private ["_weapon_config", "_magazines", "_muzzle"];
 
 	_weapon_config = _this;
@@ -141,11 +168,15 @@ _get_weapon_compatible_magazines =
             _magazines = _magazines + getArray(_muzzle >> "magazines");
         } forEach getArray(_weapon_config >> "muzzles");
 
+PERF_END("_get_weapon_compatible_magazines")
+
 	_magazines
 };
 
 _is_compatible_magazine = 
 {
+PERF_BEGIN("_is_compatible_magazine")
+
 	private ["_result", "_item", "_inventory", "_inventory_index", "_weapon", "_weapon_config", "_compatible_magazines"];
 
 	_result = false;
@@ -164,6 +195,8 @@ _is_compatible_magazine =
 		_result = (_item in _compatible_magazines);
 	};	
 
+PERF_END("_is_compatible_magazine")
+
 	_result
 };
 
@@ -175,6 +208,8 @@ _is_compatible_primary_magazine =
 
 _is_secondary_weapon = 
 {
+PERF_BEGIN("_is_secondary_weapon")
+
 	private ["_result", "_item", "_is_weapon"];
 
 	_result = false;
@@ -186,6 +221,8 @@ _is_secondary_weapon =
 	{
 		_result = [configFile >> "CfgWeapons" >> _item, "LauncherCore"] call _is_entity_of_type;
 	};
+
+PERF_END("_is_secondary_weapon")
 
 	_result
 };
@@ -216,6 +253,8 @@ _is_compatible_secondary_magazine =
 
 _is_handgun = 
 {
+PERF_BEGIN("_is_handgun")
+
 	private ["_result", "_item", "_is_weapon"];
 
 	_result = false;
@@ -227,6 +266,8 @@ _is_handgun =
 	{
 		_result = [configFile >> "CfgWeapons" >> _item, "PistolCore"] call _is_entity_of_type;
 	};
+
+PERF_END("_is_handgun")
 
 	_result
 };
@@ -258,6 +299,8 @@ _is_compatible_handgun_magazine =
 
 _is_headgear = 
 {
+PERF_BEGIN("_is_headgear")
+
 	private ["_result", "_item", "_is_weapon"];
 
 	_result = false;
@@ -269,6 +312,8 @@ _is_headgear =
 	{
 		_result = [configFile >> "CfgWeapons" >> _item, "H_HelmetB"] call _is_entity_of_type;
 	};
+
+PERF_END("_is_headgear")
 
 	_result
 };
@@ -298,11 +343,15 @@ _is_hmd =
 
 _is_binocular = 
 {
+PERF_BEGIN("_is_binocular")
+
 	private ["_item", "_result"];
 
 	_item = _this select 0;
 
 	_result = (([configFile >> "CfgWeapons" >> _item, "Binocular"] call _is_entity_of_type) && !(_this call _is_hmd));
+
+PERF_END("_is_binocular")
 
 	_result
 };
@@ -368,6 +417,8 @@ _is_uniform =
 
 _can_add_item_to_container = 
 {
+PERF_BEGIN("_can_add_item_to_container")
+
 	private ["_container", "_container_items", "_item", "_maximum_load", "_item_mass", "_result"];
 
 	_container       = _this select 0;
@@ -392,22 +443,30 @@ _can_add_item_to_container =
 		};
 	};
 
+PERF_END("_can_add_item_to_container")
+
 	_result
 };
 
 _is_addWeapon_applicable = 
 {
+PERF_BEGIN("_is_addWeapon_applicable")
+
 	private ["_item", "_result"];
 
 	_item = _this;
 
 	_result = if (isClass(configFile >> "CfgWeapons" >> _item)) then { isClass(configFile >> "CfgWeapons" >> _item >> "WeaponSlotsInfo") && getNumber(configFile >> "CfgWeapons" >> _item >> "showEmpty") == 1 } else { false };
 
+PERF_END("_is_addWeapon_applicable")
+
 	_result
 };
 
 _can_add_item_to_uniform = 
 {
+PERF_BEGIN("_can_add_item_to_uniform")
+
 	private ["_item", "_inventory", "_uniform", "_uniform_items", "_result"];
 
 	_item      = _this select 0;
@@ -422,11 +481,15 @@ _can_add_item_to_uniform =
 		_result = [_uniform, _uniform_items, _item] call _can_add_item_to_container;
 	};
 
+PERF_END("_can_add_item_to_uniform")
+
 	_result
 };
 
 _can_add_item_to_vest = 
 {
+PERF_BEGIN("_can_add_item_to_vest")
+
 	private ["_item", "_inventory", "_vest", "_vest_items", "_result"];
 
 	_item      = _this select 0;
@@ -441,11 +504,15 @@ _can_add_item_to_vest =
 		_result = [_vest, _vest_items, _item] call _can_add_item_to_container;
 	};
 
+PERF_END("_can_add_item_to_vest")
+
 	_result
 };
 
 _can_add_item_to_backpack = 
 {
+PERF_BEGIN("_can_add_item_to_backpack")
+
 	private ["_item", "_inventory", "_backpack", "_backpack_items", "_result"];
 
 	_item      = _this select 0;
@@ -454,6 +521,8 @@ _can_add_item_to_backpack =
 		_backpack_items = _inventory select 8;
 
 	_result = [_backpack, _backpack_items, _item] call _can_add_item_to_container;
+
+PERF_END("_can_add_item_to_backpack")
 
 	_result
 };
@@ -471,6 +540,8 @@ _is_vest =
 
 _get_backpack_default_items = 
 {
+PERF_BEGIN("_get_backpack_default_items")
+
 	private ["_item", "_item_config", "_result"];
 
 	_item = _this;
@@ -507,6 +578,8 @@ _get_backpack_default_items =
 			};
 		};
 	} forEach [["TransportItems", "name"], ["TransportMagazines", "magazine"], ["TransportWeapons", "weapon"]];
+
+PERF_END("_get_backpack_default_items")
 
 	_result
 };
@@ -634,6 +707,8 @@ _simple_assign_slot_item_to_inventory =
 
 _find_weapon_of_type = 
 {
+PERF_BEGIN("_find_weapon_of_type")
+
 	private ["_items", "_code", "_result", "_i"];
 
 	_items = _this select 0;
@@ -653,11 +728,15 @@ _find_weapon_of_type =
 		};
 	};
 
+PERF_END("_find_weapon_of_type")
+
 	_result
 };
 
 _simple_add_assigned_item_to_inventory = 
 {
+PERF_BEGIN("_simple_add_assigned_item_to_inventory")
+
 	private ["_inventory", "_item", "_code", "_assigned_items"];
 
 	_inventory = _this select 0;
@@ -695,10 +774,15 @@ _simple_add_assigned_item_to_inventory =
 			_assigned_items set [_index, _item];
 		};
 	};
+
+PERF_END("_simple_add_assigned_item_to_inventory")
+
 };
 
 _set_weapon_item_to_inventory = 
 {
+PERF_BEGIN("_set_weapon_item_to_inventory")
+
 	private ["_inventory", "_weapon", "_index", "_clean_muzzles", "_weapon_config"];
 
 	_inventory          = _this select 0;
@@ -727,10 +811,15 @@ _set_weapon_item_to_inventory =
 	} forEach getArray(_weapon_config >> "muzzles");
 
 	[_inventory, _clean_muzzles, [_weapon_items_index, 3]] call _simple_assign_slot_item_to_inventory;
+
+PERF_END("_set_weapon_item_to_inventory")
+
 };
 
 _simple_assign_magazine_to_weapon = 
 {
+PERF_BEGIN("_simple_assign_magazine_to_weapon")
+
 	private ["_inventory", "_magazine", "_weapon_index", "_weapon_items_index", "_weapon", "_weapon_items", "_weapon_config", "_muzzle_index", "_muzzle_current_index"];
 
 	_inventory          = _this select 0;
@@ -779,10 +868,15 @@ _simple_assign_magazine_to_weapon =
 	            [_inventory, _magazine, [_weapon_items_index, 3, _muzzle_index, 1]] call _simple_assign_slot_item_to_inventory;
 		};
 	};
+
+PERF_END("_simple_assign_magazine_to_weapon")
+
 };
 
 _simple_assign_uniform_to_inventory = 
 {
+PERF_BEGIN("_simple_assign_uniform_to_inventory")
+
 	private ["_inventory", "_item"];
 
 	_inventory = _this select 0;
@@ -803,11 +897,16 @@ _simple_assign_uniform_to_inventory =
 
 		[_inventory, _items, [2]] call _simple_assign_slot_item_to_inventory;
 	};
+
+PERF_END("_simple_assign_uniform_to_inventory")
+
 };
 
 
 _simple_assign_vest_to_inventory = 
 {
+PERF_BEGIN("_simple_assign_vest_to_inventory")
+
 	private ["_inventory", "_item"];
 
 	_inventory = _this select 0;
@@ -828,10 +927,15 @@ _simple_assign_vest_to_inventory =
 
 		[_inventory, _items, [5]] call _simple_assign_slot_item_to_inventory;
 	};
+
+PERF_END("_simple_assign_vest_to_inventory")
+
 };
 
 _simple_assign_backpack_to_inventory = 
 {
+PERF_BEGIN("_simple_assign_backpack_to_inventory")
+
 	private ["_inventory", "_item"];
 
 	_inventory = _this select 0;
@@ -857,6 +961,9 @@ _simple_assign_backpack_to_inventory =
 
 		[_inventory, _items, [8]] call _simple_assign_slot_item_to_inventory;
 	};
+
+PERF_END("_simple_assign_backpack_to_inventory")
+
 };
 
 
@@ -904,6 +1011,8 @@ _assign_slot_item_to_inventory =
 
 _get_compatible_slots = 
 {
+PERF_BEGIN("_get_compatible_slots")
+
 	//_item      = _this select 0;
 	//_inventory = _this select 1;
 
@@ -924,12 +1033,15 @@ _get_compatible_slots =
 		};
 	} forEach _all_slots;
 
-	_result
+PERF_END("_get_compatible_slots")
 
+	_result
 };
 
 _is_weapon_compatible_with_slot = 
 {
+PERF_BEGIN("_is_weapon_compatible_with_slot")
+
     private ["_result", "_param", "_destination_control", "_source_control", "_dragged_items", "_inventory", "_item_type", "_compatible_slots"];
     _result = false;
 
@@ -951,6 +1063,8 @@ _is_weapon_compatible_with_slot =
 	_result = _destination_control in _compatible_slots;
 
     } forEach _dragged_items;
+
+PERF_END("_is_weapon_compatible_with_slot")
 
     _result;
 
@@ -1006,6 +1120,8 @@ _save_button_color =
 
 _initial_fill_inventory_gui = 
 {
+PERF_BEGIN("_initial_fill_inventory_gui")
+
     private ["_target", "_display", "_player_name_control", "_player_rank_control", "_set_simple_visual_generic", "_set_simple_visual", "_set_simple_magazine_visual", "_set_container_visual", "_assignedItems", "_set_weapon_visual", "_empty_slot_pictures"];
 
     _target_tmp = _this select 0;
@@ -1296,11 +1412,16 @@ _initial_fill_inventory_gui =
 	_ok_button_control ctrlEnable _can_buy;
 	_ok_button_control ctrlSetTextColor (if (_can_buy) then { [ 0, 1, 0, 0.5 ] } else { [1, 0, 0, 0.5] });
     };
+
+PERF_END("_initial_fill_inventory_gui")
+
 };
 
 
 _set_weapons_list = 
 {
+PERF_BEGIN("_set_weapons_list")
+
 	private ["_display", "_config_list", "_current_weapon", "_weapons_list_control", "_a", "_list_current_index"];
 
 	_display        = _this select 0;
@@ -1343,10 +1464,15 @@ _set_weapons_list =
 	} forEach _config_list;
 
 	_weapons_list_control lnbSetCurSelRow _list_current_index;
+
+PERF_END("_set_weapons_list")
+
 };
 
 _enum_simplest_weapons = 
 {
+PERF_BEGIN("_enum_simplest_weapons")
+
     private ["_base_class", "_display", "_weapons_config", "_config_list", "_i"];
 
     _base_class = _this select 0;
@@ -1384,11 +1510,15 @@ _enum_simplest_weapons =
         };
     };
 
+PERF_END("_enum_simplest_weapons")
+
     _config_list
 };
 
 _add_simplest_weapons = 
 {
+PERF_BEGIN("_add_simplest_weapons")
+
     private ["_base_class", "_display", "_current_weapon", "_config_list"];
 
     _base_class     = _this select 0;
@@ -1398,10 +1528,14 @@ _add_simplest_weapons =
     _config_list = [_base_class, _display] call _enum_simplest_weapons;
 
     [_display, _config_list, _current_weapon] call _set_weapons_list;
+
+PERF_END("_add_simplest_weapons")
 };
 
 _show_available_weapons_list = 
 {
+PERF_BEGIN("_show_available_weapons_list")
+
     private ["_param", "_button", "_weapon_kind", "_display", "_inventory", "_current_weapon"];
 
     _param = _this select 1;
@@ -1429,10 +1563,15 @@ _show_available_weapons_list =
     };
 
     [_weapon_kind, _display, _current_weapon] call _add_simplest_weapons;
+
+PERF_END("_show_available_weapons_list")
+
 };
 
 _show_available_weapons_list_pred = 
 {
+PERF_BEGIN("_show_available_weapons_list_pred")
+
 	private ["_param", "_button", "_display", "_weapons_config", "_config_list", "_i"];
 
 	_param = _this select 1;
@@ -1462,10 +1601,15 @@ _show_available_weapons_list_pred =
 	};
 
 	[_display, _config_list, ""] call _set_weapons_list;
+
+PERF_END("_show_available_weapons_list_pred")
+
 };
 
 _paint_compatible_slot_backgrounds = 
 {
+PERF_BEGIN("_paint_compatible_slot_backgrounds")
+
 	private ["_display", "_slot_ids", "_current_tab"];
 
 	_display  = _this select 0;
@@ -1497,10 +1641,15 @@ _paint_compatible_slot_backgrounds =
 		};
 
 	} forEach _slot_to_background;
+
+PERF_END("_paint_compatible_slot_backgrounds")
+
 };
 
 _on_drag_and_drop_started = 
 {
+PERF_BEGIN("_on_drag_and_drop_started")
+
 	private ["_param", "_control", "_dragged_items", "_display", "_inventory", "_compatible_slots"];
 
 	_param = _this select 1;
@@ -1521,10 +1670,15 @@ _on_drag_and_drop_started =
 
 		_control lnbSetCurSelRow _item_index;
 	} forEach _dragged_items;
+
+PERF_END("_on_drag_and_drop_started")
+
 };
 
 _on_drag_and_drop_finished = 
 {
+PERF_BEGIN("_on_drag_and_drop_finished")
+
 	private ["_display", "_slots", "_slot_idc", "_back_idc"];
 
 	_display = _this select 0;
@@ -1538,10 +1692,15 @@ _on_drag_and_drop_finished =
 	} forEach _slot_to_background;
 
 	[_display, _slots] call _paint_compatible_slot_backgrounds;
+
+PERF_END("_on_drag_and_drop_finished")
+
 };
 
 _activate_container = 
 {
+PERF_BEGIN("_activate_container")
+
 	private ["_button_idc", "_display"];
 	_button_idc = _this select 0;
 	_display    = _this select 1;
@@ -1567,10 +1726,15 @@ _activate_container =
 			[    IDC_VestSlot,     IDC_VestContainer,     IDC_VestTab], 
 			[IDC_BackpackSlot, IDC_BackpackContainer, IDC_BackpackTab]
 		];
+
+PERF_END("_activate_container")
+
 };
 
 _remove_container_itself = 
 {
+PERF_BEGIN("_remove_container_itself")
+
 	private ["_button_idc", "_inventory"];
 	_button_idc = _this select 0;
 	_inventory  = _this select 1;
@@ -1596,10 +1760,15 @@ _remove_container_itself =
 			[    IDC_VestSlot, [4,5]], 
 			[IDC_BackpackSlot, [7,8]]
 		];
+
+PERF_END("_remove_container_itself")
+
 };
 
 _remove_item_from_container = 
 {
+PERF_BEGIN("_remove_item_from_container")
+
 	private ["_button_idc", "_inventory"];
 	_button_idc = _this select 0;
 	_inventory  = _this select 1;
@@ -1644,10 +1813,15 @@ _remove_item_from_container =
 			[    IDC_VestContainer, 5], 
 			[IDC_BackpackContainer, 8]
 		];
+
+PERF_END("_remove_item_from_container")
+
 };
 
 _on_container_slot_click = 
 {
+PERF_BEGIN("_on_container_slot_click")
+
 	private ["_param", "_button", "_button_idc", "_display", "_mouse_button", "_inventory"];
 
 	_param = _this select 1;
@@ -1667,10 +1841,15 @@ _on_container_slot_click =
 	{
 		[_button_idc, _inventory] call _remove_container_itself;
 	};
+
+PERF_END("_on_container_slot_click")
+
 };
 
 _on_container_item_click = 
 {
+PERF_BEGIN("_on_container_item_click")
+
 	private ["_param", "_button", "_button_idc", "_display", "_mouse_button", "_inventory"];
 
 	_param = _this select 1;
@@ -1685,10 +1864,15 @@ _on_container_item_click =
 	{
 		[_button_idc, _inventory] call _remove_item_from_container;
 	};
+
+PERF_END("_on_container_item_click")
+
 };
 
 _store_inventory_in_display = 
 {
+PERF_BEGIN("_store_inventory_in_display")
+
 	private ["_display", "_inventory", "_tmp"];
 
 	_display   = _this select 0;
@@ -1698,6 +1882,8 @@ _store_inventory_in_display =
 	//diag_log format ["!  store = %1", _inventory];
 
 	[_inventory, _display] call _initial_fill_inventory_gui;
+
+PERF_END("_store_inventory_in_display")
 };
 
 _restore_inventory_from_display = 
@@ -1712,6 +1898,8 @@ _restore_inventory_from_display =
 
 _on_slot_click = 
 {
+PERF_BEGIN("_on_slot_click")
+
 	private ["_inventory", "_control_idc"];
 
 	_inventory   = _this select 0;
@@ -1728,10 +1916,15 @@ _on_slot_click =
 			[_inventory, ""] call _code;
 		};
 	} forEach _assign_slot_item_to_inventory;
+
+PERF_END("_on_slot_click")
+
 };
 
 _on_preset_click = 
 {
+PERF_BEGIN("_on_preset_click")
+
         private ["_param", "_button", "_button_idc", "_display", "_preset_index", "_i"];
 
         _param = _this select 1;
@@ -1770,10 +1963,15 @@ _on_preset_click =
 
 		[_display, _inventory] call _store_inventory_in_display;
 	};
+
+PERF_END("_on_preset_click")
+
 };
 
 _store_preset = 
 {
+PERF_BEGIN("_store_preset")
+
 	private ["_inventory", "_preset_index", "_preset_namespace"];
 
 	_inventory    = + _this select 0;
@@ -1782,10 +1980,15 @@ _store_preset =
 	_preset_namespace = if (isNil "Config_PresetNamespace") then { "default" } else { Config_PresetNamespace };
 
 	profileNamespace setVariable [format ["FT2_Preset_%1_%2_%3", _preset_namespace, Local_PlayerSide, _preset_index], _inventory];
+
+PERF_END("_store_preset")
+
 };
 
 _restore_preset = 
 {
+PERF_BEGIN("_restore_preset")
+
 	private ["_preset_index", "_preset_namespace", "_inventory"];
 
 	_preset_index = _this;
@@ -1796,75 +1999,85 @@ _restore_preset =
 
 	_inventory = + _inventory;
 
+PERF_END("_restore_preset")
+
 	_inventory
 };
 
 _precache_config = 
 {
+PERF_BEGIN("_precache_config")
+
 	private ["_vehicles_config", "_i"];
 
-	Local_RscGear_east_uniform = []; 
-	Local_RscGear_west_uniform = []; 
-
-	Local_RscGear_east_vest = []; 
-	Local_RscGear_west_vest = []; 
-
-	Local_RscGear_east_headgear = []; 
-	Local_RscGear_west_headgear = []; 
-
-	_vehicles_config = configfile >> "CfgVehicles"; 
-
-	for [{_i=0},{_i<count _vehicles_config},{_i=_i+1}] do 
+	if (isNil "Local_RscGear_east_uniform") then
 	{
-		private ["_config"];
+		Local_RscGear_east_uniform = []; 
+		Local_RscGear_west_uniform = []; 
 
-		_config = _vehicles_config select _i;
+		Local_RscGear_east_vest = []; 
+		Local_RscGear_west_vest = []; 
 
-		if (isClass(_config)) then
+		Local_RscGear_east_headgear = []; 
+		Local_RscGear_west_headgear = []; 
+
+		_vehicles_config = configfile >> "CfgVehicles"; 
+
+		for [{_i=0},{_i<count _vehicles_config},{_i=_i+1}] do 
 		{
-			if (getText(_config >> "uniformClass") != "") then
+			private ["_config"];
+
+			_config = _vehicles_config select _i;
+
+			if (isClass(_config)) then
 			{
-				if ("Man" in ([_config, true] call BIS_fnc_returnParents)) then 
+				if (getText(_config >> "uniformClass") != "") then
 				{
-					private ["_side", "_uniform", "_uniform_naked", "_linked_items", "_vest", "_headgear"];
-
-					_side          = getNumber(_config >> "side");
-					_uniform       = getText  (_config >> "uniformClass");
-					_uniform_naked = getText  (_config >> "nakedUniform");	
-					_linked_items  = getArray (_config >> "linkedItems");
-
-					_vest     = "";
-					_headgear = "";
+					if ("Man" in ([_config, true] call BIS_fnc_returnParents)) then 
 					{
-						if ([_x] call _is_vest) then
-						{
-							_vest = _x;
-						};
-						if ([_x] call _is_headgear) then
-						{
-							_headgear = _x;
-						};
-					} forEach _linked_items;
+						private ["_side", "_uniform", "_uniform_naked", "_linked_items", "_vest", "_headgear"];
 
-					switch (_side) do
-					{
-						case 0:
+						_side          = getNumber(_config >> "side");
+						_uniform       = getText  (_config >> "uniformClass");
+						_uniform_naked = getText  (_config >> "nakedUniform");	
+						_linked_items  = getArray (_config >> "linkedItems");
+
+						_vest     = "";
+						_headgear = "";
 						{
-							if ((_uniform  != "") && !(_uniform  in Local_RscGear_east_uniform))  then { Local_RscGear_east_uniform  set [count Local_RscGear_east_uniform,   _uniform] };
-							if ((_vest     != "") && !(_vest     in Local_RscGear_east_vest))     then { Local_RscGear_east_vest     set [count Local_RscGear_east_vest,         _vest] };
-							if ((_headgear != "") && !(_headgear in Local_RscGear_east_headgear)) then { Local_RscGear_east_headgear set [count Local_RscGear_east_headgear, _headgear] };
-						};
-						case 1:
+							if ([_x] call _is_vest) then
+							{
+								_vest = _x;
+							};
+							if ([_x] call _is_headgear) then
+							{
+								_headgear = _x;
+							};
+						} forEach _linked_items;
+
+						switch (_side) do
 						{
-							if ((_uniform  != "") && !(_uniform  in Local_RscGear_west_uniform))  then { Local_RscGear_west_uniform  set [count Local_RscGear_west_uniform,   _uniform] };
-							if ((_vest     != "") && !(_vest     in Local_RscGear_west_vest))     then { Local_RscGear_west_vest     set [count Local_RscGear_west_vest,         _vest] };
-							if ((_headgear != "") && !(_headgear in Local_RscGear_west_headgear)) then { Local_RscGear_west_headgear set [count Local_RscGear_west_headgear, _headgear] };
+							case 0:
+							{
+								if ((_uniform  != "") && !(_uniform  in Local_RscGear_east_uniform))  then { Local_RscGear_east_uniform  set [count Local_RscGear_east_uniform,   _uniform] };
+								if ((_vest     != "") && !(_vest     in Local_RscGear_east_vest))     then { Local_RscGear_east_vest     set [count Local_RscGear_east_vest,         _vest] };
+								if ((_headgear != "") && !(_headgear in Local_RscGear_east_headgear)) then { Local_RscGear_east_headgear set [count Local_RscGear_east_headgear, _headgear] };
+							};
+							case 1:
+							{
+								if ((_uniform  != "") && !(_uniform  in Local_RscGear_west_uniform))  then { Local_RscGear_west_uniform  set [count Local_RscGear_west_uniform,   _uniform] };
+								if ((_vest     != "") && !(_vest     in Local_RscGear_west_vest))     then { Local_RscGear_west_vest     set [count Local_RscGear_west_vest,         _vest] };
+								if ((_headgear != "") && !(_headgear in Local_RscGear_west_headgear)) then { Local_RscGear_west_headgear set [count Local_RscGear_west_headgear, _headgear] };
+							};
 						};
 					};
 				};
 			};
 		};
 	};
+
+PERF_END("_precache_config")
+
 };
 
 _clear_seapon_stuff_controls = 
@@ -1879,6 +2092,12 @@ switch (_action) do
 {
     case "RscGear_onLoad":
     {
+	Global_GearDialog_AllProfFunctionNames = [];
+	Global_GearDialog_AllProfFunctionTimes = [];
+	Global_GearDialog_AllProfFunctionConts = [];
+
+PERF_BEGIN("RscGear_onLoad")
+
         private ["_param", "_display", "_inventory", "_current_primary_weapon"];
 
 	[] call _precache_config;
@@ -1887,12 +2106,16 @@ switch (_action) do
         _display = _param select 0;
 
 	_inventory = [player] call Func_Client_GetPlayerInventory;
+
 	_current_primary_weapon = _inventory select 13;
+
 	Local_RscGear_InitialCost = _inventory call Func_Client_GetInventoryCost;
+
 	if (isNil "Local_RscGear_SavedInventory") then
 	{
 		Local_RscGear_SavedInventory = + _inventory;
 	};
+
         uiNamespace setVariable ["FT2_RscGear_CurrentPreset", 0];
 	[_display, _inventory] call _store_inventory_in_display;
 
@@ -1932,40 +2155,67 @@ switch (_action) do
 	};
 
         //["RifleCore", _display, _current_primary_weapon] call _add_simplest_weapons;
-
+PERF_END("RscGear_onLoad")
+    };
+    case "RscGear_onUnload":
+    {
+	/*
+	private ["_i"];
+	for "_i" from 0 to (count Global_GearDialog_AllProfFunctionNames) - 1 do
+	{
+		diag_log format ["%1,%2,%3", Global_GearDialog_AllProfFunctionNames select _i, Global_GearDialog_AllProfFunctionTimes select _i, Global_GearDialog_AllProfFunctionConts select _i];
+	};
+	*/
     };
     case "RscGear_onMouseButtonDown":
     {
     };
     case "RscGear_onMouseButtonUp":
     {
+	PERF_BEGIN("RscGear_onMouseButtonUp")
+
         _param = _this select 1;
 		_display = _param select 0;
 
         [_display] call _on_drag_and_drop_finished;
+
+	PERF_END("RscGear_onMouseButtonUp")
     };
 
     case "Primary_button":
     {
+	PERF_BEGIN("Primary_button")
+
 	call _clear_seapon_stuff_controls;
 
         (_this + ["RifleCore"]) call _show_available_weapons_list;
 
+	PERF_END("Primary_button")
     };
     case "Secondary_button":
     {
+	PERF_BEGIN("Secondary_button")
+
 	call _clear_seapon_stuff_controls;
 
         (_this + ["LauncherCore"]) call _show_available_weapons_list;
+
+	PERF_END("Secondary_button")
     };
     case "Sidearms_button":
     {
+	PERF_BEGIN("Sidearms_button")
+
 	call _clear_seapon_stuff_controls;
 
         (_this + ["PistolCore"]) call _show_available_weapons_list;
+
+	PERF_END("Sidearms_button")
     };
     case "Explosives_button":
     {
+	PERF_BEGIN("Explosives_button")
+
         private ["_param", "_button", "_display", "_config_list", "_all_kind", "_i", "_muzzle", "_magazines", "_magazine_config"];
 
 	_param = _this select 1;
@@ -1997,9 +2247,13 @@ switch (_action) do
         } forEach ["Throw", "Put"];
 
 	[_display, _config_list, ""] call _set_weapons_list;
+
+	PERF_END("Explosives_button")
     };
     case "Items_button":
     {
+	PERF_BEGIN("Items_button")
+
 	(_this + 
 	[
 		{
@@ -2012,9 +2266,13 @@ switch (_action) do
 		}
 	]
 	) call _show_available_weapons_list_pred;
+
+	PERF_END("Items_button")
     };
     case "Clothing_button":
     {
+	PERF_BEGIN("Clothing_button")
+
 	private ["_param", "_button", "_display", "_side_uniform", "_side_vest", "_side_headgear", "_config_list"];
 
 	_param = _this select 1;
@@ -2046,9 +2304,12 @@ switch (_action) do
 
 	[_display, _config_list, ""] call _set_weapons_list;
 
+	PERF_END("Clothing_button")
     };
     case "Backpacks_button":
     {
+	PERF_BEGIN("Backpacks_button")
+
 	private ["_param", "_button", "_display", "_vehicles_config", "_config_list", "_i"];
 
 	_param = _this select 1;
@@ -2081,9 +2342,13 @@ switch (_action) do
 	};
 
 	[_display, _config_list, ""] call _set_weapons_list;
+
+	PERF_END("Backpacks_button")
     };
     case "Goggles_button":
     {
+	PERF_BEGIN("Goggles_button")
+
 	private ["_param", "_button", "_display", "_glasses_config", "_config_list", "_i", "_item_config", "_has_model"];
 
 	_param = _this select 1;
@@ -2107,10 +2372,14 @@ switch (_action) do
 	};
 
 	[_display, _config_list, ""] call _set_weapons_list;
+
+	PERF_END("Goggles_button")
     };
 
     case "Weapons_list_onLBSelChanged":
     {
+	PERF_BEGIN("Weapons_list_onLBSelChanged")
+
         private ["_current_row", "_weapon", "_weapon_config", "_set_compatible_magazines", "_compatible_gadgets", "_cows_slot", "_muzzle_slot", "_pointer_slot", "_set_compatible_items"];
 
         _current_row = lnbCurSelRow IDC_Weapons_list;
@@ -2200,10 +2469,14 @@ switch (_action) do
             [IDC_Obves2_list, _muzzle_slot]  call _set_compatible_items;
             [IDC_Obves3_list, _pointer_slot] call _set_compatible_items;
         };
+
+	PERF_END("Weapons_list_onLBSelChanged")
     };
 
     case "Weapons_list_onLBDblClick":
     {
+	PERF_BEGIN("Weapons_list_onLBDblClick")
+
         private ["_param", "_control", "_display", "_index", "_inventory", "_weapon_config_name", "_compatible_slots", "_added"];
 
 	_param = _this select 1;
@@ -2251,10 +2524,14 @@ switch (_action) do
 	} forEach _compatible_slots;
 
 	[_display, _inventory] call _store_inventory_in_display;
+
+	PERF_END("Weapons_list_onLBDblClick")
     };
 
     case "onAnyLBDrag":
     {
+	PERF_BEGIN("onAnyLBDrag")
+
         private ["_param", "_control", "_display", "_inventory"];
 
 	_param = _this select 1;
@@ -2264,10 +2541,14 @@ switch (_action) do
 	_inventory = [_display] call _restore_inventory_from_display;
 
 	(_this + [_inventory]) call _on_drag_and_drop_started;
+
+	PERF_END("onAnyLBDrag")
     };
 
     case "Slot_onMouseButtonClick":
     {
+	PERF_BEGIN("Slot_onMouseButtonClick")
+
         private ["_param", "_control", "_control_idc", "_display", "_mouse_button", "_inventory"];
 
 	_param = _this select 1;
@@ -2284,6 +2565,8 @@ switch (_action) do
 
 		[_display, _inventory] call _store_inventory_in_display;
 	};
+
+	PERF_END("Slot_onMouseButtonClick")
     };
 
     case "Slot_onLBDrag":
@@ -2292,6 +2575,8 @@ switch (_action) do
 
     case "Slot_onLBDragging":
     {
+	PERF_BEGIN("Slot_onLBDragging")
+
         private ["_param", "_control", "_display", "_inventory"];
 
 	_param = _this select 1;
@@ -2301,9 +2586,13 @@ switch (_action) do
 	_inventory = [_display] call _restore_inventory_from_display;	
 
         _result = (_this + [_inventory]) call _is_weapon_compatible_with_slot;
+
+	PERF_END("Slot_onLBDragging")
     };
     case "Slot_onLBDrop":
     {
+	PERF_BEGIN("Slot_onLBDrop")
+
         private ["_param", "_destination_control", "_destination_control_idc", "_display", "_inventory", "_dragged_items"];
 
 	_param = _this select 1;
@@ -2338,10 +2627,14 @@ switch (_action) do
         };
 
 	[_display, _inventory] call _store_inventory_in_display;
+
+	PERF_END("Slot_onLBDrop")
     };
 
     case "ContainerSlot_onMouseButtonClick":
     {
+	PERF_BEGIN("ContainerSlot_onMouseButtonClick")
+
         private ["_param", "_control", "_display", "_inventory"];
 
 	_param = _this select 1;
@@ -2353,10 +2646,14 @@ switch (_action) do
 	(_this + [_inventory]) call _on_container_slot_click;
 
 	[_display, _inventory] call _store_inventory_in_display;
+
+	PERF_END("ContainerSlot_onMouseButtonClick")
     };
 
     case "ContainerItem_onMouseButtonClick":
     {
+	PERF_BEGIN("ContainerItem_onMouseButtonClick")
+
         private ["_param", "_control", "_display", "_inventory"];
 
 	_param = _this select 1;
@@ -2368,10 +2665,14 @@ switch (_action) do
 	(_this + [_inventory]) call _on_container_item_click;
 
 	[_display, _inventory] call _store_inventory_in_display;
+
+	PERF_END("ContainerItem_onMouseButtonClick")
     };
 
     case "Clear_button":
     {
+	PERF_BEGIN("Clear_button")
+
         private ["_param", "_button", "_display", "_inventory"];
 
         _param = _this select 1;
@@ -2381,9 +2682,13 @@ switch (_action) do
         _inventory = [] call _get_empty_inventory_from_player;
 
 	[_display, _inventory] call _store_inventory_in_display;
+
+	PERF_END("Clear_button")
     };
     case "Save_button":
     {
+	PERF_BEGIN("Save_button")
+
         private ["_param", "_button", "_display", "_preset_index", "_inventory"];
 
         _param = _this select 1;
@@ -2406,10 +2711,14 @@ switch (_action) do
         [_button, false] call _save_button_color;
 
 	player commandChat localize "STR_MES_LoadoutSaved";
+
+	PERF_END("Save_button")
     };
 
     case "OK_button":
     {
+	PERF_BEGIN("OK_button")
+
         private ["_param", "_button", "_display", "_inventory", "_cost"];
 
         _param = _this select 1;
@@ -2430,10 +2739,14 @@ switch (_action) do
 	} forEach _all_preset_buttons;
 
 	[_inventory, _display] call _initial_fill_inventory_gui; // TODO: put debug here, get player loadout, check equal to _inventory, fix price
+
+	PERF_END("OK_button")
     };
 
     case "Cancel_button":
     {
+	PERF_BEGIN("Cancel_button")
+
         private ["_param", "_button", "_display"];
 
         _param = _this select 1;
@@ -2441,11 +2754,17 @@ switch (_action) do
                 _display = ctrlParent _button;
 
 	_display closeDisplay 1;
+
+	PERF_END("Cancel_button")
     };
 
     case "Preset_button":
     {
+	PERF_BEGIN("Preset_button")
+
 	_this call _on_preset_click;
+
+	PERF_END("Preset_button")
     };
 
     default
