@@ -2,6 +2,54 @@ private["_item", "_result", "_i"];
 
 _item = _this;
 
+_string_compare = 
+{
+	private ["_lefta", "_righta"];
+
+	_lefta  = toLower(_this select 0);
+	_righta = toLower(_this select 1);
+
+	if (_lefta == _righta) then
+	{
+		0
+	}
+	else
+	{
+		private ["_left", "_right", "_ll", "_rl", "_i"];
+	
+		_left  = toArray(_lefta); 
+		_right = toArray(_righta);
+
+		_ll = count _left; 
+		_rl = count _right; 
+
+		for "_i" from 0 to (_ll max _rl) - 1 do 
+		{
+			private ["_l", "_r"];
+			
+			_l = if (_i < _ll) then 
+			{
+				_left select _i
+			} 
+			else 
+			{
+				0
+			}; 
+	
+			_r = if (_i < _rl) then 
+			{ 
+				_right select _i
+			} 
+			else 
+			{
+				0
+			}; 
+	
+			if (_l != _r) exitWith { _l - _r };
+		};
+	};
+}; 
+
 if (isNil "Global_CostMap") then
 {
 	Global_CostMap = 
@@ -256,316 +304,7 @@ if (isNil "Global_CostMap") then
 		["V_RebreatherB",0],
 		["V_RebreatherIR",0],
 		["V_TacVest_brn",0],
-		["V_TacVest_oli",0],
-
-		["100Rnd_556x45_BetaCMag", 35],
-		["100Rnd_556x45_BetaCMag_airLock", 35],
-		["100Rnd_556x45_M249", 35],
-		["100Rnd_762x51_M240", 40],
-		["100Rnd_762x54_PK", 40],
-		["10Rnd_127x99_m107", 36],
-		["10Rnd_762x54_SVD", 7],
-		["10Rnd_9x39_SP5_VSS", 7],
-		["10Rnd_B_765x17_Ball", 7],
-		["10x_303", 2],
-		["15Rnd_9x19_M9", 2],
-		["15Rnd_9x19_M9SD", 3],
-		["17Rnd_9x19_glock17", 3],
-		["17Rnd_9x19_glock17_H", 3],
-		["1Rnd_HE_GP25", 10],
-		["1Rnd_HE_M203", 5],
-		["1Rnd_SMOKE_GP25", 5],
-		["1Rnd_Smoke_M203", 5],
-		["1Rnd_SmokeGreen_GP25", 5],
-		["1Rnd_SmokeGreen_M203", 5],
-		["1Rnd_SmokeRed_GP25", 5],
-		["1Rnd_SmokeRed_M203", 5],
-		["1Rnd_SmokeYellow_GP25", 5],
-		["1Rnd_SmokeYellow_M203", 5],
-		["200Rnd_556x45_L110A1", 22],
-		["200Rnd_556x45_M249", 22],
-		["20Rnd_556x45_Stanag", 5],
-		["20Rnd_762x51_B_SCAR", 20],
-		["20Rnd_762x51_DMR", 18],
-		["20Rnd_762x51_FNFAL", 3],
-		["20Rnd_762x51_SB_SCAR", 25],
-		["20Rnd_9x39_SP5_VSS", 9],
-		["20Rnd_B_765x17_Ball", 8],
-		["20Rnd_B_AA12_74Slug", 16],
-		["20Rnd_B_AA12_HE", 150],
-		["20Rnd_B_AA12_Pellets", 30],
-		["30Rnd_545x39_AK", 4],
-		["30Rnd_545x39_AKSD", 7],
-		["30Rnd_556x45_G36", 19],
-		["30Rnd_556x45_G36SD", 24],
-		["30Rnd_556x45_Stanag_H", 5],
-		["30Rnd_556x45_StanagSD", 7],
-		["30Rnd_762x39_AK47", 5],
-		["30Rnd_762x39_AK47_H", 5],
-		["30Rnd_762x39_SA58", 5],
-		["30Rnd_9x19_MP5", 3],
-		["30Rnd_9x19_MP5SD", 4],
-		["30Rnd_9x19_UZI", 10],
-		["30Rnd_9x19_UZI_SD", 10],
-		["5Rnd_127x108_KSVK", 15],
-		["5Rnd_127x99_as50", 36],
-		["5Rnd_762x51_M24", 12],
-		["5Rnd_86x70_L115A1", 28],
-		["5x_22_LR_17_HMR", 4],
-		["64Rnd_9x19_Bizon", 6],
-		["64Rnd_9x19_SD_Bizon", 8],
-		["6Rnd_45ACP", 2],
-		["6Rnd_FlareGreen_M203", 5*6],
-		["6Rnd_FlareRed_M203", 5*6],
-		["6Rnd_FlareWhite_M203", 5*6],
-		["6Rnd_FlareYellow_M203", 5*6],
-		["6Rnd_HE_M203", 10*6],
-		["6Rnd_Smoke_M203", 5*6],
-		["6Rnd_SmokeGreen_M203", 5*6],
-		["6Rnd_SmokeRed_M203", 5*6],
-		["6Rnd_SmokeYellow_M203", 5*6],
-		["75Rnd_545x39_RPK", 9],
-		["7Rnd_45ACP_1911", 2],
-		["8Rnd_9x18_Makarov", 2],
-		["8Rnd_9x18_MakarovSD", 3],
-		["8Rnd_B_Beneli_74Slug", 6],
-		["8Rnd_B_Beneli_Pellets", 6],
-		["8Rnd_B_Saiga12_74Slug", 6],
-		["8Rnd_B_Saiga12_Pellets", 6],
-		["AA12_PMC", 300],
-		["AK_107_GL_kobra", 140],
-		["AK_107_GL_pso", 260],
-		["AK_107_kobra", 130],
-		["AK_107_pso", 250],
-		["AK_47_M", 60],
-		["AK_47_S", 60],
-		["AK_74", 80],
-		["AK_74_GL", 100],
-		["AK_74_GL_kobra", 120],
-		["AK47M_H", 80],
-		["AK74", 80],
-		["AK74GL", 100],
-		["AKS_74", 100],
-		["AKS_74_GOSHAWK", 1200],
-		["AKS_74_kobra", 100],
-		["AKS_74_NSPU", 150],
-		["AKS_74_pso", 450],
-		["AKS_74_U", 80],
-		["AKS_74_UN_kobra", 120],
-		["AKS_GOLD", 300],
-		["aks74pso", 450],
-		["AKS74U", 80],
-		["AKS74UN", 120],
-		["AT13", 500],
-		["BAF_AS50_scoped", 1400],
-		["BAF_AS50_TWS", 2400],
-		["BAF_ied_v1", 10],
-		["BAF_ied_v2", 10],
-		["BAF_ied_v3", 10],
-		["BAF_ied_v4", 10],
-		["BAF_L109A1_HE", 10],
-		["BAF_L110A1_Aim", 300],
-		["BAF_L7A2_GPMG", 310],
-		["BAF_L85A2_RIS_ACOG", 190],
-		["BAF_L85A2_RIS_CWS", 1400],
-		["BAF_L85A2_RIS_Holo", 130],
-		["BAF_L85A2_RIS_SUSAT", 190],
-		["BAF_L85A2_UGL_ACOG", 220],
-		["BAF_L85A2_UGL_Holo", 140],
-		["BAF_L85A2_UGL_SUSAT", 220],
-		["BAF_L86A2_ACOG", 190],
-		["BAF_LRR_scoped", 1150],
-		["BAF_LRR_scoped_W", 1150],
-		["BAF_NLAW_Launcher", 450],
-		["Binocular_Vector", 20],
-		["bizon", 90],
-		["bizon_silenced", 110],
-		["CDF_dogtags", 10],
-		["Cobalt_File", 10],
-		["Colt1911", 15],
-		["CZ_75_D_COMPACT", 50],
-		["CZ_75_P_07_DUTY", 50],
-		["CZ_75_SP_01_PHANTOM", 50],
-		["CZ_75_SP_01_PHANTOM_SD", 50],
-		["CZ_Backpack_EP1", 35],
-		["CZ_VestPouch_EP1", 15],
-		["DMR", 850],
-		["Dragon_EP1", 300],
-		["EvDogTags", 10],
-		["EvKobalt", 10],
-		["EvMap", 10],
-		["EvMoney", 10],
-		["EvMoscow", 10],
-		["Evo_ACR", 10],
-		["Evo_mrad_ACR", 10],
-		["evo_sd_ACR", 10],
-		["EvPhoto", 10],
-		["FlareGreen_GP25", 5],
-		["FlareGreen_M203", 5],
-		["FlareRed_GP25", 5],
-		["FlareRed_M203", 5],
-		["FlareWhite_GP25", 5],
-		["FlareWhite_M203", 5],
-		["FlareYellow_GP25", 5],
-		["FlareYellow_M203", 5],
-		["FN_FAL", 160],
-		["FN_FAL_ANPVS4", 200],
-		["G36_C_SD_camo", 170],
-		["G36_C_SD_eotech", 200],
-		["G36a", 560],
-		["G36A_camo", 560],
-		["G36C", 160],
-		["G36C_camo", 160],
-		["G36K", 540],
-		["G36K_camo", 540],
-		["glock17_EP1", 25],
-		["Glock17_H", 25],
-		["H_HelmetB_AiA", 10],
-		["HandGrenade_East", 10],
-		["HandGrenade_West", 10],
-		["huntingrifle", 490],
-		["Igla", 110],
-		["Igla_H", 320],
-		["IR_Strobe_Marker", 10],
-		["IR_Strobe_Target", 10],
-		["Javelin", 500],
-		["Kostey_map_case", 10],
-		["Kostey_notebook", 10],
-		["Kostey_photos", 10],
-		["ksvk", 1150],
-		["LeeEnfield", 20],
-		["LRTV_ACR", 50],
-		["M1014", 80],
-		["m107", 1200],
-		["m107_TWS_EP1", 2200],
-		["M110_NVG_EP1", 1000],
-		["M110_TWS_EP1", 2000],
-		["M136", 50],
-		["M14_EP1", 150],
-		["M16A2", 80],
-		["M16A2GL", 90],
-		["m16a4", 100],
-		["m16a4_acg", 150],
-		["M16A4_ACG_GL", 160],
-		["M16A4_GL", 90],
-		["M24", 500],
-		["M24_des_EP1", 500],
-		["M240", 310],
-		["m240_scoped_EP1", 650],
-		["M249", 300],
-		["M249_EP1", 300],
-		["M249_m145_EP1", 650],
-		["M249_TWS_EP1", 1650],
-		["M32_EP1", 120],
-		["M4", 60],
-		["M47Launcher_EP1", 400],
-		["M4A1", 80],
-		["M4A1_Aim", 90],
-		["M4A1_Aim_camo", 90],
-		["M4A1_AIM_SD_camo", 100],
-		["M4A1_H", 90],
-		["M4A1_HWS_GL", 120],
-		["M4A1_HWS_GL_camo", 120],
-		["M4A1_HWS_GL_SD_Camo", 130],
-		["M4A1_RCO_GL", 160],
-		["M4A1GL", 550],
-		["M4A1SD", 120],
-		["M4A3_CCO_EP1", 90],
-		["M4A3_RCO_GL_EP1", 220],
-		["M4AIM", 80],
-		["M4GL", 550],
-		["M4SPR", 750],
-		["M60A4_EP1", 290],
-		["M79_EP1", 50],
-		["m8_carbine", 160],
-		["m8_carbine_pmc", 140],
-		["m8_carbineGL", 160],
-		["m8_compact", 130],
-		["m8_compact_pmc", 130],
-		["m8_holo_sd", 150],
-		["m8_SAW", 450],
-		["m8_sharpshooter", 290],
-		["m8_tws", 1150],
-		["m8_tws_sd", 1250],
-		["M9", 20],
-		["M9SD", 25],
-		["MAAWS", 320],
-		["MAAWS_HEAT", 110],
-		["MAAWS_HEDP", 110],
-		["Makarov", 10],
-		["MakarovSD", 15],
-		["MetisLauncher", 500],
-		["MG36", 320],
-		["MG36_camo", 320],
-		["Mine", 40],
-		["MineE", 50],
-		["Mk_48_DES_EP1", 350],
-		["Mk13_EP1", 80],
-		["Moscow_Bombing_File", 10],
-		["MP5A5", 60],
-		["MP5SD", 80],
-		["NLAW", 300],
-		["OG7", 110],
-		["Pecheneg", 600],
-		["PG7V", 50],
-		["PG7VL", 80],
-		["PG7VR", 150],
-		["Phone", 10],
-		["PipeBomb", 50],
-		["PK", 300],
-		["PMC_AS50_scoped", 1300],
-		["PMC_AS50_TWS", 2200],
-		["PMC_documents", 10],
-		["PMC_ied_v1", 20],
-		["PMC_ied_v2", 20],
-		["PMC_ied_v3", 20],
-		["PMC_ied_v4", 20],
-		["revolver_EP1", 8],
-		["revolver_gold_EP1", 80],
-		["RPG18", 50],
-		["RPG7V", 200],
-		["RPK_74", 200],
-		["Sa58P_EP1", 90],
-		["Sa58V_CCO_EP1", 120],
-		["Sa58V_EP1", 90],
-		["Sa58V_RCO_EP1", 190],
-		["Sa61_EP1", 40],
-		["Saiga12K", 80],
-		["SCAR_H_CQC_CCO", 880],
-		["SCAR_H_CQC_CCO_SD", 950],
-		["SCAR_H_LNG_Sniper", 870],
-		["SCAR_H_LNG_Sniper_SD", 650],
-		["SCAR_H_STD_EGLM_Spect", 1180],
-		["SCAR_H_STD_TWS_SD", 1800],
-		["SCAR_L_CQC", 750],
-		["SCAR_L_CQC_CCO_SD", 920],
-		["SCAR_L_CQC_EGLM_Holo", 820],
-		["SCAR_L_CQC_Holo", 790],
-		["SCAR_L_STD_EGLM_RCO", 999],
-		["SCAR_L_STD_EGLM_TWS", 1300],
-		["SCAR_L_STD_HOLO", 820],
-		["SCAR_L_STD_Mk4CQT", 810],
-		["SMAW", 260],
-		["SMAW_HEAA", 150],
-		["SMAW_HEDP", 150],
-		["Stinger", 300],
-		["Strela", 290],
-		["SVD", 820],
-		["SVD_CAMO", 820],
-		["SVD_des_EP1", 820],
-		["SVD_NSPU_EP1", 850],
-		["TimeBomb", 100],
-		["TK_ALICE_Pack_EP1", 30],
-		["TK_Assault_Pack_EP1", 20],
-		["U_BasicUniformWB_F_AiA", 10],
-		["US_Assault_Pack_EP1", 30],
-		["US_Backpack_EP1", 30],
-		["US_Backpack_Specops_EP1", 30],
-		["US_Patrol_Pack_EP1", 30],
-		["UZI_EP1", 45],
-		["UZI_SD_EP1", 55],
-		["V_PlateCarrier1_rgr_AiA", 20],
-		["VSS_vintorez", 800]
+		["V_TacVest_oli",0]
 	];
 };
 
@@ -573,7 +312,40 @@ if (isNil "Global_CostMap") then
 _result = 0;
 _known_cost = false;
 
-for [{_i=0},{_i<count Global_CostMap},{_i=_i+1}] do
+_interval_begin = 0;
+_interval_end   = (count Global_CostMap) - 1;
+
+for "_z" from 0 to 10 do
+{
+	if (_interval_end == _interval_begin) exitWith { false };
+
+	_middle_index = floor((_interval_end + _interval_begin) / 2);
+
+	_desc = Global_CostMap select _middle_index;
+		_desc_item = _desc select 0;
+		_desc_cost = _desc select 1;
+
+	_compare_result = [_desc_item, _item] call _string_compare;
+
+	//diag_log ["quick", _z, _interval_begin, _interval_end, _middle_index, _desc, _item, _compare_result];
+
+	if (_compare_result == 0) exitWith
+	{
+		_result = _desc_cost; _known_cost = true;
+	};
+
+	if (_compare_result < 0) then
+	{
+		_interval_begin = _middle_index;
+	}
+	else
+	{
+		_interval_end = _middle_index;
+	};
+};
+
+/*
+for [{_i=0},{_i<},{_i=_i+1}] do
 {
 	private ["_desc", "_desc_item", "_desc_cost"];
 	_desc = Global_CostMap select _i;
@@ -582,6 +354,7 @@ for [{_i=0},{_i<count Global_CostMap},{_i=_i+1}] do
 
 	if (_item == _desc_item) then { _result = _desc_cost; _known_cost = true; };
 };
+*/
 
 /*
 if (!_known_cost) then
