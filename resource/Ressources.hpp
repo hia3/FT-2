@@ -324,7 +324,7 @@ class RscMapControl_ext {
 	sizeExInfo = 0.034;
 	fontLevel = "PuristaMedium";
 	sizeExLevel = 0.024;
-	text = "pic\ca\ui\data\map_background2_co.paa";
+	text = "#(argb,8,8,3)color(1,1,1,1)";
 	
 	class Task {
 		icon = "\A3\ui_f\data\map\mapcontrol\taskIcon_CA.paa";
