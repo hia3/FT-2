@@ -59,12 +59,6 @@ Local_PlayerVehicle setVariable ["FT2_WF_ACT_IgnitionOff",_action];
 _action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_IgnitionOn")+"</t>","client\Script_Client_Actions.sqf",[26],98,false,true,"","(player==driver _target) && (_target getVariable 'ignition_off')"];
 Local_PlayerVehicle setVariable ["FT2_WF_ACT_IgnitionOn",_action];
 
-_action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_CursorOff")+"</t>","client\Script_Client_Actions.sqf",[27],90,false,true,"","(Local_PlayerVehicle isKindOf 'Air') && (Local_CrosshairShow)"];
-Local_PlayerVehicle setVariable ["FT2_WF_ACT_CursorOff",_action];
-
-_action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_CursorOn")+"</t>","client\Script_Client_Actions.sqf",[27],90,false,true,"","(Local_PlayerVehicle isKindOf 'Air') && (((assignedVehicleRole player) select 0) != 'Cargo') && (!Local_CrosshairShow)"];
-Local_PlayerVehicle setVariable ["FT2_WF_ACT_CursorOn",_action];
-
 _action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_LowGearOff")+"</t>","client\Script_Client_Actions.sqf",[28],91,false,true,"","(player==driver _target) && (Local_HighClimbingModeOn) && (canMove _target)"];
 Local_PlayerVehicle setVariable ["FT2_WF_ACT_LowGearOff",_action];
 
@@ -102,7 +96,7 @@ Local_PlayerVehicle addEventHandler ["Fired","_this call Func_Client_PlayerFired
 	}
 	else
 	{		
-		_actions=["FT2_WF_ACT_GpsOn","FT2_WF_ACT_GpsOff","FT2_WF_ACT_BailOut","FT2_WF_ACT_Repair","FT2_WF_ACT_Reammo","FT2_WF_ACT_Refuel","FT2_WF_ACT_TakeOff","FT2_WF_ACT_Landing","FT2_WF_ACT_ClosedPosS","FT2_WF_ACT_ClosedPosC","FT2_WF_ACT_IgnitionOff","FT2_WF_ACT_IgnitionOn","FT2_WF_ACT_CursorOff","FT2_WF_ACT_CursorOn","FT2_WF_ACT_LowGearOff","FT2_WF_ACT_LowGearOn","FT2_WF_ACT_RadarGuidanceOff","FT2_WF_ACT_RadarGuidanceOn","STR_ACT_ManualFlareOff","STR_ACT_ManualFlareOn"];
+		_actions=["FT2_WF_ACT_GpsOn","FT2_WF_ACT_GpsOff","FT2_WF_ACT_BailOut","FT2_WF_ACT_Repair","FT2_WF_ACT_Reammo","FT2_WF_ACT_Refuel","FT2_WF_ACT_TakeOff","FT2_WF_ACT_Landing","FT2_WF_ACT_ClosedPosS","FT2_WF_ACT_ClosedPosC","FT2_WF_ACT_IgnitionOff","FT2_WF_ACT_IgnitionOn","FT2_WF_ACT_LowGearOff","FT2_WF_ACT_LowGearOn","FT2_WF_ACT_RadarGuidanceOff","FT2_WF_ACT_RadarGuidanceOn","STR_ACT_ManualFlareOff","STR_ACT_ManualFlareOn"];
 		
 		{
 			_action=Local_PlayerVehicle getVariable _x;

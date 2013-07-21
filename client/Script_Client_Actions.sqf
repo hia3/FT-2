@@ -170,10 +170,6 @@ switch((_this select 3)select 0)do
 		Local_PlayerVehicle setVariable ["ignition_off",false,true];		
 		Local_PlayerVehicle setFuel (Local_PlayerVehicle getVariable "ignite_fuel");
 	};
-	case 27://air cursor switch
-	{
-		Local_CrosshairShow = !Local_CrosshairShow;
-	};
 	case 28://high-climbing mode for tanks
 	{
 		Local_HighClimbingModeOn = !Local_HighClimbingModeOn;
