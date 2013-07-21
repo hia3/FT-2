@@ -1,5 +1,5 @@
 _handler=Local_PlayerVehicle addEventHandler ["fired","_this call Func_System_GetFireMode"];
-	
+
 _index=System_HaveAARadarVehicleTypes find (typeOf Local_PlayerVehicle);
 
 if (_index >= 0) then
@@ -14,7 +14,7 @@ if (_index >= 0) then
 				_pos=worldToScreen (getPosATL _x);				
 				if ((count _pos) > 0) then
 				{
-					if (([_pos select 0,_pos select 1,0] distance [0.5,0.5,0]) < 0.12) exitWith
+					if (([_pos select 0,_pos select 1,0] distance [0.5,0.5,0]) < 0.4) exitWith
 					{
 						_found=_x;
 					};
