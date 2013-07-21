@@ -1,5 +1,11 @@
 class CfgSounds
 {
+	class arrived
+	{
+		name="arrived";
+		sound[]={"sound\arrived.ogg",db+15,1.0};
+		titles[]={};
+	};
 	class area_capture_all
 	{
 		name="area_capture_all";
