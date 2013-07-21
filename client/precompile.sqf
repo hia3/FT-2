@@ -93,7 +93,6 @@ Local_IndirectFireMode=false;
 Local_InjuredByEnemy=false;
 Local_ReviverUnit=objNull;
 Local_PlayerBody=objNull;
-Local_CrosshairShow=false;
 Local_HighClimbingModeOn=false;
 Local_RadarGuidanceOn=false;
 Local_LastDeathTime=0;
@@ -104,6 +103,7 @@ Local_TankDrivePos=[];
 Local_TankFirePos=[];
 Func_Client_AssignDrivePos = { Local_TankDrivePos = _this };
 Func_Client_AssignFirePos  = { Local_TankFirePos  = _this };
+Local_LaserSpots=[];
 
 
 Func_Client_AddIncome=compile preprocessFile ("client\Func_Client_AddIncome.sqf");
@@ -231,6 +231,31 @@ onEachFrame
 			_distance = round (player distance Local_TankFirePos);
 		
 			drawIcon3D ["a3\ui_f\data\map\GroupIcons\selector_selectedmission_ca.paa", [1,0,0,1], Local_TankFirePos, 0.7, 0.7, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
+		};
+		
+		{
+			private ["_laser_spot"];
+			
+			_laser_spot = _x;
+			if !(isNull _laser_spot) then
+			{
+				drawIcon3D ["a3\ui_f\data\map\GroupIcons\selector_selectedmission_ca.paa", [1,0,0,1], _laser_spot, 0.7, 0.7, 0, "", 1, 0.02, "TahomaB"];
+			};
+		} forEach Local_LaserSpots;
+		
+		{
+			private ["_target"];
+			
+			_target = _x;
+			if !(isNull _target) then
+			{
+				drawIcon3D ["a3\ui_f\data\map\Markers\NATO\o_unknown.paa", [0.7, 0.7, 0.7, 1], _target, 0.7, 0.7, 0, "", 1, 0.02, "TahomaB"];
+			};
+		} forEach Local_CommanderDetectedVehicles;
+		
+		if !(isNull System_RadarTrackedAircraft) then
+		{
+			drawIcon3D ["a3\ui_f\data\gui\cfg\cursors\track_gs.paa", [1, 0, 0, 1], System_RadarTrackedAircraft, 2, 2, 0, "", 1, 0.02, "TahomaB"];
 		};
 	};
 };
