@@ -171,7 +171,7 @@ switch (_key) do
 	};
 	case KEY_TANK_ORDERS:
 	{
-		if ((cameraView == "GUNNER") && (player==commander Local_PlayerVehicle)) then
+		if ((cameraView == "GUNNER") && (player==commander Local_PlayerVehicle) && (Local_PlayerVehicle != player)) then
 		{
 			if (_shift) then
 			{
@@ -208,7 +208,6 @@ switch (_key) do
 
 	default
 	{
-		/*player sideChat format["%1",_key];*/
 		switch (true) do
 		{
 			case (_key in actionKeys "LockTargets"):
