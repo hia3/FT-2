@@ -2318,7 +2318,8 @@ PERF_END("RscGear_onLoad")
 
 	_vehicles_config = configfile >> "CfgVehicles";
 
-	_config_list = [_vehicles_config >> "B_Parachute"];
+//	_config_list = [_vehicles_config >> "B_Parachute"];
+	_config_list = [];
 
 	for [{_i = 0},{_i != count _vehicles_config},{_i = _i + 1}] do
 	{
