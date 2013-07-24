@@ -60,7 +60,7 @@ _veh call Func_Common_AddHandlers;
 
 if (_veh isKindOf "Air") then
 {
-	_veh setVariable ["manualflare_off",false,true];
+	_veh setVariable ["manualflare",false,true];
 	_handler=format ["if ((_this select 1) in System_AntiAirMissileTypes) then {[_this select 0,_this select 1,_this select 2,%1] spawn Func_System_IncomingAAMissile};",_aawarning];
 	_veh addEventHandler ['incomingmissile',_handler];
 }

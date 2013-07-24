@@ -44,7 +44,7 @@ switch (_key) do
 		// Manual Flare control for Planes
 		if ((Local_PlayerVehicle!=player) && ((player ==(commander Local_PlayerVehicle))|| (player ==(driver Local_PlayerVehicle))) && ((typeOf Local_PlayerVehicle) in System_AircraftVehicleTypes)) then
 		{
-			if (Local_PlayerVehicle getVariable 'manualflare_off') then 
+			if (Local_PlayerVehicle getVariable 'manualflare') then 
 			{
 				_flares = Local_PlayerVehicle getVariable "flaresleft";
 				if (_flares > 0) then

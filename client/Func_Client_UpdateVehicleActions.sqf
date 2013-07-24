@@ -78,10 +78,10 @@ _action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT
 Local_PlayerVehicle setVariable ["FT2_WF_ACT_ClosedPosC",_action];
 
 
-_action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_ManualFlareOn")+"</t>","client\Script_Client_Actions.sqf",[33],98,false,true,"","(player==driver _target) && !(_target getVariable 'manualflare_off') && (_target isKindOf 'Air') && ((typeof _target) in System_AircraftVehicleTypes)"];
+_action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_ManualFlareOn")+"</t>","client\Script_Client_Actions.sqf",[33],98,false,true,"","(player==driver _target) && !(_target getVariable 'manualflare') && (_target isKindOf 'Air') && ((typeof _target) in System_AircraftVehicleTypes)"];
 Local_PlayerVehicle setVariable ["STR_ACT_ManualFlareOn",_action];
 
-_action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_ManualFlareOff")+"</t>","client\Script_Client_Actions.sqf",[34],98,false,true,"","(player==driver _target) && (_target getVariable 'manualflare_off')"];
+_action=Local_PlayerVehicle  addAction ["<t color='#FFBD4C'>"+(localize "STR_ACT_ManualFlareOff")+"</t>","client\Script_Client_Actions.sqf",[34],98,false,true,"","(player==driver _target) && (_target getVariable 'manualflare')"];
 Local_PlayerVehicle setVariable ["STR_ACT_ManualFlareOff",_action];
 
 

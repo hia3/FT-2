@@ -204,11 +204,11 @@ switch((_this select 3)select 0)do
 	};
 	case 33:
 	{
-		Local_PlayerVehicle setVariable ["manualflare_off",true,true];
+		Local_PlayerVehicle setVariable ["manualflare",true,true];
 	};
 	case 34:
 	{
-		Local_PlayerVehicle setVariable ["manualflare_off",false,true];
+		Local_PlayerVehicle setVariable ["manualflare",false,true];
 	};		
 	case 35:
 	{
