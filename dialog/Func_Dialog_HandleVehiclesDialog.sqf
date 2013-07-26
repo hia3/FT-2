@@ -36,7 +36,7 @@ _lb=3708;
 _ld=3709;
 _fillerIDC = [3700,3701,3702,3703,3704];
 _fillerTypes = ["car","armor","heli","air","support"];
-_lastFiller=nil;
+_lastFiller = Dialog_VehicleFiller;
 _updateFiller=true;
 
 _listClasses = [];
@@ -70,28 +70,31 @@ _fillList = {
 		_i = _i + 1;
 		_u = _u + 1;
 	} forEach _listNames;
-	
+
 	lnbSetCurSelRow [_listBox,0]
 };
 
-while {alive player && dialog} do 
+Dialog_VehicleLbChange = false;
+Dialog_VehicleActionSE = "";
+
+while {alive player && dialog} do
 {
 	if (!dialog) exitWith {};
-	
+
 	//--- Something changed since the last time?
 	_filler = Dialog_VehicleFiller;
 	_changed = Dialog_VehicleLbChange;
 	_actionSE = Dialog_VehicleActionSE;
-		
+
 	//--- Filter Changed.
 	if (_filler != _lastFiller || _updateFiller) then {
-		_updateFiller = false;		
+		_updateFiller = false;
 		_listClasses = Call Compile Format ["_%1VehicleClasses",_filler];
 		_listCosts = Call Compile Format ["_%1VehicleCosts",_filler];
 		_listNames = Call Compile Format ["_%1VehicleNames",_filler];
 		_listPictures = Call Compile Format ["_%1VehiclePictures",_filler];
 		_listTimes = Call Compile Format ["_%1VehicleTimes",_filler];
-		
+
 		lnbClear _lb;
 		[_listCosts,_listNames,_listPictures,_listCosts,_filler,_lb] Call _fillList;
 		_id = _fillerTypes find _filler;
@@ -100,7 +103,7 @@ while {alive player && dialog} do
 		//--- Update the list since the filler changed.
 		_changed = true;
 	};
-	
+
 	//--- List Selection Changed.
 	if (_changed) then {
 		Dialog_VehicleLbChange=false;
@@ -108,12 +111,13 @@ while {alive player && dialog} do
 		//_currentData = lnbData[_lb,[_currentRow,0]];
 		_currentValue = lnbValue[_lb,[_currentRow,0]];
 		_currentCost = lnbValue[_lb,[_currentRow,1]];
-		_currentItem = _listClasses select _currentValue;		
+		_currentItem = _listClasses select _currentValue;
+		_currentItem = if (isNil "_currentItem") then { "" } else { _currentItem };
 		_currentName = _listNames select _currentValue;
 		_currentPicture = _listPictures select _currentValue;
 		_currentTime = _listTimes select _currentValue;
 
-		if (isClass (configFile >> 'CfgVehicles' >> _currentItem >> 'Library')) then 
+		if (isClass (configFile >> 'CfgVehicles' >> _currentItem >> 'Library')) then
 		{
 			_txt = getText (configFile >> 'CfgVehicles' >> _currentItem >> 'Library' >> 'libTextDesc');
 			(_display displayCtrl 3709) ctrlSetStructuredText (parseText format["<t size='0.65' align='justify'>%1</t>",_txt]);
@@ -123,7 +127,7 @@ while {alive player && dialog} do
 			(_display displayCtrl 3709) ctrlSetStructuredText (parseText '');
 		};
 	};
-	
+
 	if (_actionSE=="buy") then
 	{
 		if (isClass (configFile >> 'CfgVehicles' >> _currentItem)) then
@@ -131,9 +135,9 @@ while {alive player && dialog} do
 			if (_currentCost <= ([] call Func_Client_GetPlayerFunds)) then
 			{
 				_vehiclecost = _currentCost;
-			
-				[_currentItem,_vehiclecost,_currentTime,12] call Func_Client_CreateCustomVehicle;	
-		
+
+				[_currentItem,_vehiclecost,_currentTime,12] call Func_Client_CreateCustomVehicle;
+
 				-_currentCost call Func_Client_ChangePlayerFunds;
 				[] spawn { ctrlEnable [3710,false]; sleep 1; ctrlEnable [3710,true]; };
 				[_currentName,localize "STR_HINT_VehicleBought",_currentPicture,1.35] call Func_Client_ShowCustomMessage;
@@ -143,15 +147,15 @@ while {alive player && dialog} do
 				[localize "STR_HINT_Vehicles",localize "STR_HINT_LowFunds","pic\icon_funds.paa",1.35,"error_sound"] call Func_Client_ShowCustomMessage;
 			};
 		};
-		Dialog_VehicleActionSE=nil;
+		Dialog_VehicleActionSE = "";
 	};
-	
+
 	//--- Player"s Cash.
 	ctrlSetText[3706,Format["%1 $ %2.",localize "STR_WF_CashLabel",Call Func_Client_GetPlayerFunds]];
-	
+
 	_lastFiller = _filler;
 	sleep 0.05;
 };
 
-Dialog_VehicleLbChange=nil;
-Dialog_VehicleActionSE=nil;
+Dialog_VehicleLbChange=false;
+Dialog_VehicleActionSE="";

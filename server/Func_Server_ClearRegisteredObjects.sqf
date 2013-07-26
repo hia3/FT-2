@@ -13,9 +13,8 @@ while{!Global_GameEnded}do
 				if (!alive _x) then
 				{
 					_time=_x getVariable "deathtime";
-					if (format ["%1",_time]=="<null>") then
+					if (isNil "_time") then
 					{
-
 						_x setVariable ["deathtime",_timer+Config_DeleteBodiesPeriod];
 						
 					}
@@ -57,9 +56,8 @@ while{!Global_GameEnded}do
 					}
 					else
 					{
-						_time=_x getVariable "lastused";
-						_format=format ["%1",_time];
-						if ((_format=="<null>") || (_format=="-1")) then
+						_time=_x getVariable ["lastused", -1];
+						if (_time == -1) then
 						{
 							_deleteUnmanned=_x getVariable "idle_time";
 							_x setVariable ["lastused",_timer+_deleteUnmanned,true];

@@ -6,7 +6,7 @@ _removedropaction=
 	_veh=_this;
 	
 	_action=_veh getVariable "FT2_WF_ACT_Drop";
-	if (format["%1",_action]!="<null>") then
+	if !(isNil "_action") then
 	{
 		_veh removeAction _action;
 	};

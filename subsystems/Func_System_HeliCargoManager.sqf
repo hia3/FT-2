@@ -6,14 +6,14 @@ _removepickaction=
 	_veh=_this;
 	
 	_action=_veh getVariable "FT2_WF_ACT_Pick";
-	if (format["%1",_action]!="<null>") then
+	if !(isNil "_action") then
 	{
 		_veh removeAction _action;
 	};
 };
 
 _actadded = 0;
-_cargo = nil;
+_cargo = objNull;
 System_HeliCargoTransportState=0;
 
 while{(Local_PlayerVehicle!=player) && (alive Local_PlayerVehicle) && ((Local_PlayerVehicle emptyPositions "driver")==0) && (player in Local_PlayerVehicle)} do
@@ -30,7 +30,7 @@ while{(Local_PlayerVehicle!=player) && (alive Local_PlayerVehicle) && ((Local_Pl
 			}
 			else
 			{
-				if ((_vehicle!=_cargo) && (_actadded == 1)) then
+				if ((_vehicle != _cargo) && (_actadded == 1)) then
 				{
 					Local_PlayerVehicle call _removepickaction;
 					_actadded = 0;

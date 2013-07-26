@@ -54,8 +54,7 @@ while {!(Global_GameEnded)} do
 			if ((_data select 0)=='ARMA2-DAO-VH') then
 			{				
 				//set messages for players not in ts
-				[_data,[] call Config_EastPlayers] call _showmessage;
-				[_data,[] call Config_WestPlayers] call _showmessage;
+				[_data, allUnits] call _showmessage;
 			}
 			else
 			{
@@ -65,15 +64,13 @@ while {!(Global_GameEnded)} do
 		else
 		{
 			//remove messages for everybody
-			([] call Config_EastPlayers) call _removemessage;
-			([] call Config_WestPlayers) call _removemessage;
+			allUnits call _removemessage;
 		};
 	}
 	else
 	{
 		//remove messages for everybody
-		([] call Config_EastPlayers) call _removemessage;
-		([] call Config_WestPlayers) call _removemessage;
+		allUnits call _removemessage;
 	};
 	sleep 5;
 };

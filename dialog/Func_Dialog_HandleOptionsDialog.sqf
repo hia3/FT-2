@@ -26,7 +26,7 @@ SliderSetPosition[13005,Dialog_ScreenMarkersDistance];
 _i = 1;
 {
 	_name=_x getVariable "playername";
-	if (((typeName _x)=="OBJECT") && (format["%1",_name]!="<null>")) then
+	if (((typeName _x)=="OBJECT") && !(isNil "_name")) then
 	{		
 		_index=lbAdd[13016,Format ["[%1] %2",_i,_name]];
 		lbSetData[13016,_index,_name];

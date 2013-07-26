@@ -2,7 +2,14 @@
 
 	while {!Global_GameEnded} do
 	{
-		Local_CurrentPlayers=[] call Local_FriendlyPlayers;//update the list of current players
+		_current_players = [];
+		{
+			if ((side _x) == Local_PlayerSide) then
+			{
+				_current_players set [count _current_players, _x];
+			};
+		} forEach playableUnits;
+		Local_CurrentPlayers=_current_players;//update the list of current players
 		
 		[] call Func_Client_MarkMHQ;//mark MHQ on the map
 		[] call Func_Client_MarkFriendlyPlayers;//mark players on the map

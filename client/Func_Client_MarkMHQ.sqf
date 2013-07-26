@@ -18,32 +18,35 @@ _report_mhq_event =
 
 	_hint_old_event = _mhq getVariable "Local_MhqHintOldEvent";
 
-	if (_hint_old_event != _event) then
+	if !(isNil "_hint_old_event") then
 	{
-		private ["_message"];
-
-		_message = localize _event;
-		switch (_event) do
+		if (_hint_old_event != _event) then
 		{
-			case "STR_HINT_MHQ_Moving":
-			{
-				_veh_driver = driver _x;
-				_driver_name = if (!(isNull _veh_driver) && (alive _veh_driver)) then { name _veh_driver; } else { "" };
+			private ["_message"];
 
-				_message = composeText [parseText format ["<t align='center' size='1' shadow='true'>%1</t><br/><t align='center' color='#e0e080' size='1.25' shadow='true'>%2</t>", _message, _driver_name]];
-			};
-			case "STR_HINT_MHQ_Water":
+			_message = localize _event;
+			switch (_event) do
 			{
-				playSound "error_sound";
+				case "STR_HINT_MHQ_Moving":
+				{
+					_veh_driver = driver _x;
+					_driver_name = if (!(isNull _veh_driver) && (alive _veh_driver)) then { name _veh_driver; } else { "" };
+
+					_message = composeText [parseText format ["<t align='center' size='1' shadow='true'>%1</t><br/><t align='center' color='#e0e080' size='1.25' shadow='true'>%2</t>", _message, _driver_name]];
+				};
+				case "STR_HINT_MHQ_Water":
+				{
+					playSound "error_sound";
+				};
+				case "STR_HINT_MHQ_Destroyed":
+				{
+					playSound "mhq_down";
+				};
 			};
-			case "STR_HINT_MHQ_Destroyed":
-			{
-				playSound "mhq_down";
-			};
+
+			hint _message;
+			_mhq setVariable ["Local_MhqHintOldEvent", _event];
 		};
-
-		hint _message;
-		_mhq setVariable ["Local_MhqHintOldEvent", _event];
 	};
 };
 
@@ -70,7 +73,7 @@ _i=1;
 			{
 				//wait some time since MHQ stopped
 				_lastmovetime=_x getVariable "lastmovetime";
-				if (format ["%1",_lastmovetime]=="<null>") then {_lastmovetime=-Config_MHQStopTime};
+				if (isNil "_lastmovetime") then {_lastmovetime=-Config_MHQStopTime};
 			};
 
 			if (!(surfaceIsWater _pos)) then

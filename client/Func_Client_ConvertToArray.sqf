@@ -3,6 +3,12 @@
 
 	private ["_list"];
 	_list=[];
-	{_list=_list+list _x;}forEach _this;
+	{
+		_l = list _x;
+		if !(isNil "_l") then
+		{
+			_list=_list + _l;
+		};
+	} forEach _this;
 	_list;
 	
