@@ -1,18 +1,18 @@
 /**/
-_v=_this select 0;	
+_v=_this select 0;
 /*_key=_this select 1;*/
 _isPlayer=_this select 2;
 _launcher=_this select 3;
 
 _period=_v getVariable "smokeslasttime";
-if (time<_period) exitWith{};	
+if (time<_period) exitWith{};
 _v setVariable ["smokeslasttime",time+9];
 
 _smokes=_v getVariable "smokesleft";
 if (_smokes <= 0) exitWith {_v vehicleChat localize "STR_MES_SmokesEmpty"; playSound "error_sound";};
 
 _v vehicleChat format[localize "STR_MES_SmokesLaunched",_smokes-1];
-	
+
 playSound3D ["A3\Sounds_F\weapons\HMG\HMG_grenade.wss", _v];
 
 _v setVariable ["smokesleft",_smokes-1,true];
@@ -69,9 +69,9 @@ if (_num>0) then
 		_smokeg setVectorDir _Gvel;
 		_shells=_shells+[_smokeg];
 	};
-	
+
 	{[_x] spawn Func_System_SpawnSmoke} forEach _shells;
-	
+
 	Public_VehicleSmokeShells=_shells;
 	publicVariable "Public_VehicleSmokeShells";
 };
