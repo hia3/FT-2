@@ -97,7 +97,7 @@ if (isNil "Global_CostMap") then
 		["3Rnd_UGL_FlareYellow_F",15],
 		["5Rnd_127x108_Mag",50],
 		["7Rnd_408_Mag",50],
-		["9Rnd_45ACP_Mag",60],
+		["9Rnd_45ACP_Mag",30],
 		["acc_flashlight",5],
 		["acc_pointer_IR",5],
 		["APERSBoundingMine_Range_Mag",150],
@@ -108,7 +108,10 @@ if (isNil "Global_CostMap") then
 		["arifle_Katiba_GL_F",120],
 		["arifle_Mk20_F",70],
 		["arifle_Mk20_GL_F",130],
+		["arifle_Mk20_GL_plain_F",150],
+		["arifle_Mk20_plain_F",100],
 		["arifle_Mk20C_F",50],
+		["arifle_Mk20C_plain_F",120],
 		["arifle_MX_F",80],
 		["arifle_MX_GL_F",150],
 		["arifle_MX_SW_F",200],
@@ -218,16 +221,16 @@ if (isNil "Global_CostMap") then
 		["ItemWatch",5],
 		["Laserbatteries",5],
 		["Laserdesignator",100],
-		["launch_B_Titan_F",200],
-		["launch_B_Titan_short_F",200],
-		["launch_I_Titan_F",200],
-		["launch_I_Titan_short_F",200],
-		["launch_NLAW_F",200],
-		["launch_O_Titan_F",200],
-		["launch_O_Titan_short_F",200],
-		["launch_RPG32_F",200],
-		["launch_Titan_F",200],
-		["launch_Titan_short_F",200],
+		["launch_B_Titan_F",500],
+		["launch_B_Titan_short_F",500],
+		["launch_I_Titan_F",500],
+		["launch_I_Titan_short_F",500],
+		["launch_NLAW_F",500],
+		["launch_O_Titan_F",500],
+		["launch_O_Titan_short_F",500],
+		["launch_RPG32_F",500],
+		["launch_Titan_F",500],
+		["launch_Titan_short_F",500],
 		["LMG_Mk200_F",250],
 		["LMG_Zafir_F",300],
 		["Medikit",100],
@@ -239,18 +242,21 @@ if (isNil "Global_CostMap") then
 		["muzzle_snds_H_MG",70],
 		["muzzle_snds_L",50],
 		["muzzle_snds_M",70],
-		["NLAW_F",200],
+		["NLAW_F",500],
 		["NVGoggles",5],
 		["optic_Aco",20],
 		["optic_ACO_grn",20],
+		["optic_ACO_grn_smg",20],
+		["optic_Aco_smg",20],
 		["optic_Arco",150],
 		["optic_Hamr",150],
 		["optic_Holosight",20],
+		["optic_Holosight_smg",20],
 		["optic_MRCO",150],
 		["optic_SOS",300],
 		["Rangefinder",20],
-		["RPG32_AA_F",200],
-		["RPG32_F",200],
+		["RPG32_AA_F",500],
+		["RPG32_F",500],
 		["SatchelCharge_Remote_Mag",200],
 		["SLAMDirectionalMine_Wire_Mag",100],
 		["SMG_01_F",30],
@@ -265,9 +271,9 @@ if (isNil "Global_CostMap") then
 		["srifle_EBR_F",500],
 		["srifle_GM6_F",1000],
 		["srifle_LRR_F",1000],
-		["Titan_AA",200],
-		["Titan_AP",200],
-		["Titan_AT",200],
+		["Titan_AA",500],
+		["Titan_AP",500],
+		["Titan_AT",500],
 		["ToolKit",100],
 		["U_B_CombatUniform_mcam",0],
 		["U_B_CombatUniform_mcam_tshirt",0],
@@ -303,6 +309,7 @@ if (isNil "Global_CostMap") then
 		["V_Rangemaster_belt",0],
 		["V_RebreatherB",0],
 		["V_RebreatherIR",0],
+		["V_TacVest_blk",0],
 		["V_TacVest_brn",0],
 		["V_TacVest_oli",0]
 	];
@@ -343,18 +350,6 @@ for "_z" from 0 to 10 do
 		_interval_end = _middle_index;
 	};
 };
-
-/*
-for [{_i=0},{_i<},{_i=_i+1}] do
-{
-	private ["_desc", "_desc_item", "_desc_cost"];
-	_desc = Global_CostMap select _i;
-		_desc_item = _desc select 0;
-		_desc_cost = _desc select 1;
-
-	if (_item == _desc_item) then { _result = _desc_cost; _known_cost = true; };
-};
-*/
 
 /*
 if (!_known_cost) then
