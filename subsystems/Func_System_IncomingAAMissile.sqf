@@ -4,16 +4,21 @@ _ammotype  = _this select 1;
 _antiair   = _this select 2;
 _aawarning = _this select 3;
 
-if (_aawarning) then
+if ((_aawarning) && (local _air)) then
 {
 	_ammo = nearestObject [_antiair, _ammotype];
 
 	_attacker_distance = _ammo distance _air;
 	_activate_distance = 300;
 
+	_flares_left = _air getVariable "flaresleft";
+	
 	//--send _air crew a warning message
-	Public_AircraftAttacked = _air;
-	publicVariable 'Public_AircraftAttacked';
+	if (player in _air) then
+	{
+		[localize "STR_HINT_Warning",localize "STR_HINT_IncomingMissile","pic\ui_notfreeze_ca.01.paa",1.0] call Func_Client_ShowCustomMessage;
+		_air say "air_alarm";
+	};
 	//--end
 
 	_auto_flares = !(_air getVariable 'manualflare');
@@ -51,10 +56,9 @@ if (_aawarning) then
 	{
 		if (_auto_flares) then
 		{
-			_flares_left = _air getVariable "flaresleft";
-
 			if (_flares_left > 0) then
 			{
+				_air vehicleChat format [localize "STR_MES_FlaresLaunched", _flares_left - 1];
 				_air spawn Func_System_DropFlares;
 				_air setVariable ["flaresleft", _flares_left - 1, true];
 			};
