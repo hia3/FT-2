@@ -25,7 +25,10 @@ System_ArmoredVehicleTypes=
 	["I_MRAP_03_hmg_F",1],
 	
 	["O_Boat_Armed_01_hmg_F",2],
-	["B_Boat_Armed_01_minigun_F",2]
+	["B_Boat_Armed_01_minigun_F",2],
+
+	["O_APC_Tracked_02_cannon_F",4],
+	["B_APC_Tracked_01_rcws_F",4]
 ];
 System_AircraftVehicleTypes=
 [
