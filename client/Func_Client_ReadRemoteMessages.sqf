@@ -1,16 +1,16 @@
 
-	_message=player getVariable "message_kill_safezone";
+	_message=player getVariable ["message_kill_safezone", 0];
 	if (_message!=0) then
 	{
 		if (_message > 0) then
 		{
-			player commandChat format[localize "STR_MES_KIlledSafe",_message];
+			player commandChat format[localize "STR_MES_KIlledSafe", _message];
 			playSound "error_sound";
 		};		
 		player setVariable ["message_kill_safezone",0];
 	};
 	
-	_message=player getVariable "message_kill_infantry";
+	_message=player getVariable ["message_kill_infantry", 0];
 	if (_message!=0) then
 	{
 		if (_message > 0) then
@@ -25,7 +25,7 @@
 		player setVariable ["message_kill_infantry",0];
 	};
 
-	_message=player getVariable "message_destroy_vehicle";
+	_message=player getVariable ["message_destroy_vehicle", 0];
 	if (_message!=0) then
 	{
 		if (_message > 0) then
@@ -40,7 +40,7 @@
 	};
 
 	
-	_message=player getVariable "message_transfer_funds";
+	_message=player getVariable ["message_transfer_funds", 0];
 	if ((typeName _message)=="ARRAY") then
 	{	
 		player groupChat format[localize "STR_MES_FundsTransfered",_message select 0,_message select 1];
@@ -49,7 +49,7 @@
 		player setVariable ["message_transfer_funds",0];
 	};
 
-	_message=player getVariable "message_group";
+	_message=player getVariable ["message_group", 0];
 	if ((typeName _message)=="ARRAY") then
 	{	
 		if (_message select 0)then
@@ -64,15 +64,14 @@
 		player setVariable ["message_group",0];
 	};
 
-	_message=player getVariable "message_knife";
-
+	_message=player getVariable ["message_knife", 0];
 	if ((typeName _message)=="OBJECT") then
 	{	
 		player commandChat format[localize "STR_MES_KIlledKnife",_message getVariable "playername"];
 		player setVariable ["message_knife",0];
 	};
 
-	_message=player getVariable "message_blast";
+	_message=player getVariable ["message_blast", 0];
 	if ((typeName _message)=="OBJECT") then
 	{	
 		player commandChat format[localize "STR_MES_BackBlast",_message getVariable "playername"];	
@@ -91,7 +90,7 @@
 		};
 	};
 
-	_message=player getVariable "message_pushcrew";
+	_message=player getVariable ["message_pushcrew", 0];
 	if ((typeName _message)=="OBJECT") then
 	{	
 		player commandChat format[localize "STR_MES_Push",_message getVariable "playername"];	
@@ -122,28 +121,28 @@
 		};
 	};
 
-	_message=player getVariable "message_grenadeinside";
+	_message=player getVariable ["message_grenadeinside", 0];
 	if ((typeName _message)=="OBJECT") then
 	{			
 		player setVariable ["message_grenadeinside",0];
 		Local_PlayerVehicle vehicleRadio "grenade_in_tank";
 	};
 	
-	_message=player getVariable "message_grenadeinexploded";
+	_message=player getVariable ["message_grenadeinexploded", 0];
 	if ((typeName _message)=="OBJECT") then
 	{	
 		player setVariable ["message_grenadeinexploded",0];
 		player commandChat format[localize "STR_MES_GrenadeInside",_message getVariable "playername"];		
 	};
 	
-	_message=player getVariable "message_healedteammate";
+	_message=player getVariable ["message_healedteammate", 0];
 	if (_message!=0) then
 	{	
 		player groupChat format[localize "STR_MES_HealedTeammate",_message];
 		player setVariable ["message_healedteammate",0];		
 	};
 	
-	_message=player getVariable "message_revivedteammate";
+	_message=player getVariable ["message_revivedteammate", 0];
 	if (_message!=0) then
 	{	
 		player groupChat format[localize "STR_MES_RevivedTeammate",_message];
