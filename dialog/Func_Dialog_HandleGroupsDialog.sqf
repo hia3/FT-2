@@ -30,7 +30,7 @@ _filllist=
 	_playerindex=0;
     //--prepare lists of groups
 	{
-		_number=_x getVariable "groupNumber";
+		_number=_x getVariable ["groupNumber", -1];
 		if (_number==-1) then
 		{
 			_nogroup set [count _nogroup,_x];
@@ -229,7 +229,7 @@ while {dialog && !Global_GameEnded} do
 				closeDialog 0;	
 				sleep 0.5;
 			};
-			case 5://Player joins a group, protected with a passowrd
+			case 5://Player joins a group, protected with a password
 			{							
 				_pass=ctrlText _idpass;
 				
