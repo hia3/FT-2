@@ -64,7 +64,7 @@ class CfgSounds
 	class air_alarm
 	{
 		name="air_alarm";
-		sound[]={"A3\Sounds_F\air\Mi48\alarm.wss",db+10,1};
+		sound[]={"sound\air_alarm.ogg",db+10,1};
 		titles[]={};
 	};
 
