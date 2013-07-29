@@ -40,7 +40,7 @@ if (isServer) then
 			
 			if (_victim_owner != _attacker_name) then
 			{
-				_attacker_award  = ceil(_full_award * (_attacker_damage / _full_damage));
+				_attacker_award  = _full_award * (_attacker_damage / _full_damage);
 				
 				if (_attacker_side == _victim_side) then
 				{
@@ -53,6 +53,8 @@ if (isServer) then
 						_attacker_award = _attacker_award * Config_TS3FundsModifier;
 					};
 				};
+				
+				_attacker_award = floor(_attacker_award);
 				
 				_attacker_funds_name = format["FT2_WF_Funds_%1", _attacker_name]; 		
 				_attacker_funds      = FT2_WF_Logic getVariable _attacker_funds_name;
