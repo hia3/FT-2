@@ -1,6 +1,6 @@
 
 System_AntiAirMissileTypes=[["M_RPG32_AA_F",true],["M_Titan_AA",true],["M_Air_AA",true]];
-System_AntiAirVehicleTypes=[["Man",0.33],["Helicopter",0]];
+System_AntiAirVehicleTypes=[["Man",0.165],["Helicopter",0]];
 
 System_AntiTankMissileTypes=[["M_RPG32_F",true],["M_NLAW_AT_F",true],["M_Titan_AT",true],["M_PG_AT",true]];
 System_AntiTankVehicleTypes=[["Man",0.33],["Helicopter",0.5]];
@@ -30,11 +30,12 @@ System_ArmoredVehicleTypes=
 	["O_APC_Tracked_02_cannon_F",4],
 	["B_APC_Tracked_01_rcws_F",4]
 ];
+
 System_AircraftVehicleTypes=
 [
-	["B_Heli_Light_01_F",0],["B_Heli_Light_01_armed_F",1],["B_Heli_Attack_01_F",3],["B_Heli_Transport_01_F",0],
+	["B_Heli_Light_01_F",0],["B_Heli_Light_01_armed_F",1],["B_Heli_Attack_01_F",4],["B_Heli_Transport_01_F",0],
 	["I_Heli_Transport_02_F",0],
-	["O_Heli_Light_02_unarmed_F",0],["O_Heli_Light_02_F",1],["O_Heli_Attack_02_F",3],["O_Heli_Attack_02_black_F",3]
+	["O_Heli_Light_02_unarmed_F",0],["O_Heli_Light_02_F",1],["O_Heli_Attack_02_F",4],["O_Heli_Attack_02_black_F",4]
 ];
 
 System_GuidedMissileTypes=[];
