@@ -84,7 +84,7 @@ Local_MapInfoStrings=
 	format ["<t align='center' shadow='true' size='1.5'>Teamspeak3: %1</t>",Local_TS_host],
 	format ["<t align='center' shadow='true' size='1.5'>Website: %1</t>",Local_TS_home],
 	format ["<t align='center' shadow='true' size='1.5'>Report bugs and other suggestions to: %1</t>",Local_TS_mail],
-	"<t align='center' shadow='true' size='1.5'>[Copyright ArmaRUS and Hi,A2 Project, 2013]</t>"
+	"<t align='center' shadow='true' size='1.5'>[Copyright ArmaRUS and Hi,A3 Project, 2013]</t>"
 ];
 
 Local_RegisteredObjects=[];
