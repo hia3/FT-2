@@ -33,7 +33,7 @@
 
 		//--send _tank crew a warning message
 		Public_TankAttacked=_tank;
-		publicVariable 'Public_TankAttacked';
+		"Public_TankAttacked" call Func_Common_PublicVariable;
 		//--end
 
 		//get missile hit chance

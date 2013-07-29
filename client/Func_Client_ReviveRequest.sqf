@@ -28,7 +28,7 @@ if (player==_this) then
 			if (alive _this) then
 			{
 				Public_ReviveRequest=[player,_unit];
-				publicVariable "Public_ReviveRequest";
+				"Public_ReviveRequest" call Func_Common_PublicVariable;
 			};
 		}
 		else

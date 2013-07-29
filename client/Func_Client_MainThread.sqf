@@ -22,7 +22,7 @@
 		[] call Func_Client_SetAllowDamage;//allowDamage false; for enemies inside respawn zone	
 		
 		
-		if (Param_RoundDuration < time) then {Global_GameEnded=true; publicVariable "Global_GameEnded"};//if round time is passed - end the round		
+		if (Param_RoundDuration < time) then {Global_GameEnded=true; "Global_GameEnded" call Func_Common_PublicVariable; };//if round time is passed - end the round		
 		sleep 0.5;
 	};
 	

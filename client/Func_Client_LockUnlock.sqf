@@ -24,6 +24,6 @@
 		//if vehicle is not local
 		//see client`s and server`s precompile.sqf
 		Public_VehicleLock=_this;
-		publicVariable "Public_VehicleLock";
+		"Public_VehicleLock" call Func_Common_PublicVariable;
 	};
 	

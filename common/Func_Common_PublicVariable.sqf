@@ -1,0 +1,2 @@
+
+publicVariable _this;

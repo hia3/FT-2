@@ -36,7 +36,7 @@
 						player setVariable ["enemytrack",time+Config_EnemyTrackTime,true];
 			
 						Public_EnemyTracked=player;
-						publicVariable "Public_EnemyTracked";
+						"Public_EnemyTracked" call Func_Common_PublicVariable;
 					};
 				};
 			};			

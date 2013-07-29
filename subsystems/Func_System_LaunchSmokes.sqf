@@ -73,5 +73,5 @@ if (_num>0) then
 	{[_x] spawn Func_System_SpawnSmoke} forEach _shells;
 
 	Public_VehicleSmokeShells=_shells;
-	publicVariable "Public_VehicleSmokeShells";
+	"Public_VehicleSmokeShells" call Func_Common_PublicVariable;
 };

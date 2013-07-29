@@ -43,7 +43,7 @@ if (_thrown) then
 	sleep 1.5;
 
 	Public_TankExploded=_tank;
-	publicVariable "Public_TankExploded";
+	"Public_TankExploded" call Func_Common_PublicVariable;
 	_tank spawn Func_System_TankExploded;
 
 	_crew=crew _tank;
@@ -69,7 +69,7 @@ if (_thrown) then
 		else
 		{
 			Public_VehicleLock=_tank;
-			publicVariable "Public_VehicleLock";
+			"Public_VehicleLock" call Func_Common_PublicVariable;
 		};
 	};	
 };

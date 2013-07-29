@@ -8,7 +8,7 @@ while{(_time > 0) && !Global_GameEnded} do
 };
 
 Global_GameEnded=true;
-publicVariable "Global_GameEnded";
+"Global_GameEnded" call Func_Common_PublicVariable;
 
 sleep Config_GameEndDelay;
 

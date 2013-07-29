@@ -41,7 +41,7 @@ if (Dialog_RespawnDeathTime==0) then
 		
 	//mark player dead body
 	Public_DeadUnit=[_player,true];
-	publicVariable "Public_DeadUnit";		
+	"Public_DeadUnit" call Func_Common_PublicVariable;
 };
 
 //close all the dialogs
@@ -216,7 +216,7 @@ if (_playerWasDead) then
 		
 	//remove player body marker
 	Public_DeadUnit=[player,false];
-	publicVariable "Public_DeadUnit";
+	"Public_DeadUnit" call Func_Common_PublicVariable;
 };
 
 2 fadeMusic 0;

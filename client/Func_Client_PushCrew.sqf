@@ -10,7 +10,7 @@ if (!((locked _this)==2)) then
 	else
 	{
 		Public_VehicleLock=_this;
-		publicVariable "Public_VehicleLock";
+		"Public_VehicleLock" call Func_Common_PublicVariable;
 	};
 };
 

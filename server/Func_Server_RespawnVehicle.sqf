@@ -105,7 +105,7 @@
 			_veh setVelocity [0,0,-10];
 			
 			_veh setVehicleVarName _varname;
-			_veh call compile format ["%1=_veh;publicVariable ""%1""",_varname];
+			_veh call compile format ["%1=_veh; '%1' call Func_Common_PublicVariable;", _varname];
 			
 			[_veh,_award,_aawarning,_atwarning,_side,_startpos,_startdir] call _setinit;					
 		};

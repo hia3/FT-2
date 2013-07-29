@@ -489,7 +489,7 @@ onEachFrame
 
 	//Send command to the server to renew marker colors
 	Public_PlayerConnected=player;
-	publicVariable "Public_PlayerConnected";
+	"Public_PlayerConnected" call Func_Common_PublicVariable;
 
 	if (Localshowintro) then {sleep 5.0} else {sleep 0.0;};
 	//Show Credits

@@ -3,5 +3,5 @@
 	{
 		sleep 10*60;
 		Public_WeatherCode=[time,fog,overcast,rain];
-		publicVariable "Public_WeatherCode";
+		"Public_WeatherCode" call Func_Common_PublicVariable;
 	};

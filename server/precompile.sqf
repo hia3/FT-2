@@ -17,7 +17,7 @@ Func_System_Repaint=compile preprocessFile ("SubSystems\Func_System_Repaint.sqf"
 
 [] spawn
 {		
-	publicVariable "Global_GameEnded";
+	"Global_GameEnded" call Func_Common_PublicVariable;
 	
 	/*onPlayerConnected "[] spawn Func_Server_OnPlayerConnected;";*/
     onPlayerDisconnected {_name spawn Func_Server_OnPlayerDisconnected;};
@@ -72,7 +72,7 @@ Func_System_Repaint=compile preprocessFile ("SubSystems\Func_System_Repaint.sqf"
 
 	if (ismultiplayer) then {_pa0 = paramsArray select 0;};
 	Param_RoundDuration=_pa0+Config_GameStartDelay;
-	publicVariable "Param_RoundDuration";
+	"Param_RoundDuration" call Func_Common_PublicVariable;
 
 	while {isNil 'FT2_WF_Logic'} do {sleep 0.1};	
 

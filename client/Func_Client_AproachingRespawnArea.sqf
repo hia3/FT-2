@@ -40,7 +40,7 @@ if ( ((Local_PlayerVehicle distance Local_EnemyBaseFlag) < _Limit) && ((time-Loc
 	//tell all the clients about new unti to track
 	//see Func_Client_TrackEnemy & client`s precompile.sqf
 	Public_EnemyTracked=player;
-	publicVariable "Public_EnemyTracked";
+	"Public_EnemyTracked" call Func_Common_PublicVariable;
 	//reduce view distance 
 	Local_LastWarningTimeAproach=time;
 	Local_EnteredEnemySafeZone=true;

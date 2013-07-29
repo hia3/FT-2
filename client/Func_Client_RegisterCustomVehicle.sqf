@@ -12,6 +12,6 @@
 	else
 	{
 		Public_UnitRegistered=_veh;
-		publicVariable "Public_UnitRegistered";
+		"Public_UnitRegistered" call Func_Common_PublicVariable;
 	};
 	

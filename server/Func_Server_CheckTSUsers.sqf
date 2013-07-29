@@ -34,7 +34,7 @@ _ts_info_version = "ts-info" callExtension "version";
 if (_ts_info_version == "1.1") then
 {
 Public_TeamSpeakInfo="ts-info" callExtension "get-server-info";
-publicVariable "Public_TeamSpeakInfo";
+"Public_TeamSpeakInfo" call Func_Common_PublicVariable;
 
 while {!(Global_GameEnded)} do
 {
@@ -79,5 +79,5 @@ while {!(Global_GameEnded)} do
 else
 {
 	Public_TeamSpeakInfo="";
-	publicVariable "Public_TeamSpeakInfo";
+	"Public_TeamSpeakInfo" call Func_Common_PublicVariable;
 };
