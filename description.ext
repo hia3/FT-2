@@ -19,7 +19,7 @@ onLoadMission="Based on the Valhalla map by WINSE and Roman.val";
 
 class Header
 {
-	gameType=Hold;
+	gameType=SC;
 	minPlayers=1;
 	maxPlayers=120;
 };
