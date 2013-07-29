@@ -70,11 +70,14 @@ _filllist=
 			_j=_j+1;
 			
 			_name=_x getVariable "playername";
-			lnbAddRow[_idclist,[_name]];
-			lnbSetValue[_idclist,[_j,0],_groupslist select _i];
-			lnbSetData[_idclist,[_j,0],format["%1",_x]];
-			lnbSetData[_idclist,[_j,1],_passwordslist select _i];
-			if (_name==Local_PlayerName) then {_playerindex=_j};
+			if !(isNil "_name") then
+			{
+				lnbAddRow[_idclist,[_name]];
+				lnbSetValue[_idclist,[_j,0],_groupslist select _i];
+				lnbSetData[_idclist,[_j,0],format["%1",_x]];
+				lnbSetData[_idclist,[_j,1],_passwordslist select _i];
+				if (_name==Local_PlayerName) then {_playerindex=_j};
+			};
 		} forEach _x;
 		_j=_j+1;
 		_i=_i+1;
