@@ -193,11 +193,6 @@ switch((_this select 3)select 0)do
 		// we need to make a check on player to see if he has secondary weapons.
 		createdialog "RscHaloMenu";
 	};
-	case 31://Halo system
-	{
-		// we need to make a check on player to see if he has secondary weapons.
-		player spawn Halo_Parachute;
-	};
 	case 32://attach explosives to vehicle
 	{
 		[] spawn Func_System_AttachExplosives;
@@ -228,7 +223,7 @@ switch((_this select 3)select 0)do
 			_vehiclecost = _currentCost;
 			
 			_vehicle = [_currentItem, _vehiclecost, _currentTime, -2] call Func_Client_CreateCustomVehicle;
-
+			_vehicle lock false;
 			player moveInDriver _vehicle;
 		
 			-_currentCost call Func_Client_ChangePlayerFunds;

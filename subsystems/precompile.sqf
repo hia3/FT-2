@@ -15,7 +15,6 @@ System_LoadableStaticsDatas=[];
 System_HaveAARadarVehicleDatas=[];
 System_HaveAARadarVehicleRanges=[];
 
-#include "Func_System_HaloSystem.sqf";
 Func_System_AdjustCannonGuidance = compile preprocessFile "SubSystems\Func_System_AdjustCannonGuidance.sqf";
 Func_System_AdjustMissileGuidance = compile preprocessFile "SubSystems\Func_System_AdjustMissileGuidance.sqf";
 Func_System_AdjustStingerGuidance = compile preprocessFile "SubSystems\Func_System_AdjustStingerGuidance.sqf";

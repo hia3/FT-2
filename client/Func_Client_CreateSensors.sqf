@@ -51,12 +51,6 @@ _sensor=createTrigger["EmptyDetector",[0,0]];
 _sensor setTriggerActivation ["ANY", "PRESENT", true];
 _sensor setTriggerStatements["(alive player) && ((rating player) < 0)","player addRating -(rating player)",""];
 
-//HALO jump
-_sensor=createTrigger["EmptyDetector",[0,0]];
-_sensor setTriggerActivation ["ANY", "PRESENT", true];
-_sensor setTriggerStatements["(alive player) && (typeOf(vehicle player) in ['ParachuteEast','ParachuteWest','Parachute_TK_EP1','Parachute_US_EP1'])","[(vehicle player)] spawn Halo_FreeFall",""];
-
-
 
 //reset injury flag for healer awarding
 _sensor=createTrigger["EmptyDetector",[0,0]];
