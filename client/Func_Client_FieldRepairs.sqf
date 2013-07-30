@@ -1,8 +1,6 @@
 	//user action: Field Repair
 	//see Func_Client_UpdateUserActions
 
-
-
 	private["_veh","_name"];
 
 	_veh=_this;
@@ -13,7 +11,7 @@
 	_fieldrepairtime=20;
 
 	//if vehicle is not handled by any script before, consider it is new
-	//and set a full ammount of repair packs inside
+	//and set a full amount of repair packs inside
 	if (isNil "_pack") then
 	{
 		_pack=Config_RepairKitsDefault;
@@ -33,7 +31,7 @@
 	{
 		//if there are crew inside - cancel repair
 		//just because i want so :)
-		//if vehicle is allready being field repaired - cancel repair
+		//if vehicle is already being field repaired - cancel repair
 		//because some persons at one time can spend all of the repair kits
 		//though it will give poor result anyway
 		if (({alive _x} count crew _veh) > 0) exitWith {[_name,localize "STR_HINT_FieldCrew","pic\i_repair_f.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage;_veh setVariable ["fieldrepair",0,true];};
@@ -60,9 +58,9 @@
 				};
 			};
 
-			if (_i<20) exitWith
+			if (_i<_fieldrepairtime) exitWith
 			{
-				//if i<20 that means player is dead / _veh is dead / some crew got into veh
+				//if i<_fieldrepairtime that means player is dead / _veh is dead / some crew got into veh
 				[_name,localize "STR_HINT_FieldFailed","pic\i_repair_f.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage;
 				Local_TechnicalService=false;
 				_veh setVariable ["fieldrepair",0,true];
@@ -87,7 +85,6 @@
 				_veh setFuel (fuel _veh)+0.4;
 			};
 			_veh setDammage _dam;
-
 
 			//mark player is not engaged in technical service
 			//see Func_Client_UpdateVehicleActions
