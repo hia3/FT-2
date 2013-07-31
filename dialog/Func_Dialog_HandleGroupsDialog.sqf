@@ -118,7 +118,7 @@ _joingroup=
 	{
 		if ((_x getVariable "groupnumber")==_group) then
 		{
-			_x setVariable ["message_group",[true,Local_PlayerName],true];
+			["message_group", [true, Local_PlayerName], _x] call Func_Common_SendRemoteCommand;
 			
 			if (isNull _unit) then
 			{
@@ -216,7 +216,7 @@ while {dialog && !Global_GameEnded} do
 				{
 					if ((_x getVariable "groupnumber")==_newgroup) then
 					{
-						_x setVariable ["message_group",[false,Local_PlayerName],true];
+						["message_group", [false, Local_PlayerName], _x] call Func_Common_SendRemoteCommand;
 					};
 				} forEach Local_CurrentPlayers;
 			};

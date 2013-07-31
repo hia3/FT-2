@@ -27,13 +27,13 @@ _i = 1;
 {
 	_name=_x getVariable "playername";
 	if (((typeName _x)=="OBJECT") && !(isNil "_name")) then
-	{		
+	{
 		_index=lbAdd[13016,Format ["[%1] %2",_i,_name]];
 		lbSetData[13016,_index,_name];
 		lbSetValue[13016,_index,_i-1];
 	};
 	_i = _i + 1;
-} forEach Local_CurrentPlayers; 
+} forEach Local_CurrentPlayers;
 lbSetCurSel[13016,0];
 
 for [{_i=0},{_i<=(paramsArray select 5)},{_i=_i+1}] do
@@ -96,10 +96,10 @@ ctrlSetText [13002, format [localize "STR_WF_ViewDistance",Local_ViewDistance]];
 ctrlSetText [13004, format [localize "STR_WF_SMDistance",Dialog_ScreenMarkersDistance]];
 ctrlSetText [13014, format [localize "STR_WF_Transfer",0]];
 
-while {alive player && dialog} do 
+while {alive player && dialog} do
 {
 	if (!dialog) exitWith {};
-	
+
 	//_curSel = lbCurSel 13008;
 	_currentVD = Floor (SliderPosition 13003);
 	_currentMD = Floor (SliderPosition 13005);
@@ -108,29 +108,29 @@ while {alive player && dialog} do
 	_currentMMP=lbCurSel 13009;
 	_currentMMV=lbCurSel 13011;
 	_currentMMS=lbCurSel 13013;
-	
+
 	_currentGS=lbCurSel 13006;
 	_currentGC=lbCurSel 13017;
-	
+
 	_currentAS=lbCurSel 13008;
 	_currentFunds=call Func_Client_GetPlayerFunds;
-	
+
 	if (_currentVD!=_lastViewDistance) then
 	{
 		ctrlSetText [13002, format [localize "STR_WF_ViewDistance",_currentVD]];
 		Local_ViewDistance=_currentVD;
 		_lastViewDistance=_currentVD;
-		
+
 		setViewDistance Local_ViewDistance;
-	};	
-	
+	};
+
 	if (_currentMD!=_lastMarkersDistance) then
 	{
 		ctrlSetText [13004, format [localize "STR_WF_SMDistance",_currentMD]];
 		Dialog_ScreenMarkersDistance=_currentMD;
 		_lastMarkersDistance=_currentMD;
-	};	
-	
+	};
+
 	if (_transferAmount!=_lastAmmount) then
 	{
 		ctrlSetText [13014, format [localize "STR_WF_Transfer",_transferAmount]];
@@ -141,8 +141,8 @@ while {alive player && dialog} do
 	{
 		_lastSMT=_currentSMT;
 		Dialog_ScreenMarkersType=_currentSMT;
-	};	
-	
+	};
+
 	if (_currentMMP!=_lastMMP) then
 	{
 		_lastMMP=_currentMMP;
@@ -154,7 +154,7 @@ while {alive player && dialog} do
 		_lastMMV=_currentMMV;
 		Dialog_MapMarkersVType=_currentMMV;
 	};
-	
+
 	if (_currentMMS!=_lastMMS) then
 	{
 		_lastMMS=_currentMMS;
@@ -165,14 +165,14 @@ while {alive player && dialog} do
 			{
 				_i=1;
 				{
-					_NameString=format ["ammoMarker%1",_i]; 					
+					_NameString=format ["ammoMarker%1",_i];
 					_NameString setMarkerTextLocal "";
 					_i=_i+1;
 				} forEach ([] call Config_AmmoCrates);
 
 				_i=1;
 				{
-					_NameString=format ["hospMarker%1",_i]; 					
+					_NameString=format ["hospMarker%1",_i];
 					_NameString setMarkerTextLocal "";
 					_i=_i+1;
 				} forEach ([] call Config_Hospitals);
@@ -181,14 +181,14 @@ while {alive player && dialog} do
 			{
 				_i=1;
 				{
-					_NameString=format ["ammoMarker%1",_i]; 					
+					_NameString=format ["ammoMarker%1",_i];
 					_NameString setMarkerTextLocal localize "STR_BASE_Ammo";
 					_i=_i+1;
 				} forEach ([] call Config_AmmoCrates);
 
 				_i=1;
 				{
-					_NameString=format ["hospMarker%1",_i]; 					
+					_NameString=format ["hospMarker%1",_i];
 					_NameString setMarkerTextLocal localize "STR_BASE_Hosp";
 					_i=_i+1;
 				} forEach ([] call Config_Hospitals);
@@ -196,12 +196,12 @@ while {alive player && dialog} do
 			default{};
 		};
 	};
-	
+
 	// Gui sytle
 	if (_currentGS!=_lastGS) then
 	{
 		_lastGS=_currentGS;
-		Dialog_GUIType=_currentGS;		
+		Dialog_GUIType=_currentGS;
 		Local_GUIRestart=true;
 	};
 	// gui color
@@ -210,39 +210,41 @@ while {alive player && dialog} do
 		_lastGC=_currentGC;
 		Dialog_GUIColor=_currentGC;
 		Local_GUIRestart=true;
-	};	
-	
-	
+	};
+
+
 	if (_currentAS!=_lastAS) then
 	{
 		_lastAS=_currentAS;
 		Dialog_AutosaveGearType=_currentAS;
 	};
-	
+
 	if (_lastFunds!=_currentFunds) then
 	{
 		_lastFunds=_currentFunds;
-		SliderSetRange[13015,0,_lastFunds];		
+		SliderSetRange[13015,0,_lastFunds];
 	};
-	
+
 	if (Dialog_MenuAction==1) then
 	{
 		Dialog_MenuAction=-1;
-		_index=lbCurSel 13016;		
+		_index=lbCurSel 13016;
 		_name=lbData [13016,_index];
 		_index=lbValue [13016,_index];
-		_unit=Local_CurrentPlayers select _index;		
+		_unit=Local_CurrentPlayers select _index;
 		if ((typeName _unit)=="OBJECT") then
-		{			
+		{
 			if ((_transferAmount <= 0) || (_unit==player) || (_transferAmount > (call Func_Client_GetPlayerFunds))) exitWith {};
 			if ((_unit getVariable "playername")==_name) then
 			{
-				_fundsname=format["FT2_WF_Funds_%1",_name]; 		
+				_fundsname=format["FT2_WF_Funds_%1",_name];
 				_funds = FT2_WF_Logic getVariable _fundsname;
 				_funds=_funds+_transferAmount;
 				FT2_WF_Logic setVariable[_fundsname,_funds,true];
 				-_transferAmount call Func_Client_ChangePlayerFunds;
-				_unit setVariable ["message_transfer_funds",[player getVariable "playername",_transferAmount],true];
+
+				["message_transfer_funds", [player getVariable "playername", _transferAmount], _unit] call Func_Common_SendRemoteCommand;
+
 				[_name,format[localize "STR_HINT_FundsTransfered",_transferAmount],"pic\icon_funds.paa",1.35] call Func_Client_ShowCustomMessage;
 			}
 			else
@@ -255,25 +257,25 @@ while {alive player && dialog} do
 			[_name,localize "STR_HINT_FundsDenided","pic\no.paa",1.35,"error_sound"] call Func_Client_ShowCustomMessage;
 		};
 	};
-	
+
 	if (Dialog_MenuAction==2) then
 	{
 		Dialog_MenuAction=-1;
-		
+
 		if (Local_PlayerVehicle!=player) exitWith {};
-		
+
 		_pos=getposATL player;
 		_dir=getDir player;
-		
-		_veh=(nearestObjects[player,["LandVehicle","Air","Ship"],8] select 0);		
+
+		_veh=(nearestObjects[player,["LandVehicle","Air","Ship"],8] select 0);
 		if (!(isNull _veh) && (_veh!=player) && (({alive _x} count crew _veh)==0)) then
 		{
 			_pic=getText(configFile>>"cfgVehicles">>(typeOf _veh)>>"picture");
 			_name=getText(configFile>>"cfgVehicles">>(typeOf _veh)>>"displayName");
 			[_name,localize "STR_HINT_VehFliped",_pic,1.0] call Func_Client_ShowCustomMessage;
 			_veh setPos getPos _veh;
-		};		
+		};
 	};
-	
+
 	sleep 0.2;
 };

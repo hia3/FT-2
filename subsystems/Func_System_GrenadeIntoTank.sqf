@@ -19,7 +19,8 @@ sleep 4;
 if (!((locked _tank)==2)) then
 {
 	{if (_x in magazines _unit) exitWith{_unit removeMagazine _x; _thrown=true;}} forEach System_HandGrenadeAmmoTypes;
-	{_x setVariable ["message_grenadeinside",_unit,true]} forEach crew _tank;
+
+	["message_grenadeinside", [], crew _tank] call Func_Common_SendRemoteCommand;
 }
 else
 {
@@ -48,18 +49,19 @@ if (_thrown) then
 
 	_crew=crew _tank;
 	_cnt={alive _x} count _crew;
-	{_x setVariable ["message_grenadeinexploded",_unit,true]} forEach _crew;
+
+	["message_grenadeinexploded", Local_PlayerName, _crew] call Func_Common_SendRemoteCommand;
+
 	{_x setDamage 1} forEach _crew;
 
-	_award=Config_AwardKillPlayerValue*3;	
+	_award=Config_AwardKillPlayerValue*3;
 	(_award*_cnt) call Func_Client_ChangePlayerFunds;
 
 	for [{_i=0},{_i<_cnt},{_i=_i+1}] do
 	{
-		_unit setVariable ["message_kill_infantry",_award];
-		sleep (0.5+random 0.8);
+		["message_kill_infantry", _award, _unit] call Func_Common_SendRemoteCommand;
 	};
-	
+
 	if ((locked _tank)==2) then
 	{
 		if (local _tank) then
@@ -71,5 +73,5 @@ if (_thrown) then
 			Public_VehicleLock=_tank;
 			"Public_VehicleLock" call Func_Common_PublicVariable;
 		};
-	};	
+	};
 };

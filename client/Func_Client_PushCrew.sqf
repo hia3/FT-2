@@ -19,9 +19,4 @@ _name=gettext(configFile >> "CfgVehicles" >> (typeof _this) >> "displayName");
 
 _crew=(crew _this)-[player];
 
-//push crew out
-//see Func_Client_ReadRemoteMessages
-{
-	_x setVariable ["message_pushcrew",player,true];
-} forEach _crew;
-
+["message_pushcrew", Local_PlayerName, _crew] call Func_Common_SendRemoteCommand;

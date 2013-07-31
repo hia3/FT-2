@@ -3,14 +3,14 @@ private["_player","_playerWasDead","_position","_MarkerBasePos"];
 if ((time-Local_LastDeathTime) < 5) exitWith {};
 
 Local_LastDeathTime=time;
-	
+
 _player=_this select 0;
 
 Local_PlayerBody=_player;//variable for revive system - stores last player body which can be used for revive
 _playerWasDead=false;
 
 _killedByEnemy=false;
-	
+
 //variable duplicates in Func_Dialog_HandleRespawnDialog
 //here we need it here for Func_Client_CreateRotatingCamera
 Dialog_RespawnState="idle";
@@ -24,21 +24,21 @@ if (isNull Local_Camera) then
 
 _teamspeak_timing=[0,0];
 if (Dialog_RespawnDeathTime==0) then
-{		
-	//Dialog_RespawnDeathTime!=0 means player just entered the game and  
+{
+	//Dialog_RespawnDeathTime!=0 means player just entered the game and
 	//it is not necessary to delete his body or to launch spectating camera
-	_playerWasDead=true;		
+	_playerWasDead=true;
 	_teamspeak_timing=player getVariable "ts_message_timing";
 	Dialog_RespawnDeathTime=time;
-	
+
 	[] call Func_Client_CreateRespawnCamera;
-	
+
 	//obtain data for possible reviver awarding
 	if ((side (_this select 1))==Local_EnemySide) then
 	{
 		_killedByEnemy=true;
 	};
-		
+
 	//mark player dead body
 	Public_DeadUnit=[_player,true];
 	"Public_DeadUnit" call Func_Common_PublicVariable;
@@ -49,7 +49,7 @@ while {dialog} do
 {
 	closeDialog 0;
 };
-	
+
 waitUntil{(alive player)};
 
 if (Global_GameEnded) exitWith{};
@@ -60,7 +60,7 @@ Dialog_HandsHit=false;
 Dialog_BodyHit=false;
 Dialog_HeadHit=false;
 
-//setpos player to spawn position 
+//setpos player to spawn position
 //and make him to salute
 player setPosATL Local_SpawnPos; // TODO: why setPosASL?
 player setDir Local_SpawnDir;
@@ -76,16 +76,16 @@ player setVariable ["ft2_wf_side",Local_PlayerSide,true];//side player..
 player setVariable ["enemytrack",-Config_EnemyTrackTime,true];//if player attacked safezone or aproached it.. we mark him on the map. this var is timer
 player setVariable ["groupNumber",Local_PlayerGroupNumber,true];//number of player group
 player setVariable ["groupPassword",Local_PlayerGroupPassword,true];//password of player group
-player setVariable ["deafness",0];//deafness effect. e.g. after tank or rpg shot			
+player setVariable ["deafness",0];//deafness effect. e.g. after tank or rpg shot
 player setVariable ["joied_ts",true];//if player is in TS
 player setVariable ["ts_message_timing",_teamspeak_timing];//timer to show TS message
 Local_PlayerVehicle=player;
 
 //add some useractions to player
 [] call Func_Client_UpdateUserActions;
-	
-[[position player select 0,position player select 1,4],(getDir player)-30,2,16,8] spawn Func_Client_CreateRotatingCamera;		
-	
+
+[[position player select 0,position player select 1,4],(getDir player)-30,2,16,8] spawn Func_Client_CreateRotatingCamera;
+
 //give player his default loadout and subtract its cost from player's funds
 
 _defaultCost=Local_RscGear_SavedInventory call Func_Client_GetInventoryCost;
@@ -94,7 +94,7 @@ _defaultCost=Local_RscGear_SavedInventory call Func_Client_GetInventoryCost;
 -(_defaultCost) call Func_Client_ChangePlayerFunds;
 
 FT2_WF_Logic setVariable ["currentCost", _defaultCost];
-	
+
 //if player has too little money, less then Config_MinimumFunds
 //we adjust money value to  Config_MinimumFunds
 _funds=[] call Func_Client_GetPlayerFunds;
@@ -102,11 +102,11 @@ if ((_funds+_defaultCost) < Config_MinimumFunds) then
 {
 	(Config_MinimumFunds-_funds-_defaultCost) call Func_Client_ChangePlayerFunds;
 };
-	
+
 sleep 1.5;
 
-"dynamicBlur" ppEffectEnable true; 
-"dynamicBlur" ppEffectAdjust [1.4]; 
+"dynamicBlur" ppEffectEnable true;
+"dynamicBlur" ppEffectAdjust [1.4];
 "dynamicBlur" ppEffectCommit 0.3;
 
 createDialog "RscRespawnMenu";
@@ -115,7 +115,7 @@ createDialog "RscRespawnMenu";
 waitUntil{(Dialog_RespawnState=="readytospawn") || (Dialog_RespawnState=="revived") || !(alive player)};
 
 1 setFog Local_OriginalFog;
-"dynamicBlur" ppEffectAdjust [0]; 
+"dynamicBlur" ppEffectAdjust [0];
 "dynamicBlur" ppEffectCommit 0.3;
 
 //reset death flag
@@ -123,12 +123,12 @@ Dialog_RespawnDeathTime=0;
 
 //player was not killed during respawn dialog
 if (alive player) then
-{	
+{
 	//close all the dialogs
 	while {dialog} do
 	{
 		closeDialog 0;
-	};	
+	};
 
 	titleCut["","black out",1.0];
 
@@ -150,7 +150,7 @@ if (alive player) then
 		//player was revived
 		player setPosATL getPosATL _player;
 		player setDir getDir _player;
-		
+
 		/*_defaultCost call Func_Client_ChangePlayerFunds;
 
 		_dead_body_inventory = _player getVariable 'current_weapons';
@@ -161,29 +161,30 @@ if (alive player) then
 
 		//award reviver, if player was killed by enemy
 		if (_killedByEnemy) then
-		{				
+		{
 			_fundsname=format["FT2_WF_Funds_%1",Local_ReviverUnit getVariable "playername"];
 			_funds = FT2_WF_Logic getVariable _fundsname;
 			_award=Config_AwardKillPlayerValue*3;
 			FT2_WF_Logic setVariable [_fundsname,_funds+_award,true];
-			Local_ReviverUnit setVariable ["message_revivedteammate",_award,true];
+
+			["message_revivedteammate", _award, Local_ReviverUnit] call Func_Common_SendRemoteCommand;
 		};
 		player playMove "amovppnemstpsraswrfldnon";
 	};
 	player selectWeapon (primaryWeapon player);
 };
-		
+
 sleep 1.0;
 
 //player was not killed during respawn dialog
 if (alive player) then
-{	
+{
 	//reset count of shots, done at base
 	Local_ShotsDoneAtBase=0;
-		
+
 	player cameraEffect ["terminate","back"];
 	camDestroy Local_Camera;
-		
+
 	titleCut["","black in",1.0];
 };
 
@@ -195,25 +196,25 @@ if (_playerWasDead) then
 	removeAllWeapons _player;
 	removeAllItems _player;
 	removeBackPack _player;
-	
+
 	hideBody _player;
 	deleteVehicle _player;
-		
+
 	//don`t want to allow players to mine all the map, so delete all their placed mines after death
 	// better yet, delete only attached mines so there will be explosion
 	{
 		private ["_mine", "_is_attached"];
-		
+
 		_mine = _x;
 
 		_is_attached = _mine in Local_PlayerAttachedMines;
-		
+
 		if (_is_attached) then
 		{
 			deleteVehicle _x;
 		};
 	} forEach Local_PlayerMines;
-		
+
 	//remove player body marker
 	Public_DeadUnit=[player,false];
 	"Public_DeadUnit" call Func_Common_PublicVariable;
@@ -221,5 +222,5 @@ if (_playerWasDead) then
 
 2 fadeMusic 0;
 "colorCorrections" ppEffectEnable false;
-"dynamicBlur" ppEffectEnable false; 
+"dynamicBlur" ppEffectEnable false;
 enableEnvironment true;

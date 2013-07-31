@@ -2,22 +2,21 @@ switch((_this select 3)select 0)do
 {
 	case 0://cut with knife
 	{
-		_target=_this select 0;
-		_pos=getposATL _target;
-		_victim=nearestObject [[(_pos select 0)+1.5*sin(getDir _target),(_pos select 1)+1.5*cos(getDir _target), _pos select 2],"Man"];
-		if ((_victim !=_target) && ((side _victim)==Local_EnemySide)) then
+		_killer = _this select 0;
+		_pos=getposATL _killer;
+		_victim=nearestObject [[(_pos select 0)+1.5*sin(getDir _killer),(_pos select 1)+1.5*cos(getDir _killer), _pos select 2],"Man"];
+		if ((_victim != _killer) && ((side _victim) == Local_EnemySide)) then
 		{
 			playSound3D ["A3\sounds_f\characters\human-sfx\Person0\P0_hit_01.wss", _victim];
 			_victim setDamage 1;			
 			
-			_award=(Config_AwardKillPlayerValue*3);
-			_target addScore 3;
+			_award = (Config_AwardKillPlayerValue*3);
+			_killer addScore 3;
 			
 			_award call Func_Client_ChangePlayerFunds;
 			
-			_target setVariable ["message_kill_infantry",_award];
-			
-			_victim setVariable ["message_knife",_target,true];
+			["message_kill_infantry", _award,                           _killer] call Func_Common_SendRemoteCommand;
+			["message_knife",         _killer getVariable "playername", _victim] call Func_Common_SendRemoteCommand;
 		};
 	};
 	case 1://switch on GPS

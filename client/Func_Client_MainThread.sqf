@@ -17,7 +17,6 @@
 		[] call Func_Client_AproachingRespawnArea;//check aproaching respawn area
 		if (Local_GUIActive && !Local_GUIWorking && (isNull Local_Camera) && !(visibleMap)) then {Local_GUIWorking=true; 1365 cutRsc ["RscOverlay","PLAIN",0]};//if GUI is not working, but it should - restart it
 
-		[] call Func_Client_ReadRemoteMessages;//read remote messages
 		[] call Func_Client_AddIncome;//add periodic income
 		[] call Func_Client_SetAllowDamage;//allowDamage false; for enemies inside respawn zone	
 		

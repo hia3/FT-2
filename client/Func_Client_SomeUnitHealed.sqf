@@ -15,9 +15,10 @@ if (_a1 && !_a2) then
 	{
 		_fundsname=format["FT2_WF_Funds_%1",_this select 0];
 		_funds = FT2_WF_Logic getVariable _fundsname;
-		_award=round(Config_AwardKillPlayerValue)/2;
-		FT2_WF_Logic setVariable [_fundsname,_funds+_award,true];
-		(_this select 2) setVariable ["message_healedteammate",_award,true]
+		_award = round(Config_AwardKillPlayerValue)/2;
+		FT2_WF_Logic setVariable [_fundsname, _funds + _award, true];
+
+		["message_healedteammate", _award, _this select 2] call Func_Common_SendRemoteCommand;
 	};
 };
 /*end*/
