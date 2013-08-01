@@ -418,19 +418,8 @@ onEachFrame
 		_x setVariable ["Local_MhqHintOldEvent","STR_HINT_MHQ_Deployed"];
 	} forEach ([] call Local_FriendlyMHQ);
 
-	//Create markers for friendly players
-	_i=1;
-	{
-		if ((side _x) == Local_PlayerSide) then
-		{
-			_NameString=format ["playerMarker%1",_i];
-			createMarkerLocal [_NameString,[15000,15000]];
-			_NameString setMarkerColorLocal Local_FriendlyColor;
-			_NameString setMarkerSizeLocal [0.3,0.3];
-			_NameString setMarkerTypeLocal "mil_arrow2";
-			_i=_i+1;
-		};
-	} forEach playableUnits;
+	Local_NumberOfMarkersCreated = 0;
+	Local_NumberOfMarkersUsed    = 0;
 
 	//checking for friendly vehicles to mark them on map
 	{
