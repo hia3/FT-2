@@ -12,7 +12,7 @@ class RscTitles
 		duration=10000;
 		name="gps";
 
-		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","Target00","Target01","Target02","Target03","Target04","Target05","TeamSpeak","Crosshair","Order01","Order02"};
+		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak"};
 
 		onload="uiNamespace setVariable['GUI',_this select 0]; [] spawn Func_Client_UpdateGUI";
 
@@ -178,33 +178,14 @@ class RscTitles
 				shadow=false;
 			};
 		};
-
-		class Target00:PlayerNameDisp {idc=6080;};
-		class Target01:PlayerNameDisp {idc=6081;};
-		class Target02:PlayerNameDisp {idc=6082;};
-		class Target03:PlayerNameDisp {idc=6083;};
-		class Target04:PlayerNameDisp {idc=6084;};
-		class Target05:PlayerNameDisp {idc=6085;};		
-		class TeamSpeak:PlayerNameDisp
+		class TeamSpeak : RscPicture
 		{
 			idc=6087;
-			x = safeZoneX;
-			y = SafeZoneY+0.25;
-			w = SafeZoneW;
-			h = 0.2;
+			x = safeZoneX + SafeZoneW * 0.3;
+			y = SafeZoneY;
+			w = SafeZoneW * 0.4;
+			h = SafeZoneH * 0.3;
 		};
-		class Crosshair:RscPicture_ext
-		{	
-			idc=6090;
-			colorText[]={0.15,1.0,0.275,0.8};
-			text="";		
-			x = "SafeZoneX+SafezoneW/2-0.0241*SafezoneH/2";
-			y = "SafeZoneY+SafezoneH/2-0.0322*SafezoneH/2";
-			w = "0.0241*SafezoneH";
-			h = "0.0322*SafezoneH";			
-		};
-		class Order01:PlayerNameDisp {idc=6091;};	
-		class Order02:PlayerNameDisp {idc=6092;};	
 	};
 	class trailer
 	{		

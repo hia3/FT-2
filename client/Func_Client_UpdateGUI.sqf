@@ -332,7 +332,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_TimerT=_timing+1;
 		if (player getVariable "joied_ts") then
 		{
-			_teamspeak ctrlSetStructuredText parseText "";
+			_teamspeak ctrlSetText "";
 		}else{
 			if (((player getVariable "ts_message_timing") select 1) < _timing) then
 			{
@@ -340,9 +340,9 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 			};
 			if (((player getVariable "ts_message_timing") select 0) > _timing) then
 			{
-				_teamspeak ctrlSetStructuredText parseText format["<t size='"+Local_TS_size+"' shadow='true' align='center' color='"+Local_TS_color+"'>%1</t><br/><t size='"+Local_TS_size+"' shadow='true' align='center' color='"+Local_TS_color+"'>%2</t><br/><t size='"+Local_TS_size+"' shadow='true' align='center' color='"+Local_TS_color+"'>%3</t>",localize "STR_MES_TS01",localize "STR_MES_TS02",format[localize "STR_MES_TS03",Local_TS_host]];
+				_teamspeak ctrlSetText "pic\ts_warning.paa";
 			}else{
-				_teamspeak ctrlSetStructuredText parseText "";
+				_teamspeak ctrlSetText "";
 			};
 		};
 	};
@@ -351,6 +351,5 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 	sleep 0.35;
 };
 
-	1365 cutRsc ["MyDefault","plain"];
-	Local_GUIWorking=false;
-	
+1365 cutRsc ["MyDefault","plain"];
+Local_GUIWorking=false;

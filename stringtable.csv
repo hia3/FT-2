@@ -254,10 +254,9 @@ STR_MES_SmokesEmpty,"Smoke launcher empty!","Дымовые заряды зак�
 STR_MES_InvalidPassword,"The password is invalid!","Пароль неверен!"
 STR_MES_HealedTeammate,"You receive $%1 having healed your teammate","Вы получили $%1 за лечение дружественного бойца"
 STR_MES_RevivedTeammate,"You receive $%1 having revived your teammate","Вы получили $%1 за реанимирование дружественного бойца"
-STR_MES_TS01,"Be advised, your presence in Teamspeak increases your ingame funds!","Внимание: игроки, зашедшие в TeamSpeak 3 получают больше денег в игре!",""
-STR_MES_TS02,"Please, visit www.teamspeak.com to get the latest Teamspeak client","Скачать последнюю версию клиента TS3 можно с сайта www.teamspeak.com"
-STR_MES_TS03,"Hi,A3 Teamspeak 3 Server hostname: <t color='#FFDEAD'>%1</t>","Адрес TeamSpeak 3 сервера: <t color='#FFDEAD'>%1</t>",""
-STR_MES_Donator,"Player %1 has joined the game and was rewarded with $1000 for the given donation!","Player %1 has joined the game and was rewarded with $1000 for the given donation!",""
+STR_MES_TS01_UNUSED,"Be advised, your presence in Teamspeak increases your ingame funds!","Внимание: игроки, зашедшие в TeamSpeak 3 получают больше денег в игре!",""
+STR_MES_TS02_UNUSED,"Please, visit www.teamspeak.com to get the latest Teamspeak client","Скачать последнюю версию клиента TS3 можно с сайта www.teamspeak.com"
+STR_MES_TS03_UNUSED,"HiA3 Teamspeak 3 Server hostname: <t color='#FFDEAD'>%1</t>","Адрес TeamSpeak 3 сервера: <t color='#FFDEAD'>%1</t>",""
 
 STR_P_Duration,"Duration:","Продолжительность:"
 STR_P_Duration30,"30 min","30 мин"
