@@ -54,20 +54,6 @@ class CfgSounds
 		sound[]={"sound\area_capture.ogg",db+1,1};
 		titles[]={};
 	};
-
-	class tank_alarm
-	{
-		name="tank_alarm";
-		sound[]={"sound\tank_alarm.ogg",db+10,1};
-		titles[]={};
-	};
-	class air_alarm
-	{
-		name="air_alarm";
-		sound[]={"sound\air_alarm.ogg",db+10,1};
-		titles[]={};
-	};
-
 	class deafness
 	{
 		name="deafness";
@@ -81,35 +67,35 @@ class CfgSounds
 		titles[]={};
 	};
 };
+
 class CfgRadio
 {
-	sounds[] = {tank_alarm, air_alarm, grenade_explo, grenade_in_tank};
+	sounds[] = {};
 	class tank_alarm
 	{
-		name = "tank_alarm";
+		name = "";
 		sound[] = {"sound\tank_alarm.ogg", db+1, 1.0};
 		title = "";
 	};
 	class air_alarm
 	{
-		name = "air_alarm";
-		sound[] = {"A3\Sounds_F\air\Mi48\alarm", db-2, db+1};
+		name = "";
+		sound[] = {"sound\air_alarm.wss", db-100, db+1}; // .wss implied
 		title = "";
 	};
 	class grenade_explo
 	{
-		name = "grenade_explo";
-		sound[] = {"sound\grenade_explo.ogg", db-2, db+1}; // .wss implied
+		name = "";
+		sound[] = {"sound\grenade_explo.ogg", db-100, db+1}; // .wss implied
 		title = "";
 	};
 	class grenade_in_tank
 	{
-		name = "grenade_in_tank";
-		sound[] = {"sound\grenade_in_tank.ogg", db-2, db+1}; // .wss implied
+		name = "";
+		sound[] = {"sound\grenade_in_tank.ogg", db-100, db+1}; // .wss implied
 		title = "";
 	};
 };
-
 
 class CfgMusic
 {

@@ -32,8 +32,7 @@
 		if (!_isArmor) exitWith {};
 
 		//--send _tank crew a warning message
-		Public_TankAttacked=_tank;
-		"Public_TankAttacked" call Func_Common_PublicVariable;
+		["message_incoming_missile", "tank", crew _tank] call Func_Common_SendRemoteCommand;
 		//--end
 
 		//get missile hit chance

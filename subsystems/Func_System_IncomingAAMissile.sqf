@@ -14,11 +14,7 @@ if ((_aawarning) && (local _air)) then
 	_flares_left = _air getVariable "flaresleft";
 	
 	//--send _air crew a warning message
-	if (player in _air) then
-	{
-		[localize "STR_HINT_Warning",localize "STR_HINT_IncomingMissile","pic\ui_notfreeze_ca.01.paa",1.0] call Func_Client_ShowCustomMessage;
-		_air say "air_alarm";
-	};
+	["message_incoming_missile", "air", crew _air] call Func_Common_SendRemoteCommand;
 	//--end
 
 	_auto_flares = !(_air getVariable 'manualflare');

@@ -360,7 +360,6 @@ onEachFrame
 	"Public_DeadUnit" addPublicVariableEventHandler {if (((_this select 1) select 0) getVariable "ft2_wf_side"==Local_PlayerSide) then {private["_name"];_name=format["body%1",((_this select 1) select 0) getVariable "playername"]; if ((_this select 1) select 1) then {createMarkerLocal[_name,position ((_this select 1) select 0)];_name setMarkerColorLocal Local_FriendlyColor;_name setMarkerTypeLocal "waypoint";_name setMarkerSizeLocal [1.3,1.3]} else {deleteMarkerLocal _name}}};
 	"Public_UnitHealed" addPublicVariableEventHandler {(_this select 1) spawn Func_Client_SomeUnitHealed};
 	"Public_ReviveRequest" addPublicVariableEventHandler {if (((_this select 1) select 1)==Local_PlayerBody) then {((_this select 1) select 0) spawn Func_Client_ReviveRequest}};
-	"Public_TankAttacked" addPublicVariableEventHandler {private["_veh"]; _veh=_this select 1; if (player in _veh) then {[localize "STR_HINT_Warning",localize "STR_HINT_IncomingATGM","pic\ui_notfreeze_ca.01.paa",1.0] call Func_Client_ShowCustomMessage;Public_TankAttacked=objNull;_veh vehicleRadio "tank_alarm"}};
 	"Public_VehicleSmokeShells" addPublicVariableEventHandler {{[_x] spawn Func_System_SpawnSmoke} forEach (_this select 1)};
 
 

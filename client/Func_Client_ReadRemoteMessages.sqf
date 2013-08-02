@@ -133,4 +133,21 @@ switch (_msg) do
 	{
 		player groupChat format[localize "STR_MES_RevivedTeammate", _arg];
 	};
+	
+	case "message_incoming_missile":
+	{
+		switch (_arg) do
+		{
+			case "tank":
+			{
+				[localize "STR_HINT_Warning",localize "STR_HINT_IncomingATGM","pic\ui_notfreeze_ca.01.paa",1.0] call Func_Client_ShowCustomMessage;
+				Local_PlayerVehicle vehicleRadio "tank_alarm";
+			};
+			case "air":
+			{
+				[localize "STR_HINT_Warning",localize "STR_HINT_IncomingMissile","pic\ui_notfreeze_ca.01.paa",1.0] call Func_Client_ShowCustomMessage;
+				Local_PlayerVehicle vehicleRadio "air_alarm";
+			};
+		};
+	};
 };

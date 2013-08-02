@@ -58,7 +58,7 @@ if ((!isDedicated)) then {
 	waitUntil {(!(isNull player))};
 
 	enableSaving [false, false];
-	enableSentences false;
+	enableSentences true;
 	player enableAttack false;	
 };
 /***************************************************************************
