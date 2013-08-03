@@ -13,7 +13,6 @@ Func_Server_OnPlayerConnected=compile preprocessFile ("server\Func_Server_OnPlay
 Func_Server_OnPlayerDisconnected=compile preprocessFile ("server\Func_Server_OnPlayerDisconnected.sqf");
 Func_Server_RespawnVehicle=compile preprocessFile ("server\Func_Server_RespawnVehicle.sqf");
 Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_WeatherBroadcast.sqf");
-Func_System_Repaint=compile preprocessFile ("SubSystems\Func_System_Repaint.sqf");
 
 [] spawn
 {		

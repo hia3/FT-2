@@ -34,7 +34,6 @@ Func_System_IncomingAAMissile = compile preprocessFile "SubSystems\Func_System_I
 Func_System_KeyPressed = compile preprocessFile "SubSystems\Func_System_KeyPressed.sqf";
 Func_System_LaunchSmokes = compile preprocessFile "SubSystems\Func_System_LaunchSmokes.sqf";
 Func_System_RadarAiming = compile preprocessFile "SubSystems\Func_System_RadarAiming.sqf";
-Func_System_Repaint = compile preprocessFile "SubSystems\Func_System_Repaint.sqf";
 Func_System_SetPitchBank = compile preprocessFile "SubSystems\Func_System_SetPitchBank.sqf";
 Func_System_SpawnSmoke = compile preprocessFile "SubSystems\Func_System_SpawnSmoke.sqf";
 Func_System_TankExploded = compile preprocessFile "SubSystems\Func_System_TankExploded.sqf";
