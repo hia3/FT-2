@@ -33,9 +33,9 @@ System_ArmoredVehicleTypes=
 
 System_AircraftVehicleTypes=
 [
-	["B_Heli_Light_01_F",0],["B_Heli_Light_01_armed_F",1],["B_Heli_Attack_01_F",4],["B_Heli_Transport_01_F",0],
+	["B_Heli_Light_01_F",0],["B_Heli_Light_01_armed_F",2],["B_Heli_Attack_01_F",4],["B_Heli_Transport_01_F",0],
 	["I_Heli_Transport_02_F",0],
-	["O_Heli_Light_02_unarmed_F",0],["O_Heli_Light_02_F",1],["O_Heli_Attack_02_F",4],["O_Heli_Attack_02_black_F",4]
+	["O_Heli_Light_02_unarmed_F",0],["O_Heli_Light_02_F",3],["O_Heli_Attack_02_F",4],["O_Heli_Attack_02_black_F",4]
 ];
 
 System_GuidedMissileTypes=[];
