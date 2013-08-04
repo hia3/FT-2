@@ -114,8 +114,8 @@ class RscTitles
 			idc=6015;		
 			colorText[]={0.1,1,0.1,0.7};
 			text="pic\man.paa";
-			x=0.94;
-			y=0.02;
+			x=safeZoneX-2;
+			y=SafeZoneY-2;
 			w=0.04*1.25;
 			h=0.14*1.25;
 		};		
