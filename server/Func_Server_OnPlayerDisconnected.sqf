@@ -1,15 +1,23 @@
-	private["_marker","_body"];
+private ["_body"];
 
-	_marker=format["body%1",_this];
+sleep 5;
 
-	_body=nearestObject[getMarkerPos _marker,"Man"];
+_body = objNull;
 
-	if (!isNull _body) then
+{
+	private ["_dead_name"];
+
+	_dead_name = _x getVariable ["playername", ""];
+
+	if (_dead_name == _this) exitWith { _body = _x; };
+} forEach allDeadMen;
+
+if !(isNull _body) then
+{
+	if !(alive _body) then
 	{
-		if (!alive _body) then
-		{
-			deleteVehicle _body;
-		};		
-	};	
+		deleteVehicle _body;
+	};
+};
 
-	deleteMarker _marker;
+deleteMarker format ["body%1", _this];
