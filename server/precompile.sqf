@@ -3,6 +3,7 @@
 Global_GameEnded=false;
 Server_RegisteredObjects=[];
 
+Func_Server_Animals=compile preprocessFile ("server\Func_Server_Animals.sqf");
 Func_Server_CheckTSUsers=compile preprocessFile ("server\Func_Server_CheckTSUsers.sqf");
 Func_Server_ClearRegisteredObjects=compile preprocessFile ("server\Func_Server_ClearRegisteredObjects.sqf");
 Func_Server_ControlPoints=compile preprocessFile ("server\Func_Server_ControlPoints.sqf");
@@ -15,9 +16,9 @@ Func_Server_RespawnVehicle=compile preprocessFile ("server\Func_Server_RespawnVe
 Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_WeatherBroadcast.sqf");
 
 [] spawn
-{		
+{
 	"Global_GameEnded" call Func_Common_PublicVariable;
-	
+
 	/*onPlayerConnected "[] spawn Func_Server_OnPlayerConnected;";*/
     onPlayerDisconnected {_name spawn Func_Server_OnPlayerDisconnected;};
 
@@ -35,13 +36,13 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 		_first_flag setVariable ["flag_timing_west",0,false];
 		_first_flag setVariable ["flag_timing_award",0,false];
 	} forEach Config_TotalCheckPointData;
-	
+
 	"Public_UnitRegistered" addPublicVariableEventHandler {Server_RegisteredObjects=Server_RegisteredObjects+[_this select 1]};
 	"Public_VehicleLock" addPublicVariableEventHandler {if (local (_this select 1)) then {(_this select 1) lock !((locked (_this select 1))==2)}};
 	"Public_CrewAward" addPublicVariableEventHandler {private["_unit"];_unit=_this select 1; _unit addScore (_unit getVariable "crew_award")};
 	"Public_DeadUnit" addPublicVariableEventHandler {private["_name"];_name=format["body%1",((_this select 1) select 0) getVariable "playername"]; if ((_this select 1) select 1) then {createMarkerLocal[_name,position ((_this select 1) select 0)]} else {deleteMarkerLocal _name}};
-	"Public_PlayerConnected" addPublicVariableEventHandler {call Func_Server_OnPlayerConnected};	
-		
+	"Public_PlayerConnected" addPublicVariableEventHandler {call Func_Server_OnPlayerConnected};
+
 	//param daytime
 	_pa1 = 1.0;
 	if (ismultiplayer) then {_pa1 = (paramsArray select 1);};
@@ -52,12 +53,12 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 		/*skipTime (4.5+(random 14));*/
 		skipTime (6.0+(random 12));
 	};
-	
+
 	//param weather
 	if !(Config_DisableWeatherChange) then
 	{
 		_pa2 = 0;
-		if (ismultiplayer) then {_pa2 = (paramsArray select 2);};	
+		if (ismultiplayer) then {_pa2 = (paramsArray select 2);};
 		if (_pa2 == -1) then
 		{
 			[] spawn Func_Server_DynamicWeather;
@@ -65,7 +66,7 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 			10 setOvercast (random 1.0);
 		};
 	};
-	
+
 	//param mission duration
 	_pa0 = 3600;
 
@@ -73,20 +74,21 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	Param_RoundDuration=_pa0+Config_GameStartDelay;
 	"Param_RoundDuration" call Func_Common_PublicVariable;
 
-	while {isNil 'FT2_WF_Logic'} do {sleep 0.1};	
+	while {isNil 'FT2_WF_Logic'} do {sleep 0.1};
 
 	sleep 0.1;
-	
+
 	[] spawn Func_Server_ControlPoints;
 	[] spawn Func_Server_ClearRegisteredObjects;
 	[] spawn Func_Server_RespawnVehicle;
 	[] spawn Func_Server_MissionTiming;
 	[] spawn Func_Server_CheckTSUsers;
-		
+	[] spawn Func_Server_Animals;
+
 	if ((count ([] call Config_Hospitals)) > 0) then
 	{
 
 		[] spawn Func_Server_RepairTents;
-	
+
 	};
 };
