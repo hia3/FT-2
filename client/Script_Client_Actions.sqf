@@ -8,13 +8,13 @@ switch((_this select 3)select 0)do
 		if ((_victim != _killer) && ((side _victim) == Local_EnemySide)) then
 		{
 			playSound3D ["A3\sounds_f\characters\human-sfx\Person0\P0_hit_01.wss", _victim];
-			_victim setDamage 1;			
-			
+			_victim setDamage 1;
+
 			_award = (Config_AwardKillPlayerValue*3);
 			_killer addScore 3;
-			
+
 			_award call Func_Client_ChangePlayerFunds;
-			
+
 			["message_kill_infantry", _award,                           _killer] call Func_Common_SendRemoteCommand;
 			["message_knife",         _killer getVariable "playername", _victim] call Func_Common_SendRemoteCommand;
 		};
@@ -65,7 +65,7 @@ switch((_this select 3)select 0)do
 		[(_this select 0),false] spawn Func_Client_TakeOff;
 	};
 	case 13://pick up a vehicle
-	{		
+	{
 		[_this select 0,(_this select 3) select 1] spawn Func_System_HeliCargoPick;
 	};
 	case 14://drop up a vehicle
@@ -102,18 +102,18 @@ switch((_this select 3)select 0)do
 	{
 		_weapon=_this select 0;
 		_name=getText (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "DisplayName");
-		
+
 		_index=-1;
 		{
-			if (_weapon isKindOf _x) exitWith 
+			if (_weapon isKindOf _x) exitWith
 			{
 				_index=_index+1;
 			};
 			_index=_index+1;
 		} forEach System_LoadableStaticsTypes;
-		
+
 		if (_index >= 0) then
-		{			
+		{
 			_magazine="";
 			_magazines=magazines player;
 			{
@@ -121,30 +121,30 @@ switch((_this select 3)select 0)do
 				{
 					_magazine=_x;
 				};
-			} forEach (System_LoadableStaticsDatas select _index);			
-			
+			} forEach (System_LoadableStaticsDatas select _index);
+
 			if (_magazine=="") then
 			{
-				_str=localize "STR_HINT_MGReloadF";				
+				_str=localize "STR_HINT_MGReloadF";
 				{
 					_str=_str+format["<br/><t color='#FFBD4C'>%1</t>",getText(configFile >> "CfgMagazines" >> _x >> "DisplayName")];
 				} forEach (System_LoadableStaticsDatas select _index);
-				
+
 				[_name,_str,"pic\i_reammo_f.paa",1.0] call Func_Client_ShowCustomMessage;
 			}
 			else
 			{
 				player removeMagazine _magazine;
-				
+
 				_str=format[localize "STR_HINT_MGReloadS","<t color='#FFBD4C'>"+getText(configFile >> "CfgMagazines" >> _magazine >> "DisplayName")+"</t>"];
 				[_name,_str,"pic\i_reammo_s.paa",1.0] call Func_Client_ShowCustomMessage;
-				
+
 				_magazine=getArray(configFile >> "CfgWeapons" >> ((weapons _weapon) select 0) >> "Magazines") select 0;
 				_weapon addMagazine _magazine;
-				
+
 				player playMove "amovpercmstpsraswrfldnon_gear";
 			};
-		};		
+		};
 	};
 	case 21://start indirect fire mode
 	{
@@ -160,13 +160,13 @@ switch((_this select 3)select 0)do
 	};
 	case 25://ignition off
 	{
-		Local_PlayerVehicle setVariable ["ignition_off",true,true];		
+		Local_PlayerVehicle setVariable ["ignition_off",true,true];
 		Local_PlayerVehicle setVariable ["ignite_fuel",fuel Local_PlayerVehicle,true];
-		Local_PlayerVehicle setFuel 0;		
+		Local_PlayerVehicle setFuel 0;
 	};
 	case 26://ignition on
 	{
-		Local_PlayerVehicle setVariable ["ignition_off",false,true];		
+		Local_PlayerVehicle setVariable ["ignition_off",false,true];
 		Local_PlayerVehicle setFuel (Local_PlayerVehicle getVariable "ignite_fuel");
 	};
 	case 28://high-climbing mode for tanks
@@ -203,7 +203,7 @@ switch((_this select 3)select 0)do
 	case 34:
 	{
 		Local_PlayerVehicle setVariable ["manualflare",false,true];
-	};		
+	};
 	case 35:
 	{
 		private ["_currentItem", "_currentCost", "_currentItem", "_vehiclecost", "_currentTime", "_currentName", "_currentPicture", "_vehicle"];
@@ -220,11 +220,11 @@ switch((_this select 3)select 0)do
 			_currentTime = 30;
 
 			_vehiclecost = _currentCost;
-			
+
 			_vehicle = [_currentItem, _vehiclecost, _currentTime, -2] call Func_Client_CreateCustomVehicle;
 			_vehicle lock false;
 			player moveInDriver _vehicle;
-		
+
 			-_currentCost call Func_Client_ChangePlayerFunds;
 
 			[_currentName,localize "STR_HINT_VehicleBought", _currentPicture, 1.35] call Func_Client_ShowCustomMessage;
@@ -233,5 +233,5 @@ switch((_this select 3)select 0)do
 		{
 			[localize "STR_HINT_Vehicles",localize "STR_HINT_LowFunds","pic\icon_funds.paa",1.35,"error_sound"] call Func_Client_ShowCustomMessage;
 		};
-	};			
+	};
 };
