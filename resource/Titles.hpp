@@ -12,7 +12,7 @@ class RscTitles
 		duration=10000;
 		name="gps";
 
-		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak"};
+		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
 
 		onload="uiNamespace setVariable['GUI',_this select 0]; [] spawn Func_Client_UpdateGUI";
 
@@ -26,12 +26,14 @@ class RscTitles
 			colorText[]={1,1,1,0.5};
 			colorBackground[]={0,0,0,0};
 		};
+
 		class txt_crw:txt_dwn
 		{
 			idc=6004;
 			w=0.25;
 			h=0.55;
 		};
+
 		class OptionsImageAspectRatio: RscPicture_ext 
 		{
 			w = 0.078431;
@@ -180,11 +182,105 @@ class RscTitles
 		};
 		class TeamSpeak : RscPicture
 		{
-			idc=6087;
+			idc=6020;
 			x = safeZoneX + SafeZoneW * 0.3;
 			y = SafeZoneY;
 			w = SafeZoneW * 0.4;
 			h = SafeZoneH * 0.3;
+		};
+
+
+		class gps_map : RscMapControl_ext
+		{
+			idc = 6021;
+
+			default=true;
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
+		};
+
+		class gps_background : RscPicture 
+		{
+			idc = 6022;
+
+			colorBackground[] = {"(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])", "(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_B',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_A',0.8])"};
+
+			text = "\A3\ui_f\data\igui\rscingameui\rscminimap\gradient_gs.paa";
+			colorText[] = {0, 0, 0, 0.100000};
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
+		};
+
+		class gps_background_title : RscText
+		{
+			idc = 6023;
+
+			colorBackground[] = {"(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])", "(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_B',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_A',0.8])"};
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
+		};
+
+		class gps_background_title_dark : RscText
+		{
+			idc = 6024;
+
+			colorBackground[] = {0, 0, 0, 0.100000};
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
+		};
+
+		class gps_grid : RscText
+		{
+			idc = 6025;
+
+			style = 0;
+			colorText[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
+			sizeEx = "0.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
+		};
+
+		class gps_time : RscText
+		{
+			idc = 6026;
+
+			style = 1;
+			colorText[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
+			sizeEx = "0.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
+		};
+
+		class gps_heading : RscText
+		{
+			idc = 6027;
+
+			style = 2;
+			colorText[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
+			sizeEx = "0.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+
+			x = 100;
+			y = 100;
+			w = 0;
+			h = 0;
 		};
 	};
 	class trailer

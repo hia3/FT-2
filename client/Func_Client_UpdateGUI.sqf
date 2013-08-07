@@ -14,6 +14,17 @@ _position=getPos Local_PlayerVehicle;
 	
 //START: GPS, SCORE, FUNDS, PLAYERS
 _lowertext=_display displayCtrl 6003;
+	
+	_gps_map                   = _display displayCtrl 6021;
+	_gps_background            = _display displayCtrl 6022;
+	_gps_background_title      = _display displayCtrl 6023;
+	_gps_background_title_dark = _display displayCtrl 6024;
+	_gps_grid                  = _display displayCtrl 6025;
+	_gps_time                  = _display displayCtrl 6026;
+	_gps_heading               = _display displayCtrl 6027;
+
+	_gps_controls = [_gps_map, _gps_background, _gps_background_title, _gps_background_title_dark, _gps_grid, _gps_time, _gps_heading];
+
 _crewlist=_display displayCtrl 6004;
 _playerslist=_display displayCtrl 6012;
 _scorelist=_display displayCtrl 6013;
@@ -40,18 +51,12 @@ _legs=_display displayCtrl 6019;
 //END: HUMAN DAMAGE INDICATOR
 	
 //TS3 TEXT
-_teamspeak=_display displayCtrl 6087;
+_teamspeak=_display displayCtrl 6020;
 		
 _dx=SafeZoneW+safeZoneX-0.245;
 _dy=SafeZoneH+safeZoneY-0.2575;
 		
-//setting position: gps
-if (Dialog_GUIType in [0,2]) then
-{
-	_fundslist ctrlSetPosition [_dx-0.135,_dy+0.15];
-}else{
-	_fundslist ctrlSetPosition [_dx-0.015,_dy+0.14];
-};
+_fundslist ctrlSetPosition [_dx-0.135,_dy+0.15];
 	
 //setting position: crew list, funds, players, score
 _lowertext ctrlSetPosition [_dx-0.02,_dy+0.19];
@@ -74,7 +79,33 @@ if (Dialog_GUIType < 2) then
 	_arms ctrlSetPosition [safeZoneX-2,SafeZoneY-2];
 	_legs ctrlSetPosition [safeZoneX-2,SafeZoneY-2];
 };
+
+_gps_common_x = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_X', str (safezoneX + safezoneW - 10.5 * (((safezoneW / safezoneH) min 1.2) / 40))]);
+_gps_low_y    = (call compile (profileNamespace getVariable ['IGUI_GRID_GPS_Y', str (safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))])) + (((safezoneW / safezoneH) min 1.2) / 1.2) / 25;
+_gps_common_w = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_W', str (10 * (((safezoneW / safezoneH) min 1.2) / 40))]);
+_gps_common_h = (call compile (profileNamespace getVariable ['IGUI_GRID_GPS_H', str (10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))])) - ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
+_gps_low_h    = 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
+_gps_common_y = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_Y', str (safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))]);
+
+_move_gps = 
+{
+	_gps_x = if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then { _gps_common_x } else { _gps_common_x + 10 };
+
+	_gps_map					ctrlSetPosition [_gps_x, _gps_low_y, _gps_common_w, _gps_common_h];
+	_gps_background				ctrlSetPosition [_gps_x, _gps_low_y, _gps_common_w, _gps_common_h];
+	_gps_background_title		ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+	_gps_background_title_dark	ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+	_gps_grid					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+	_gps_time					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+	_gps_heading				ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
 	
+	{
+		_x ctrlCommit 0;
+	} forEach _gps_controls;
+};
+
+call _move_gps;
+
 switch (Dialog_GUIColor) do
 {
 	case 0: {Dialog_GUIColorActive = "#DDDDDD";}; // White
@@ -96,9 +127,11 @@ _body ctrlCommit 0;
 _arms ctrlCommit 0;
 _legs ctrlCommit 0;
 _teamspeak ctrlCommit 0;
+
+	_gps_map ctrlMapAnimAdd [0,((speed Local_PlayerVehicle)+8)/200,_position];
+	ctrlMapAnimCommit _gps_map;
 	
 //some auxiliary variables
-_CurrentSpeed=0;
 _TimerG=0;
 _TimerC=0;
 _TimerO=0;
@@ -115,19 +148,43 @@ _updatedam=true;
 	
 while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GUIRestart}do
 {
-
 	_timing=time;
 	_position=getPos Local_PlayerVehicle;
-	_direction=round direction Local_PlayerVehicle;
+	
+	if(_TimerG<=_timing) then
+	{
+		_TimerG = _timing + 0.5;
 
-	if(Dialog_GUIType in [0,2])then
-	{
-		//GPS on 
-		_lowertext ctrlSetStructuredText composeText([parseText(format ['<t align="left" color="%3" size="1.4" shadow="true">%1  %2</t>',mapGridPosition Local_PlayerVehicle,_direction,Dialog_GUIColorActive]),parseText(format ['<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',localize "STR_DLG_GPSTime",[Param_RoundDuration-_timing,true] call Func_Client_ConvertToTime,Dialog_GUIColorActive])]);
-	}else
-	{
-		//GPS off
-		_lowertext ctrlSetStructuredText composeText([parseText(format ['<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',localize "STR_DLG_GPSTime",[Param_RoundDuration-_timing,true] call Func_Client_ConvertToTime,Dialog_GUIColorActive])]);
+		_gps_map ctrlMapAnimAdd [0.5, ((speed Local_PlayerVehicle) + 12) / 200, _position];
+		ctrlMapAnimCommit _gps_map;
+		
+		call _move_gps;
+		
+		if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then
+		{
+			//GPS on
+			
+			_gps_grid ctrlSetText     (mapGridPosition Local_PlayerVehicle);
+			_gps_heading ctrlSetText str (floor direction Local_PlayerVehicle);
+			_gps_time ctrlSetText     ([daytime * 60 * 60, "HH:MM"] call BIS_fnc_secondsToString);
+
+		};
+
+		_lowertext ctrlSetStructuredText composeText
+		(
+			[	
+				parseText
+				(
+					format 
+					[
+						'<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',
+						localize "STR_DLG_GPSTime",
+						[Param_RoundDuration - _timing,true] call Func_Client_ConvertToTime,
+						Dialog_GUIColorActive
+					]
+				)
+			]
+		);		
 	};
 		
 	//---VEHICLE-CREW-START---
