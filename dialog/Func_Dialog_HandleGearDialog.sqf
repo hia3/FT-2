@@ -1504,6 +1504,18 @@ PERF_BEGIN("_enum_simplest_weapons")
 				_algo_index_2 = if (isNil "Config_AllowedWeaponClasses") then { 0 } else { if (0 == (count Config_AllowedWeaponClasses)) then { 1 } else { 2 } };
 
 				_algo_index = 3 * _algo_index_1 + _algo_index_2;
+				
+//		weapon	class	
+//---------------------------------
+// 0	nil		nil		all
+// 1	nil		[]		none
+// 2	nil		[c]		[c]
+// 3	[]		nil		none
+// 4	[]		[]		none
+// 5	[]		[c]		[c]
+// 6	[w]		nil		[w]
+// 7	[w]		[]		[w]
+// 8	[w]		[c]		[w] + [c]
 
 				_is_allowed_by_class =
 				{
