@@ -2,6 +2,7 @@
 //['westbaserings','ColorBlack',5,(markerDir "marker_respawn_west"),(getmarkerpos "marker_respawn_west"),(markerSize "marker_respawn_west"),markerShape "marker_respawn_west"  ] spawn createhollowCircle;
 CreateHollowMarker =
 {
+/*
     private ["_i","_markername","_prefix","_color","_size","_dir","_posx","_posy","_sx","_sy","_shape"];
     _prefix = ( _this select 0);
 	_color =  ( _this select 1);
@@ -28,6 +29,7 @@ CreateHollowMarker =
 		_markername setMarkerPosLocal [_posx,_posy];
 	};
 	};
+*/
 };
 
 
