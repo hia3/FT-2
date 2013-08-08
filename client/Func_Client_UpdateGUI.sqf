@@ -87,24 +87,36 @@ _gps_common_h = (call compile (profileNamespace getVariable ['IGUI_GRID_GPS_H', 
 _gps_low_h    = 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
 _gps_common_y = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_Y', str (safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))]);
 
-_move_gps = 
+_show_gps = 
 {
-	_gps_x = if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then { _gps_common_x } else { _gps_common_x + 10 };
-
-	_gps_map					ctrlSetPosition [_gps_x, _gps_low_y, _gps_common_w, _gps_common_h];
-	_gps_background				ctrlSetPosition [_gps_x, _gps_low_y, _gps_common_w, _gps_common_h];
-	_gps_background_title		ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
-	_gps_background_title_dark	ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
-	_gps_grid					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
-	_gps_time					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
-	_gps_heading				ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+	private ["_is_visible", "_gps_x"];
 	
+	_should_visible = ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player));
+	_is_visible = ctrlShown _gps_map;
+	
+	_gps_x = if (_should_visible) then { _gps_common_x } else { _gps_common_x + 10 };
+
+	if ((_should_visible && !_is_visible) || (!_should_visible && _is_visible) || _this) then
 	{
-		_x ctrlCommit 0;
-	} forEach _gps_controls;
+		_gps_map					ctrlSetPosition [_gps_x, _gps_low_y, _gps_common_w, _gps_common_h];
+		_gps_background				ctrlSetPosition [_gps_x, _gps_low_y, _gps_common_w, _gps_common_h];
+		_gps_background_title		ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+		_gps_background_title_dark	ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+		_gps_grid					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+		_gps_time					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+		_gps_heading				ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
+		
+		{
+			_x ctrlCommit 0;
+		} forEach _gps_controls;
+		
+		{
+			_x ctrlShow _should_visible;
+		} forEach _gps_controls;
+	};
 };
 
-call _move_gps;
+true call _show_gps;
 
 switch (Dialog_GUIColor) do
 {
@@ -154,15 +166,15 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 	if(_TimerG<=_timing) then
 	{
 		_TimerG = _timing + 0.5;
-
-		_gps_map ctrlMapAnimAdd [0.5, ((speed Local_PlayerVehicle) + 12) / 200, _position];
-		ctrlMapAnimCommit _gps_map;
 		
-		call _move_gps;
+		false call _show_gps;
 		
 		if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then
 		{
 			//GPS on
+			
+			_gps_map ctrlMapAnimAdd [0.5, ((speed Local_PlayerVehicle) + 12) / 200, _position];
+			ctrlMapAnimCommit _gps_map;
 			
 			_gps_grid ctrlSetText     (mapGridPosition Local_PlayerVehicle);
 			_gps_heading ctrlSetText str (floor direction Local_PlayerVehicle);

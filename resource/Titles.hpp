@@ -194,12 +194,14 @@ class RscTitles
 		{
 			idc = 6021;
 
+			ShowCountourInterval = 1;
+
 			default=true;
 
 			x = 100;
 			y = 100;
-			w = 0;
-			h = 0;
+			w = "(call compile (profilenamespace getvariable ['IGUI_GRID_GPS_W',str ((10 * (((safezoneW / safezoneH) min 1.2) / 40)))]))";
+			h = "(call compile (profilenamespace getvariable ['IGUI_GRID_GPS_H',str ((10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)))])) - 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 		};
 
 		class gps_background : RscPicture 
