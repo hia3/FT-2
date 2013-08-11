@@ -10,8 +10,6 @@ if ((_aawarning) && (local _air)) then
 
 	_attacker_distance = _ammo distance _air;
 	_activate_distance = 300;
-
-	_flares_left = _air getVariable "flaresleft";
 	
 	//--send _air crew a warning message
 	["message_incoming_missile", "air", crew _air] call Func_Common_SendRemoteCommand;
@@ -52,12 +50,7 @@ if ((_aawarning) && (local _air)) then
 	{
 		if (_auto_flares) then
 		{
-			if (_flares_left > 0) then
-			{
-				_air vehicleChat format [localize "STR_MES_FlaresLaunched", _flares_left - 1];
-				_air spawn Func_System_DropFlares;
-				_air setVariable ["flaresleft", _flares_left - 1, true];
-			};
+			_air spawn Func_System_DropFlares;
 		};
 
 		waitUntil{((_ammo distance _air) < (_activate_distance / 2)) || (isNull _ammo)};

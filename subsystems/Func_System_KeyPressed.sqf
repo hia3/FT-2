@@ -46,16 +46,7 @@ switch (_key) do
 		{
 			if (Local_PlayerVehicle getVariable 'manualflare') then 
 			{
-				_flares = Local_PlayerVehicle getVariable "flaresleft";
-				if (_flares > 0) then
-				{
-					_period = Local_PlayerVehicle getVariable "flareslasttime";
-					if (time>_period) then 
-					{
-						Local_PlayerVehicle setVariable ["flaresleft",_flares-1,true];
-						Local_PlayerVehicle spawn Func_System_DropFlares;
-					};
-				};	
+				Local_PlayerVehicle spawn Func_System_DropFlares;
 			};
 		};		
 	};
