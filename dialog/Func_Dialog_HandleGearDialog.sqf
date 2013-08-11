@@ -1469,14 +1469,97 @@ PERF_END("_set_weapons_list")
 
 };
 
+_is_weapon_allowed =
+{
+	private ["_weapon_config", "_parents", "_algo_index_1", "_algo_index_2", "_algo_index", "_is_allowed_by_class", "_result"];
+
+	_weapon_config = _this select 0;
+	_parents       = _this select 1;
+
+	_algo_index_1 = if (isNil "Config_AllowedWeapons")       then { 0 } else { if (0 == (count Config_AllowedWeapons))       then { 1 } else { 2 } };
+	_algo_index_2 = if (isNil "Config_AllowedWeaponClasses") then { 0 } else { if (0 == (count Config_AllowedWeaponClasses)) then { 1 } else { 2 } };
+
+	_algo_index = 3 * _algo_index_1 + _algo_index_2;
+
+//		weapon	class
+//---------------------------------
+// 0	nil		nil		all
+// 1	nil		[]		none
+// 2	nil		[c]		[c]
+// 3	[]		nil		none
+// 4	[]		[]		none
+// 5	[]		[c]		[c]
+// 6	[w]		nil		[w]
+// 7	[w]		[]		[w]
+// 8	[w]		[c]		[w] + [c]
+
+	_is_allowed_by_class =
+	{
+		private ["_parents", "_result"];
+
+		_parents = _this;
+
+		_result = false;
+		{
+			if (_x in _parents) exitWith
+			{
+				_result = true;
+			};
+		} forEach Config_AllowedWeaponClasses;
+
+		_result
+	};
+
+	_result = switch (_algo_index) do
+	{
+		case 0:
+		{
+			true
+		};
+		case 1:
+		{
+			false
+		};
+		case 2:
+		{
+			_parents call _is_allowed_by_class
+		};
+		case 3:
+		{
+			false
+		};
+		case 4:
+		{
+			false
+		};
+		case 5:
+		{
+			_parents call _is_allowed_by_class
+		};
+		case 6:
+		{
+			configName(_weapon_config) in Config_AllowedWeapons
+		};
+		case 7:
+		{
+			configName(_weapon_config) in Config_AllowedWeapons
+		};
+		case 8:
+		{
+			((configName(_weapon_config) in Config_AllowedWeapons) || (_parents call _is_allowed_by_class))
+		};
+	};
+
+	_result
+};
+
 _enum_simplest_weapons =
 {
 PERF_BEGIN("_enum_simplest_weapons")
 
-    private ["_base_class", "_display", "_weapons_config", "_config_list", "_i"];
+    private ["_base_class", "_weapons_config", "_config_list", "_i"];
 
-    _base_class = _this select 0;
-    _display    = _this select 1;
+    _base_class     = _this select 0;
 
     _weapons_config = configFile >> "CfgWeapons";
 
@@ -1492,7 +1575,7 @@ PERF_BEGIN("_enum_simplest_weapons")
         {
 			if (getNumber(_weapon_config >> "scope") >= 2) then
 			{
-				private ["_parents", "_is_weapon_of_base_class", "_simplest_model", "_algo_index_1", "_algo_index_2", "_algo_index", "_is_allowed_by_class", "_this_weapon_allowed"];
+				private ["_parents", "_is_weapon_of_base_class", "_simplest_model"];
 
 				_parents = [_weapon_config, true] call BIS_fnc_returnParents;
 
@@ -1500,83 +1583,12 @@ PERF_BEGIN("_enum_simplest_weapons")
 
 				_simplest_model = !isClass(_weapon_config >> "LinkedItems");
 
-				_algo_index_1 = if (isNil "Config_AllowedWeapons")       then { 0 } else { if (0 == (count Config_AllowedWeapons))       then { 1 } else { 2 } };
-				_algo_index_2 = if (isNil "Config_AllowedWeaponClasses") then { 0 } else { if (0 == (count Config_AllowedWeaponClasses)) then { 1 } else { 2 } };
-
-				_algo_index = 3 * _algo_index_1 + _algo_index_2;
-				
-//		weapon	class	
-//---------------------------------
-// 0	nil		nil		all
-// 1	nil		[]		none
-// 2	nil		[c]		[c]
-// 3	[]		nil		none
-// 4	[]		[]		none
-// 5	[]		[c]		[c]
-// 6	[w]		nil		[w]
-// 7	[w]		[]		[w]
-// 8	[w]		[c]		[w] + [c]
-
-				_is_allowed_by_class =
+				if (_is_weapon_of_base_class && _simplest_model) then
 				{
-					private ["_parents", "_result"];
-
-					_parents = _this;
-
-					_result = false;
+					if ([_weapon_config, _parents] call _is_weapon_allowed) then
 					{
-						if (_x in _parents) exitWith
-						{
-							_result = true;
-						};
-					} forEach Config_AllowedWeaponClasses;
-
-					_result
-				};
-
-				_this_weapon_allowed = switch (_algo_index) do
-				{
-					case 0:
-					{
-						true
+						_config_list = _config_list + [_weapon_config];
 					};
-					case 1:
-					{
-						false
-					};
-					case 2:
-					{
-						_parents call _is_allowed_by_class
-					};
-					case 3:
-					{
-						false
-					};
-					case 4:
-					{
-						false
-					};
-					case 5:
-					{
-						_parents call _is_allowed_by_class
-					};
-					case 6:
-					{
-						configName(_weapon_config) in Config_AllowedWeapons
-					};
-					case 7:
-					{
-						configName(_weapon_config) in Config_AllowedWeapons
-					};
-					case 8:
-					{
-						((configName(_weapon_config) in Config_AllowedWeapons) || (_parents call _is_allowed_by_class))
-					};
-				};
-
-				if (_is_weapon_of_base_class && _simplest_model && _this_weapon_allowed) then
-				{
-					_config_list = _config_list + [_weapon_config];
 				};
 			};
         };
@@ -1597,7 +1609,7 @@ PERF_BEGIN("_add_simplest_weapons")
     _display        = _this select 1;
     _current_weapon = _this select 2;
 
-    _config_list = [_base_class, _display] call _enum_simplest_weapons;
+    _config_list = [_base_class] call _enum_simplest_weapons;
 
     [_display, _config_list, _current_weapon] call _set_weapons_list;
 
@@ -1611,8 +1623,8 @@ PERF_BEGIN("_show_available_weapons_list")
     private ["_param", "_button", "_weapon_kind", "_display", "_inventory", "_current_weapon"];
 
     _param = _this select 1;
-        _button = _param select 0;
-    _weapon_kind    = _this select 2;
+		_button = _param select 0;
+	_weapon_kind = _this select 2;
 
     _display = ctrlParent _button;
 
@@ -2288,37 +2300,51 @@ PERF_END("RscGear_onLoad")
     {
 	PERF_BEGIN("Explosives_button")
 
-        private ["_param", "_button", "_display", "_config_list", "_all_kind", "_i", "_muzzle", "_magazines", "_magazine_config"];
+		private ["_param", "_button", "_display", "_config_list"];
+		
+		call _clear_seapon_stuff_controls;
 
-	_param = _this select 1;
-		_button = _param select 0;
-	_display = ctrlParent _button;
+		_param = _this select 1;
+			_button = _param select 0;
+				_display = ctrlParent _button;
 
-	_config_list = [];
+		_config_list = [];
 
-        {
-            _all_kind = configfile >> "CfgWeapons" >> _x;
+		{
+			private ["_all_kind", "_i"];
 
-            for [{_i = 0},{_i != count _all_kind},{_i = _i + 1}] do
-            {
-                _muzzle = _all_kind select _i;
+			_all_kind = configfile >> "CfgWeapons" >> _x;
 
-                if (isClass _muzzle) then
-                {
-                    _magazines = getArray(_muzzle >> "magazines");
-                    {
-                        _magazine_config = configfile >> "CfgMagazines" >> _x;
-
-			if !(_magazine_config in _config_list) then
+			for [{_i = 0},{_i != count _all_kind},{_i = _i + 1}] do
 			{
-				_config_list = _config_list + [_magazine_config];
-			};
-                    } forEach _magazines;
-                };
-            };
-        } forEach ["Throw", "Put"];
+				private ["_muzzle"];
 
-	[_display, _config_list, ""] call _set_weapons_list;
+				_muzzle = _all_kind select _i;
+
+				if (isClass _muzzle) then
+				{
+					private ["_magazines"];
+				
+					_magazines = getArray(_muzzle >> "magazines");
+					{
+						private ["_magazine_config", "_parents", "_is_allowed"];
+					
+						_magazine_config = configfile >> "CfgMagazines" >> _x;
+
+						_parents = [_magazine_config, true] call BIS_fnc_returnParents;
+						
+						_is_allowed = [_magazine_config, _parents] call _is_weapon_allowed;
+
+						if (_is_allowed && !(_magazine_config in _config_list)) then
+						{
+							_config_list set [count _config_list, _magazine_config];
+						};
+					} forEach _magazines;
+				};
+			};
+		} forEach ["Throw", "Put"];
+
+		[_display, _config_list, ""] call _set_weapons_list;
 
 	PERF_END("Explosives_button")
     };
