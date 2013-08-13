@@ -12,7 +12,7 @@ class RscTitles
 		duration=10000;
 		name="gps";
 
-		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
+		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","OptionsIcon7","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
 
 		onload="uiNamespace setVariable['GUI',_this select 0]; [] spawn Func_Client_UpdateGUI";
 
@@ -48,7 +48,7 @@ class RscTitles
 			y = 0.3;
 			w = 0.039216;
 			h = 0.052288;
-			colortext[] = {1, 1, 1, 0.400000};
+			colortext[] = {1, 1, 1, 0.800000};
 			text = "";
 		};
 
@@ -86,10 +86,15 @@ class RscTitles
 			IDC = 6011;
 			y = "0.3+(0.0522876*6)";
 		};
+		class OptionsIcon7: OptionsIcon0 
+		{
+			IDC = 6012;
+			y = "0.3+(0.0522876*7)";
+		};
 		// Text and color is set in script by ctrlSetStructuredText see Func_CLient_UpdateGUI.sqf
 		class Players:txt_dwn
 		{
-			idc=6012;
+			idc=6030;
 			x=0.7;
 			y=0.9;
 			w=0.20;
@@ -97,7 +102,7 @@ class RscTitles
 		};
 		class Score:txt_dwn
 		{
-			idc=6013;
+			idc=6031;
 			x=0.7;
 			y=0.9;
 			w=0.20;
@@ -105,7 +110,7 @@ class RscTitles
 		};
 		class Funds:txt_dwn
 		{
-			idc=6014;
+			idc=6032;
 			x=0.7;
 			y=0.9;
 			w=0.20;
@@ -113,7 +118,7 @@ class RscTitles
 		};	
 		class ManPic:RscPicture_ext
 		{	
-			idc=6015;		
+			idc=6033;		
 			colorText[]={0.1,1,0.1,0.7};
 			text="pic\man.paa";
 			x=safeZoneX-2;
@@ -123,7 +128,7 @@ class RscTitles
 		};		
 		class HeadPic:RscPicture_ext
 		{
-			idc=6016;
+			idc=6034;
 			colorText[]={1,0,0,0.8};
 			text="";
 			x=0.9492;
@@ -133,7 +138,7 @@ class RscTitles
 		};
 		class BodyPic:RscPicture_ext
 		{
-			idc=6017;
+			idc=6035;
 			colorText[]={1,0,0,0.8};
 			text="";
 			x=0.93995;
@@ -143,7 +148,7 @@ class RscTitles
 		};
 		class ArmsPic:RscPicture_ext
 		{
-			idc=6018;
+			idc=6036;
 			colorText[]={1,0,0,0.8};
 			text="";
 			x=0.94;
@@ -153,7 +158,7 @@ class RscTitles
 		};
 		class LegsPic:RscPicture_ext
 		{
-			idc=6019;
+			idc=6037;
 			colorText[]={1,0,0,0.8};
 			text="";
 			x=0.93999;
@@ -182,7 +187,7 @@ class RscTitles
 		};
 		class TeamSpeak : RscPicture
 		{
-			idc=6020;
+			idc=6038;
 			x = safeZoneX + SafeZoneW * 0.3;
 			y = SafeZoneY;
 			w = SafeZoneW * 0.4;
@@ -192,7 +197,7 @@ class RscTitles
 
 		class gps_map : RscMapControl_ext
 		{
-			idc = 6021;
+			idc = 6039;
 
 			ShowCountourInterval = 1;
 
@@ -206,7 +211,7 @@ class RscTitles
 
 		class gps_background : RscPicture 
 		{
-			idc = 6022;
+			idc = 6040;
 
 			colorBackground[] = {"(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])", "(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_B',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_A',0.8])"};
 
@@ -221,7 +226,7 @@ class RscTitles
 
 		class gps_background_title : RscText
 		{
-			idc = 6023;
+			idc = 6041;
 
 			colorBackground[] = {"(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])", "(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_B',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_A',0.8])"};
 
@@ -233,7 +238,7 @@ class RscTitles
 
 		class gps_background_title_dark : RscText
 		{
-			idc = 6024;
+			idc = 6042;
 
 			colorBackground[] = {0, 0, 0, 0.100000};
 
@@ -245,7 +250,7 @@ class RscTitles
 
 		class gps_grid : RscText
 		{
-			idc = 6025;
+			idc = 6043;
 
 			style = 0;
 			colorText[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
@@ -259,7 +264,7 @@ class RscTitles
 
 		class gps_time : RscText
 		{
-			idc = 6026;
+			idc = 6044;
 
 			style = 1;
 			colorText[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
@@ -273,7 +278,7 @@ class RscTitles
 
 		class gps_heading : RscText
 		{
-			idc = 6027;
+			idc = 6045;
 
 			style = 2;
 			colorText[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};

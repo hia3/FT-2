@@ -15,20 +15,20 @@ _position=getPos Local_PlayerVehicle;
 //START: GPS, SCORE, FUNDS, PLAYERS
 _lowertext=_display displayCtrl 6003;
 	
-	_gps_map                   = _display displayCtrl 6021;
-	_gps_background            = _display displayCtrl 6022;
-	_gps_background_title      = _display displayCtrl 6023;
-	_gps_background_title_dark = _display displayCtrl 6024;
-	_gps_grid                  = _display displayCtrl 6025;
-	_gps_time                  = _display displayCtrl 6026;
-	_gps_heading               = _display displayCtrl 6027;
+	_gps_map                   = _display displayCtrl 6039;
+	_gps_background            = _display displayCtrl 6040;
+	_gps_background_title      = _display displayCtrl 6041;
+	_gps_background_title_dark = _display displayCtrl 6042;
+	_gps_grid                  = _display displayCtrl 6043;
+	_gps_time                  = _display displayCtrl 6044;
+	_gps_heading               = _display displayCtrl 6045;
 
 	_gps_controls = [_gps_map, _gps_background, _gps_background_title, _gps_background_title_dark, _gps_grid, _gps_time, _gps_heading];
 
 _crewlist=_display displayCtrl 6004;
-_playerslist=_display displayCtrl 6012;
-_scorelist=_display displayCtrl 6013;
-_fundslist=_display displayCtrl 6014;
+_playerslist=_display displayCtrl 6030;
+_scorelist=_display displayCtrl   6031;
+_fundslist=_display displayCtrl   6032;
 //END: GPS, SCORE, FUNDS, PLAYERS
 
 
@@ -40,18 +40,19 @@ _opt3=_display displayCtrl 6008;
 _opt4=_display displayCtrl 6009;
 _opt5=_display displayCtrl 6010;
 _opt6=_display displayCtrl 6011;
+_opt7=_display displayCtrl 6012;
 //END: OPTION ICONS
 	
 //START: HUMAN DAMAGE INDICATOR
-_man=_display displayCtrl 6015;
-_head=_display displayCtrl 6016;
-_body=_display displayCtrl 6017;
-_arms=_display displayCtrl 6018;
-_legs=_display displayCtrl 6019;
+_man=_display displayCtrl 6033;
+_head=_display displayCtrl 6034;
+_body=_display displayCtrl 6035;
+_arms=_display displayCtrl 6036;
+_legs=_display displayCtrl 6037;
 //END: HUMAN DAMAGE INDICATOR
 	
 //TS3 TEXT
-_teamspeak=_display displayCtrl 6020;
+_teamspeak=_display displayCtrl 6038;
 		
 _dx=SafeZoneW+safeZoneX-0.245;
 _dy=SafeZoneH+safeZoneY-0.2575;
@@ -253,6 +254,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_t4="";
 		_t5="";
 		_t6="";
+		_t7="";
 			
 		switch (Local_PlayerInSafeZone) do
 		{
@@ -293,6 +295,10 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 				_t5="pic\icon_fuel.paa";
 			};
 		};
+		if !(player getVariable "joied_ts") then
+		{
+			_t7 = "pic\ts_not_connected.paa";
+		};
 		_opt0 ctrlSetText _t0;
 		_opt1 ctrlSetText _t1;
 		_opt2 ctrlSetText _t2;
@@ -300,6 +306,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_opt4 ctrlSetText _t4;
 		_opt5 ctrlSetText _t5;
 		_opt6 ctrlSetText _t6;
+		_opt7 ctrlSetText _t7;
 	};
 	//---OPTIONS-END---
 		
