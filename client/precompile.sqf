@@ -32,6 +32,7 @@ Local_GUIWorking=false;
 Local_PlayerVehicle=player;
 Local_UserVehicles=[];
 Local_CurrentPlayers=[];
+Local_CurrentPlayersTS=[];
 Local_PlayerMines=[];
 Local_PlayerAttachedMines=[];
 Local_TaskSensors=[];
@@ -186,16 +187,17 @@ onEachFrame
 		{
 			if ((side _x == side player) && (_x != player)) then
 			{
-				private ["_pos", "_distance", "_color"];
+				private ["_pos", "_distance", "_color", "_picture"];
 
 				_pos = _x modelToWorld (_x selectionposition "head");
 				_pos = [_pos select 0, _pos select 1, 0.5 + (_pos select 2)];
 
 				_distance = round (player distance _x);
 
-				_color = if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] };
+				_color   = if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] };
+				_picture = if (_x in Local_CurrentPlayersTS) then { "\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa" } else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
 
-				drawIcon3D ["a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa", _color, _pos, 0.5, 0.5, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
+				drawIcon3D [_picture, _color, _pos, 0.5, 0.5, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
 			};
 		} forEach (if (Dialog_ScreenMarkersType == 1) then { units player } else { playableUnits });
 

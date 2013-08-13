@@ -3,13 +3,19 @@
 	while {!Global_GameEnded} do
 	{
 		_current_players = [];
+		_current_players_ts = [];
 		{
 			if ((side _x) == Local_PlayerSide) then
 			{
 				_current_players set [count _current_players, _x];
+				if (_x getVariable ["joied_ts", false]) then
+				{
+					_current_players_ts set [count _current_players_ts, _x];
+				};
 			};
 		} forEach playableUnits;
-		Local_CurrentPlayers=_current_players;//update the list of current players
+		Local_CurrentPlayers    = _current_players;//update the list of current players
+		Local_CurrentPlayersTS  = _current_players_ts;
 		
 		[] call Func_Client_MarkMHQ;//mark MHQ on the map
 		[] call Func_Client_MarkFriendlyPlayers;//mark players on the map
