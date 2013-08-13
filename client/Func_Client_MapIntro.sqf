@@ -63,7 +63,7 @@ if (Localshowintro) then
 	"dynamicBlur" ppEffectCommit 3.8;
 
 	sleep 1.6;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold Map</t></t>";
+	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
 	titleRsc ["about","plain",2];
 	sleep 3.3;
 	titleFadeOut 0.2;
