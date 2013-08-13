@@ -126,7 +126,7 @@ STR_BASE_Hosp,"Hospital","Госпиталь"
 
 STR_HINT_MHQ_Deployed,"MHQ has been deployed","КШМ развёрнута"
 STR_HINT_MHQ_Moving,"MHQ is driven by player","КШМ управляется игроком"
-STR_HINT_MHQ_Water,"MHQ is in water can't be used for respawn","КШМ находится в воде и не может быть использована для возрождения"
+STR_HINT_MHQ_Water,"MHQ is in water and cannot be used for respawn","КШМ находится в воде и не может быть использована для возрождения"
 STR_HINT_MHQ_Destroyed,"MHQ has been destroyed","КШМ уничтожена"
 
 STR_ACT_Menu,"Main menu","Главное меню"
