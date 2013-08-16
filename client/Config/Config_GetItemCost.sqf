@@ -165,6 +165,9 @@ if (isNil "Global_CostMap") then
 		["B_TacticalPack_oli",33],
 		["B_TacticalPack_rgr",33],
 		["Binocular",10],
+		["C_Bergen_blu",28],
+		["C_Bergen_grn",28],
+		["C_Bergen_red",28],
 		["Chemlight_blue",2],
 		["Chemlight_green",2],
 		["Chemlight_red",2],
@@ -172,6 +175,8 @@ if (isNil "Global_CostMap") then
 		["ClaymoreDirectionalMine_Remote_Mag",100],
 		["DemoCharge_Remote_Mag",150],
 		["FirstAidKit",50],
+		["G_AssaultPack",33],
+		["G_Bergen",42],
 		["G_Combat",3],
 		["G_Diving",3],
 		["G_Lowprofile",3],
@@ -195,6 +200,7 @@ if (isNil "Global_CostMap") then
 		["H_Booniehat_khk",0],
 		["H_Cap_headphones",0],
 		["H_HelmetB",0],
+		["H_HelmetB_camo",0],
 		["H_HelmetB_light",0],
 		["H_HelmetB_paint",0],
 		["H_HelmetCrew_B",0],
@@ -257,6 +263,7 @@ if (isNil "Global_CostMap") then
 		["Rangefinder",20],
 		["RPG32_AA_F",500],
 		["RPG32_F",300],
+		["RPG32_HE_F",500],
 		["SatchelCharge_Remote_Mag",200],
 		["SLAMDirectionalMine_Wire_Mag",100],
 		["SMG_01_F",30],
@@ -351,12 +358,10 @@ for "_z" from 0 to 10 do
 	};
 };
 
-/*
 if (!_known_cost) then
 {
 	diag_log format ["Unknown cost: %1", _item];
 };
-*/
 
 /*
 if (_result == 0) then
