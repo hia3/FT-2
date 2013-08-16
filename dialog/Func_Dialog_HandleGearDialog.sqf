@@ -1436,7 +1436,7 @@ PERF_BEGIN("_set_weapons_list")
 	_list_current_index = _a;
 
 	{
-		private ["_weapon_config", "_weapon_config_name", "_display_name", "_picture", "_cost"];
+		private ["_weapon_config", "_weapon_config_name", "_display_name", "_picture", "_cost", "_tooltip"];
 
 		_weapon_config = _x;
 
@@ -1453,6 +1453,9 @@ PERF_BEGIN("_set_weapons_list")
                     lnbSetPicture [ctrlIDC _weapons_list_control, [_a, 0], _picture];
                     _weapons_list_control lnbSetData  [[_a, 0], _weapon_config_name];
                     _weapons_list_control lnbSetValue [[_a, 0], _a];
+
+                    _tooltip = if (([_weapon_config_name] call Func_Client_IsBackpack) || ([_weapon_config_name] call _is_vest) || ([_weapon_config_name] call _is_uniform)) then { format ["Mass: %1; Capacity: %2", [_weapon_config_name] call Func_Client_GetItemsMass, _weapon_config_name call Func_Client_GetContainerMaximumLoad] } else { format ["Mass: %1", [_weapon_config_name] call Func_Client_GetItemsMass] };
+                    _weapons_list_control lbSetTooltip [_a, _tooltip];
 
                     if (_weapon_config_name == _current_weapon) then
                     {
@@ -2417,8 +2420,7 @@ PERF_END("RscGear_onLoad")
 
 	_vehicles_config = configfile >> "CfgVehicles";
 
-//	_config_list = [_vehicles_config >> "B_Parachute"];
-	_config_list = [];
+	_config_list = [_vehicles_config >> "B_Parachute"];
 
 	for [{_i = 0},{_i != count _vehicles_config},{_i = _i + 1}] do
 	{
