@@ -2,7 +2,10 @@
 
 while {!Global_GameEnded} do
 {
-	estimatedTimeLeft (Param_RoundDuration-time);
+	private ["_estimated_time_left"];
+
+	_estimated_time_left = if (Param_RoundDuration < time) then { 5 } else { Param_RoundDuration-time };
+	estimatedTimeLeft _estimated_time_left;
 	sleep 60;
 };
 

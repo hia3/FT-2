@@ -1,20 +1,20 @@
 //player GUI script
 //the most shity and unoptimized script in whole mission
 //hate working with GUI
-		
 
-		
+
+
 disableSerialization;
 _display=uiNamespace getVariable "GUI";
-	
+
 Local_GUIActive=true;
 Local_GUIRestart=false;
-	
+
 _position=getPos Local_PlayerVehicle;
-	
+
 //START: GPS, SCORE, FUNDS, PLAYERS
 _lowertext=_display displayCtrl 6003;
-	
+
 	_gps_map                   = _display displayCtrl 6039;
 	_gps_background            = _display displayCtrl 6040;
 	_gps_background_title      = _display displayCtrl 6041;
@@ -42,7 +42,7 @@ _opt5=_display displayCtrl 6010;
 _opt6=_display displayCtrl 6011;
 _opt7=_display displayCtrl 6012;
 //END: OPTION ICONS
-	
+
 //START: HUMAN DAMAGE INDICATOR
 _man=_display displayCtrl 6033;
 _head=_display displayCtrl 6034;
@@ -50,21 +50,21 @@ _body=_display displayCtrl 6035;
 _arms=_display displayCtrl 6036;
 _legs=_display displayCtrl 6037;
 //END: HUMAN DAMAGE INDICATOR
-	
+
 //TS3 TEXT
 _teamspeak=_display displayCtrl 6038;
-		
+
 _dx=SafeZoneW+safeZoneX-0.245;
 _dy=SafeZoneH+safeZoneY-0.2575;
-		
+
 _fundslist ctrlSetPosition [_dx-0.135,_dy+0.15];
-	
+
 //setting position: crew list, funds, players, score
-_lowertext ctrlSetPosition [_dx-0.02,_dy+0.19];
+_lowertext ctrlSetPosition [_dx,_dy+0.19];
 _crewlist ctrlSetPosition [safeZoneX+0.025,SafeZoneY+0.5];
-_playerslist ctrlSetPosition [safeZoneX+0.025,_dy+0.11];	
-_scorelist ctrlSetPosition [safeZoneX+0.155,_dy+0.11];		
-		
+_playerslist ctrlSetPosition [safeZoneX+0.025,_dy+0.11];
+_scorelist ctrlSetPosition [safeZoneX+0.155,_dy+0.11];
+
 //setting position: damage indicator
 if (Dialog_GUIType < 2) then
 {
@@ -88,13 +88,13 @@ _gps_common_h = (call compile (profileNamespace getVariable ['IGUI_GRID_GPS_H', 
 _gps_low_h    = 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
 _gps_common_y = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_Y', str (safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))]);
 
-_show_gps = 
+_show_gps =
 {
 	private ["_is_visible", "_gps_x"];
-	
+
 	_should_visible = ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player));
 	_is_visible = ctrlShown _gps_map;
-	
+
 	_gps_x = if (_should_visible) then { _gps_common_x } else { _gps_common_x + 10 };
 
 	if ((_should_visible && !_is_visible) || (!_should_visible && _is_visible) || _this) then
@@ -106,11 +106,11 @@ _show_gps =
 		_gps_grid					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
 		_gps_time					ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
 		_gps_heading				ctrlSetPosition [_gps_x, _gps_common_y, _gps_common_w, _gps_low_h];
-		
+
 		{
 			_x ctrlCommit 0;
 		} forEach _gps_controls;
-		
+
 		{
 			_x ctrlShow _should_visible;
 		} forEach _gps_controls;
@@ -144,69 +144,70 @@ _teamspeak ctrlCommit 0;
 	_veh_real_speed = [0, 0, 0] distance (velocity Local_PlayerVehicle);
 	_gps_map ctrlMapAnimAdd [0,(_veh_real_speed+8)/200,_position];
 	ctrlMapAnimCommit _gps_map;
-	
+
 //some auxiliary variables
 _TimerG=0;
 _TimerC=0;
 _TimerO=0;
 _TimerP=0;
-_TimerD=0;	
+_TimerD=0;
 _TimerT=0;
 _lastdam=0;
 _playerInVehicle=false;
 _updatedam=true;
 
-	
+
 //run screenMarkers
 [Func_Client_UpdateOSD] call Func_Common_Spawn;
-	
+
 while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GUIRestart}do
 {
 	_timing=time;
 	_position=getPos Local_PlayerVehicle;
-	
+
 	if(_TimerG<=_timing) then
 	{
 		_TimerG = _timing + 0.5;
-		
+
 		false call _show_gps;
-		
+
 		if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then
 		{
 			//GPS on
 			_veh_real_speed = [0, 0, 0] distance (velocity Local_PlayerVehicle);
 			_gps_map ctrlMapAnimAdd [0.5, (_veh_real_speed + 12) / 200, _position];
 			ctrlMapAnimCommit _gps_map;
-			
+
 			_gps_grid ctrlSetText     (mapGridPosition Local_PlayerVehicle);
 			_gps_heading ctrlSetText str (floor direction Local_PlayerVehicle);
 			_gps_time ctrlSetText     ([daytime * 60 * 60, "HH:MM"] call BIS_fnc_secondsToString);
 
 		};
 
-		_lowertext ctrlSetStructuredText composeText
-		(
-			[	
+		if (Param_RoundDuration >= _timing) then
+		{
+			_lowertext ctrlSetStructuredText
 				parseText
-				(
-					format 
+					format
 					[
-						'<t align="right" color="%3" size="1.4" shadow="true">%1 %2</t>',
+						'<t align="left" color="%3" size="1.4" shadow="true">%1 %2</t>',
 						localize "STR_DLG_GPSTime",
-						[Param_RoundDuration - _timing,true] call Func_Client_ConvertToTime,
+						[Param_RoundDuration - _timing, true] call Func_Client_ConvertToTime,
 						Dialog_GUIColorActive
-					]
-				)
-			]
-		);		
+					];
+		}
+		else
+		{
+			_lowertext ctrlSetStructuredText parseText "";
+		};
 	};
-		
+
 	//---VEHICLE-CREW-START---
 	if(_TimerC<=_timing)then
 	{
 		_TimerC=_timing+1;
 		_ParsedText="";
-			
+
 		if((alive player) && (alive Local_PlayerVehicle) && (player!=Local_PlayerVehicle)) then
 		{
 			_crew=crew Local_PlayerVehicle;
@@ -237,13 +238,13 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 					};
 
 					_ParsedText=_ParsedText+format ["<t size='1.5'><img image='\A3\ui_f\data\igui\cfg\actions\%1'></t> <t size='1.35' shadow='true' color='%2'>%3</t><br/>",_pic, _color, _x getVariable "playername"];
-				};					
+				};
 			}forEach _crew;
-		};			
+		};
 		_crewlist ctrlSetStructuredText parseText _ParsedText;
-	};		
+	};
 	//---VEHICLE-CREW-END---
-		
+
 	//---OPTIONS-START---
 	if(_TimerO<=_timing)then
 	{
@@ -256,7 +257,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_t5="";
 		_t6="";
 		_t7="";
-			
+
 		switch (Local_PlayerInSafeZone) do
 		{
 			case 2:
@@ -268,7 +269,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 				_t0="pic\icon_danger.paa";
 			};
 		};
-		
+
 		if (((({((Local_PlayerVehicle distance _x) <= Config_SupplyVehicleRange) && (alive _x)} count nearestobjects [Local_PlayerVehicle,Local_FriendlySupplyVehicleTypes,Config_SupplyVehicleRange]) > 0) || ((Local_PlayerVehicle distance Local_FriendlyBaseFlag)<Config_RespawnSize))) then
 		{
 			_t1="pic\icon_wf_building_gear_ca.paa";
@@ -310,7 +311,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_opt7 ctrlSetText _t7;
 	};
 	//---OPTIONS-END---
-		
+
 	//---PLAYERS/SCORE/FUNDS-START---
 	if(_TimerP<=_timing)then
 	{
@@ -325,12 +326,12 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 			_playerslist ctrlSetStructuredText parseText _ParsedText;
 			_ParsedText=format ["<t size='1.75' align='left' shadow='true' color='%6'>%1:</t><br/><t size='1.5'><img image='%2'></t><t size='1.75' align='left' shadow='true' color='%6'> %3</t><br/><t size='1.5'><img image='%4'></t><t size='1.75' align='left' shadow='true' color='%6'> %5</t>",localize "STR_NAME_Score",Config_EastSign,Config_EastBaseFlag getVariable "score",Config_WestSign,Config_WestBaseFlag getVariable "score",Dialog_GUIColorActive];
 			_scorelist ctrlSetStructuredText parseText _ParsedText;
-		};			
+		};
 		_ParsedText=format ["<t size='1.5'><img image='pic\icon_plus.paa'></t><t size='1.95' align='left' shadow='true' color='%4'>%1/%2</t><br/><t size='1.5'><img image='pic\icon_funds.paa'></t><t size='1.95' align='left' shadow='true' color='%4'>%3</t>",Config_PeriodicIncome,localize "STR_DLG_Min",[] call Func_Client_GetPlayerFunds,Dialog_GUIColorActive];
 		_fundslist ctrlSetStructuredText parseText _ParsedText;
 	};
 	//---PLAYERS/SCORE/FUNDS-END---
-	
+
 
 	//---DAMAGE-INDICATOR-START---
 	_dam=getDammage player;
@@ -339,10 +340,10 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_lastdam=_dam;
 		_updatedam=false;
 		_TimerD=_timing+0.3;
-			
+
 		_man ctrlSetText "pic\man.paa";
-			
-		if (_dam<0.05) then 
+
+		if (_dam<0.05) then
 		{
 			Dialog_LegsHit=false;
 			Dialog_ArmsHit=false;
@@ -353,7 +354,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		{
 			Dialog_BodyHit=true;
 		};
-		
+
 		if (Dialog_HeadHit) then
 		{
 			_head ctrlSetText "pic\head.paa";
@@ -384,17 +385,17 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 			_legs ctrlSetText "pic\legs_r.paa";
 		};
 	};
-		
+
 	if ((Local_PlayerVehicle!=player) && !_playerInVehicle) then
-	{			
+	{
 		_playerInVehicle=true;
 		_man ctrlSetText "";
 		_body ctrlSetText "";
 		_head ctrlSetText "";
 		_legs ctrlSetText "";
-		_arms ctrlSetText "";		
+		_arms ctrlSetText "";
 	};
-		
+
 	if ((Local_PlayerVehicle==player) && _playerInVehicle) then
 	{
 		_playerInVehicle=false;
@@ -402,7 +403,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 	};
 	//---DAMAGE-INDICATOR-END---
 
-		
+
 	//---TS-MESSAGE-START---
 	if(_TimerT<=_timing)then
 	{
@@ -423,8 +424,8 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 			};
 		};
 	};
-		
-	//---TS-MESSAGE-END---		
+
+	//---TS-MESSAGE-END---
 	sleep 0.35;
 };
 

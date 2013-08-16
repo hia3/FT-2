@@ -39,6 +39,7 @@ Local_TaskSensors=[];
 Local_TrackedShells=0;
 Local_LastWarningTimeAproach=0;
 Local_LastWarningTimeAttack=0;
+Local_PlayerLastActivityTime=time;
 Local_EnteredEnemySafeZone=false;
 Local_TechnicalService=false;
 Local_LastIncomeTime=0;

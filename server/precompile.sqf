@@ -70,7 +70,7 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	//param mission duration
 	_pa0 = 3600;
 
-	if (ismultiplayer) then {_pa0 = paramsArray select 0;};
+	if (isMultiplayer) then {_pa0 = paramsArray select 0;};
 	Param_RoundDuration=_pa0+Config_GameStartDelay;
 	"Param_RoundDuration" call Func_Common_PublicVariable;
 

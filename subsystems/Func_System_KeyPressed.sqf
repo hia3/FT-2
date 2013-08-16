@@ -1,4 +1,4 @@
-
+Local_PlayerLastActivityTime=time;
 
 #define KEY_TANK_SMOKE 34 	//G
 #define KEY_ENGINE_OFF 41	//~
