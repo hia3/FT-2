@@ -1,5 +1,5 @@
 
-System_AntiAirMissileTypes=[["M_RPG32_AA_F",true],["M_Titan_AA",true],["M_Air_AA",true]];
+System_AntiAirMissileTypes=[["M_Titan_AA",true],["M_Air_AA",true]];
 System_AntiAirVehicleTypes=[["Man",0.165],["Helicopter",0]];
 
 System_AntiTankMissileTypes=[["M_RPG32_F",true],["M_NLAW_AT_F",true],["M_Titan_AT",true],["M_PG_AT",true]];
