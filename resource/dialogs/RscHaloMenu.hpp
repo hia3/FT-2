@@ -2,8 +2,8 @@
 class RscHaloMenu {
 	movingEnable = 1;
 	idd = -1;
-	onLoad = "_this spawn Halo_Marker_Init";
-	onUnload = "[] spawn Halo_Marker_Remove";
+	onLoad = "[Halo_Marker_Init, _this] call Func_Common_Spawn";
+	onUnload = "[Halo_Marker_Remove, []] call Func_Common_Spawn";
 	
 	class controlsBackground {
 		class Mainback : RscText {
@@ -51,7 +51,7 @@ class RscHaloMenu {
 			w = 0.185;
 			h = 0.052;
 			text = "Jump";
-			action = "[] spawn Halo_Jump_F;";
+			action = "[Halo_Jump_F, []] call Func_Common_Spawn;";
 		};		
 		
 		class CloseButton : RscShortcutButton {

@@ -2,7 +2,7 @@
 class RscHelp {
 	movingEnable = 1;
 	idd = -1;
-	onLoad = "_this spawn Func_Dialog_HandleHelpDialog";
+	onLoad = "[Func_Dialog_HandleHelpDialog, _this] call Func_Common_Spawn";
 	
 	class controlsBackground {
 		class Mainback : RscText {

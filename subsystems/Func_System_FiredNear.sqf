@@ -15,13 +15,13 @@ if (_shooter isKindOf "man") then
 {
 	if ((_weapon==secondaryWeapon _shooter) && (_distance < _rpgdistance)) then
 	{
-		[0] spawn Func_System_Deafness;		
+		[Func_System_Deafness, [0]] call Func_Common_Spawn;		
 	};
 }else{
 	_reloadTime=getNumber(configFile>>"CfgWeapons">>_weapon>>"reloadTime");
 	//if ((_shooter isKindOf "Tank") && (_reloadTime>2) && (_distance < _gundistance)) then
 	if ((_reloadTime>2) && (_distance < _gundistance)) then
 	{
-		[random 5] spawn Func_System_Deafness;	
+		[Func_System_Deafness, [random 5]] call Func_Common_Spawn;	
 	};
 };

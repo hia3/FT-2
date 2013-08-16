@@ -46,7 +46,7 @@ switch (_key) do
 		{
 			if (Local_PlayerVehicle getVariable 'manualflare') then 
 			{
-				Local_PlayerVehicle spawn Func_System_DropFlares;
+				[Func_System_DropFlares, Local_PlayerVehicle] call Func_Common_Spawn;
 			};
 		};		
 	};
@@ -69,7 +69,7 @@ switch (_key) do
 			_weapon=primaryWeapon player;
 			if (_weapon != "") then 
 			{	
-				[getText(configFile>>'CfgWeapons'>>_weapon>>'DisplayName'),getText(configFile>>'CfgWeapons'>>_weapon>>'Picture')] spawn _hint;
+				[_hint, [getText(configFile>>'CfgWeapons'>>_weapon>>'DisplayName'),getText(configFile>>'CfgWeapons'>>_weapon>>'Picture')]] call Func_Common_Spawn;
 				_muzzles=getArray(configFile >> 'CfgWeapons' >> _weapon >> 'Muzzles');		
 				if ((_muzzles select 0)!="this") then
 				{
@@ -102,7 +102,7 @@ switch (_key) do
 					
 					if ((getText(_config >> 'cursorAim')) == "gl") exitWith
 					{
-						[getText(configFile >> 'CfgWeapons' >> _weapons >> _x >> 'DisplayName'), getText(configFile >> 'CfgWeapons' >> _weapons >> 'Picture')] spawn _hint;				
+						[_hint, [getText(configFile >> 'CfgWeapons' >> _weapons >> _x >> 'DisplayName'), getText(configFile >> 'CfgWeapons' >> _weapons >> 'Picture')]] call Func_Common_Spawn;				
 						player selectWeapon _x;
 					};
 				} forEach _muzzles;				
@@ -124,7 +124,7 @@ switch (_key) do
 			_weapon=secondaryWeapon player;
 			if (_weapon != "") then 
 			{	
-				[getText(configFile>>'CfgWeapons'>>_weapon>>'DisplayName'),getText(configFile>>'CfgWeapons'>>_weapon>>'Picture')] spawn _hint;				
+				[_hint, [getText(configFile>>'CfgWeapons'>>_weapon>>'DisplayName'),getText(configFile>>'CfgWeapons'>>_weapon>>'Picture')]] call Func_Common_Spawn;				
 				player selectWeapon _weapon;
 			};
 		}else{				
@@ -148,7 +148,7 @@ switch (_key) do
 				_weapon=_weapons select _i;				
 				if (getNumber(configFile >> 'CfgWeapons' >> _weapon >> 'Type')==2) exitWith
 				{	
-					[getText(configFile>>'CfgWeapons'>>_weapon>>'DisplayName'),getText(configFile>>'CfgWeapons'>>_weapon>>'Picture')] spawn _hint;
+					[_hint, [getText(configFile>>'CfgWeapons'>>_weapon>>'DisplayName'),getText(configFile>>'CfgWeapons'>>_weapon>>'Picture')]] call Func_Common_Spawn;
 					player selectWeapon _weapon;
 				};
 			};

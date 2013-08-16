@@ -70,7 +70,7 @@ if (_num>0) then
 		_shells=_shells+[_smokeg];
 	};
 
-	{[_x] spawn Func_System_SpawnSmoke} forEach _shells;
+	{[Func_System_SpawnSmoke, [_x]] call Func_Common_Spawn} forEach _shells;
 
 	Public_VehicleSmokeShells=_shells;
 	"Public_VehicleSmokeShells" call Func_Common_PublicVariable;

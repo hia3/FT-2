@@ -38,7 +38,7 @@ Func_System_SetPitchBank = compile preprocessFile "SubSystems\Func_System_SetPit
 Func_System_SpawnSmoke = compile preprocessFile "SubSystems\Func_System_SpawnSmoke.sqf";
 Func_System_TankExploded = compile preprocessFile "SubSystems\Func_System_TankExploded.sqf";
 
-[] spawn 
+[
 {
 
 	//Interpriting AA missile types data to be more convenient
@@ -125,4 +125,5 @@ Func_System_TankExploded = compile preprocessFile "SubSystems\Func_System_TankEx
 	System_SmokeLauncherMagazines=getArray(configFile>>"cfgWeapons">>"SmokeLauncher">>"Magazines");	
 	//End data
 
-};
+},
+[]] call Func_Common_Spawn;

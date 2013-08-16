@@ -67,7 +67,7 @@ Halo_Jump_F = {
 Halo_Fall = 
 {	
 	private ["_vehicle"];
-	[] spawn
+	[
 	{
 		// FREEFALL 
 		while { (alive player) && (vehicle player) == player} do 
@@ -89,5 +89,6 @@ Halo_Fall =
 		};
 		//delete parachute to avoid explosion
 		deleteVehicle _vehicle;
-	};
+	}
+	] call Func_Common_Spawn;
 };

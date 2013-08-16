@@ -157,7 +157,7 @@ _updatedam=true;
 
 	
 //run screenMarkers
-[] spawn Func_Client_UpdateOSD;
+[Func_Client_UpdateOSD] call Func_Common_Spawn;
 	
 while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GUIRestart}do
 {

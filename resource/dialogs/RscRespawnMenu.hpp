@@ -2,10 +2,10 @@
 class RscRespawnMenu {
 	movingEnable = 1;
 	idd = -1;
-	onLoad = "_this spawn Func_Dialog_HandleRespawnDialog";
-	onUnload = "_this spawn Func_Dialog_RespawnDialogClosed";
-	
-	class controlsBackground {	
+	onLoad = "[Func_Dialog_HandleRespawnDialog, _this] call Func_Common_Spawn";
+	onUnload = "[Func_Dialog_RespawnDialogClosed, _this] call Func_Common_Spawn";
+
+	class controlsBackground {
 		class Mainback : RscText {
 			colorBackground[] = {0, 0, 0, 0.700000};
 			idc = -1;
@@ -15,8 +15,8 @@ class RscRespawnMenu {
 			h = 0.7;
 		};
 	};
-	
-	class controls {	
+
+	class controls {
 		class TipText : RscStructuredText
 		{
 			idc = 15000;
@@ -24,14 +24,14 @@ class RscRespawnMenu {
 			y = safezoneY;
 			w = safezoneW;
 			h = safezoneH / 7;
-			
+
 			colorText[]={1,1,1,1};
 			colorBackground[]={0,0,0,0.5};
-			
+
 			size=0.04;
-			
+
 			text="";
-			
+
 			class Attributes
 			{
 				font = "PuristaMedium";
@@ -81,7 +81,7 @@ class RscRespawnMenu {
 			x = 0.2;
 			w = 0.7;
 			y = 0.805;
-		};		
+		};
 		class RespawnButton : RscShortcutButton {
 			idc = 3904;
 			x = 0.7;

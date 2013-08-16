@@ -71,7 +71,7 @@ switch (_msg) do
 	{
 		player commandChat format[localize "STR_MES_BackBlast", _arg];
 		
-		[] spawn
+		[
 		{
 			"DynamicBlur" ppEffectEnable true;
 			"DynamicBlur" ppEffectAdjust [5];
@@ -81,14 +81,15 @@ switch (_msg) do
 			"DynamicBlur" ppEffectCommit 4;
 			sleep 4;
 			"DynamicBlur" ppEffectEnable false;
-		};
+		}
+		] call Func_Common_Spawn;
 	};
 	
 	case "message_pushcrew":
 	{
 		player commandChat format[localize "STR_MES_Push", _arg];
 		
-		[] spawn
+		[
 		{
 			private ["_pos","_ang","_dir"];
 
@@ -111,7 +112,8 @@ switch (_msg) do
 			sleep 1;
 			//switch GUI on
 			Local_GUIActive=true;
-		};
+		}
+		] call Func_Common_Spawn;
 	};
 	
 	case "message_grenadeinside":

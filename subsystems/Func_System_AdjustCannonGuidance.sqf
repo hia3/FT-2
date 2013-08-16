@@ -47,7 +47,7 @@ _ammo setDir _hangle;
 
 _ammo setVelocity _ammoVel;
 
-[_ammo,_ammoVel] spawn 
+[
 {
 	while {!isNull (_this select 0)} do
 	{
@@ -55,4 +55,5 @@ _ammo setVelocity _ammoVel;
 		(_this select 0) setVelocity (_this select 1);
 		sleep 0.1;
 	};
-}
+}, 
+[_ammo,_ammoVel]] call Func_Common_Spawn;

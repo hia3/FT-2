@@ -5,7 +5,7 @@ _param=_this select 0;
 
 if ((vehicle player) in (call Local_EnemyMHQ)) exitWith
 {
-	[] spawn
+	[
 	{
 		_veh=vehicle player;
 		player action ["eject",_veh];
@@ -15,7 +15,8 @@ if ((vehicle player) in (call Local_EnemyMHQ)) exitWith
 		_veh setVelocity [0,0,0];
 		sleep 1;
 		_veh setFuel _fuel;
-	};
+	}
+	] call Func_Common_Spawn;
 };
 
 if (_param) then
@@ -90,7 +91,7 @@ Local_PlayerVehicle addEventHandler ["Fired","_this call Func_Client_PlayerFired
 
 		if ((typeOf Local_PlayerVehicle) in System_CargoChopperVehicles) then
 		{
-			[] spawn Func_System_HeliCargoManager;
+			[Func_System_HeliCargoManager] call Func_Common_Spawn;
 		};
 
 	}

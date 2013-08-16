@@ -15,12 +15,12 @@ Func_Server_OnPlayerDisconnected=compile preprocessFile ("server\Func_Server_OnP
 Func_Server_RespawnVehicle=compile preprocessFile ("server\Func_Server_RespawnVehicle.sqf");
 Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_WeatherBroadcast.sqf");
 
-[] spawn
+[
 {
 	"Global_GameEnded" call Func_Common_PublicVariable;
 
-	/*onPlayerConnected "[] spawn Func_Server_OnPlayerConnected;";*/
-    onPlayerDisconnected {_name spawn Func_Server_OnPlayerDisconnected;};
+	/*onPlayerConnected "[Func_Server_OnPlayerConnected, []] call Func_Common_Spawn;";*/
+    onPlayerDisconnected {[Func_Server_OnPlayerDisconnected, _name] call Func_Common_Spawn;};
 
 	{ private ["_flag", "_texture"]; _flag = _x select 0; _texture = _x select 1; _flag setFlagTexture _texture; } forEach [[Config_EastBaseFlag, Config_EastFlagTexture],[Config_WestBaseFlag, Config_WestFlagTexture]];
 	{_x setVariable ["score",0,true]; _x setVariable ["bonus",0,true]} forEach [Config_EastBaseFlag,Config_WestBaseFlag];
@@ -61,8 +61,8 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 		if (ismultiplayer) then {_pa2 = (paramsArray select 2);};
 		if (_pa2 == -1) then
 		{
-			[] spawn Func_Server_DynamicWeather;
-			[] spawn Func_Server_WeatherBroadcast;
+			[Func_Server_DynamicWeather, []] call Func_Common_Spawn;
+			[Func_Server_WeatherBroadcast, []] call Func_Common_Spawn;
 			10 setOvercast (random 1.0);
 		};
 	};
@@ -78,17 +78,16 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 
 	sleep 0.1;
 
-	[] spawn Func_Server_ControlPoints;
-	[] spawn Func_Server_ClearRegisteredObjects;
-	[] spawn Func_Server_RespawnVehicle;
-	[] spawn Func_Server_MissionTiming;
-	[] spawn Func_Server_CheckTSUsers;
-	[] spawn Func_Server_Animals;
+	[Func_Server_ControlPoints, []] call Func_Common_Spawn;
+	[Func_Server_ClearRegisteredObjects, []] call Func_Common_Spawn;
+	[Func_Server_RespawnVehicle, []] call Func_Common_Spawn;
+	[Func_Server_MissionTiming, []] call Func_Common_Spawn;
+	[Func_Server_CheckTSUsers, []] call Func_Common_Spawn;
+	[Func_Server_Animals, []] call Func_Common_Spawn;
 
 	if ((count ([] call Config_Hospitals)) > 0) then
 	{
-
-		[] spawn Func_Server_RepairTents;
-
+		[Func_Server_RepairTents, []] call Func_Common_Spawn;
 	};
-};
+}
+] call Func_Common_Spawn;

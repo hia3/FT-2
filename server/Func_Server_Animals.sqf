@@ -109,7 +109,7 @@ _track_animals =
 	{
 		private ["_dummy"];
 
-		_dummy = [_x, _animal_fence] spawn _track_animal;
+		_dummy = [_track_animal, [_x, _animal_fence]] call Func_Common_Spawn;
 
 	} forEach _animals;
 };

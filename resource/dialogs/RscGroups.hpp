@@ -2,7 +2,7 @@
 class RscGroups {
 	movingEnable = 1;
 	idd = -1;
-	onLoad = "_this spawn Func_Dialog_HandleGroupsDialog";
+	onLoad = "[Func_Dialog_HandleGroupsDialog, _this] call Func_Common_Spawn";
 	
 	class controlsBackground {
 		class Mainback : RscText {

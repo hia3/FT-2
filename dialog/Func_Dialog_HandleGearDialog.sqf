@@ -2209,7 +2209,7 @@ PERF_BEGIN("RscGear_onLoad")
 
 	Local_RscGear_Running = true;
 
-	[_display] spawn
+	[
 	{
 		disableSerialization;
 
@@ -2236,7 +2236,8 @@ PERF_BEGIN("RscGear_onLoad")
 
 			sleep 1;
 		};
-	};
+	}
+	, [_display]] call Func_Common_Spawn;
 
         //["RifleCore", _display, _current_primary_weapon] call _add_simplest_weapons;
 PERF_END("RscGear_onLoad")

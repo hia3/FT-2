@@ -25,14 +25,14 @@
 		{
 			_veh setVariable ["manualflare",false,true];
 
-			_handler=_handler+format ["if ((_this select 1) in System_AntiAirMissileTypes) then {[_this select 0,_this select 1,_this select 2,%1] spawn Func_System_IncomingAAMissile};",_aawarning];
+			_handler=_handler+format ["if ((_this select 1) in System_AntiAirMissileTypes) then {[Func_System_IncomingAAMissile, [_this select 0,_this select 1,_this select 2,%1]] call Func_Common_Spawn};",_aawarning];
 		}
 		else
 		{
 			//AT
 			if (_veh isKindOf "LandVehicle") then
 			{			
-				_handler=_handler+format["if ((_this select 1) in System_AntiTankMissileTypes) then {[_this select 0,_this select 1,_this select 2,%1] spawn Func_System_IncomingATMissile};",_atwarning];
+				_handler=_handler+format["if ((_this select 1) in System_AntiTankMissileTypes) then {[Func_System_IncomingATMissile, [_this select 0,_this select 1,_this select 2,%1]] call Func_Common_Spawn};",_atwarning];
 			};	
 		};
 		_veh addEventHandler ['incomingmissile',_handler];

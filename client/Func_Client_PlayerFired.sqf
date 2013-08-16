@@ -45,7 +45,7 @@ if (Local_PlayerInSafeZone>0) then
 		{				
 			if (_weapon in System_DisposableRPGTypes) then
 			{
-				_weapon spawn { sleep 1.0; player removeWeapon _this};
+				[{ sleep 1.0; player removeWeapon _this}, _weapon] call Func_Common_Spawn;
 			};
 		};
 	};
@@ -59,7 +59,7 @@ if (Local_PlayerInSafeZone>0) then
 		{
 			if (_weapon in System_DisposableRPGTypes) then
 			{
-				_weapon spawn { sleep 1.0; player removeWeapon _this};
+				[{ sleep 1.0; player removeWeapon _this}, _weapon] call Func_Common_Spawn ;
 			};
 			[player] call Func_System_BackBlast;
 		};
@@ -68,7 +68,7 @@ if (Local_PlayerInSafeZone>0) then
 		//which are bugged (fall to the ground after start)
 		if ((_weapon in System_GuidedMissileTypes) && (player==(gunner Local_PlayerVehicle))) then
 		{
-			[_weapon,_ammo] spawn Func_System_AdjustMissileGuidance;
+			[Func_System_AdjustMissileGuidance, [_weapon,_ammo]] call Func_Common_Spawn;
 		};			
 	};
 };
@@ -87,6 +87,6 @@ if (_weapon in ["Put"]) then
 	//track shell flight not to allow enemy respawn attack
 	if (!isNull _ammo) then
 	{
-		_ammo spawn Func_Client_TrackShell;
+		[Func_Client_TrackShell, _ammo] call Func_Common_Spawn;
 	};
 };

@@ -9,7 +9,7 @@ switch (getText(configFile >> 'CfgAmmo' >> _ammo >> 'simulation')) do
 	case "shotMissile":
 	{
 		_ammo=nearestObject [_unit,_ammo];	
-		[System_RadarTrackedAircraft,_ammo,_unit] spawn Func_System_AdjustStingerGuidance;
+		[Func_System_AdjustStingerGuidance, [System_RadarTrackedAircraft,_ammo,_unit]] call Func_Common_Spawn;
 	};
 	case "shotBullet":
 	{

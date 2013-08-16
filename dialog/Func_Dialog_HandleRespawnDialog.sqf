@@ -37,7 +37,7 @@
 	ctrlMapAnimCommit _map;
 	
 	//create a rotating yellow marker on the desired spawn position	
-	_ta=["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"] spawn Func_Dialog_MarkerAnim;
+	_ta=[Func_Dialog_MarkerAnim, ["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"]] call Func_Common_Spawn;
 	
 	//disable "respawn" button
 	ctrlEnable [3904,false];
@@ -108,7 +108,7 @@
 							Dialog_RespawnMarkerAnimation=false;
 							terminate _ta;
 							deleteMarkerLocal "TempAnim";
-							_ta=["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"] spawn Func_Dialog_MarkerAnim;																			
+							_ta=[Func_Dialog_MarkerAnim, ["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"]] call Func_Common_Spawn;																			
 						};
 					};
 				};

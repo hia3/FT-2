@@ -46,27 +46,27 @@ switch((_this select 3)select 0)do
 	};
 	case 8://repair a vehicle near repair truck
 	{
-		(_this select 0) spawn Func_Client_RepairVehicle;
+		[Func_Client_RepairVehicle, (_this select 0)] call Func_Common_Spawn;
 	};
 	case 9://remmo a vehicle near reammo truck
 	{
-		(_this select 0) spawn Func_Client_ReammoVehicle;
+		[Func_Client_ReammoVehicle, (_this select 0)] call Func_Common_Spawn;
 	};
 	case 10://refuel a vehicle near refuel truck
 	{
-		(_this select 0) spawn Func_Client_RefuelVehicle;
+		[Func_Client_RefuelVehicle, (_this select 0)] call Func_Common_Spawn;
 	};
 	case 11://take off an aircraft
 	{
-		[(_this select 0),true] spawn Func_Client_TakeOff;
+		[Func_Client_TakeOff, [(_this select 0),true]] call Func_Common_Spawn;
 	};
 	case 12://land an aircraft
 	{
-		[(_this select 0),false] spawn Func_Client_TakeOff;
+		[Func_Client_TakeOff, [(_this select 0),false]] call Func_Common_Spawn;
 	};
 	case 13://pick up a vehicle
 	{
-		[_this select 0,(_this select 3) select 1] spawn Func_System_HeliCargoPick;
+		[Func_System_HeliCargoPick, [_this select 0,(_this select 3) select 1]] call Func_Common_Spawn;
 	};
 	case 14://drop up a vehicle
 	{
@@ -78,7 +78,7 @@ switch((_this select 3)select 0)do
 	};
 	case 16://throw grenade into a tank
 	{
-		[] spawn Func_System_GrenadeIntoTank;
+		[Func_System_GrenadeIntoTank, []] call Func_Common_Spawn;
 	};
 	case 17://turn static weapon left
 	{
@@ -96,7 +96,7 @@ switch((_this select 3)select 0)do
 	};
 	case 19://move static weapon
 	{
-		(_this select 0) spawn Func_Client_MoveStatic;
+		[Func_Client_MoveStatic, (_this select 0)] call Func_Common_Spawn;
 	};
 	case 20://reload static weapon
 	{
@@ -148,7 +148,7 @@ switch((_this select 3)select 0)do
 	};
 	case 21://start indirect fire mode
 	{
-		[] spawn Func_Client_ShowWeaponDirection;
+		[Func_Client_ShowWeaponDirection, []] call Func_Common_Spawn;
 	};
 	case 22://stop indirect fire mode
 	{
@@ -156,7 +156,7 @@ switch((_this select 3)select 0)do
 	};
 	case 24://revive a player via backpack
 	{
-		player spawn Func_Client_ReviveRequest;
+		[Func_Client_ReviveRequest, player] call Func_Common_Spawn;
 	};
 	case 25://ignition off
 	{
@@ -175,7 +175,7 @@ switch((_this select 3)select 0)do
 
 		if (Local_HighClimbingModeOn) then
 		{
-			[] spawn Func_Client_LowGear;
+			[Func_Client_LowGear, []] call Func_Common_Spawn;
 		};
 	};
 	case 29://radar guidance switch for aa systems
@@ -184,7 +184,7 @@ switch((_this select 3)select 0)do
 
 		if (Local_RadarGuidanceOn) then
 		{
-			[] spawn Func_System_RadarAiming;
+			[Func_System_RadarAiming, []] call Func_Common_Spawn;
 		};
 	};
 	case 30://Halo system from base
@@ -194,7 +194,7 @@ switch((_this select 3)select 0)do
 	};
 	case 32://attach explosives to vehicle
 	{
-		[] spawn Func_System_AttachExplosives;
+		[Func_System_AttachExplosives, []] call Func_Common_Spawn;
 	};
 	case 33:
 	{

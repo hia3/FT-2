@@ -101,7 +101,7 @@ if (Localshowintro) then
 	sleep 0.3;
 	titleCut["","black in",4.0];
 
-	[player] spawn Func_Client_PlayerRespawn;
+	[Func_Client_PlayerRespawn, [player]] call Func_Common_Spawn;
 
 	"radialBlur" ppEffectEnable false;
 	"colorCorrections" ppEffectEnable true;

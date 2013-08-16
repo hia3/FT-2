@@ -14,7 +14,7 @@ class RscTitles
 
 		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","OptionsIcon7","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
 
-		onload="uiNamespace setVariable['GUI',_this select 0]; [] spawn Func_Client_UpdateGUI";
+		onload="uiNamespace setVariable['GUI',_this select 0]; [Func_Client_UpdateGUI, []] call Func_Common_Spawn";
 
 		class txt_dwn:RscStructuredTextB_ext
 		{
@@ -297,7 +297,7 @@ class RscTitles
 		duration=47;
 		name="trailer";
 		controls[]={"Contents"};
-		onload="_this spawn Func_Client_CopyrightsAndLinks;";
+		onload="[Func_Client_CopyrightsAndLinks, _this] call Func_Common_Spawn;";
 		class Contents:RscStructuredTextB_ext
 		{
 			idc=1641;

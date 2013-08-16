@@ -50,7 +50,7 @@ if ((_aawarning) && (local _air)) then
 	{
 		if (_auto_flares) then
 		{
-			_air spawn Func_System_DropFlares;
+			[Func_System_DropFlares, _air] call Func_Common_Spawn;
 		};
 
 		waitUntil{((_ammo distance _air) < (_activate_distance / 2)) || (isNull _ammo)};

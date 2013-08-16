@@ -45,7 +45,7 @@ if (_thrown) then
 
 	Public_TankExploded=_tank;
 	"Public_TankExploded" call Func_Common_PublicVariable;
-	_tank spawn Func_System_TankExploded;
+	[Func_System_TankExploded, _tank] call Func_Common_Spawn;
 
 	_crew=crew _tank;
 	_cnt={alive _x} count _crew;

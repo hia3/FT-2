@@ -2,11 +2,11 @@
 class RscVehicles {
 	movingEnable = 1;
 	idd = -1;
-	onLoad = "_this spawn Func_Dialog_HandleVehiclesDialog";
+	onLoad = "[Func_Dialog_HandleVehiclesDialog, _this] call Func_Common_Spawn";
 	onUnload = "";
-	
+
 	class controlsBackground {
-	
+
 		class Mainback: RscText {
 			colorBackground[] = {0, 0, 0, 0.700000};
 			idc = -1;

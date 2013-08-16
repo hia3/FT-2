@@ -51,6 +51,6 @@ else
 		
 		createDialog "RscReviveRequest";
 		ctrlSetText[4900,format[localize "STR_WF_Revive_Text",Local_ReviverUnit getVariable "playername"]];
-		[] spawn _timing;
+		[_timing] call Func_Common_Spawn;
 	};
 };

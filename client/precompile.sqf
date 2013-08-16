@@ -4,17 +4,17 @@
 
 //cosmetic rings around base..
 // West base
-['westbaserings','ColorBlack',4,(markerDir "marker_respawn_west"),(getmarkerpos "marker_respawn_west"),(markerSize "marker_respawn_west"),(markerShape "marker_respawn_west")] spawn CreateHollowMarker;
-['westbaserings_inner','ColorBlack',1,(markerDir "respawn_west"),(getmarkerpos "respawn_west"),(markerSize "respawn_west"),(markerShape "marker_respawn_west")] spawn CreateHollowMarker;
+[CreateHollowMarker, ['westbaserings','ColorBlack',4,(markerDir "marker_respawn_west"),(getmarkerpos "marker_respawn_west"),(markerSize "marker_respawn_west"),(markerShape "marker_respawn_west")]] call Func_Common_Spawn;
+[CreateHollowMarker, ['westbaserings_inner','ColorBlack',1,(markerDir "respawn_west"),(getmarkerpos "respawn_west"),(markerSize "respawn_west"),(markerShape "marker_respawn_west")]] call Func_Common_Spawn;
 // East Base
-['eastbaserings','ColorBlack',4,(markerDir "marker_respawn_east"),(getmarkerpos "marker_respawn_east"),(markerSize "marker_respawn_east"),(markerShape "marker_respawn_east")] spawn CreateHollowMarker;
-['eastbaserings_inner','ColorBlack',1,(markerDir "respawn_east"),(getmarkerpos "respawn_east"),(markerSize "respawn_east"),(markerShape "respawn_east")] spawn CreateHollowMarker;
+[CreateHollowMarker, ['eastbaserings','ColorBlack',4,(markerDir "marker_respawn_east"),(getmarkerpos "marker_respawn_east"),(markerSize "marker_respawn_east"),(markerShape "marker_respawn_east")]] call Func_Common_Spawn;
+[CreateHollowMarker, ['eastbaserings_inner','ColorBlack',1,(markerDir "respawn_east"),(getmarkerpos "respawn_east"),(markerSize "respawn_east"),(markerShape "respawn_east")]] call Func_Common_Spawn;
 
 // Task Zones
 {
 	_markername = _x select 3;
 	_name = format["%1_Ring",_markername];
-	[_name,'ColorBlack',1,(markerDir _markername),(getmarkerpos _markername),(markerSize _markername),(markerShape _markername)] spawn CreateHollowMarker;
+	[CreateHollowMarker, [_name,'ColorBlack',1,(markerDir _markername),(getmarkerpos _markername),(markerSize _markername),(markerShape _markername)]] call Func_Common_Spawn;
 
 	// inner capture zones..
 	_sones = _x select 4;
@@ -22,7 +22,7 @@
 	{
 		_markername = _sones select _i;
 		_name = format["%1_Ring",_markername];
-		[_name,'ColorBlack',0.3,(markerDir _markername),(getmarkerpos _markername),(markerSize _markername),(markerShape _markername)] spawn CreateHollowMarker;
+		[CreateHollowMarker, [_name,'ColorBlack',0.3,(markerDir _markername),(getmarkerpos _markername),(markerSize _markername),(markerShape _markername)]] call Func_Common_Spawn;
 	};
 } foreach Config_TotalCheckPointData;
 
@@ -281,7 +281,7 @@ onEachFrame
 } forEach Config_TotalCheckPointData;
 
 
-[] spawn
+[
 {
 	private["_Item","_NameString","_task","_i","_count"];
 	_pa3 = if (ismultiplayer) then {paramsArray select 3;} else {3000;};
@@ -339,7 +339,7 @@ onEachFrame
 		setTerrainGrid 50;
 	};
 
-	player addEventHandler ['killed',       "_this spawn Func_Client_PlayerRespawn"];
+	player addEventHandler ['killed', "[Func_Client_PlayerRespawn, _this] call Func_Common_Spawn"];
 
 	player call Func_Common_AddHandlers;
 
@@ -356,13 +356,13 @@ onEachFrame
 	{((_x select 8) select 0) setVariable ["owner_color",Config_IndepColor,false]} forEach Config_TotalCheckPointData;
 
 	"Public_VehicleLock" addPublicVariableEventHandler {if (local (_this select 1)) then {(_this select 1) lock !((locked (_this select 1))==2)}};
-	"Public_EnemyTracked" addPublicVariableEventHandler {(_this select 1) spawn Func_Client_TrackEnemy};
+	"Public_EnemyTracked" addPublicVariableEventHandler {[Func_Client_TrackEnemy, (_this select 1)] call Func_Common_Spawn};
 	"Public_UnitRegistered" addPublicVariableEventHandler {if (((_this select 1) getVariable "ft2_wf_side")==Local_PlayerSide) then {Local_RegisteredObjects=Local_RegisteredObjects+[_this select 1];};};
-	"Public_TankExploded" addPublicVariableEventHandler {(_this select 1) spawn Func_System_TankExploded};
+	"Public_TankExploded" addPublicVariableEventHandler {[Func_System_TankExploded, (_this select 1)] call Func_Common_Spawn};
 	"Public_DeadUnit" addPublicVariableEventHandler {if (((_this select 1) select 0) getVariable "ft2_wf_side"==Local_PlayerSide) then {private["_name"];_name=format["body%1",((_this select 1) select 0) getVariable "playername"]; if ((_this select 1) select 1) then {createMarkerLocal[_name,position ((_this select 1) select 0)];_name setMarkerColorLocal Local_FriendlyColor;_name setMarkerTypeLocal "waypoint";_name setMarkerSizeLocal [1.3,1.3]} else {deleteMarkerLocal _name}}};
-	"Public_UnitHealed" addPublicVariableEventHandler {(_this select 1) spawn Func_Client_SomeUnitHealed};
-	"Public_ReviveRequest" addPublicVariableEventHandler {if (((_this select 1) select 1)==Local_PlayerBody) then {((_this select 1) select 0) spawn Func_Client_ReviveRequest}};
-	"Public_VehicleSmokeShells" addPublicVariableEventHandler {{[_x] spawn Func_System_SpawnSmoke} forEach (_this select 1)};
+	"Public_UnitHealed" addPublicVariableEventHandler {[Func_Client_SomeUnitHealed, (_this select 1)] call Func_Common_Spawn};
+	"Public_ReviveRequest" addPublicVariableEventHandler {if (((_this select 1) select 1)==Local_PlayerBody) then {[Func_Client_ReviveRequest, ((_this select 1) select 0)] call Func_Common_Spawn}};
+	"Public_VehicleSmokeShells" addPublicVariableEventHandler {{[Func_System_SpawnSmoke, [_x]] call Func_Common_Spawn } forEach (_this select 1)};
 
 
 
@@ -464,7 +464,7 @@ onEachFrame
 
 
 	//[] spawn Func_Client_PlayerRespawn;
-	[] spawn Func_Client_MapIntro;
+	[Func_Client_MapIntro, []] call Func_Common_Spawn;
 	[] call Func_Client_CreateSensors;
 
 	Dialog_RespawnDeathTime=-(Config_SpawnDelay-Config_GameStartDelay)+time;//game starts in Config_GameStartDelay after player join it
@@ -473,9 +473,9 @@ onEachFrame
 	if (Localshowintro) then {sleep 36.1} else {sleep 7.0;};
 
 	//Run client main thread
-	[] spawn Func_Client_MainThread;
-	[] spawn Func_Client_LimitExternalView;
-	[] spawn Func_Client_CheckPointCaptured;
+	[Func_Client_MainThread, []] call Func_Common_Spawn;
+	[Func_Client_LimitExternalView, []] call Func_Common_Spawn;
+	[Func_Client_CheckPointCaptured, []] call Func_Common_Spawn;
 
 	//Send command to the server to renew marker colors
 	Public_PlayerConnected=player;
@@ -484,4 +484,5 @@ onEachFrame
 	if (Localshowintro) then {sleep 5.0} else {sleep 0.0;};
 	//Show Credits
 	titleRsc ["trailer","plain"];
-};
+}
+] call Func_Common_Spawn;

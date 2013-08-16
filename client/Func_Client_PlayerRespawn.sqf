@@ -84,7 +84,7 @@ Local_PlayerVehicle=player;
 //add some useractions to player
 [] call Func_Client_UpdateUserActions;
 
-[[position player select 0,position player select 1,4],(getDir player)-30,2,16,8] spawn Func_Client_CreateRotatingCamera;
+[Func_Client_CreateRotatingCamera, [[position player select 0,position player select 1,4],(getDir player)-30,2,16,8]] call Func_Common_Spawn;
 
 //give player his default loadout and subtract its cost from player's funds
 

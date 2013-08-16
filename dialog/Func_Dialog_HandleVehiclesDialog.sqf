@@ -139,7 +139,7 @@ while {alive player && dialog} do
 				[_currentItem,_vehiclecost,_currentTime,12] call Func_Client_CreateCustomVehicle;
 
 				-_currentCost call Func_Client_ChangePlayerFunds;
-				[] spawn { ctrlEnable [3710,false]; sleep 1; ctrlEnable [3710,true]; };
+				[{ ctrlEnable [3710,false]; sleep 1; ctrlEnable [3710,true]; }, []] call Func_Common_Spawn;
 				[_currentName,localize "STR_HINT_VehicleBought",_currentPicture,1.35] call Func_Client_ShowCustomMessage;
 			}
 			else

@@ -82,11 +82,12 @@ if ((time > _flares_last_time) && (_flares_left > 0)) then
 		sleep 0.2;
 	};
 
-	(_emmiters + _flares) spawn
+	[
 	{
 		sleep 4.5 + random 1;
 		{deletevehicle _x} foreach _this;
-	};
+	},
+	(_emmiters + _flares)] call Func_Common_Spawn;
 }
 else
 {

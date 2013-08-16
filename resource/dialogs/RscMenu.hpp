@@ -2,7 +2,7 @@
 class RscMenu {
 	movingEnable = 1;
 	idd = -1;
-	onLoad = "_this spawn Func_Dialog_HandleMainMenu";
+	onLoad = "[Func_Dialog_HandleMainMenu, _this] call Func_Common_Spawn";
 	
 	class controlsBackground {
 	
