@@ -1454,7 +1454,14 @@ PERF_BEGIN("_set_weapons_list")
                     _weapons_list_control lnbSetData  [[_a, 0], _weapon_config_name];
                     _weapons_list_control lnbSetValue [[_a, 0], _a];
 
-                    _tooltip = if (([_weapon_config_name] call Func_Client_IsBackpack) || ([_weapon_config_name] call _is_vest) || ([_weapon_config_name] call _is_uniform)) then { format ["Mass: %1; Capacity: %2", [_weapon_config_name] call Func_Client_GetItemsMass, _weapon_config_name call Func_Client_GetContainerMaximumLoad] } else { format ["Mass: %1", [_weapon_config_name] call Func_Client_GetItemsMass] };
+                    _tooltip = if (([_weapon_config_name] call Func_Client_IsBackpack) || ([_weapon_config_name] call _is_vest) || ([_weapon_config_name] call _is_uniform)) then
+					{
+						format ["Mass: %1kg; Capacity: %2kg", ([_weapon_config_name] call Func_Client_GetItemsMass) / 20, (_weapon_config_name call Func_Client_GetContainerMaximumLoad) / 20]
+					}
+					else
+					{
+						format ["Mass: %1kg", ([_weapon_config_name] call Func_Client_GetItemsMass) / 20]
+					};
                     _weapons_list_control lbSetTooltip [_a, _tooltip];
 
                     if (_weapon_config_name == _current_weapon) then
