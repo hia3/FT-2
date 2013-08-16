@@ -1,14 +1,10 @@
 /**/
-_time=Param_RoundDuration;
-while{(_time > 0) && !Global_GameEnded} do
-{
-	_time=Param_RoundDuration-time;
-	estimatedTimeLeft(_time);
-	sleep 10;
-};
 
-Global_GameEnded=true;
-"Global_GameEnded" call Func_Common_PublicVariable;
+while {!Global_GameEnded} do
+{
+	estimatedTimeLeft (Param_RoundDuration-time);
+	sleep 60;
+};
 
 sleep Config_GameEndDelay;
 
