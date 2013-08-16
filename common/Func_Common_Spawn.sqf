@@ -28,7 +28,7 @@ _code_str = [str _code, 0, 10] call BIS_fnc_trimString;
 
 if (1 == (count _this)) then
 {
-	diag_log ["spawn: ", _code];
+	//diag_log ["spawn: ", _code];
 
 	_result = _code spawn { call _this };
 }
@@ -36,7 +36,7 @@ else
 {
 	_params = _this select 1;
 
-	diag_log ["spawn: ", _code, _params];
+	//diag_log ["spawn: ", _code, _params];
 
 	_result = _params spawn _code;
 };
