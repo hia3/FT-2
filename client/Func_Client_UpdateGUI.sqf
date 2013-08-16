@@ -141,7 +141,8 @@ _arms ctrlCommit 0;
 _legs ctrlCommit 0;
 _teamspeak ctrlCommit 0;
 
-	_gps_map ctrlMapAnimAdd [0,((speed Local_PlayerVehicle)+8)/200,_position];
+	_veh_real_speed = [0, 0, 0] distance (velocity Local_PlayerVehicle);
+	_gps_map ctrlMapAnimAdd [0,(_veh_real_speed+8)/200,_position];
 	ctrlMapAnimCommit _gps_map;
 	
 //some auxiliary variables
@@ -173,8 +174,8 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then
 		{
 			//GPS on
-			
-			_gps_map ctrlMapAnimAdd [0.5, ((speed Local_PlayerVehicle) + 12) / 200, _position];
+			_veh_real_speed = [0, 0, 0] distance (velocity Local_PlayerVehicle);
+			_gps_map ctrlMapAnimAdd [0.5, (_veh_real_speed + 12) / 200, _position];
 			ctrlMapAnimCommit _gps_map;
 			
 			_gps_grid ctrlSetText     (mapGridPosition Local_PlayerVehicle);
