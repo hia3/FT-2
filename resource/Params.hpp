@@ -78,7 +78,7 @@
 		title="$STR_P_Halo";
 		values[]={0,1};
 		texts[]={$STR_P_Disable,$STR_P_Enable};
-		default=0;
+		default=1;
 	};		
 	// params array 9
 	class Grass
