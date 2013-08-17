@@ -416,7 +416,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 			{
 				player setVariable ["ts_message_timing",[_timing+Local_TS_duration,_timing+Local_TS_period]];
 			};
-			if (((player getVariable "ts_message_timing") select 0) > _timing) then
+			if ((((player getVariable "ts_message_timing") select 0) > _timing) && false) then
 			{
 				_teamspeak ctrlSetText "pic\ts_warning.paa";
 			}else{
