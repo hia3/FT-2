@@ -1,10 +1,11 @@
 	private["_display","_tip","_map","_markers","_markerIndex","_markerName","_spawn","_ta","_delay","_index","_state","_cost","_position","_respawnText","_funds"];
-	
+
 	disableSerialization;
 	_display=_this select 0;
 
-	_tip = _display DisplayCtrl 15000;
-	_map = _display DisplayCtrl 15001;
+	_tip = _display displayCtrl 15000;
+	_map = _display displayCtrl 15001;
+	_respawn_button = _display displayCtrl 3904;
 
 	_last_tip_time = time;
 	_tip_shown     = true;
@@ -16,7 +17,7 @@
 	};
 	_tip_indexes = _tip_indexes call BIS_fnc_arrayShuffle;
 	_tip_current_index = 0;
-	
+
 	//create yellow round markers on available spawn-positions
 	_markers = [];
 	_markerIndex = 0;
@@ -29,27 +30,53 @@
 		_markerName setMarkerSizeLocal [1,1];
 		_markerIndex = _markerIndex + 1;
 	} forEach Local_FriendlySpawnPoints;
-	
+
 	//get a desired respawn marker
-	_spawn=(Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 0;	
-	
+	_spawn=(Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 0;
+
 	_map ctrlMapAnimAdd [2,0.16,getMarkerPos _spawn];
 	ctrlMapAnimCommit _map;
-	
-	//create a rotating yellow marker on the desired spawn position	
+
+	//create a rotating yellow marker on the desired spawn position
 	_ta=[Func_Dialog_MarkerAnim, ["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"]] call Func_Common_Spawn;
-	
+
 	//disable "respawn" button
 	ctrlEnable [3904,false];
-	
+
 	_cost=FT2_WF_Logic getVariable "currentCost";
-	
+
 	//main cycle.. until player presses "respawn" button
-	Dialog_RespawnState="idle";		
+	Dialog_RespawnState="idle";
 	_state=Dialog_RespawnState;
+
+	Dialog_RespawnProne = false;
+	_respawn_button ctrlSetText (localize "STR_DLG_RespawnSpawn");
+	Dialog_RespawnKeyDown = nil;
+	Dialog_RespawnKeyUp   = nil;
 
 	while {(dialog) && ((_state=="idle") || (_state=="reviving")) && (alive player)} do
 	{
+		if !(isNil "Dialog_RespawnKeyDown") then
+		{
+			if ((Dialog_RespawnKeyDown select 1) == 42) then
+			{
+				Dialog_RespawnProne = true;
+				_respawn_button ctrlSetText (localize "STR_DLG_RespawnSpawnProne");
+			};
+			Dialog_RespawnKeyDown = nil;
+		};
+
+		if !(isNil "Dialog_RespawnKeyUp") then
+		{
+			if ((Dialog_RespawnKeyUp select 1) == 42) then
+			{
+				Dialog_RespawnProne = false;
+				_respawn_button ctrlSetText (localize "STR_DLG_RespawnSpawn");
+			};
+			Dialog_RespawnKeyUp = nil;
+		};
+
+
 		if ((time - _last_tip_time < 3) && _tip_shown) then
 		{
 			_tip_shown = false;
@@ -83,58 +110,58 @@
 		};
 
 		if (!dialog) exitWith {};
-		
+
 		_state=Dialog_RespawnState;
 		switch (_state) do
 		{
 			//waiting and timing mode.. process respawn
 			//countdown and respawn point selection
 			case "idle":
-			{	
+			{
 				//spawn point selection
-				if ((FT2_WF_Logic getVariable "MouseButtonUp") == 0) then 
-				{			
+				if ((FT2_WF_Logic getVariable "MouseButtonUp") == 0) then
+				{
 					FT2_WF_Logic setVariable ["MouseButtonUp",-1];
-					if (count Local_FriendlySpawnPoints > 1) then 
+					if (count Local_FriendlySpawnPoints > 1) then
 					{
 						_position=_map PosScreenToWorld (FT2_WF_Logic getVariable "MousePos");
-						
-						_index=[_position,Local_FriendlySpawnPoints] Call Func_Dialog_SortByDistance;				
-						if ((getMarkerPos ((Local_FriendlySpawnPoints select _index) select 0)) distance _position < 100) then 
+
+						_index=[_position,Local_FriendlySpawnPoints] Call Func_Dialog_SortByDistance;
+						if ((getMarkerPos ((Local_FriendlySpawnPoints select _index) select 0)) distance _position < 100) then
 						{
 							_spawn=(Local_FriendlySpawnPoints select _index) select 0;
-							
+
 							Dialog_RespawnCurrentPoint=_index;
 							Dialog_RespawnMarkerAnimation=false;
 							terminate _ta;
 							deleteMarkerLocal "TempAnim";
-							_ta=[Func_Dialog_MarkerAnim, ["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"]] call Func_Common_Spawn;																			
+							_ta=[Func_Dialog_MarkerAnim, ["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"]] call Func_Common_Spawn;
 						};
 					};
 				};
-				
+
 				//replace yellow markers on moving MHQ`s
 				_markerIndex = 0;
-				{				
-					(_markers select _markerIndex) setMarkerPosLocal getMarkerPos (_x select 0);				
+				{
+					(_markers select _markerIndex) setMarkerPosLocal getMarkerPos (_x select 0);
 					_markerIndex = _markerIndex + 1;
 				} forEach Local_FriendlySpawnPoints;
-				
+
 				//respawn countdown
 				_respawnText="";
 				_delay=Config_SpawnDelay-time+Dialog_RespawnDeathTime;
-				
+
 				if (_delay > 0) then
 				{
 					//respawndelay not passed yet
-					_respawnText=format[localize "STR_DLG_RespawnDelay",floor _delay];			
-				};						
-				ctrlSetText[15003, _respawnText];	
-				
-				_funds=[] call Func_Client_GetPlayerFunds;		
+					_respawnText=format[localize "STR_DLG_RespawnDelay",floor _delay];
+				};
+				ctrlSetText[15003, _respawnText];
+
+				_funds=[] call Func_Client_GetPlayerFunds;
 				ctrlSetText[15002, format [localize "STR_DLG_RespawnPoint",(Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 1]];
-				ctrlSetText[15004, format [localize "STR_DLG_RespawnFunds",_funds]];		
-				ctrlSetText[15005, format [localize "STR_DLG_RespawnCost",_cost]];		
+				ctrlSetText[15004, format [localize "STR_DLG_RespawnFunds",_funds]];
+				ctrlSetText[15005, format [localize "STR_DLG_RespawnCost",_cost]];
 
 				//enable "respawn" button only if
 				//-respawn delay passed
@@ -160,10 +187,11 @@
 			//don`t need to do anything
 			case "readytospawn":
 			{
-				
+
 			};
 		};
-		sleep 0.5;		
+
+		sleep 0.5;
 	};
 	//deleting yellow markers
 	{deleteMarkerLocal _x} forEach _markers;

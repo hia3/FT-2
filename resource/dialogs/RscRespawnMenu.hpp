@@ -5,6 +5,9 @@ class RscRespawnMenu {
 	onLoad = "[Func_Dialog_HandleRespawnDialog, _this] call Func_Common_Spawn";
 	onUnload = "[Func_Dialog_RespawnDialogClosed, _this] call Func_Common_Spawn";
 
+	onKeyDown = "Dialog_RespawnKeyDown = _this";
+	onKeyUp   = "Dialog_RespawnKeyUp   = _this";
+
 	class controlsBackground {
 		class Mainback : RscText {
 			colorBackground[] = {0, 0, 0, 0.700000};
@@ -84,16 +87,16 @@ class RscRespawnMenu {
 		};
 		class RespawnButton : RscShortcutButton {
 			idc = 3904;
-			x = 0.7;
+			x = 0.65;
 			y = 0.79;
-			w = 0.185;
+			w = 0.23;
 			h = 0.052;
 			text = $STR_DLG_RespawnSpawn;
 			action = "Dialog_RespawnState='readytospawn'";
 		};
 		class LoadoutsButton : RscShortcutButton {
 			idc = 3905;
-			x = 0.5;
+			x = 0.45;
 			y = 0.79;
 			w = 0.185;
 			h = 0.052;

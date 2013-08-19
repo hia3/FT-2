@@ -144,6 +144,31 @@ if (alive player) then
 			_position=[_MarkerBasePos select 0,_MarkerBasePos select 1,(Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 2] call Func_Client_CalculateSpawnPos;
 			player setPos _position;
 			player setDir (random 360);
+			
+			if !(isNil "Dialog_RespawnProne") then
+			{
+				if (Dialog_RespawnProne) then
+				{
+					private ["_animation"];
+					_animation = 
+					if ((primaryWeapon player) != "") then
+					{
+						"AidlPpneMstpSrasWrflDnon_AI";
+					}
+					else
+					{
+						if ((handgunWeapon player) != "") then
+						{
+							"AidlPpneMstpSrasWpstDnon_AI"
+						}
+						else
+						{
+							"AidlPpneMstpSnonWnonDnon_AI"
+						};
+					};
+					player switchMove _animation;
+				};
+			};
 		};
 //		player playMove "aidlpercmstpsraswrfldnon_idlesteady01n";
 	}else{
