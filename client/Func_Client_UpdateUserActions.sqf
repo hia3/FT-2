@@ -22,5 +22,5 @@ _pa10 = 1;
 if (ismultiplayer) then {_pa10 = (paramsArray select 10);};
 if (_pa10 == 1) then
 {
-	player addAction ["<t color='#4040FF'>"+(localize "STR_ACT_MHQ_Bicycle")+"</t>","client\Script_Client_Actions.sqf",[35],98,false,true,"", "((vehicle player)==player) && ((vehicle _target)==_target) && (({((_target distance _x) < 10) && ((_target distance Local_FriendlyBaseFlag)>Config_RespawnSafeZone)} count (call Local_FriendlyMHQ)) > 0)"];
+	player addAction ["<t color='#4040FF'>"+(localize "STR_ACT_MHQ_Bicycle")+"</t>","client\Script_Client_Actions.sqf",[35],98,false,true,"", "((vehicle player)==player) && ((vehicle _target)==_target) && (({((_target distance _x) < 10) && ((_target distance Local_FriendlyBaseFlag)>Config_RespawnSafeZone) && (alive _x)} count (call Local_FriendlyMHQ)) > 0)"];
 };
