@@ -1,4 +1,4 @@
-//function performes increasing of player funds once a minute
+//function increases player funds once a minute
 
 if (((floor (time mod 60))==0) && (Local_LastIncomeTime<time)) then 
 {
