@@ -109,6 +109,8 @@ Local_LaserSpots=[];
 
 Local_KeyPressedForward = false;
 
+Local_LogInfoStrings = [];
+
 Func_Client_AddIncome=compile preprocessFile ("client\Func_Client_AddIncome.sqf");
 Func_Client_AddLockActions=compile preprocessFile ("client\Func_Client_AddLockActions.sqf");
 Func_Client_AproachingRespawnArea=compile preprocessFile ("client\Func_Client_AproachingRespawnArea.sqf");

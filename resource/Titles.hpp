@@ -12,10 +12,19 @@ class RscTitles
 		duration=10000;
 		name="gps";
 
-		controls[]={"txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","OptionsIcon7","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
+		controls[]={"log_info","txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","OptionsIcon7","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
 
 		onload="uiNamespace setVariable['GUI',_this select 0]; [Func_Client_UpdateGUI, []] call Func_Common_Spawn";
 
+		class log_info : RscStructuredText
+		{
+			idc=6002;
+			x=0.2;
+			y=SafeZoneY + SafeZoneH;
+			w=0.8;
+			h=0.2;
+		};
+		
 		class txt_dwn:RscStructuredTextB_ext
 		{
 			idc=6003;

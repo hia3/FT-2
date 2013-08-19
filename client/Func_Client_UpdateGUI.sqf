@@ -13,7 +13,10 @@ Local_GUIRestart=false;
 _position=getPos Local_PlayerVehicle;
 
 //START: GPS, SCORE, FUNDS, PLAYERS
-_lowertext=_display displayCtrl 6003;
+_log_info  = _display displayCtrl 6002;
+_log_info_down = true;
+
+_lowertext = _display displayCtrl 6003;
 
 	_gps_map                   = _display displayCtrl 6039;
 	_gps_background            = _display displayCtrl 6040;
@@ -152,6 +155,7 @@ _TimerO=0;
 _TimerP=0;
 _TimerD=0;
 _TimerT=0;
+_TimerL=0;
 _lastdam=0;
 _playerInVehicle=false;
 _updatedam=true;
@@ -424,8 +428,41 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 			};
 		};
 	};
-
 	//---TS-MESSAGE-END---
+
+	if (((count Local_LogInfoStrings) == 0) && !_log_info_down) then
+	{
+		_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH];
+		_log_info_down = true;
+		_log_info ctrlCommit 0;
+	}
+	else
+	{
+		if (((count Local_LogInfoStrings) != 0) && _log_info_down) then
+		{
+			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.2];
+			_log_info_down = false;
+			_log_info ctrlCommit 3;
+		};
+	};
+
+	if(_TimerL<=_timing) then
+	{
+		_TimerL = _TimerL + 3;
+
+		if ((ctrlCommitted _log_info) && (!_log_info_down)) then
+		{
+			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.2 + (ctrlTextHeight _log_info) / (count Local_LogInfoStrings) - 0.01];
+			_log_info ctrlCommit 0;
+			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.2];
+			_log_info ctrlCommit 1;
+
+			[Local_LogInfoStrings] call BIS_fnc_arrayShift;
+		};
+	};
+
+	_log_info ctrlSetStructuredText composeText Local_LogInfoStrings;
+
 	sleep 0.35;
 };
 

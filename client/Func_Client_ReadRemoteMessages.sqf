@@ -152,4 +152,44 @@ switch (_msg) do
 			};
 		};
 	};
+	
+	case "someone_killed": // [_victim, _damage_src, _damage_val]
+	{	
+		private ["_victim", "_damage_src", "_damage_val", "_victim_name", "_unit_color", "_text"];
+		_victim     = _arg select 0;
+		_damage_src = _arg select 1;
+		_damage_val = _arg select 2;
+		
+		_victim_name = if (_victim isKindOf "Man") then { _victim getVariable "playername" } else { getText(configFile >> "CfgVehicles" >> (typeOf _victim) >> "displayName") };
+		
+		_unit_color = 
+		{
+			switch (_this getVariable "ft2_wf_side") do
+			{
+				case east:
+				{
+					"#ff0000"
+				};
+				case west:
+				{
+					"#0000ff"
+				};
+				default
+				{
+					"#00ff00"
+				};
+			};
+		};
+		
+		_text = format ["<t color='%1'>%2</t> was killed by [", _victim call _unit_color, _victim_name];
+		
+		for "_i" from 0 to (count _damage_src) - 1 do
+		{
+			_text = _text + format ["<t color='%1'>%2</t> (%3)%4", (_damage_src select _i) call _unit_color, (_damage_src select _i) getVariable "playername", str (_damage_val select _i) + "%", if (((count _damage_src) - 1) == _i) then {""} else {", "}];
+		};
+		
+		_text = _text + "]<br/>";
+	
+		Local_LogInfoStrings set [count Local_LogInfoStrings, parseText _text];
+	};
 };

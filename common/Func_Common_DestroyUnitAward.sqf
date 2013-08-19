@@ -28,6 +28,8 @@ if (isServer) then
 		};
 	};
 
+	_damage_percent = [];
+	
 	for "_i" from 0 to (count _damage_src) - 1 do
 	{
 		_attacker        = _damage_src select _i;
@@ -41,6 +43,7 @@ if (isServer) then
 			if (_victim_owner != _attacker_name) then
 			{
 				_attacker_award  = _full_award * (_attacker_damage / _full_damage);
+				_damage_percent set [_i, floor (100 * _attacker_damage / _full_damage)];
 
 				if (_attacker_side == _victim_side) then
 				{
@@ -48,7 +51,7 @@ if (isServer) then
 				}
 				else
 				{
-					if (!(_attacker getVariable "joied_ts")) then
+					if (!(_attacker getVariable ["joied_ts", true])) then
 					{
 						_attacker_award = _attacker_award * Config_TS3FundsModifier;
 					};
@@ -62,6 +65,8 @@ if (isServer) then
 
 				_message = if (_victim isKindOf "Man") then { "message_kill_infantry" } else { "message_destroy_vehicle" };
 				[_message, _attacker_award, _attacker] call Func_Common_SendRemoteCommand;
+				
+				["someone_killed", [_victim, _damage_src, _damage_percent], true] call Func_Common_SendRemoteCommand;
 			};
 		};
 	};
