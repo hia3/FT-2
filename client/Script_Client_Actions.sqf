@@ -42,7 +42,25 @@ switch((_this select 3)select 0)do
 	};
 	case 7://bail out from a locked vehicle
 	{
-		player action ["eject",Local_PlayerVehicle];
+		if (Local_PlayerVehicle isKindOf "Air") then
+		{
+			private ["_pos", "_vel", "_dir", "_d"];
+			
+			_pos = getPos Local_PlayerVehicle;
+			_vel = velocity Local_PlayerVehicle;
+			
+			_dir = getDir Local_PlayerVehicle;
+			
+			_d = 1;
+			
+			player action ["eject",Local_PlayerVehicle];
+			player setPos [(_pos select 0) - _d * (_vel select 0), (_pos select 1) - _d * (_vel select 1), (_pos select 2) - _d * (_vel select 2)];
+			player setDir _dir;
+		}
+		else
+		{
+			player action ["eject",Local_PlayerVehicle];
+		};
 	};
 	case 8://repair a vehicle near repair truck
 	{
