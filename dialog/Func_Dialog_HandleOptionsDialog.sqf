@@ -267,13 +267,22 @@ while {alive player && dialog} do
 		_pos=getposATL player;
 		_dir=getDir player;
 
-		_veh=(nearestObjects[player,["LandVehicle","Air","Ship"],8] select 0);
-		if (!(isNull _veh) && (_veh!=player) && (({alive _x} count crew _veh)==0)) then
+		_nearest_objects = nearestObjects[player,["LandVehicle","Air","Ship"],8];
+		
+		if ((count _nearest_objects) == 0) then
 		{
-			_pic=getText(configFile>>"cfgVehicles">>(typeOf _veh)>>"picture");
-			_name=getText(configFile>>"cfgVehicles">>(typeOf _veh)>>"displayName");
-			[_name,localize "STR_HINT_VehFliped",_pic,1.0] call Func_Client_ShowCustomMessage;
-			_veh setPos getPos _veh;
+			[localize "STR_HINT_Warning",localize "STR_HINT_VehNotFliped","pic\no.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage;
+		}
+		else
+		{		
+			_veh=(_nearest_objects select 0);
+			if (!(isNull _veh) && (_veh!=player) && (({alive _x} count crew _veh)==0)) then
+			{
+				_pic=getText(configFile>>"cfgVehicles">>(typeOf _veh)>>"picture");
+				_name=getText(configFile>>"cfgVehicles">>(typeOf _veh)>>"displayName");
+				[_name,localize "STR_HINT_VehFliped",_pic,1.0] call Func_Client_ShowCustomMessage;
+				_veh setPos getPos _veh;
+			};
 		};
 	};
 

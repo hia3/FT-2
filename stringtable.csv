@@ -223,6 +223,7 @@ STR_HINT_Heavy,"Vehicle is too heavy for this chopper","Техника слиш�
 STR_HINT_Lost,"Cargo winch has broken!","Грузовой трос оборвался!"
 STR_HINT_CrewPush,"Crew pushed out","Экипаж высажен"
 STR_HINT_VehFliped,"Vehicle overturned","Техника перевернута"
+STR_HINT_VehNotFliped,"No vehicles nearby","Нет техники поблизости"
 STR_HINT_ParaOpen,"Parachute","Парашют"
 STR_HINT_ReviveEnemy,"You can't revive enemy units","Вы не можете реанимировать вражеских бойцов"
 STR_HINT_MGMove,"Moving weapon..<br/><br/>Notice: you should move very slowly<br/>[Shift+W/S/A/D] default","Переноска установки..<br/><br/>Вы должны двигаться медленно<br/>[Shift+W/S/A/D] по-умолчанию",""
