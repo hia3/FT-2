@@ -42,7 +42,7 @@ Local_PlayerVehicle setVariable ["FT2_WF_ACT_Reammo",_action];
 _action=Local_PlayerVehicle addAction ["<t color='#4C4FFF'>"+(localize "STR_ACT_Refuel")+"</t>","client\Script_Client_Actions.sqf",[10],94,false,true,"", "(alive player) && (local _target) && ((speed _target)<5) && (((getPosATL _target select 2) < 5) || (_target isKindOf 'StaticWeapon')) && (({((_target distance _x) < Config_ServiceVehicleRange) && (alive _x)} count nearestObjects [_target,Local_FriendlyRefuelVehicleTypes,Config_ServiceVehicleRange]>0) || ((_target distance Local_FriendlyBaseFlag)<Config_RespawnSize)) && !(Local_TechnicalService)"];
 Local_PlayerVehicle setVariable ["FT2_WF_ACT_Refuel",_action];
 
-_action=Local_PlayerVehicle addAction ["<t color='#FF4A3D'>"+(localize "STR_ACT_BailOut")+"</t>","client\Script_Client_Actions.sqf",[7],100,false,true,"", "(alive _target) && ((locked _target)==2) && !(_target isKindOf 'Air')"];
+_action=Local_PlayerVehicle addAction ["<t color='#FF4A3D'>"+(localize "STR_ACT_BailOut")+"</t>","client\Script_Client_Actions.sqf",[7],100,false,true,"", "(alive _target) && ((locked _target)==2)"];
 Local_PlayerVehicle setVariable ["FT2_WF_ACT_BailOut",_action];
 
 _action=Local_PlayerVehicle addAction ["<t color='#FFF37A'>"+(localize "STR_ACT_TakeOff")+"</t>","client\Script_Client_Actions.sqf",[11],99,false,true,"", "(alive player)&& ((speed _target)<10) && ((getPosATL _target select 2) < 5) && (player==(driver _target)) && (_target isKindOf 'Plane') && !(Local_TechnicalService) && (isEngineOn _target)"];
