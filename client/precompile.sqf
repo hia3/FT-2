@@ -35,6 +35,7 @@ Local_CurrentPlayers=[];
 Local_CurrentPlayersTS=[];
 Local_PlayerMines=[];
 Local_PlayerAttachedMines=[];
+Local_KnifedVictimNetId=[];
 Local_TaskSensors=[];
 Local_TrackedShells=0;
 Local_LastWarningTimeAproach=0;

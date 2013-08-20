@@ -5,8 +5,11 @@ switch((_this select 3)select 0)do
 		_killer = _this select 0;
 		_pos=getposATL _killer;
 		_victim=nearestObject [[(_pos select 0)+1.5*sin(getDir _killer),(_pos select 1)+1.5*cos(getDir _killer), _pos select 2],"Man"];
+
 		if ((_victim != _killer) && ((side _victim) == Local_EnemySide)) then
 		{
+			Local_KnifedVictimNetId set [count Local_KnifedVictimNetId, netId _victim];
+
 			playSound3D ["A3\sounds_f\characters\human-sfx\Person0\P0_hit_01.wss", _victim];
 			_victim setDamage 1;
 
@@ -45,14 +48,14 @@ switch((_this select 3)select 0)do
 		if (Local_PlayerVehicle isKindOf "Air") then
 		{
 			private ["_pos", "_vel", "_dir", "_d"];
-			
+
 			_pos = getPos Local_PlayerVehicle;
 			_vel = velocity Local_PlayerVehicle;
-			
+
 			_dir = getDir Local_PlayerVehicle;
-			
+
 			_d = 1;
-			
+
 			player action ["eject",Local_PlayerVehicle];
 			player setPos [(_pos select 0) - _d * (_vel select 0), (_pos select 1) - _d * (_vel select 1), (_pos select 2) - _d * (_vel select 2)];
 			player setDir _dir;
