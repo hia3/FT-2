@@ -1,6 +1,5 @@
 /**/
 
-Global_GameEnded=false;
 Server_RegisteredObjects=[];
 
 Func_Server_Animals=compile preprocessFile ("server\Func_Server_Animals.sqf");
