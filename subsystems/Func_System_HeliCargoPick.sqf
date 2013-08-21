@@ -55,7 +55,7 @@ while{(System_HeliCargoTransportState==1) && (alive _veh) && ((_veh emptyPositio
 	{
 		_cargo setdir getdir _veh;
 		_cargo setposATL [(_pos select 0),(_pos select 1),(_pos select 2)-15];		
-		_cargo setvelocity [(_velocity select 0),(_velocity select 1),(_velocity select 2)];
+		_cargo setvelocity _velocity;
 	}
  	else
  	{
