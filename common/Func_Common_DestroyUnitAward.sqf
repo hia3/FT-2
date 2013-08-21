@@ -11,6 +11,9 @@ if (isServer) then
 	if (_victim in (call Config_EastMHQ)) then { _victim_side = east };
 	if (_victim in (call Config_WestMHQ)) then { _victim_side = west };
 
+	_damage_percent = [];
+	_damage_source  = [];
+
 	_full_damage = 0;
 	for "_i" from 0 to (count _damage_src) - 1 do
 	{
@@ -28,8 +31,6 @@ if (isServer) then
 		};
 	};
 
-	_damage_percent = [];
-	
 	for "_i" from 0 to (count _damage_src) - 1 do
 	{
 		_attacker        = _damage_src select _i;
@@ -44,6 +45,7 @@ if (isServer) then
 			{
 				_attacker_award  = _full_award * (_attacker_damage / _full_damage);
 				_damage_percent set [_i, floor (100 * _attacker_damage / _full_damage)];
+				_damage_source  set [_i, _attacker];
 
 				if (_attacker_side == _victim_side) then
 				{
@@ -65,11 +67,11 @@ if (isServer) then
 
 				_message = if (_victim isKindOf "Man") then { "message_kill_infantry" } else { "message_destroy_vehicle" };
 				[_message, _attacker_award, _attacker] call Func_Common_SendRemoteCommand;
-				
-				["someone_killed", [_victim, _damage_src, _damage_percent], true] call Func_Common_SendRemoteCommand;
 			};
 		};
 	};
+	
+	["someone_killed", [_victim, _damage_source, _damage_percent], true] call Func_Common_SendRemoteCommand;
 
 	_victim setVariable ["damage_src", []];
 	_victim setVariable ["damage_val", []];
