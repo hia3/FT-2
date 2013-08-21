@@ -191,17 +191,32 @@ onEachFrame
 		{
 			if ((side _x == side player) && (_x != player)) then
 			{
-				private ["_pos", "_distance", "_color", "_picture"];
+				private ["_pos", "_text", "_screen", "_color", "_text_size", "_picture"];
 
-				_pos = _x modelToWorld (_x selectionposition "head");
+				_pos = _x modelToWorld (_x selectionPosition "head");
 				_pos = [_pos select 0, _pos select 1, 0.5 + (_pos select 2)];
 
-				_distance = round (player distance _x);
+				_text = (str (round (player distance _x))) + "m";
+				_text_size = 0.02;
+
+				_screen = worldToScreen _pos;
+				if ((count _screen) > 0) then
+				{
+					private ["_screen_distance"];
+
+					_screen_distance = [_screen select 0, _screen select 1, 0] distance [0.5, 0.5, 0];
+
+					if (_screen_distance < 0.05) then
+					{
+						_text = (_x getVariable ["playername", ""]) + " " + _text;
+						_text_size = (0.07 - _screen_distance) min 0.04;
+					};
+				};
 
 				_color   = if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] };
 				_picture = if (_x in Local_CurrentPlayersTS) then { "\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa" } else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
 
-				drawIcon3D [_picture, _color, _pos, 0.5, 0.5, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
+				drawIcon3D [_picture, _color, _pos, 0.5, 0.5, 0, _text, 1, _text_size, "TahomaB"];
 			};
 		} forEach (if (Dialog_ScreenMarkersType == 1) then { units player } else { playableUnits });
 
@@ -338,6 +353,7 @@ onEachFrame
 
 	showCinemaBorder false;
 	setViewDistance Local_ViewDistance;
+	setObjectViewDistance [Local_ViewDistance * 0.8, Local_ViewDistance * 0.8, Local_ViewDistance * 0.8];
 	if (Local_Grass==0) then
 	{
 		setTerrainGrid 50;
