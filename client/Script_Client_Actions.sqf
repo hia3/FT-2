@@ -13,7 +13,7 @@ switch((_this select 3)select 0)do
 			playSound3D ["A3\sounds_f\characters\human-sfx\Person0\P0_hit_01.wss", _victim];
 			_victim setDamage 1;
 
-			_award = (Config_AwardKillPlayerValue*3);
+			_award = (Config_AwardKillPlayerValue*2);
 			_killer addScore 3;
 
 			_award call Func_Client_ChangePlayerFunds;
