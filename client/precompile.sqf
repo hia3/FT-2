@@ -353,7 +353,7 @@ onEachFrame
 
 	showCinemaBorder false;
 	setViewDistance Local_ViewDistance;
-	setObjectViewDistance [Local_ViewDistance * 0.8, Local_ViewDistance * 0.8, Local_ViewDistance * 0.8];
+	setObjectViewDistance [Local_ViewDistance * 0.8, Local_ViewDistance * 0.8];
 	if (Local_Grass==0) then
 	{
 		setTerrainGrid 50;
