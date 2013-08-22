@@ -15,6 +15,7 @@ Halo_Marker_Init =
 Halo_Marker_Remove = 
 {
 	deleteMarker format["%1_Halo", Local_PlayerName];
+	onMapSingleClick "";
 };
 
 Halo_Jump_F = {
