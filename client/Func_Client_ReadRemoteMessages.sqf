@@ -6,52 +6,36 @@ switch (_msg) do
 {
 	case "message_kill_infantry":
 	{
-		if (_arg != 0) then
+		if (_arg < 0) then
 		{
-			if (_arg > 0) then
-			{
-				player groupChat format[localize "STR_MES_KIlledManE", _arg];
-			}
-			else
-			{
-				player groupChat format[localize "STR_MES_KIlledManF", _arg];
-				playSound "error_sound";
-			};
+			playSound "error_sound";
 		};
 	};
 
 	case "message_destroy_vehicle":
 	{
-		if (_arg != 0) then
+		if (_arg < 0) then
 		{
-			if (_arg > 0) then
-			{
-				player groupChat format[localize "STR_MES_DestroyedVehE", _arg];
-			}
-			else
-			{
-				player groupChat format[localize "STR_MES_DestroyedVehF", _arg];
-				playSound "error_sound";
-			};
+			playSound "error_sound";
 		};
 	};
-	
+
 	case "message_transfer_funds":
 	{
 		private ["_sponsor", "_money"];
 		_sponsor = _arg select 0;
 		_money   = _arg select 1;
-		
+
 		player groupChat format[localize "STR_MES_FundsTransfered", _sponsor, _money];
 		playSound "hint_sound";
 	};
-	
+
 	case "message_group":
 	{
 		private ["_is_joined", "_member"];
 		_is_joined = _arg select 0;
 		_member    = _arg select 1;
-		
+
 		if (_is_joined) then
 		{
 			player groupChat format[localize "STR_MES_JoinedGroup", _member];
@@ -61,16 +45,16 @@ switch (_msg) do
 			player groupChat format[localize "STR_MES_LeftGroup", _member];
 		};
 	};
-	
+
 	case "message_knife":
 	{
 		player commandChat format[localize "STR_MES_KIlledKnife", _arg];
 	};
-	
+
 	case "message_blast":
 	{
 		player commandChat format[localize "STR_MES_BackBlast", _arg];
-		
+
 		[
 		{
 			"DynamicBlur" ppEffectEnable true;
@@ -84,11 +68,11 @@ switch (_msg) do
 		}
 		] call Func_Common_Spawn;
 	};
-	
+
 	case "message_pushcrew":
 	{
 		player commandChat format[localize "STR_MES_Push", _arg];
-		
+
 		[
 		{
 			private ["_pos","_ang","_dir"];
@@ -115,27 +99,27 @@ switch (_msg) do
 		}
 		] call Func_Common_Spawn;
 	};
-	
+
 	case "message_grenadeinside":
 	{
 		Local_PlayerVehicle vehicleRadio "grenade_in_tank";
 	};
-	
+
 	case "message_grenadeinexploded":
 	{
 		player commandChat format[localize "STR_MES_GrenadeInside", _arg];
 	};
-	
+
 	case "message_healedteammate":
 	{
 		player groupChat format[localize "STR_MES_HealedTeammate", _arg];
 	};
-	
+
 	case "message_revivedteammate":
 	{
 		player groupChat format[localize "STR_MES_RevivedTeammate", _arg];
 	};
-	
+
 	case "message_incoming_missile":
 	{
 		switch (_arg) do
@@ -152,44 +136,18 @@ switch (_msg) do
 			};
 		};
 	};
-	
-	case "someone_killed": // [_victim, _damage_src, _damage_val]
-	{	
-		private ["_victim", "_damage_src", "_damage_val", "_victim_name", "_unit_color", "_text"];
-		_victim     = _arg select 0;
-		_damage_src = _arg select 1;
-		_damage_val = _arg select 2;
-		
-		_victim_name = if (_victim isKindOf "Man") then { _victim getVariable "playername" } else { getText(configFile >> "CfgVehicles" >> (typeOf _victim) >> "displayName") };
-		
-		_unit_color = 
+
+	case "log_info_message":
+	{
+		if ((time - Local_LogInfoStringsTimeShift) < 10) then
 		{
-			switch (_this getVariable "ft2_wf_side") do
-			{
-				case east:
-				{
-					"#ff0000"
-				};
-				case west:
-				{
-					"#0000ff"
-				};
-				default
-				{
-					"#00ff00"
-				};
-			};
-		};
-		
-		_text = format ["<t color='%1'>%2</t> was killed by [", _victim call _unit_color, _victim_name];
-		
-		for "_i" from 0 to (count _damage_src) - 1 do
+			private ["_text"];
+			_text = format call compile _arg;
+			Local_LogInfoStrings set [count Local_LogInfoStrings, parseText _text];
+		}
+		else
 		{
-			_text = _text + format ["<t color='%1'>%2</t> (%3)%4", (_damage_src select _i) call _unit_color, (_damage_src select _i) getVariable "playername", str (_damage_val select _i) + "%", if (((count _damage_src) - 1) == _i) then {""} else {", "}];
+			Local_LogInfoStrings = [];
 		};
-		
-		_text = _text + "]<br/>";
-	
-		Local_LogInfoStrings set [count Local_LogInfoStrings, parseText _text];
 	};
 };

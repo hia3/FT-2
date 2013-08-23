@@ -57,11 +57,6 @@ if (_thrown) then
 	_award=Config_AwardKillPlayerValue*3;
 	(_award*_cnt) call Func_Client_ChangePlayerFunds;
 
-	for [{_i=0},{_i<_cnt},{_i=_i+1}] do
-	{
-		["message_kill_infantry", _award, _unit] call Func_Common_SendRemoteCommand;
-	};
-
 	if ((locked _tank)==2) then
 	{
 		if (local _tank) then

@@ -23,6 +23,8 @@ class RscTitles
 			y=SafeZoneY + SafeZoneH;
 			w=0.8;
 			h=0.2;
+			
+			size = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 		};
 		
 		class txt_dwn:RscStructuredTextB_ext

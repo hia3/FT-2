@@ -448,7 +448,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 
 	if(_TimerL<=_timing) then
 	{
-		_TimerL = _TimerL + 3;
+		_TimerL = _TimerL + 5;
 
 		if ((ctrlCommitted _log_info) && (!_log_info_down)) then
 		{
@@ -462,6 +462,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 	};
 
 	_log_info ctrlSetStructuredText composeText Local_LogInfoStrings;
+	Local_LogInfoStringsTimeShift = time;
 
 	sleep 0.35;
 };

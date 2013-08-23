@@ -111,6 +111,7 @@ Local_LaserSpots=[];
 Local_KeyPressedForward = false;
 
 Local_LogInfoStrings = [];
+Local_LogInfoStringsTimeShift = time;
 
 Func_Client_AddIncome=compile preprocessFile ("client\Func_Client_AddIncome.sqf");
 Func_Client_AddLockActions=compile preprocessFile ("client\Func_Client_AddLockActions.sqf");

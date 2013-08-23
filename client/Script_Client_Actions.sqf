@@ -18,8 +18,7 @@ switch((_this select 3)select 0)do
 
 			_award call Func_Client_ChangePlayerFunds;
 
-			["message_kill_infantry", _award,                           _killer] call Func_Common_SendRemoteCommand;
-			["message_knife",         _killer getVariable "playername", _victim] call Func_Common_SendRemoteCommand;
+			["message_knife", _killer getVariable "playername", _victim] call Func_Common_SendRemoteCommand;
 		};
 	};
 	case 1://switch on GPS
