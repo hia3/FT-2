@@ -440,7 +440,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 	{
 		if (((count Local_LogInfoStrings) != 0) && _log_info_down) then
 		{
-			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.2];
+			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.15];
 			_log_info_down = false;
 			_log_info ctrlCommit 3;
 		};
@@ -452,9 +452,9 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 
 		if ((ctrlCommitted _log_info) && (!_log_info_down)) then
 		{
-			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.2 + (ctrlTextHeight _log_info) / (count Local_LogInfoStrings) - 0.01];
+			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.15 + (ctrlTextHeight _log_info) / (count Local_LogInfoStrings) - 0.01];
 			_log_info ctrlCommit 0;
-			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.2];
+			_log_info ctrlSetPosition [0.2, SafeZoneY + SafeZoneH - 0.15];
 			_log_info ctrlCommit 1;
 
 			[Local_LogInfoStrings] call BIS_fnc_arrayShift;

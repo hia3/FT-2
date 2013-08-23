@@ -21,7 +21,7 @@ class RscTitles
 			idc=6002;
 			x=0.2;
 			y=SafeZoneY + SafeZoneH;
-			w=0.8;
+			w=1;
 			h=0.2;
 			
 			size = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
