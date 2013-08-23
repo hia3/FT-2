@@ -44,9 +44,9 @@ if (isServer) then
 
 	_full_damage = 0;
 	_attacker_count = 0;
-	
+
 	_data_size = ((count _damage_src) min (count _damage_val));
-	
+
 	for "_i" from 0 to _data_size - 1 do
 	{
 		_attacker        = _damage_src select _i;
@@ -65,7 +65,7 @@ if (isServer) then
 	};
 
 	_text = ([_victim_name, _victim_side] call _format_name_side) + (if (_victim isKindOf "Man") then { " was killed " } else { " was destroyed " });
-	
+
 	_one_attacker = (_attacker_count == 1);
 
 	for "_i" from 0 to _data_size - 1 do
@@ -84,7 +84,7 @@ if (isServer) then
 				{
 					_text = _text + "by " + (if (_one_attacker) then {""} else {"["});
 				};
-			
+
 				_attacker_award  = _full_award * (_attacker_damage / _full_damage);
 
 				_attacker_damage_percent = floor (100 * _attacker_damage / _full_damage);
@@ -102,7 +102,7 @@ if (isServer) then
 				};
 
 				_attacker_award = floor(_attacker_award);
-				
+
 				_text = _text + ([_attacker_name, _attacker_side] call _format_name_side) + "(" + (str _attacker_award) + "$" + (if (_one_attacker) then { "" } else { " = " + (str _attacker_damage_percent) + "%1" }) + ")";
 
 				_attacker_funds_name = format["FT2_WF_Funds_%1", _attacker_name];
@@ -111,7 +111,7 @@ if (isServer) then
 
 				_message = if (_victim isKindOf "Man") then { "message_kill_infantry" } else { "message_destroy_vehicle" };
 				[_message, _attacker_award, _attacker] call Func_Common_SendRemoteCommand;
-				
+
 				if ((_data_size - 1) == _i) then
 				{
 					_text = _text + (if (_one_attacker) then {""} else {"]"});
@@ -124,7 +124,7 @@ if (isServer) then
 			};
 		};
 	};
-	
+
 	_text = _text + "<br/>";
 
 	["log_info_message", "[""" + _text + """, '%']", true] call Func_Common_SendRemoteCommand;
