@@ -239,6 +239,9 @@ if (_playerWasDead) then
 			deleteVehicle _x;
 		};
 	} forEach Local_PlayerMines;
+	
+	Local_PlayerAttachedMines = [];
+	Local_PlayerMines=[];
 
 	//remove player body marker
 	Public_DeadUnit=[player,false];

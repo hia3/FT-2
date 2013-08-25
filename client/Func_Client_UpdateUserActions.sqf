@@ -16,7 +16,7 @@ if (_pa8 == 1) then
 	player addAction ["<t color='#4C4FFF'>Halo</t>","client\Script_Client_Actions.sqf",[30],98,false,true,"","( ((_target distance Local_FriendlyBaseFlag) < 5) && (vehicle player == player) )"];
 };
 	
-player addAction ["<t color='#FF4A3D'>Attach Explosives</t>","client\Script_Client_Actions.sqf",[32],98,false,true,"", "({((_target distance _x) < 8)} count nearestObjects [_target,['car','truck','tank','Wheeled_APC_F'],8]>0) && (alive _target) && ((vehicle _target)==_target) && (((nearestObject [_target, 'SatchelCharge_Remote_Ammo']) distance _target) < 1.5)"];
+player addAction ["<t color='#FF4A3D'>Attach Explosives</t>","client\Script_Client_Actions.sqf",[32],98,false,true,"", "({((_target distance _x) < 8)} count nearestObjects [_target,['car','truck','tank','Wheeled_APC_F'],8]>0) && (alive _target) && ((vehicle _target)==_target) && (({!(_x in Local_PlayerAttachedMines)} count (position player nearObjects ['SatchelCharge_Remote_Ammo', 2])) > 0)"];
 
 _pa10 = 1;
 if (ismultiplayer) then {_pa10 = (paramsArray select 10);};
