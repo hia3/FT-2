@@ -16,7 +16,7 @@ _distance = _this select 3;
 _aawarning=(_type in System_AircraftVehicleTypes);
 _atwarning=(_type in System_ArmoredVehicleTypes);
 	
-//calculate vehicle spawn position
+//calculate vehicle position
 //and direction
 _pos=position player;
 _px=_pos select 0;

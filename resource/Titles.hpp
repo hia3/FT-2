@@ -331,7 +331,6 @@ class RscTitles
 		movingEnable=0;
 		duration=30;
 		onLoad="";
-		//onLoad="[] spawn compile 'sleep 20.0; titleCut['' '',''black in'',4.0]'";
 		name="overlay";
 		fadein=0;
 		fadeout=0;

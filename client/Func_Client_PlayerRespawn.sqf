@@ -60,7 +60,7 @@ Dialog_HandsHit=false;
 Dialog_BodyHit=false;
 Dialog_HeadHit=false;
 
-//setpos player to spawn position
+//setpos player to the position
 //and make him to salute
 player setPosATL Local_SpawnPos; // TODO: why setPosASL?
 player setDir Local_SpawnDir;
@@ -137,9 +137,9 @@ if (alive player) then
 		//player pressed "respawn" button
 		if (Dialog_RespawnCurrentPoint>0) then
 		{
-			//player decided to spawn not at base
+			//player decided to respawn not at base
 			//so we have to calculate position in some range
-			//of spawn point and place player there
+			//of respawn point and place player there
 			_MarkerBasePos=getMarkerPos ((Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 0);
 			_position=[_MarkerBasePos select 0,_MarkerBasePos select 1,(Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 2] call Func_Client_CalculateSpawnPos;
 			player setPos _position;

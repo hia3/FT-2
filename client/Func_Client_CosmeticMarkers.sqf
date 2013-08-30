@@ -1,5 +1,4 @@
 
-//['westbaserings','ColorBlack',5,(markerDir "marker_respawn_west"),(getmarkerpos "marker_respawn_west"),(markerSize "marker_respawn_west"),markerShape "marker_respawn_west"  ] spawn createhollowCircle;
 CreateHollowMarker =
 {
 /*

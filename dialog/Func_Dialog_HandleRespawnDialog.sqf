@@ -18,7 +18,7 @@
 	_tip_indexes = _tip_indexes call BIS_fnc_arrayShuffle;
 	_tip_current_index = 0;
 
-	//create yellow round markers on available spawn-positions
+	//create yellow round markers on available respawn positions
 	_markers = [];
 	_markerIndex = 0;
 	{
@@ -37,7 +37,7 @@
 	_map ctrlMapAnimAdd [2,0.16,getMarkerPos _spawn];
 	ctrlMapAnimCommit _map;
 
-	//create a rotating yellow marker on the desired spawn position
+	//create a rotating yellow marker on the desired respawn position
 	_ta=[Func_Dialog_MarkerAnim, ["TempAnim",_spawn,"selector_selectedMission",1.4,"ColorYellow"]] call Func_Common_Spawn;
 
 	//disable "respawn" button
@@ -118,7 +118,7 @@
 			//countdown and respawn point selection
 			case "idle":
 			{
-				//spawn point selection
+				//respawn point selection
 				if ((FT2_WF_Logic getVariable "MouseButtonUp") == 0) then
 				{
 					FT2_WF_Logic setVariable ["MouseButtonUp",-1];

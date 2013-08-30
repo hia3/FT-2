@@ -6,7 +6,7 @@
 
 	if (_action) then
 	{
-		//calculate spawn position and velocity
+		//calculate respawn position and velocity
 		_dir=getDir _veh;
 		_vel=[150*(sin _dir),150*(cos _dir),0];
 		_pos=getPos _veh;	

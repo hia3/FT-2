@@ -483,8 +483,6 @@ onEachFrame
 						 [_position,_MarkerDirection,3000] call Func_Client_GetPosition,
 						 [_position,_MarkerDirection,1200] call Func_Client_GetPosition];
 
-
-	//[] spawn Func_Client_PlayerRespawn;
 	[Func_Client_MapIntro, []] call Func_Common_Spawn;
 	[] call Func_Client_CreateSensors;
 
