@@ -1685,11 +1685,14 @@ PERF_BEGIN("_show_available_weapons_list_pred")
 
 		if (isClass(_item_config)) then
 		{
-			_item_config_name = configName(_item_config);
-
-			if ([_item_config_name] call _pred) then
+			if (2 == getNumber(_item_config >> "scope")) then
 			{
-				_config_list = _config_list + [_item_config];
+				_item_config_name = configName(_item_config);
+
+				if ([_item_config_name] call _pred) then
+				{
+					_config_list = _config_list + [_item_config];
+				};
 			};
 		};
 	};
