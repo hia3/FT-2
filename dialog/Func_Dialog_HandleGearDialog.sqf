@@ -373,7 +373,7 @@ _is_gps =
 
 	_item = _this select 0;
 
-	_item == "ItemGPS";
+	(_item == "ItemGPS") || ([configFile >> "CfgWeapons" >> _item, "UavTerminal_base"] call _is_entity_of_type)
 };
 
 
