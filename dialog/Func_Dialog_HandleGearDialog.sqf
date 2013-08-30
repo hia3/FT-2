@@ -337,7 +337,7 @@ _is_hmd =
 
 	_item = _this select 0;
 
-	_item == "NVGoggles"
+	(_item == "NVGoggles") || (_item == "NVGoggles_OPFOR") || (_item == "NVGoggles_INDEP")
 };
 
 
