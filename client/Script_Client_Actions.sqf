@@ -44,7 +44,7 @@ switch((_this select 3)select 0)do
 	};
 	case 7://bail out from a locked vehicle
 	{
-		if (Local_PlayerVehicle isKindOf "Air") then
+		if ((Local_PlayerVehicle isKindOf "Air") && (((getPos Local_PlayerVehicle) select 2) > 2)) then
 		{
 			private ["_pos", "_vel", "_dir", "_d"];
 
@@ -173,6 +173,11 @@ switch((_this select 3)select 0)do
 	case 22://stop indirect fire mode
 	{
 		Local_IndirectFireMode=false;
+	};
+	case 23:
+	{
+		player action ["heal", player];
+		[{ sleep 5; player setDamage 0; }, []] call Func_Common_Spawn;
 	};
 	case 24://revive a player via backpack
 	{
