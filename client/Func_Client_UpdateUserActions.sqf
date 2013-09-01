@@ -7,8 +7,10 @@ player addAction ["<t color='#4C4FFF'>"+(localize "STR_ACT_Revive")+"</t>","clie
 
 player addAction ["<t color='#4C4FFF'>"+(localize "STR_ACT_HealThyself")+"</t>","client\Script_Client_Actions.sqf",[23],98,false,true,"", "(count (position player nearObjects ['Land_Sunshade_F', 3])) > 0"];
 
+player addAction ["<t color='#FF4040'>"+(localize "STR_ACT_DefuseMine")+"</t>","client\Script_Client_Actions.sqf",[36],98,false,true,"", "(((player distance nearestObject [player, 'TimeBombCore']) < 2) || ((player distance nearestObject [player, 'MineBase']) < 2)) && ('MineDetector' in items player)"];
+
 _pa8 = 1;
-if (ismultiplayer) then {_pa8 = (paramsArray select 8);};
+if (isMultiplayer) then {_pa8 = (paramsArray select 8);};
 if (_pa8 == 1) then
 {
 	player addAction ["<t color='#4C4FFF'>Halo</t>","client\Script_Client_Actions.sqf",[30],98,false,true,"","( ((_target distance Local_FriendlyBaseFlag) < 5) && (vehicle player == player) )"];

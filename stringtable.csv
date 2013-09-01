@@ -166,6 +166,7 @@ STR_ACT_RadarGuidanceOn,"Cannon radar-guidance on","Вкл. наведение �
 STR_ACT_ManualFlareOff,"Manual Flares Off","Автоматические контрмеры"
 STR_ACT_ManualFlareOn,"Manual Flares On","Ручные контрмеры"
 STR_ACT_MHQ_Bicycle,"Bicycle","Велосипед"
+STR_ACT_DefuseMine,"Defuse mine","Обезвредить мину"
 
 
 STR_HINT_Warning,"Warning!","Внимание!"
@@ -228,8 +229,9 @@ STR_HINT_MGDrop,"Weapon mounted..","Установка размещена..",""
 STR_HINT_MGReloadF,"You should have one of the magazines to reload this weapon:","Для перезарядки данного оружия вам нужен один из магазинов:",""
 STR_HINT_MGReloadS,"Load magazine:<br/>%1","Магазин загружен:<br/>%1",""
 STR_HINT_WeapDir,"Weapon aim:\n\nDirection: %1deg\nElevation: %2deg","Наведение оружия:\n\nНаправление: %1град\nВозвышение: %2град",""
-STR_MES_GrenadeLocked,"Vehicle is locked","Люки машины закрыты"
+STR_HINT_Defused,"Defused","Обезврежено"
 
+STR_MES_GrenadeLocked,"Vehicle is locked","Люки машины закрыты"
 STR_MES_KIlledKnife,"%1 killed you with knife","%1 зарезал Вас ножом"
 STR_MES_GrenadeInside,"%1 has thrown a grenade into your vehicle","%1 забросил гранату в вашу бронемашину"
 STR_MES_BackBlast,"You were hit by %1`s RPG backblast","Вы попали под реактивную струю гранатомета %1"

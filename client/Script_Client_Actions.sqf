@@ -259,4 +259,21 @@ switch((_this select 3)select 0)do
 			[localize "STR_HINT_Vehicles",localize "STR_HINT_LowFunds","pic\icon_funds.paa",1.35,"error_sound"] call Func_Client_ShowCustomMessage;
 		};
 	};
+	case 36:
+	{
+		_mine1 = nearestObject [player, 'TimeBombCore'];
+		_mine2 = nearestObject [player, 'MineBase'];
+		
+		_mine = if ((player distance _mine1) < (player distance _mine2)) then { _mine1 } else { _mine2 };
+		
+		if !(isNull _mine) then
+		{
+			_mag = getText(configFile >> 'CfgAmmo' >> (typeOf _mine) >> 'defaultMagazine');
+			_pic = getText(configFile >> 'CfgMagazines' >> _mag >> 'picture');
+			_name = getText(configFile >> 'CfgMagazines' >> _mag >> 'displayName');
+		
+			deleteVehicle _mine;
+			[_name, localize "STR_HINT_Defused", _pic, 1.0] call Func_Client_ShowCustomMessage;
+		};
+	};
 };
