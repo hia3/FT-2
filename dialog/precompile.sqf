@@ -1,8 +1,6 @@
-
-_pa3 = if (ismultiplayer) then {paramsArray select 3;} else {3000;};
 	
 Dialog_VehicleFiller="car";
-Dialog_ScreenMarkersDistance=_pa3;
+Dialog_ScreenMarkersDistance=if (isMultiplayer) then { paramsArray select 3 } else { 3000 };
 Dialog_ScreenMarkersType=paramsArray select 5;//0-off,1-group,2-all
 Dialog_MapMarkersVType=2;//0-show only map mark,1-with vehicle name,2-with name and delete time,3-with name, time and owner name
 Dialog_MapMarkersPType=1;//0-only marks,1-with names
