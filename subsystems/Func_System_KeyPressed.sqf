@@ -42,7 +42,7 @@ switch (_key) do
 		};
 
 		// Manual Flare control for Planes
-		if ((Local_PlayerVehicle!=player) && ((player ==(commander Local_PlayerVehicle))|| (player ==(driver Local_PlayerVehicle))) && ((typeOf Local_PlayerVehicle) in System_AircraftVehicleTypes)) then
+		if ((Local_PlayerVehicle!=player) && (player == (effectiveCommander Local_PlayerVehicle)) && ((typeOf Local_PlayerVehicle) in System_AircraftVehicleTypes)) then
 		{
 			if (Local_PlayerVehicle getVariable 'manualflare') then 
 			{
