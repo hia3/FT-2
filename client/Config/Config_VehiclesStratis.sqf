@@ -31,8 +31,16 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['C_Offroad_01_F',   100, 1200] call _add_car_class;
+			['C_Offroad_01_F',         100, 1200] call _add_car_class;
+
+			['C_Hatchback_01_F',       150, 1200] call _add_car_class;
+			['C_Hatchback_01_sport_F', 200, 1200] call _add_car_class;
+			['I_G_Offroad_01_F',       300, 1200] call _add_car_class;
+			['I_G_Offroad_01_armed_F', 600, 1200] call _add_car_class;
+			['C_SUV_01_F',             350, 1200] call _add_car_class;
+
 			['B_Quadbike_01_F',   70, 1200] call _add_car_class;
+
 			['B_MRAP_01_F',      700, 1200] call _add_car_class;
 			['B_MRAP_01_gmg_F', 1000, 1200] call _add_car_class;
 			['B_MRAP_01_hmg_F', 1000, 1200] call _add_car_class;
@@ -94,6 +102,13 @@ _add_car_class =
 			_v = [];
 			_c = [];
 			_t = [];
+
+			['B_Truck_01_mover_F',   350, 1800] call _add_car_class;
+			['B_Truck_01_box_F',     400, 1800] call _add_car_class;
+			['B_Truck_01_Repair_F',  500, 1800] call _add_car_class;
+			['B_Truck_01_ammo_F',    600, 1800] call _add_car_class;
+			['B_Truck_01_fuel_F',    300, 1800] call _add_car_class;
+			['B_Truck_01_medical_F', 400, 1800] call _add_car_class;
 
 			['HMMWV_Ambulance', 150, 1800] call _add_car_class;
 			['MtvrRepair', 700, 1800] call _add_car_class;
@@ -242,8 +257,16 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['C_Offroad_01_F',   100, 1200] call _add_car_class;
+			['C_Offroad_01_F',         100, 1200] call _add_car_class;
+
+			['C_Hatchback_01_F',       150, 1200] call _add_car_class;
+			['C_Hatchback_01_sport_F', 200, 1200] call _add_car_class;
+			['I_G_Offroad_01_F',       300, 1200] call _add_car_class;
+			['I_G_Offroad_01_armed_F', 600, 1200] call _add_car_class;
+			['C_SUV_01_F',             350, 1200] call _add_car_class;
+
 			['O_Quadbike_01_F',   70, 1200] call _add_car_class;
+
 			['O_MRAP_02_F',      700, 1200] call _add_car_class;
 			['O_MRAP_02_hmg_F', 1000, 1200] call _add_car_class;
 			['O_MRAP_02_gmg_F', 1000, 1200] call _add_car_class;
@@ -302,6 +325,11 @@ _add_car_class =
 			_v = [];
 			_c = [];
 			_t = [];
+
+			['O_Truck_02_box_F',     400, 1800] call _add_car_class;
+			['O_Truck_02_Ammo_F',    600, 1800] call _add_car_class;
+			['O_Truck_02_fuel_F',    300, 1800] call _add_car_class;
+			['O_Truck_02_medical_F', 400, 1800] call _add_car_class;
 
 			['GAZ_Vodnik_MedEvac', 150, 1800] call _add_car_class;
 			['KamazRepair', 700, 1800] call _add_car_class;
