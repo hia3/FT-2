@@ -49,6 +49,8 @@ _add_car_class =
 			['I_MRAP_03_gmg_F', 1300, 1200] call _add_car_class;
 			['I_MRAP_03_hmg_F', 1300, 1200] call _add_car_class;
 			
+			['I_APC_Wheeled_03_cannon_F', 3000, 1200] call _add_car_class;
+			
 			['B_APC_Wheeled_01_cannon_F', 3000, 1200] call _add_car_class;
 			['B_Truck_01_transport_F',     250, 1200] call _add_car_class;
 			['B_Truck_01_covered_F',       300, 1200] call _add_car_class;
@@ -274,6 +276,8 @@ _add_car_class =
 			['I_MRAP_03_F',     1000, 1200] call _add_car_class;
 			['I_MRAP_03_gmg_F', 1300, 1200] call _add_car_class;
 			['I_MRAP_03_hmg_F', 1300, 1200] call _add_car_class;
+			
+			['I_APC_Wheeled_03_cannon_F', 3000, 1200] call _add_car_class;
 			
 			['O_Truck_02_covered_F',     300, 1200] call _add_car_class;
 			['O_Truck_02_transport_F',   250, 1200] call _add_car_class;

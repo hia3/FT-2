@@ -1,9 +1,9 @@
 
-System_AntiAirMissileTypes=[["M_Titan_AA",true],["M_Air_AA",true]];
-System_AntiAirVehicleTypes=[["Man",0.165],["Helicopter",0]];
+System_AntiAirMissileTypes=[["M_Titan_AA",true],["M_Air_AA",true],["M_Zephyr",true]];
+System_AntiAirVehicleTypes=[["Man",0.165],["Helicopter",0],["Plane",0.3]];
 
-System_AntiTankMissileTypes=[["M_RPG32_F",true],["M_NLAW_AT_F",true],["M_Titan_AT",true],["M_PG_AT",true]];
-System_AntiTankVehicleTypes=[["Man",0.33],["Helicopter",0.5]];
+System_AntiTankMissileTypes=[["M_Titan_AT",true],["M_PG_AT",true],["M_Scalpel_AT",true]];
+System_AntiTankVehicleTypes=[["Man",0.2],["Helicopter",0.3],["Plane",0.4]];
 
 System_ArmoredVehicleTypes=
 [
@@ -28,14 +28,27 @@ System_ArmoredVehicleTypes=
 	["B_Boat_Armed_01_minigun_F",2],
 
 	["O_APC_Tracked_02_cannon_F",4],
-	["B_APC_Tracked_01_rcws_F",4]
+	["B_APC_Tracked_01_rcws_F",4],
+	
+	["B_APC_Tracked_01_AA_F",4],
+	["B_MBT_01_cannon_F",5],
+	["B_MBT_01_arty_F",3],
+	["B_MBT_01_mlrs_F",4],
+	
+	["O_APC_Tracked_02_AA_F",4],
+	["O_MBT_02_cannon_F",5],
+	["O_MBT_02_arty_F",3],
+	
+	["I_APC_Wheeled_03_cannon_F",2]
 ];
 
 System_AircraftVehicleTypes=
 [
 	["B_Heli_Light_01_armed_F",2],["B_Heli_Attack_01_F",4],
 
-	["O_Heli_Light_02_F",3],["O_Heli_Attack_02_F",4],["O_Heli_Attack_02_black_F",4]
+	["O_Heli_Light_02_F",3],["O_Heli_Attack_02_F",4],["O_Heli_Attack_02_black_F",4],
+	
+	["I_Plane_Fighter_03_CAS_F",4], ["I_Plane_Fighter_03_AA_F",4]
 ];
 
 System_GuidedMissileTypes=[];
@@ -50,11 +63,15 @@ System_DisposableRPGTypes=["M136","RPG18"];
 
 System_HaveAARadarVehicleTypes=
 [
-	["B_APC_Wheeled_01_cannon_F", ["LMG_M200"], 2000],
-	["B_MRAP_01_hmg_F",           ["HMG_127"],  2000],
-	["O_MRAP_02_hmg_F",           ["HMG_127"],  2000],
-	["O_APC_Wheeled_02_rcws_F",   ["HMG_127"],  2000],
-	["I_MRAP_03_hmg_F",           ["HMG_127"],  2000]
+	["B_APC_Wheeled_01_cannon_F", ["LMG_M200"], 800],
+	["I_APC_Wheeled_03_cannon_F", ["LMG_M200"], 800],
+	["B_MRAP_01_hmg_F",           ["HMG_127"],  800],
+	["O_MRAP_02_hmg_F",           ["HMG_127"],  800],
+	["O_APC_Wheeled_02_rcws_F",   ["HMG_127"],  800],
+	["I_MRAP_03_hmg_F",           ["HMG_127"],  800],
+	
+	["B_APC_Tracked_01_AA_F",     ["B_35mm_AA_Tracer_Red"],   2000],
+	["O_APC_Tracked_02_AA_F",     ["B_35mm_AA_Tracer_Green"], 2000]
 ];
 
 System_IndirectWeaponsTypes=["AGS30","MK19","AGS17"];
