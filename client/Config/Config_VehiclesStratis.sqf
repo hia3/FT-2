@@ -49,7 +49,7 @@ _add_car_class =
 			['I_MRAP_03_gmg_F', 1300, 1200] call _add_car_class;
 			['I_MRAP_03_hmg_F', 1300, 1200] call _add_car_class;
 			
-			['I_APC_Wheeled_03_cannon_F', 3000, 1200] call _add_car_class;
+			['I_APC_Wheeled_03_cannon_F', 4000, 1200] call _add_car_class;
 			
 			['B_APC_Wheeled_01_cannon_F', 3000, 1200] call _add_car_class;
 			['B_Truck_01_transport_F',     250, 1200] call _add_car_class;
@@ -140,12 +140,12 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['B_APC_Tracked_01_rcws_F', 3000, 1200] call _add_car_class;
+			['B_APC_Tracked_01_rcws_F', 2800, 1200] call _add_car_class;
 			['B_APC_Tracked_01_CRV_F',  1500, 1200] call _add_car_class;
-			['B_APC_Tracked_01_AA_F',   9000, 1200] call _add_car_class;
-			['B_MBT_01_cannon_F',      12000, 1200] call _add_car_class;
-			['B_MBT_01_arty_F',        17000, 1200] call _add_car_class;
-			['B_MBT_01_mlrs_F',        20000, 1200] call _add_car_class;
+			['B_APC_Tracked_01_AA_F',   6000, 1200] call _add_car_class;
+			['B_MBT_01_cannon_F',      10000, 1200] call _add_car_class;
+			['B_MBT_01_arty_F',        13000, 1200] call _add_car_class;
+			['B_MBT_01_mlrs_F',        13000, 1200] call _add_car_class;
 
 			['M1126_ICV_M2_EP1', 1100, 1200] call _add_car_class;
 			['M1126_ICV_mk19_EP1', 1400, 1200] call _add_car_class;
@@ -186,7 +186,7 @@ _add_car_class =
 			['B_Heli_Light_01_F',       1000, 1200] call _add_car_class;
 			['B_Heli_Light_01_armed_F', 5000, 1200] call _add_car_class;
 			
-			['B_Heli_Attack_01_F',     20000, 1200] call _add_car_class;
+			['B_Heli_Attack_01_F',     18000, 1200] call _add_car_class;
 			['B_Heli_Transport_01_F',   1100, 1200] call _add_car_class;
 
 			['I_Heli_Transport_02_F',   1500, 1200] call _add_car_class;
@@ -226,8 +226,8 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['I_Plane_Fighter_03_CAS_F', 20000, 1200] call _add_car_class;
-			['I_Plane_Fighter_03_AA_F',  20000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_CAS_F', 18000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_AA_F',  17000, 1200] call _add_car_class;
 
 			['MV22', 800, 1200] call _add_car_class;
 			['C130J', 1000, 1200] call _add_car_class;
@@ -277,7 +277,7 @@ _add_car_class =
 			['I_MRAP_03_gmg_F', 1300, 1200] call _add_car_class;
 			['I_MRAP_03_hmg_F', 1300, 1200] call _add_car_class;
 			
-			['I_APC_Wheeled_03_cannon_F', 3000, 1200] call _add_car_class;
+			['I_APC_Wheeled_03_cannon_F', 4000, 1200] call _add_car_class;
 			
 			['O_Truck_02_covered_F',     300, 1200] call _add_car_class;
 			['O_Truck_02_transport_F',   250, 1200] call _add_car_class;
@@ -365,9 +365,9 @@ _add_car_class =
 			_t = [];
 
 			['O_APC_Tracked_02_cannon_F', 4000, 1200] call _add_car_class;
-			['O_APC_Tracked_02_AA_F',     9000, 1200] call _add_car_class;
-			['O_MBT_02_cannon_F',        12000, 1200] call _add_car_class;
-			['O_MBT_02_arty_F',          17000, 1200] call _add_car_class;
+			['O_APC_Tracked_02_AA_F',     6000, 1200] call _add_car_class;
+			['O_MBT_02_cannon_F',        10000, 1200] call _add_car_class;
+			['O_MBT_02_arty_F',          13000, 1200] call _add_car_class;
 
 			['BRDM2_INS', 900, 1200] call _add_car_class;
 			['BRDM2_ATGM_INS', 1800, 1200] call _add_car_class;
@@ -407,8 +407,8 @@ _add_car_class =
 			['O_Heli_Light_02_unarmed_F',  1000, 1200] call _add_car_class;
 			['O_Heli_Light_02_F',         10000, 1200] call _add_car_class;
 			
-			['O_Heli_Attack_02_F',        17000, 1200] call _add_car_class;
-			['O_Heli_Attack_02_black_F',  17500, 1200] call _add_car_class;
+			['O_Heli_Attack_02_F',        15000, 1200] call _add_car_class;
+			['O_Heli_Attack_02_black_F',  15500, 1200] call _add_car_class;
 
 			['I_Heli_Transport_02_F',      1500, 1200] call _add_car_class;
 
