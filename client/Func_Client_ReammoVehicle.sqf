@@ -8,11 +8,7 @@
 
 	_name=getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "DisplayName");
 
-
-
 	[_name,localize "STR_HINT_ReammoStarted","pic\i_reammo_s.paa",1.0] call Func_Client_ShowCustomMessage;
-
-	//_veh setVehicleAmmo 0.1;
 
 	//disallow any technical services until process is active
 	//see Func_Client_UpdateVehicleActions
