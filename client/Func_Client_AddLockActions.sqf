@@ -5,7 +5,7 @@
 //see Func_Client_CreateSensors
 _param=_this select 0;
 
-//script is called by the sensor, which activates when player aproaches any vehicle
+//script is called by the sensor, which activates when player approaches any vehicle
 _veh=nearestObject[player,_param];
 
 //check, if vehicle exsists and if it is not allready handled
