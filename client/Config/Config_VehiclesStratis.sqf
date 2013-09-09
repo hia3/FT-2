@@ -443,8 +443,8 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['I_Plane_Fighter_03_CAS_F', 20000, 1200] call _add_car_class;
-			['I_Plane_Fighter_03_AA_F',  20000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_CAS_F', 18000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_AA_F',  17000, 1200] call _add_car_class;
 
 			['An2_TK_EP1', 800, 1200] call _add_car_class;
 			['L39_TK_EP1', 9000, 1200] call _add_car_class;
