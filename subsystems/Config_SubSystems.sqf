@@ -70,4 +70,4 @@ System_HaveAARadarVehicleTypes=
 System_IndirectWeaponsTypes=["AGS30","MK19","AGS17"];
 System_LoadableStaticsTypes=[["WarfareBMGNest_M240_base",["100Rnd_762x51_M240","100Rnd_762x54_PK"]],["WarfareBMGNest_PK_base",["100Rnd_762x54_PK","100Rnd_762x51_M240"]]];
 System_MovableStaticsTypes=["SPG9_base","AGS_base","DSHKM_base","DSHkM_Mini_TriPod","KORD_high","KORD_Base","MK19_TriPod_base","M2StaticMG_base","M2HD_mini_TriPod_base","Metis_TK_EP1","TOW_Tripod_US_EP1"];
-System_TrackedVehicleTypes=["O_APC_Wheeled_02_rcws_F", "B_APC_Wheeled_01_cannon_F", "Tank","Tracked_APC","Truck"];
+System_TrackedVehicleTypes=["O_APC_Wheeled_02_rcws_F", "B_APC_Wheeled_01_cannon_F", "Tank", "Tracked_APC", "Truck"];
