@@ -62,16 +62,9 @@ System_ExplosiveAmmoTypes=["SatchelCharge_Remote_Ammo", "DemoCharge_Remote_Ammo"
 System_DisposableRPGTypes=["M136","RPG18"];
 
 System_HaveAARadarVehicleTypes=
-[
-	["B_APC_Wheeled_01_cannon_F", ["LMG_M200"], 800],
-	["I_APC_Wheeled_03_cannon_F", ["LMG_M200"], 800],
-	["B_MRAP_01_hmg_F",           ["HMG_127"],  800],
-	["O_MRAP_02_hmg_F",           ["HMG_127"],  800],
-	["O_APC_Wheeled_02_rcws_F",   ["HMG_127"],  800],
-	["I_MRAP_03_hmg_F",           ["HMG_127"],  800],
-	
-	["B_APC_Tracked_01_AA_F",     ["B_35mm_AA_Tracer_Red"],   2000],
-	["O_APC_Tracked_02_AA_F",     ["B_35mm_AA_Tracer_Green"], 2000]
+[	
+	["B_APC_Tracked_01_AA_F",     ["autocannon_35mm"], 2000],
+	["O_APC_Tracked_02_AA_F",     ["autocannon_35mm"], 2000]
 ];
 
 System_IndirectWeaponsTypes=["AGS30","MK19","AGS17"];
