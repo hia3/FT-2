@@ -2430,7 +2430,7 @@ PERF_END("RscGear_onLoad")
 
 	_vehicles_config = configfile >> "CfgVehicles";
 
-	_config_list = [_vehicles_config >> "B_Parachute"];
+	_config_list = [_vehicles_config >> (if (Local_PlayerSide==east) then { "O_UAV_01_backpack_F" } else { "B_UAV_01_backpack_F" }), _vehicles_config >> "B_Parachute"];
 
 	for [{_i = 0},{_i != count _vehicles_config},{_i = _i + 1}] do
 	{
