@@ -63,11 +63,19 @@ System_DisposableRPGTypes=["M136","RPG18"];
 
 System_HaveAARadarVehicleTypes=
 [	
-	["B_APC_Tracked_01_AA_F",     ["autocannon_35mm"], 2000],
-	["O_APC_Tracked_02_AA_F",     ["autocannon_35mm"], 2000]
+	["B_APC_Tracked_01_AA_F", ["autocannon_35mm"], 2000],
+	["O_APC_Tracked_02_AA_F", ["autocannon_35mm"], 2000]
 ];
 
 System_IndirectWeaponsTypes=["AGS30","MK19","AGS17"];
 System_LoadableStaticsTypes=[["WarfareBMGNest_M240_base",["100Rnd_762x51_M240","100Rnd_762x54_PK"]],["WarfareBMGNest_PK_base",["100Rnd_762x54_PK","100Rnd_762x51_M240"]]];
 System_MovableStaticsTypes=["SPG9_base","AGS_base","DSHKM_base","DSHkM_Mini_TriPod","KORD_high","KORD_Base","MK19_TriPod_base","M2StaticMG_base","M2HD_mini_TriPod_base","Metis_TK_EP1","TOW_Tripod_US_EP1"];
 System_TrackedVehicleTypes=["O_APC_Wheeled_02_rcws_F", "B_APC_Wheeled_01_cannon_F", "Tank", "Tracked_APC", "Truck"];
+
+System_EastReammoVehicleTypes=["O_Truck_02_Ammo_F"];
+System_EastRepairVehicleTypes=["O_Truck_02_box_F"];
+System_EastRefuelVehicleTypes=["O_Truck_02_fuel_F"];
+
+System_WestReammoVehicleTypes=["B_Truck_01_ammo_F"];
+System_WestRepairVehicleTypes=["B_Truck_01_Repair_F"];
+System_WestRefuelVehicleTypes=["B_Truck_01_fuel_F"];

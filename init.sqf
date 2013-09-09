@@ -24,9 +24,9 @@ if(!isServer || local player)then
 	waitUntil{alive player};
 	waitUntil{local player};
 	
-	call compile preprocessfile "dialog\precompile.sqf";	
-	call compile preprocessfile "client\precompile.sqf"; 	
+	call compile preprocessfile     "dialog\precompile.sqf";
 	call compile preprocessfile "subsystems\precompile.sqf";
+	call compile preprocessfile     "client\precompile.sqf";
 };
 
 //used only for retexturing system
