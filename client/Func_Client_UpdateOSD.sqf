@@ -71,12 +71,7 @@
 				
 				if (_playerInVehicle) then
 				{
-					_isArmedVehicle = (0 != count(getArray(configFile >> "CfgVehicles" >> (typeOf Local_PlayerVehicle) >> "weapons")));
-					
-					if (_isArmedVehicle) then
-					{
-						Local_LaserSpots = (position Local_PlayerVehicle) nearEntities [_laser_spot_types, 5000];
-					};
+					Local_LaserSpots = (position Local_PlayerVehicle) nearEntities [_laser_spot_types, 5000];
 				}
 				else
 				{
