@@ -105,8 +105,6 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['B_Truck_01_mover_F',   350, 1800] call _add_car_class;
-			['B_Truck_01_box_F',     400, 1800] call _add_car_class;
 			['B_Truck_01_Repair_F',  500, 1800] call _add_car_class;
 			['B_Truck_01_ammo_F',    600, 1800] call _add_car_class;
 			['B_Truck_01_fuel_F',    300, 1800] call _add_car_class;
@@ -329,8 +327,8 @@ _add_car_class =
 			_v = [];
 			_c = [];
 			_t = [];
-
-			['O_Truck_02_box_F',     400, 1800] call _add_car_class;
+			
+			['O_Truck_02_box_F',     500, 1800] call _add_car_class;
 			['O_Truck_02_Ammo_F',    600, 1800] call _add_car_class;
 			['O_Truck_02_fuel_F',    300, 1800] call _add_car_class;
 			['O_Truck_02_medical_F', 400, 1800] call _add_car_class;
