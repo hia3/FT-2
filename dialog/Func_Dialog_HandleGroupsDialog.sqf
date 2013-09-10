@@ -93,11 +93,14 @@ _filllist=
 	_j=_j+1;
 	{
 		_name=_x getVariable "playername";
-		lnbAddRow[_idclist,[_name]];
-		lnbSetData[_idclist,[_j,0],format["%1",_x]];
-		lnbSetValue[_idclist,[_j,0],-1];
-		if (_name==Local_PlayerName) then {_playerindex=_j};
-		_j=_j+1;
+		if !(isNil "_name") then
+		{
+			lnbAddRow[_idclist,[_name]];
+			lnbSetData[_idclist,[_j,0],format["%1",_x]];
+			lnbSetValue[_idclist,[_j,0],-1];
+			if (_name==Local_PlayerName) then {_playerindex=_j};
+			_j=_j+1;
+		};
 	} forEach _nogroup;
 	
 	lnbSetCurSelRow [_idclist,_playerindex];
