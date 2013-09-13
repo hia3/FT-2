@@ -1,8 +1,8 @@
-	//finction determines who is controlling a controlpoint
-	
+	//function determines who is controlling a control point
+
 	//randomize threads start on different CP`s
 	sleep(5+random(5));
-	
+
 	while{!Global_GameEnded}do
 	{
 		_total_west_captured_areas = 0;
@@ -28,7 +28,7 @@
 
 		_area_capture_sound = if ((_total_capture_areas_count != 1) && ((_total_east_captured_areas == _total_capture_areas_count) || (_total_west_captured_areas == _total_capture_areas_count))) then { "area_capture_all" } else { "area_capture" };
 
-		{		
+		{
 			_CheckPointName=localize (_x select 1);//displayname of checkpoint
 			_MarkerTask=_x select 3;//big marker on checkpoint; see editor&config.sqf
 			_SensorScore=_x select 6;//big sensor on checkpoint; see editor&config.sqf
@@ -37,15 +37,15 @@
 			_AwardValue=_x select 13;//personal score award for capture
 			_AwardMoney=_x select 14;//personal funds award for capture
 			_IncomeChanges=_x select 15;//income change when CP is captured
-				
+
 			_ColorOfSide=(_flag select 0) getVariable "owner_color";
-			_message="";			
-			
+			_message="";
+
 			_MarkerColor=markerColor _MarkerTask;
-			//if CP has changed its former color 
+			//if CP has changed its former color
 			//see Func_Server_DetermineCheckPointOwner
 			if(_ColorOfSide!=_MarkerColor)then
-			{			
+			{
 				switch(_MarkerColor)do
 				{
 					//CP is captured by east
@@ -65,7 +65,7 @@
 							} forEach _flag;
 						};
 
-						[_CheckPointName, _message, Config_EastSign, 1.0, (if (_min_flag_distance > 120) then { "area_capture_far" } else { "" }) ] call Func_Client_ShowCustomMessage;
+						[_CheckPointName, _message, Config_EastSign, 1.0, (if (_min_flag_distance > 120) then { "area_capture_far" } else { "" })] call Func_Client_ShowCustomMessage;
 
 						//if player is east
 						if(Local_PlayerSide==east)then
@@ -74,12 +74,11 @@
 							_SensorZone=_SensorTaskArray call Func_Client_ConvertToArray;
 							//if player is inside this list
 							//means he is one of persons who taken this CP
-							if(Local_PlayerVehicle in _SensorZone)then
+							if (((vehicle player) in _SensorZone) || (player in _SensorZone)) then
 							{
 								// award a full value of points and funds
 								player sideChat format [localize "STR_CP_RadioMessageCaptured",_CheckPointName,_AwardValue,_AwardMoney];
 								_AwardMoney call Func_Client_ChangePlayerFunds;
-								
 							}
 							else
 							{
@@ -87,10 +86,10 @@
 								//but inside the control point
 								//we consider he just helped to capture
 								//and give him half award
-								if(Local_PlayerVehicle in (list _SensorScore))then
+								if (((vehicle player) in (list _SensorScore)) || (player in (list _SensorScore))) then
 								{
 									player sideChat format [localize "STR_CP_RadioMessageHelped",_CheckPointName,(round(_AwardValue/2) max 1),round(_AwardMoney/2)];
-									round(_AwardMoney/2) call Func_Client_ChangePlayerFunds;									
+									round(_AwardMoney/2) call Func_Client_ChangePlayerFunds;
 								};
 							};
 							//change periodic income
@@ -120,7 +119,7 @@
 								_x say [_area_capture_sound,1];
 								sleep 0.75;
 								_min_flag_distance = (player distance _x) min _min_flag_distance;
-							} forEach _flag;					
+							} forEach _flag;
 						};
 
 						[_CheckPointName, _message, Config_WestSign, 1.0, (if (_min_flag_distance > 120) then { "area_capture_far" } else { "" })] call Func_Client_ShowCustomMessage;
@@ -132,7 +131,7 @@
 							_SensorZone=_SensorTaskArray call Func_Client_ConvertToArray;
 							//if player is inside this list
 							//means he is one of persons who taken this CP
-							if(Local_PlayerVehicle in _SensorZone)then
+							if (((vehicle player) in _SensorZone) || (player in _SensorZone)) then
 							{
 								// award a full value of points and funds
 								player sideChat format [localize "STR_CP_RadioMessageCaptured",_CheckPointName,_AwardValue,_AwardMoney];
@@ -144,13 +143,13 @@
 								//but inside the control point
 								//we consider he just helped to capture
 								//and give him half award
-								if(Local_PlayerVehicle in (list _SensorScore))then
+								if (((vehicle player) in (list _SensorScore)) || (player in (list _SensorScore))) then
 								{
 									player sideChat format [localize "STR_CP_RadioMessageHelped",_CheckPointName,(round(_AwardValue/2) max 1),round(_AwardMoney/2)];
 									round(_AwardMoney/2) call Func_Client_ChangePlayerFunds;
-									
 								};
 							};
+							//change periodic income
 							Config_PeriodicIncome=Config_PeriodicIncome+_IncomeChanges;
 						}
 						else
@@ -177,7 +176,7 @@
 								_x say ["area_draw",1];
 								sleep 0.75;
 								_min_flag_distance = (player distance _x) min _min_flag_distance;
-							} forEach _flag;					
+							} forEach _flag;
 						};
 
 						[_CheckPointName, _message, Config_IndepSign, 1.0, (if (_min_flag_distance > 120) then { "area_capture_far" } else { "" })] call Func_Client_ShowCustomMessage;
@@ -202,4 +201,3 @@
 		} forEach Config_TotalCheckPointData;
 		sleep 0.5;
 	};
-	
