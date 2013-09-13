@@ -126,8 +126,22 @@ if (isServer) then
 	};
 
 	_text = _text + "<br/>";
+	
+	_quote_sym = (toArray """") select 0;
+	
+	_text_num = [];
+	{
+		if (_x == _quote_sym) then
+		{
+			_text_num = _text_num + [_x, _x];
+		}
+		else
+		{
+			_text_num = _text_num + [_x];
+		};
+	} forEach toArray _text;
 
-	["log_info_message", "[""" + _text + """, '%']", true] call Func_Common_SendRemoteCommand;
+	["log_info_message", "[""" + (toString _text_num) + """, '%']", true] call Func_Common_SendRemoteCommand;
 
 	_victim setVariable ["damage_src", []];
 	_victim setVariable ["damage_val", []];
