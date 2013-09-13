@@ -14,7 +14,7 @@ STR_TIP_013,"All friendlies located at the Control point, but not in black-shade
 STR_TIP_014,"You can buy additional ammunition and vehicles at the Main base.","Вы можете покупать дополнительное вооружение и технику на Главной Базе"
 STR_TIP_015,"Purchasing of ammunition is available: at the Main base, near MHQ, ammo crates and Ammunition trucks.","Вы можете покупать амуницию на Главной Базе, рядом с КШМ и у ящиков на Контрольных Точках."
 STR_TIP_016,"Vehicle purchasing is available only at the Main base.","Покупка техники возможна только на Главной Базе"
-STR_TIP_017,"Heavy helicopters may carry loads. Use Action menu to attach a cable while hovering over load. Fly carefully.","Некоторые вертолёты могут поднимать грузы. Лететь с прицепленным грузом нужно осторожно, чтобы не оборвался кабель."
+STR_TIP_017,"Heavy helicopters may carry loads. Use Action menu to attach a cable while hovering over load. Fly carefully.","Некоторые вертолёты могут поднимать грузы. Лететь с прицепленным грузом нужно осторожно, чтобы не оборвался трос."
 STR_TIP_018,"Every Control point captured by your team can be used for respawn.","Возрождаться можно на любой Контрольной Точке, захваченной Вашей командой."
 STR_TIP_019,"All the available respawn points are marked with yellow circles in the respawn dialog.","Все доступные для возрождения точки обозначены желтым маркером."
 STR_TIP_020,"You can select any available spawnpoint or MHQ by clicking on it with the left mouse button.","Вы можете выбрать любую, доступную для возрождения, точку, кликая по ней левой кнопкой мыши."
