@@ -23,7 +23,7 @@ class RscOptions {
 		};
 		class CA_VD_Label: RscText_ext {
 			idc = 13002;
-			text = $STR_WF_ViewDistance;
+			text = $STR_WF_ViewDistanceP;
 			x = 0.04;
 			y = 0.25;
 			sizeEx = 0.03;

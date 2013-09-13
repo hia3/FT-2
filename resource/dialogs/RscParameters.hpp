@@ -10,7 +10,7 @@ class RscParameters {
 			idc = -1;
 			x = 0.015;
 			y = 0.15;
-			w = 0.5;
+			w = 0.6;
 			h = 0.9;
 		};
 	};
@@ -20,80 +20,58 @@ class RscParameters {
 		class Duration: RscText_ext 
 		{
 			idc = 7000;
-			text = "Duration";
 			x = 0.04;
 			y = 0.3;
+			w = 0.5;
 		};
-		class Daytime: RscText_ext 
+		class Daytime: Duration 
 		{
 			idc = 7001;
-			text = "Daytime";
-			x = 0.04;
 			y = 0.35;
 		};
-		class Weather: RscText_ext 
+		class Weather: Duration 
 		{
 			idc = 7002;
-			text = "Weather";
-			x = 0.04;
 			y = 0.4;
 		};
-		class ViewDistance: RscText_ext 
+		class ViewDistance: Duration 
 		{
 			idc = 7003;
-			text = "ViewDistance";
-			x = 0.04;
 			y = 0.45;
 		};
-		class ExternalView: RscText_ext 
+		class ExternalView: Duration 
 		{
 			idc = 7004;
-			text = "ExternalView";
-			x = 0.04;
 			y = 0.5;
-			w=1;
 		};
-		class ScreenMarkers: RscText_ext 
+		class ScreenMarkers: Duration 
 		{
 			idc = 7005;
-			text = "ScreenMarkers";
-			x = 0.04;
 			y = 0.55;
-			w=1;
 		};
-		class Armaments: RscText_ext 
+		class Armaments: Duration 
 		{
 			idc = 7006;
-			text = "Armaments";
-			x = 0.04;
 			y = 0.6;
 		};
-		class StartFund: RscText_ext 
+		class StartFund: Duration 
 		{
 			idc = 7007;
-			text = "StartFund";
-			x = 0.04;
 			y = 0.65;
 		};		
-		class Halo: RscText_ext 
+		class Halo: Duration 
 		{
 			idc = 7008;
-			text = "Halo";
-			x = 0.04;
 			y = 0.7;
 		};	
-		class Grass: RscText_ext 
+		class Grass: Duration 
 		{
 			idc = 7009;
-			text = "Grass";
-			x = 0.04;
 			y = 0.75;
 		};
-		class BicycleMHQ: RscText_ext 
+		class BicycleMHQ: Duration 
 		{
 			idc = 7010;
-			text = "Buy bicycle at MHQ";
-			x = 0.04;
 			y = 0.8;
 		};	
 		class CA_Diff_B_Back : RscShortcutButton {

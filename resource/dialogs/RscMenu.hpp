@@ -61,7 +61,7 @@ class RscMenu {
 			idc = 11007;
 			x = 0.02;
 			y = 0.780;
-			text = "Parameters";
+			text = $STR_WF_Parameters;
 			action = "Dialog_MenuAction = 6";
 		};
 		class Label: RscText_ext 
