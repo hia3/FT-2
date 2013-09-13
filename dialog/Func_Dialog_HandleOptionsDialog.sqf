@@ -92,7 +92,7 @@ for [{_i=0},{_i<3},{_i=_i+1}] do
 };
 lbSetCurSel[13008,_lastAS];
 
-ctrlSetText [13002, format [localize "STR_WF_ViewDistance",Local_ViewDistance]];
+ctrlSetText [13002, format [localize "STR_WF_ViewDistanceP",Local_ViewDistance]];
 ctrlSetText [13004, format [localize "STR_WF_SMDistance",Dialog_ScreenMarkersDistance]];
 ctrlSetText [13014, format [localize "STR_WF_Transfer",0]];
 
@@ -117,7 +117,7 @@ while {alive player && dialog} do
 
 	if (_currentVD!=_lastViewDistance) then
 	{
-		ctrlSetText [13002, format [localize "STR_WF_ViewDistance",_currentVD]];
+		ctrlSetText [13002, format [localize "STR_WF_ViewDistanceP",_currentVD]];
 		Local_ViewDistance=_currentVD;
 		_lastViewDistance=_currentVD;
 
