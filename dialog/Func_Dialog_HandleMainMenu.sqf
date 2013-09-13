@@ -2,7 +2,7 @@
 Dialog_MenuAction = -1;
 _exited = false;
 
-while {alive player && dialog} do 
+while {alive player && dialog} do
 {
 	//--- Build Units.
 	_enable = false;
@@ -18,23 +18,23 @@ while {alive player && dialog} do
 	}else{
 		ctrlEnable [11002,false];
 	};
-		
+
 	sleep 0.5;
-	
+
 	if (!dialog || _exited) exitWith {};
-	
-	
+
+
 	switch(Dialog_MenuAction) do {
-	
+
 		//--- Gear Menu.
 		case 1 :
 		{
 			Dialog_MenuAction = -1;
 			closeDialog 0;
 			createDialog "RscGear";
-			_exited = true;	
+			_exited = true;
 		};
-	
+
 		//--- Vehicles Menu.
 		case 2 :
 		{
@@ -42,8 +42,8 @@ while {alive player && dialog} do
 			closeDialog 0;
 			createDialog "RscVehicles";
 			_exited = true;
-		};	
-		
+		};
+
 		//--- Groups Menu.
 		case 3 :
 		{
@@ -51,8 +51,8 @@ while {alive player && dialog} do
 			closeDialog 0;
 			createDialog "RscGroups";
 			_exited = true;
-		};	
-		
+		};
+
 		//--- Options Menu.
 		case 4 :
 		{
@@ -78,6 +78,6 @@ while {alive player && dialog} do
 			closeDialog 0;
 			createDialog "RscParameters";
 			_exited = true;
-		};	
+		};
 	};
 };

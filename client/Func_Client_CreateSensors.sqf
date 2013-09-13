@@ -2,7 +2,7 @@
 
 
 
-//when player gets into vehicle, we should update useractions	
+//when player gets into vehicle, we should update useractions
 _sensor=createTrigger["EmptyDetector",[0,0]];
 _sensor setTriggerActivation ["ANY", "PRESENT", true];
 _sensor setTriggerStatements["(alive player) && ((vehicle player)!=player)","[true] call Func_Client_UpdateVehicleActions","[false] call Func_Client_UpdateVehicleActions"];
@@ -35,7 +35,7 @@ _sensor setTriggerStatements[format[_sensor_template_condition, "Ship"],format [
 _sensor=createTrigger["EmptyDetector",[0,0]];
 _sensor setTriggerActivation ["ANY", "PRESENT", true];
 _sensor setTriggerStatements["(alive player) && (Local_PlayerVehicle!=player) && ((locked Local_PlayerVehicle)==2) && ((player getVariable 'playername')!=(Local_PlayerVehicle getVariable 'owner_name'))","[getText(configFile>>'CfgVehicles'>>typeOf Local_PlayerVehicle>>'displayname'),localize 'STR_HINT_LockedOwner','pic\lock_off_ca.paa',1.0] call Func_Client_ShowCustomMessage","call compile 'if ((alive player) && (Local_PlayerVehicle!=player)) then {[getText(configFile>>''CfgVehicles''>>typeOf Local_PlayerVehicle>>''displayname''),localize ''STR_HINT_UnlockedOwner'',''pic\lock_on_ca.paa'',1.0] call Func_Client_ShowCustomMessage}'"];
-	
+
 
 //if player selects a disposable RPG as the current weapon
 //add him an ammo
@@ -44,7 +44,7 @@ _sensor=createTrigger["EmptyDetector",[0,0]];
 _sensor setTriggerActivation ["ANY", "PRESENT", true];
 _sensor setTriggerStatements["(alive player) && (Local_PlayerVehicle==player) && ((currentWeapon player) in System_DisposableRPGTypes)","_magazine=(getArray(configFile>>'cfgWeapons'>>secondaryWeapon player>>'magazines')) select 0; player addMagazine _magazine","_magazine=(getArray(configFile>>'cfgWeapons'>>secondaryWeapon player>>'magazines')) select 0; player removeMagazines _magazine"];
 
-	
+
 //if player gets negative rating
 //restore rating or some systems will not work
 _sensor=createTrigger["EmptyDetector",[0,0]];
@@ -55,4 +55,4 @@ _sensor setTriggerStatements["(alive player) && ((rating player) < 0)","player a
 //reset injury flag for healer awarding
 _sensor=createTrigger["EmptyDetector",[0,0]];
 _sensor setTriggerActivation ["ANY", "PRESENT", true];
-_sensor setTriggerStatements["!(alive player) || (({(animationState player)==_x} count ['AmovPpneMstpSrasWrflDnon_healed','AinvPknlMstpSlayWrflDnon_healed','AinvPknlMstpSlayWrflDnon_healed2']) > 0)","Local_InjuredByEnemy=false",""];		
+_sensor setTriggerStatements["!(alive player) || (({(animationState player)==_x} count ['AmovPpneMstpSrasWrflDnon_healed','AinvPknlMstpSlayWrflDnon_healed','AinvPknlMstpSlayWrflDnon_healed2']) > 0)","Local_InjuredByEnemy=false",""];

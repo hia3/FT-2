@@ -1,5 +1,5 @@
 //player GUI script
-//the most shity and unoptimized script in whole mission
+//the most shitty and unoptimized script in whole mission
 //hate working with GUI
 
 

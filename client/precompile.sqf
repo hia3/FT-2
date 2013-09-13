@@ -325,11 +325,11 @@ onEachFrame
 			Local_FriendlyMHQ=Config_EastMHQ;
 			Local_FriendlySpawnPoints=Config_EastSpawnPoints;
 			Local_FriendlySupplyVehicleTypes=Config_EastSupplyVehicleTypes;
-			
+
 			Local_FriendlyReammoVehicleTypes=System_EastReammoVehicleTypes;
 			Local_FriendlyRepairVehicleTypes=System_EastRepairVehicleTypes;
 			Local_FriendlyRefuelVehicleTypes=System_EastRefuelVehicleTypes;
-			
+
 			Local_FriendlySoldierTypes=Config_EastSoldierTypes;
 			Local_FriendlyBaseFlag=Config_EastBaseFlag;
 			Local_FriendlyMarkerDirection=Config_EastMarkerDirecton;
@@ -344,11 +344,11 @@ onEachFrame
 			Local_FriendlyMHQ=Config_WestMHQ;
 			Local_FriendlySpawnPoints=Config_WestSpawnPoints;
 			Local_FriendlySupplyVehicleTypes=Config_WestSupplyVehicleTypes;
-			
+
 			Local_FriendlyReammoVehicleTypes=System_WestReammoVehicleTypes;
 			Local_FriendlyRepairVehicleTypes=System_WestRepairVehicleTypes;
 			Local_FriendlyRefuelVehicleTypes=System_WestRefuelVehicleTypes;
-			
+
 			Local_FriendlySoldierTypes=Config_WestSoldierTypes;
 			Local_FriendlyBaseFlag=Config_WestBaseFlag;
 			Local_FriendlyMarkerDirection=Config_WestMarkerDirecton;

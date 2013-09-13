@@ -23,10 +23,10 @@ class RscTitles
 			y=SafeZoneY + SafeZoneH;
 			w=1;
 			h=0.2;
-			
+
 			size = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 		};
-		
+
 		class txt_dwn:RscStructuredTextB_ext
 		{
 			idc=6003;
@@ -45,14 +45,14 @@ class RscTitles
 			h=0.55;
 		};
 
-		class OptionsImageAspectRatio: RscPicture_ext 
+		class OptionsImageAspectRatio: RscPicture_ext
 		{
 			w = 0.078431;
 			h = 0.104575;
 			style = "0x30+0x800";
 		};
 
-		class OptionsIcon0: OptionsImageAspectRatio 
+		class OptionsIcon0: OptionsImageAspectRatio
 		{
 			IDC = 6005;
 			x = "(SafeZoneW + SafeZoneX) - (0.0392157)";
@@ -63,41 +63,41 @@ class RscTitles
 			text = "";
 		};
 
-		class OptionsIcon1: OptionsIcon0 
+		class OptionsIcon1: OptionsIcon0
 		{
 			IDC = 6006;
 			y = "0.3+(0.0522876*1)";
 		};
 
-		class OptionsIcon2: OptionsIcon0 
+		class OptionsIcon2: OptionsIcon0
 		{
 			IDC = 6007;
 			y = "0.3+(0.0522876*2)";
 		};
 
-		class OptionsIcon3: OptionsIcon0 
+		class OptionsIcon3: OptionsIcon0
 		{
 			IDC = 6008;
 			y = "0.3+(0.0522876*3)";
 		};
 
-		class OptionsIcon4: OptionsIcon0 
+		class OptionsIcon4: OptionsIcon0
 		{
 			IDC = 6009;
 			y = "0.3+(0.0522876*4)";
 		};
 
-		class OptionsIcon5: OptionsIcon0 
+		class OptionsIcon5: OptionsIcon0
 		{
 			IDC = 6010;
 			y = "0.3+(0.0522876*5)";
 		};
-		class OptionsIcon6: OptionsIcon0 
+		class OptionsIcon6: OptionsIcon0
 		{
 			IDC = 6011;
 			y = "0.3+(0.0522876*6)";
 		};
-		class OptionsIcon7: OptionsIcon0 
+		class OptionsIcon7: OptionsIcon0
 		{
 			IDC = 6012;
 			y = "0.3+(0.0522876*7)";
@@ -126,17 +126,17 @@ class RscTitles
 			y=0.9;
 			w=0.20;
 			h = 0.20;
-		};	
+		};
 		class ManPic:RscPicture_ext
-		{	
-			idc=6033;		
+		{
+			idc=6033;
 			colorText[]={0.1,1,0.1,0.7};
 			text="pic\man.paa";
 			x=safeZoneX-2;
 			y=SafeZoneY-2;
 			w=0.04*1.25;
 			h=0.14*1.25;
-		};		
+		};
 		class HeadPic:RscPicture_ext
 		{
 			idc=6034;
@@ -220,7 +220,7 @@ class RscTitles
 			h = "(call compile (profilenamespace getvariable ['IGUI_GRID_GPS_H',str ((10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)))])) - 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 		};
 
-		class gps_background : RscPicture 
+		class gps_background : RscPicture
 		{
 			idc = 6040;
 
