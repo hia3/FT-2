@@ -90,14 +90,15 @@ class RscGear
 
         //Debug_button,
 
-        Goggles_button,
-        Backpacks_button,
-        Clothing_button,
-        Items_button,
-        Explosives_button,
-        Sidearms_button,
-        Secondary_button,
         Primary_button,
+        Secondary_button,
+        Sidearms_button,
+        Explosives_button,
+        Items_button,
+        Clothing_button,
+        Backpacks_button,
+        Goggles_button,
+		
         Obves3_list,
         Obves2_list,
         Obves1_list,
@@ -194,8 +195,8 @@ class RscGear
         text = "\A3\ui_f\data\igui\cfg\mptable\infantry_ca.paa";
         x = 11.52 * GUI_GRID_W + GUI_GRID_X + GUI_ORIG_OFFSET_X;
         y = 27 * GUI_GRID_H + GUI_GRID_Y + GUI_ORIG_OFFSET_Y - 0.01;
-	w = 1.3 * GUI_GRID_H;
-	h = 1.1 * GUI_GRID_H + 0.02;
+        w = 1.3 * GUI_GRID_H;
+        h = 1.1 * GUI_GRID_H + 0.02;
         tooltip = $STR_WF_Tooltips_GearReload;
 
         onButtonClick = "['Preset_button', _this] call Func_Dialog_HandleGearDialog";
@@ -212,8 +213,8 @@ class RscGear
         text = "A3\ui_f\data\gui\rsc\RscDisplayMultiplayerSetup\flag_opfor_empty_ca.paa";
         x = 13.52 * GUI_GRID_W + GUI_GRID_X + GUI_ORIG_OFFSET_X;
         y = 27 * GUI_GRID_H + GUI_GRID_Y + GUI_ORIG_OFFSET_Y;
-	w = 1.3 * GUI_GRID_H;
-	h = 1.1 * GUI_GRID_H;
+        w = 1.3 * GUI_GRID_H;
+        h = 1.1 * GUI_GRID_H;
         tooltip = "";
 
         onButtonClick = "['Preset_button', _this] call Func_Dialog_HandleGearDialog";
@@ -263,8 +264,8 @@ class RscGear
         text = "\a3\Ui_f\data\GUI\Rsc\RscDisplayArcadeMap\icon_clear_ca.paa";
         x = 13.52 * GUI_GRID_W + GUI_GRID_X + GUI_ORIG_OFFSET_X;
         y = 25 * GUI_GRID_H + GUI_GRID_Y + GUI_ORIG_OFFSET_Y;
-	w = 1.56 * GUI_GRID_W;
-	h = 1.3 * GUI_GRID_H;
+        w = 1.56 * GUI_GRID_W;
+        h = 1.3 * GUI_GRID_H;
         tooltip = "$STR_DISP_ARCMAP_CLEAR_first";
 
         onButtonClick = "['Clear_button', _this] call Func_Dialog_HandleGearDialog";
@@ -289,8 +290,8 @@ class RscGear
         colorActive[] = {0, 1, 0, 1};
         text = "\a3\Ui_f\data\IGUI\RscIngameUI\RscUnitInfoAirRTDFull\ico_insp_done_3_ca.paa";
         x = 24.52 * GUI_GRID_W + GUI_GRID_X + GUI_ORIG_OFFSET_X;
-	w = 2 * 1.56 * GUI_GRID_W;
-	h = 2 * 1.3 * GUI_GRID_H;
+        w = 2 * 1.56 * GUI_GRID_W;
+        h = 2 * 1.3 * GUI_GRID_H;
         tooltip = $STR_WF_Purchase;
 
         onButtonClick = "['OK_button', _this] call Func_Dialog_HandleGearDialog";
@@ -321,104 +322,89 @@ class RscGear
 
         onButtonClick = "createDialog 'RscDebugConsole';";
     };
-
-    class Goggles_button: RscButton
+	
+	class Primary_button: RscActiveText
     {
-        idc = IDC_Goggles_button;
-        onButtonClick = "['Goggles_button', _this] call Func_Dialog_HandleGearDialog";
-
-        text = "Goggles"; //--- ToDo: Localize;
-        x = 22 * GUI_GRID_W + GUI_GRID_X;
+        idc = IDC_Primary_button;
+        shortcuts[] = {};
+        style = 48;
+        color[] = {1, 1, 1, 1};
+        colorActive[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])", 1};
+        text = "\A3\ui_f\data\gui\cfg\Hints\rifle_ca.paa";
+        x = -13 * GUI_GRID_W + GUI_GRID_X;
         y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
-    };
-    class Backpacks_button: RscButton
-    {
-        idc = IDC_Backpacks_button;
-        onButtonClick = "['Backpacks_button', _this] call Func_Dialog_HandleGearDialog";
+        w = 3 * GUI_GRID_W;
+        h = 2 * GUI_GRID_H;
 
-        text = "Backpacks"; //--- ToDo: Localize;
-        x = 17 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
+        onButtonClick = "['Primary_button', _this] call Func_Dialog_HandleGearDialog";
     };
-    class Clothing_button: RscButton
-    {
-        idc = IDC_Clothing_button;
-        onButtonClick = "['Clothing_button', _this] call Func_Dialog_HandleGearDialog";
-
-        text = "Clothing"; //--- ToDo: Localize;
-        x = 12 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
-    };
-    class Items_button: RscButton
-    {
-        idc = IDC_Items_button;
-        onButtonClick = "['Items_button', _this] call Func_Dialog_HandleGearDialog";
-
-        text = "Items"; //--- ToDo: Localize;
-        x = 7 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
-    };
-    class Explosives_button: RscButton
-    {
-        idc = IDC_Explosives_button;
-        onButtonClick = "['Explosives_button', _this] call Func_Dialog_HandleGearDialog";
-
-        text = "Explosives"; //--- ToDo: Localize;
-        x = 2 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
-    };
-    class Sidearms_button: RscButton
-    {
-        idc = IDC_Sidearms_button;
-        onButtonClick = "['Sidearms_button', _this] call Func_Dialog_HandleGearDialog";
-
-        text = "Sidearms"; //--- ToDo: Localize;
-        x = -3 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
-    };
-    class Secondary_button: RscButton
+	class Secondary_button: Primary_button
     {
         idc = IDC_Secondary_button;
         onButtonClick = "['Secondary_button', _this] call Func_Dialog_HandleGearDialog";
 
-        text = "Secondary"; //--- ToDo: Localize;
-        x = -8 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
+        text = "\A3\ui_f\data\gui\cfg\Hints\launcher_ca.paa";
+        x = -9 * GUI_GRID_W + GUI_GRID_X;
     };
-    class Primary_button: RscButton
+	class Sidearms_button: Primary_button
     {
-        idc = IDC_Primary_button;
-        onButtonClick = "['Primary_button', _this] call Func_Dialog_HandleGearDialog";
+        idc = IDC_Sidearms_button;
+        onButtonClick = "['Sidearms_button', _this] call Func_Dialog_HandleGearDialog";
 
-        text = "Primary"; //--- ToDo: Localize;
-        x = -13 * GUI_GRID_W + GUI_GRID_X;
-        y = -4 * GUI_GRID_H + GUI_GRID_Y;
-        w = 4.5 * GUI_GRID_W;
-        h = 1 * GUI_GRID_H;
+        text = "\A3\ui_f\data\gui\cfg\Hints\handgun_ca.paa";
+        x = -5 * GUI_GRID_W + GUI_GRID_X;
     };
+	class Explosives_button: Primary_button
+    {
+        idc = IDC_Explosives_button;
+        onButtonClick = "['Explosives_button', _this] call Func_Dialog_HandleGearDialog";
+
+        text = "\A3\ui_f\data\gui\cfg\Hints\grenades_ca.paa";
+        x = -1 * GUI_GRID_W + GUI_GRID_X;
+    };
+	class Items_button: Primary_button
+    {
+        idc = IDC_Items_button;
+        onButtonClick = "['Items_button', _this] call Func_Dialog_HandleGearDialog";
+
+        text = "\A3\ui_f\data\gui\cfg\Hints\slots_ca.paa";
+        x = 3 * GUI_GRID_W + GUI_GRID_X;
+    };
+	class Clothing_button: Primary_button
+    {
+        idc = IDC_Clothing_button;
+        onButtonClick = "['Clothing_button', _this] call Func_Dialog_HandleGearDialog";
+
+        text = "\A3\ui_f\data\gui\cfg\Hints\basiclean_ca.paa";
+        x = 7 * GUI_GRID_W + GUI_GRID_X;
+    };
+	class Backpacks_button: Primary_button
+    {
+        idc = IDC_Backpacks_button;
+        onButtonClick = "['Backpacks_button', _this] call Func_Dialog_HandleGearDialog";
+
+        text = "\A3\ui_f\data\gui\cfg\Hints\gear_ca.paa";
+        x = 11 * GUI_GRID_W + GUI_GRID_X;
+    };
+	class Goggles_button: Primary_button
+    {
+        idc = IDC_Goggles_button;
+        onButtonClick = "['Goggles_button', _this] call Func_Dialog_HandleGearDialog";
+
+        text = "\A3\ui_f\data\gui\cfg\Hints\basicdive_ca.paa";
+        x = 15 * GUI_GRID_W + GUI_GRID_X;
+    };
+	
+	
     class Obves3_list: RscObvesListBox
     {
         idc = IDC_Obves3_list;
 
         onLBDblClick   = "['Weapons_list_onLBDblClick',   _this] call Func_Dialog_HandleGearDialog";
 
-        text = "Obves3_list"; //--- ToDo: Localize;
+        text = "";
         x = 4.5 * GUI_GRID_W + GUI_GRID_X;
-        y = 15.5 * GUI_GRID_H + GUI_GRID_Y;
+        y = 16.5 * GUI_GRID_H + GUI_GRID_Y;
         w = 17 * GUI_GRID_W;
         h = 4 * GUI_GRID_H;
         colorBackground[] = {0,1,0,0.5};
@@ -429,9 +415,9 @@ class RscGear
 
         onLBDblClick   = "['Weapons_list_onLBDblClick',   _this] call Func_Dialog_HandleGearDialog";
 
-        text = "Obves2_list"; //--- ToDo: Localize;
+        text = "";
         x = 4.5 * GUI_GRID_W + GUI_GRID_X;
-        y = 12 * GUI_GRID_H + GUI_GRID_Y;
+        y = 13 * GUI_GRID_H + GUI_GRID_Y;
         w = 17 * GUI_GRID_W;
         h = 3 * GUI_GRID_H;
         colorBackground[] = {0,1,0,0.5};
@@ -442,9 +428,9 @@ class RscGear
 
         onLBDblClick   = "['Weapons_list_onLBDblClick',   _this] call Func_Dialog_HandleGearDialog";
 
-        text = "Obves1_list"; //--- ToDo: Localize;
+        text = "";
         x = 4.5 * GUI_GRID_W + GUI_GRID_X;
-        y = 3.5 * GUI_GRID_H + GUI_GRID_Y;
+        y = 4.5 * GUI_GRID_H + GUI_GRID_Y;
         w = 17 * GUI_GRID_W;
         h = 8 * GUI_GRID_H;
         colorBackground[] = {0,1,0,0.5};
@@ -455,9 +441,9 @@ class RscGear
 
         onLBDblClick   = "['Weapons_list_onLBDblClick',   _this] call Func_Dialog_HandleGearDialog";
 
-        text = "Magazines_list"; //--- ToDo: Localize;
+        text = "";
         x = 4.5 * GUI_GRID_W + GUI_GRID_X;
-        y = -2.5 * GUI_GRID_H + GUI_GRID_Y;
+        y = -1.5 * GUI_GRID_H + GUI_GRID_Y;
         w = 17 * GUI_GRID_W;
         h = 5.5 * GUI_GRID_H;
         colorBackground[] = {0,1,0,0.5};
@@ -472,9 +458,9 @@ class RscGear
 
         canDrag = 1;
 
-        text = "Weapons"; //--- ToDo: Localize;
+        text = "";
         x = -14 * GUI_GRID_W + GUI_GRID_X;
-        y = -2.5 * GUI_GRID_H + GUI_GRID_Y;
+        y = -1.5 * GUI_GRID_H + GUI_GRID_Y;
         w = 18 * GUI_GRID_W;
         h = 22 * GUI_GRID_H;
     };
@@ -552,14 +538,14 @@ class RscGear
         style = 48;
         color[] = {1,1,1,0.7};
 
-        text = "\A3\Ui_f\data\GUI\Rsc\RscDisplayArcadeMap\icon_exit_cross_ca.paa"; //--- ToDo: Localize;
+        text = "\A3\Ui_f\data\GUI\Rsc\RscDisplayArcadeMap\icon_exit_cross_ca.paa";
         x = 41.6 * GUI_GRID_W + GUI_GRID_X + GUI_ORIG_OFFSET_X;
         y = 1 * GUI_GRID_H + GUI_GRID_Y + GUI_ORIG_OFFSET_Y;
         w = 1.2 * GUI_GRID_W;
         h = 1 * GUI_GRID_H;
         colorText[] = {1,1,1,0.7};
         colorActive[] = {1,1,1,1};
-        tooltip = "Close"; //--- ToDo: Localize;
+        tooltip = $STR_DLG_Gear_Close;
     };
     class BackgroundSlotPrimary: RscPicture
     {
