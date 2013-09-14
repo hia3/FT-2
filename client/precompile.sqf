@@ -261,22 +261,24 @@ onEachFrame
 		};
 
 		{
-			private ["_laser_spot"];
+			private ["_laser_spot", "_distance"];
 
 			_laser_spot = _x;
 			if !(isNull _laser_spot) then
 			{
-				drawIcon3D ["a3\ui_f\data\map\GroupIcons\selector_selectedmission_ca.paa", [1,0,0,1], _laser_spot, 0.7, 0.7, 0, "", 1, 0.02, "TahomaB"];
+				_distance = round (player distance _laser_spot);
+				drawIcon3D ["a3\ui_f\data\map\GroupIcons\selector_selectedmission_ca.paa", [1,0,0,1], _laser_spot, 0.7, 0.7, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
 			};
 		} forEach Local_LaserSpots;
 
 		{
-			private ["_target"];
+			private ["_target", "_distance"];
 
 			_target = _x;
 			if !(isNull _target) then
 			{
-				drawIcon3D ["a3\ui_f\data\map\Markers\NATO\o_unknown.paa", [0.7, 0.7, 0.7, 1], _target, 0.7, 0.7, 0, "", 1, 0.02, "TahomaB"];
+				_distance = round (player distance _target);
+				drawIcon3D ["a3\ui_f\data\map\Markers\NATO\o_unknown.paa", [0.7, 0.7, 0.7, 1], _target, 0.7, 0.7, 0, (str _distance) + "m", 1, 0.02, "TahomaB"];
 			};
 		} forEach Local_CommanderDetectedVehicles;
 
