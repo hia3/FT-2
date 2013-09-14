@@ -21,7 +21,7 @@ if ((vehicle player) in (call Local_EnemyMHQ)) exitWith
 
 if (_param) then
 {
-	if (Local_PlayerVehicle isKindOf "ParachuteBase") then
+	if ((vehicle player) isKindOf "ParachuteBase") then
 	{
 		// this is the only vehicle that gets deleted while player in it
 		Local_PlayerVehicle=player;
