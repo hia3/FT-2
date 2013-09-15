@@ -37,7 +37,7 @@
 		title="$STR_P_Distance";
 		values[]={500,2500,3000,3500,4000,5000,7500,10000};
 		texts[]={$STR_P_Distance00,$STR_P_Distance01,$STR_P_Distance02,$STR_P_Distance03,$STR_P_Distance04,$STR_P_Distance05,$STR_P_Distance06,$STR_P_Distance07};
-		default=3000;
+		default=2500;
 	};
 	// params array 4
 	class ExternalView
@@ -46,7 +46,7 @@
 
 		values[]={0,1,2,3};
 		texts[]={$STR_P_View01,$STR_P_View02,$STR_P_View03,$STR_P_View04};
-		default=3;
+		default=1;
 	};	
 	// params array 5
 	class ScreenMarkers
