@@ -117,23 +117,7 @@ switch(_pa6) do
 
 };
 
-
-switch(_pa7) do 
-{
-	case 500: {_pat7 = "$500"};
-	case 600: {_pat7 = "$600"};
-	case 700: {_pat7 = "$700"};
-	case 800: {_pat7 = "$800"};
-	case 900: {_pat7 = "$900"};
-	case 1000: {_pat7 = "$1000"};
-	case 1100: {_pat7 = "$1100"};
-	case 1200: {_pat7 = "$1200"};
-	case 1300: {_pat7 = "$1300"};
-	case 1400: {_pat7 = "$1400"};
-	case 1500: {_pat7 = "$1500"};
-	case 1000000: {_pat7 = "$1000000"};
-};
-
+_pat7 = "$" + (str _pa7);
 
 switch(_pa8) do 
 {

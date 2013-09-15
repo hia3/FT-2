@@ -92,7 +92,7 @@
 				while {(count _tip_index) < 3} do { _tip_index = toArray("0") + _tip_index};
 				_tip_index_str = "STR_TIP_" + toString(_tip_index);
 
-				_tip ctrlSetStructuredText parseText format ["<br/><t align='center' size='1.2' color='#FFDEAD'>Tip: </t><t align='center' size='1.2' color='#dddddd'>%1</t>", localize _tip_index_str];
+				_tip ctrlSetStructuredText parseText format ["<br/><t align='center' size='1.2' color='#FFDEAD'>" + localize "STR_TIP_TIP" + "</t><t align='center' size='1.2' color='#dddddd'>%1</t>", localize _tip_index_str];
 
 				_tip ctrlShow true;
 				playSound "tip_sound";
