@@ -10,12 +10,12 @@ respawndelay=0;
 disabledAI=true;
 respawnDialog = 0;
 onLoadMissionTime=false;
-loadScreen="pic\hia3logo.paa";
 joinUnassigned  = false;
 
 onLoadName="www.hia3.com";
 author="sms and mid16";
 onLoadMission="Based on the Valhalla map by WINSE and Roman.val";
+loadScreen="pic\hia3logo.paa";
 
 class Header
 {
