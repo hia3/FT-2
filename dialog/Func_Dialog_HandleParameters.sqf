@@ -83,13 +83,15 @@ if (Config_DisableWeatherChange) then
 switch(_pa3) do 
 {
 	case  500  : {_pat3 = localize "STR_P_Distance00"};
-	case 2500  : {_pat3 = localize "STR_P_Distance01"};
-	case 3000  : {_pat3 = localize "STR_P_Distance02"};
-	case 3500  : {_pat3 = localize "STR_P_Distance03"};
-	case 4000  : {_pat3 = localize "STR_P_Distance04"};
-	case 5000  : {_pat3 = localize "STR_P_Distance05"};
-	case 7500  : {_pat3 = localize "STR_P_Distance06"};
-	case 10000 : {_pat3 = localize "STR_P_Distance07"};
+	case  750  : {_pat3 = localize "STR_P_Distance01"};
+	case 1000  : {_pat3 = localize "STR_P_Distance02"};
+	case 2500  : {_pat3 = localize "STR_P_Distance03"};
+	case 3000  : {_pat3 = localize "STR_P_Distance04"};
+	case 3500  : {_pat3 = localize "STR_P_Distance05"};
+	case 4000  : {_pat3 = localize "STR_P_Distance06"};
+	case 5000  : {_pat3 = localize "STR_P_Distance07"};
+	case 7500  : {_pat3 = localize "STR_P_Distance08"};
+	case 10000 : {_pat3 = localize "STR_P_Distance09"};
 };
 
 
