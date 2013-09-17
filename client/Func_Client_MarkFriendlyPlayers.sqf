@@ -5,7 +5,7 @@
 	_hide_marker =
 	{
 		//set marker to invisible area on the map
-		_this setMarkerPosLocal [15000,15000]
+		_this setMarkerPosLocal [150000,150000]
 	};
 
 	//if GPS is shown
@@ -23,7 +23,7 @@
 
 				if (_i == Local_NumberOfMarkersCreated) then
 				{
-					createMarkerLocal [_marker,[15000,15000]];
+					createMarkerLocal [_marker,[150000,150000]];
 					_marker setMarkerColorLocal Local_FriendlyColor;
 					_marker setMarkerSizeLocal [0.3,0.3];
 					_marker setMarkerTypeLocal "mil_arrow2";

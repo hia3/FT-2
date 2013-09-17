@@ -442,7 +442,7 @@ onEachFrame
 	_i=1;
 	{
 		_NameString=format ["mhqMarker%1",_i];
-		createMarkerLocal [_NameString,[15000,15000]];
+		createMarkerLocal [_NameString,[150000,150000]];
 		_NameString setMarkerColorLocal Local_FriendlyColor;
 		_NameString setMarkerSizeLocal [0.5,0.5];
 		_NameString setMarkerTypeLocal "mil_marker";

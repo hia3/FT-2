@@ -57,7 +57,7 @@
 						}
 						else
 						{
-							_marker setMarkerPosLocal [15000,15000];
+							_marker setMarkerPosLocal [150000,150000];
 						};
 					}
 					else
