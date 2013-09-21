@@ -4,6 +4,8 @@ if (isNil "Local_RunningTasks") then
 {
 	Local_RunningTasks = [];
 
+	if (false) then
+	{
 	[] spawn
 	{
 		while {!Global_GameEnded} do
@@ -21,10 +23,11 @@ if (isNil "Local_RunningTasks") then
 			} forEach Local_RunningTasks;
 		};
 	};
+	};
 };
 
 _code = _this select 0;
-_code_str = [str _code, 0, 10] call BIS_fnc_trimString;
+_code_str = [[str _code] call BIS_fnc_filterString, 0, 40] call BIS_fnc_trimString;
 
 if (1 == (count _this)) then
 {
@@ -37,6 +40,6 @@ else
 	_result = _params spawn _code;
 };
 
-Local_RunningTasks set [count Local_RunningTasks, [_result, _code_str, scriptDone _result]];
+Local_RunningTasks set [count Local_RunningTasks, [_result, _code_str, scriptDone _result, time + random 1000]];
 
 _result
