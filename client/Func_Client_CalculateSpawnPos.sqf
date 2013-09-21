@@ -1,7 +1,7 @@
 //function calculates player respawn position
 //not to place him inside a building
 
-private ["_Place","_Pos","_Attempt","_Object","_x","_y","_a","_b"];
+private ["_Place","_Pos0","_Pos1000","_Attempt","_Object","_x","_y","_a","_b"];
 //limit attempts number
 _Attempt=512;
 _Place=0;
@@ -28,12 +28,15 @@ while{_Place<_Attempt}do
 	{
 		_y=-_y
 	};
-	_Pos=[(_this select 0)+_x,(_this select 1)+_y,0];
-	_Object=nearestObjects [_Pos,["ALLVEHICLES","STATIC","THING"],10];
-	if((count _Object)<1)then
+	_Pos0=[(_this select 0)+_x,(_this select 1)+_y,0];
+	_Pos1000=[(_this select 0)+_x,(_this select 1)+_y,1000];
+	_Object=nearestObjects [_Pos0,["ALLVEHICLES","STATIC","THING"],5];
+	_Object_above = str lineIntersectsWith [_Pos1000, _Pos0];
+	_is_inside_rock = ((["rock", _Object_above] call BIS_fnc_inString) || (["stone", _Object_above] call BIS_fnc_inString));
+	if (((count _Object)<1) && !_is_inside_rock) then
 	{
 		_Place=_Attempt;
 	};
 };
-_Pos
-	
+
+_Pos0
