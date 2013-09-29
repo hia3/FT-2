@@ -403,6 +403,11 @@ onEachFrame
 	{
 		_count=paramsArray select 7;
 		FT2_WF_Logic setVariable [_varname,_count,true];
+	}
+	else
+	{
+		Localshowintro = false;
+		Config_GameStartDelay = 0;
 	};
 	//---
 
@@ -499,7 +504,7 @@ onEachFrame
 	Dialog_RespawnDeathTime=-(Config_SpawnDelay-Config_GameStartDelay)+time;//game starts in Config_GameStartDelay after player join it
 	Dialog_RespawnCurrentPoint=0;//0 - index of element in Local_FriendlySpawnPoints
 
-	if (Localshowintro) then {sleep 27} else {sleep 7.0;};
+	if (Localshowintro) then {sleep 31} else {sleep 7.0;};
 
 	//Run client main thread
 	[Func_Client_MainThread, []] call Func_Common_Spawn;
@@ -510,7 +515,7 @@ onEachFrame
 	Public_PlayerConnected=player;
 	"Public_PlayerConnected" call Func_Common_PublicVariable;
 
-	if (Localshowintro) then {sleep 3.7} else {sleep 0.0;};
+	if (Localshowintro) then {sleep 3.3} else {sleep 0.0;};
 	//Show Credits
 	titleRsc ["trailer","plain"];
 }
