@@ -1,4 +1,4 @@
-	/*disableUserInput true;*/	
+	/*disableUserInput true;*/
 	//create camera to block player movements while intro is passing
 
 	//showHUD false;
@@ -12,6 +12,8 @@
 	enableEnvironment false;
 //	enableRadio false;
 	showcinemaborder false;
+
+	sleep 4.0;
 
 if (Localshowintro) then
     {
@@ -46,10 +48,10 @@ if (Localshowintro) then
 	"colorCorrections" ppEffectEnable true;
 	"colorCorrections" ppEffectAdjust [ 0.7, 1, 0.001, [-2.08, -1.55, -1.9, 0.013],[1.69, 0.21, 0.79, 1.64],[-0.21, -1.08, 0.91, -0.09]];
 	"colorCorrections" ppEffectCommit 0;
-	
+
 	//continuing intro
 
-	sleep 1.7;	
+	sleep 1.7;
 
 	Local_MultiUseString="<t align='center' size='3.0' color='#dddddd'>Hi,A3 Project Presents</t>";
 	titleRsc ["credits","plain"];
@@ -103,7 +105,7 @@ if (Localshowintro) then
 
 	sleep 0.6;
 
-	"chromAberration" ppEffectAdjust [0.1,0.1,true]; 
+	"chromAberration" ppEffectAdjust [0.1,0.1,true];
 	"chromAberration" ppEffectCommit 0;
 	"chromAberration" ppEffectEnable true;
 
@@ -127,7 +129,7 @@ if (Localshowintro) then
 	"radialBlur" ppEffectEnable false;
 	"chromAberration" ppEffectEnable false;
 
-	"dynamicBlur" ppEffectAdjust [0]; 
+	"dynamicBlur" ppEffectAdjust [0];
 	"dynamicBlur" ppEffectCommit 0;
 	"dynamicBlur" ppEffectEnable true;
 
@@ -138,7 +140,7 @@ if (Localshowintro) then
 	Local_Camera camSetRelPos [0.0, -0.1, 2];
 	Local_camera camCommitPrepared 16.5;
 
-	"dynamicBlur" ppEffectAdjust [0.8]; 
+	"dynamicBlur" ppEffectAdjust [0.8];
 	"dynamicBlur" ppEffectCommit 0;
 
 	sleep 0.1;
@@ -196,12 +198,12 @@ if (Localshowintro) then
 	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
 	titleRsc ["about_end","plain"];
 
-	"dynamicBlur" ppEffectAdjust [0]; 
+	"dynamicBlur" ppEffectAdjust [0];
 	"dynamicBlur" ppEffectCommit 0;
 
 	sleep 2.0;
 
-	"dynamicBlur" ppEffectAdjust [0.8]; 
+	"dynamicBlur" ppEffectAdjust [0.8];
 	"dynamicBlur" ppEffectCommit 0;
 
 	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
@@ -223,27 +225,28 @@ if (Localshowintro) then
 	sleep 0.1;
 
 	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
-	titleRsc ["about_split_t","plain"];
+	titleRsc ["about_split_3t","plain"];
 	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
-	CutRsc ["about_split_b","plain"];
+	CutRsc ["about_split_3b","plain"];
+	sleep 0.1;
+	Local_MultiUseString="<t align='right' size='1.9' color='#000000'>The Enhanced Capture and Hold mode</t>";
+	titleRsc ["about_end","plain"];
+	sleep 0.1;
+
+	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	titleRsc ["about_split_3t","plain"];
+	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	CutRsc ["about_split_3b","plain"];
 	sleep 0.1;
 	Local_MultiUseString="<t align='right' size='1.9' color='#000000'>The Enhanced Capture and Hold mode</t>";
 	titleRsc ["about_end","plain"];
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#0000FF'>The Enhanced Capture and Hold mode</t>";
-	CutRsc ["about_split_lb","plain"];
-	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#FF0000'>The Enhanced Capture and Hold mode</t>";
-	CutRsc ["about_split_rr","plain"];
-
-	sleep 0.1;
-
 	titleFadeOut 0.1;
 
-	"dynamicBlur" ppEffectAdjust [0]; 
+	"dynamicBlur" ppEffectAdjust [0];
 	"dynamicBlur" ppEffectCommit 0;
 
-	sleep 1.5;
+	sleep 1.4;
 
 	"colorCorrections" ppEffectEnable false;
 	Local_Camera camSetRelPos [0.0, -0.1, 840];
@@ -281,12 +284,12 @@ if (Localshowintro) then
 	Local_Camera camSetRelPos [0.0, -0.1, 2];
 	Local_camera camCommitPrepared 10.7;
 
-	sleep 0.4;
+	sleep 0.3;
 
 	Local_Camera camSetRelPos [0.0, -0.1, 640];
 	Local_camera camCommitPrepared 0;
 	"colorCorrections" ppEffectEnable false;
-	sleep 0.2;
+	sleep 0.1;
 
 	Local_Camera camSetRelPos [0.0, -0.1, 600];
 	Local_camera camCommitPrepared 0;
@@ -295,7 +298,7 @@ if (Localshowintro) then
 	Local_camera camCommitPrepared 9.0;
 	"colorCorrections" ppEffectEnable true;
 
-	sleep 2.0;
+	sleep 2.1;
 
 	"radialBlur" ppEffectAdjust [0.01,0.01,0.0,0.0];
 	"radialBlur" ppEffectCommit 4.3;
@@ -310,7 +313,7 @@ if (Localshowintro) then
 	Local_Camera camSetRelPos [0.0, -0.1, 2];
 	Local_camera camCommitPrepared 8.6;
 
-	sleep 1.15;
+	sleep 1.1;
 
 	Local_MultiUseString="<t align='center'><t size='10.0' color='#ffffff'><img image='pic\ft2.paa'></t><br/><t size='8.0' color='#000000'><t shadow='1' shadowColor='#565656'> </t></t></t>";
 	titleRsc ["Logo","plain"];
@@ -320,10 +323,7 @@ if (Localshowintro) then
 	Local_MultiUseString="<t align='center'><t size='10.0' color='#ffffff'><img image='pic\ft2.paa'></t><br/><t size='8.0' color='#000000'><t shadow='1' shadowColor='#565656'>"+Config_MissionName+"</t></t></t>";
 	titleRsc ["Logo","plain"];
 
-	sleep 2.8;
-
-
-	sleep 1.0;
+	sleep 3.8;
 
 	"dynamicBlur" ppEffectEnable false;
 	titleFadeOut 0.1;
@@ -336,15 +336,16 @@ if (Localshowintro) then
 
     };
 
-	sleep 1.0;
+	sleep 0.8;
 	camDestroy Local_Camera;
 	Local_Camera="camera" camCreate [0,0,0];
 	Local_Camera cameraEffect ["internal","back"];
 
-	titleCut["","black in", 1.4];
-
-
 	[Func_Client_PlayerRespawn, [player]] call Func_Common_Spawn;
+
+	sleep 0.2;
+
+	titleCut["","black in", 1.4];
 
 	"radialBlur" ppEffectEnable false;
 	"colorCorrections" ppEffectEnable true;
