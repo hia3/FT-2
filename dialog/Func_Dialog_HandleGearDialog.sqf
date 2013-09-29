@@ -2839,8 +2839,10 @@ PERF_END("RscGear_onLoad")
 
         _inventory = [_display] call _restore_inventory_from_display;
 
+	FT2_WF_Logic setVariable ["currentCost", Local_RscGear_CurrentCost];
 	_cost = Local_RscGear_CurrentCost - Local_RscGear_InitialCost;
 	(-_cost) Call Func_Client_ChangePlayerFunds;
+	
 	Local_RscGear_InitialCost = Local_RscGear_CurrentCost;
 
 	[player, _inventory] call Func_Client_EquipLoadout;
