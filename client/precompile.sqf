@@ -188,6 +188,43 @@ onEachFrame
 {
 	if (Dialog_ScreenMarkersType != 0) then
 	{
+		private ["_named_unit", "_named_screen_distance"];
+		_named_unit = player;
+		_named_screen_distance = 1;
+
+		{
+			if ((side _x == side player) && (_x != player)) then
+			{
+				private ["_pos", "_distance"];
+
+				_pos = _x modelToWorld (_x selectionPosition "head");
+				_pos = [_pos select 0, _pos select 1, 0.5 + (_pos select 2)];
+
+				_distance = player distance _x;
+
+				if (_distance < Dialog_ScreenMarkersDistance) then
+				{
+					private ["_screen"];
+					_screen = worldToScreen _pos;
+
+					if ((count _screen) > 0) then
+					{
+						private ["_screen_distance"];
+
+						_screen_distance = [_screen select 0, _screen select 1, 0] distance [0.5, 0.5, 0];
+
+						if (_screen_distance < 0.05) then
+						{
+							if (_screen_distance < _named_screen_distance) then
+							{
+								_named_unit = _x;
+								_named_screen_distance = _screen_distance;
+							};
+						};
+					};
+				};
+			};
+		} forEach (if (Dialog_ScreenMarkersType == 1) then { units player } else { playableUnits });
 
 		{
 			if ((side _x == side player) && (_x != player)) then
@@ -200,6 +237,9 @@ onEachFrame
 				_distance = player distance _x;
 				if (_distance < Dialog_ScreenMarkersDistance) then
 				{
+					_picture = if (_x in Local_CurrentPlayersTS) then { "\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa" } else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
+					_color   = if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] };
+
 					_text = (str (round _distance)) + "m";
 					_text_size = 0.02;
 
@@ -210,17 +250,14 @@ onEachFrame
 
 						_screen_distance = [_screen select 0, _screen select 1, 0] distance [0.5, 0.5, 0];
 
-						if (_screen_distance < 0.05) then
+						if (_named_unit == _x) then
 						{
 							_text = (_x getVariable ["playername", ""]) + " " + _text;
 							_text_size = (0.07 - _screen_distance) min 0.04;
 						};
+
+						drawIcon3D [_picture, _color, _pos, 0.5, 0.5, 0, _text, 1, _text_size, "PuristaMedium"];
 					};
-
-					_color   = if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] };
-					_picture = if (_x in Local_CurrentPlayersTS) then { "\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa" } else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
-
-					drawIcon3D [_picture, _color, _pos, 0.5, 0.5, 0, _text, 1, _text_size, "TahomaB"];
 				};
 			};
 		} forEach (if (Dialog_ScreenMarkersType == 1) then { units player } else { playableUnits });
