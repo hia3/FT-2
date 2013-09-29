@@ -35,8 +35,8 @@
 	class ViewDistance
 	{		
 		title="$STR_P_Distance";
-		values[]={500,750,1000,2500,3000,3500,4000,5000,7500,10000};
-		texts[]={$STR_P_Distance00,$STR_P_Distance01,$STR_P_Distance02,$STR_P_Distance03,$STR_P_Distance04,$STR_P_Distance05,$STR_P_Distance06,$STR_P_Distance07,$STR_P_Distance08,$STR_P_Distance09};
+		values[]={500,750,1000,1500,2500,3000,3500,4000,5000,7500,10000};
+		texts[]={$STR_P_Distance00,$STR_P_Distance01,$STR_P_Distance02,$STR_P_Distance03,$STR_P_Distance04,$STR_P_Distance05,$STR_P_Distance06,$STR_P_Distance07,$STR_P_Distance08,$STR_P_Distance09,$STR_P_Distance10};
 		default=3000;
 	};
 	// params array 4
