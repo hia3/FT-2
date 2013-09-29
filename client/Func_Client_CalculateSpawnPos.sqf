@@ -30,7 +30,7 @@ while{_Place<_Attempt}do
 	};
 	_Pos0=[(_this select 0)+_x,(_this select 1)+_y,0];
 	_Pos1000=[(_this select 0)+_x,(_this select 1)+_y,1000];
-	_Object=nearestObjects [_Pos0,["ALLVEHICLES","STATIC","THING"],5];
+	_Object=nearestObjects [_Pos0,["ALLVEHICLES","STATIC","THING"],10];
 	_Object_above = str lineIntersectsWith [_Pos1000, _Pos0];
 	_is_inside_rock = ((["rock", _Object_above] call BIS_fnc_inString) || (["stone", _Object_above] call BIS_fnc_inString));
 	if (((count _Object)<1) && !_is_inside_rock) then
