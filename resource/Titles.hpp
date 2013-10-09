@@ -216,8 +216,8 @@ class RscTitles
 
 			x = 100;
 			y = 100;
-			w = "(call compile (profilenamespace getvariable ['IGUI_GRID_GPS_W',str ((10 * (((safezoneW / safezoneH) min 1.2) / 40)))]))";
-			h = "(call compile (profilenamespace getvariable ['IGUI_GRID_GPS_H',str ((10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)))])) - 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+			w = "(profilenamespace getvariable ['IGUI_GRID_GPS_W', (10 * (((safezoneW / safezoneH) min 1.2) / 40))])";
+			h = "(profilenamespace getvariable ['IGUI_GRID_GPS_H', (10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))]) - 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 		};
 
 		class gps_background : RscPicture

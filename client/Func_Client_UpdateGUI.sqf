@@ -84,12 +84,12 @@ if (Dialog_GUIType < 2) then
 	_legs ctrlSetPosition [safeZoneX-2,SafeZoneY-2];
 };
 
-_gps_common_x = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_X', str (safezoneX + safezoneW - 10.5 * (((safezoneW / safezoneH) min 1.2) / 40))]);
-_gps_low_y    = (call compile (profileNamespace getVariable ['IGUI_GRID_GPS_Y', str (safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))])) + (((safezoneW / safezoneH) min 1.2) / 1.2) / 25;
-_gps_common_w = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_W', str (10 * (((safezoneW / safezoneH) min 1.2) / 40))]);
-_gps_common_h = (call compile (profileNamespace getVariable ['IGUI_GRID_GPS_H', str (10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))])) - ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
+_gps_common_x = profileNamespace getVariable ['IGUI_GRID_GPS_X', safezoneX + safezoneW - 10.5 * (((safezoneW / safezoneH) min 1.2) / 40)];
+_gps_low_y    = (profileNamespace getVariable ['IGUI_GRID_GPS_Y', safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)]) + (((safezoneW / safezoneH) min 1.2) / 1.2) / 25;
+_gps_common_w = profileNamespace getVariable ['IGUI_GRID_GPS_W', 10 * (((safezoneW / safezoneH) min 1.2) / 40)];
+_gps_common_h = (profileNamespace getVariable ['IGUI_GRID_GPS_H', 10 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)]) - ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
 _gps_low_h    = 1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
-_gps_common_y = call compile (profileNamespace getVariable ['IGUI_GRID_GPS_Y', str (safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25))]);
+_gps_common_y = profileNamespace getVariable ['IGUI_GRID_GPS_Y', safezoneY + safezoneH - 15.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)];
 
 _show_gps =
 {
