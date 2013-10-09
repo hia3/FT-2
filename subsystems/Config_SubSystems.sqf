@@ -63,8 +63,8 @@ System_DisposableRPGTypes=["M136","RPG18"];
 
 System_HaveAARadarVehicleTypes=
 [	
-	["B_APC_Tracked_01_AA_F", ["autocannon_35mm"], 2000],
-	["O_APC_Tracked_02_AA_F", ["autocannon_35mm"], 2000]
+	["B_APC_Tracked_01_AA_F", ["autocannon_35mm"], 3000],
+	["O_APC_Tracked_02_AA_F", ["autocannon_35mm"], 3000]
 ];
 
 System_IndirectWeaponsTypes=["AGS30","MK19","AGS17"];
