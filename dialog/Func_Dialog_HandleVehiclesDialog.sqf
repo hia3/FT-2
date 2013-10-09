@@ -5,12 +5,6 @@ _carVehiclePictures=FT2_WF_Logic getVariable 'carVehiclePictures';
 _carVehicleNames=FT2_WF_Logic getVariable 'carVehicleNames';
 _carVehicleTimes=FT2_WF_Logic getVariable 'carVehicleTimes';
 
-_supportVehicleClasses=FT2_WF_Logic getVariable 'supportVehicleClasses';
-_supportVehicleCosts=FT2_WF_Logic getVariable 'supportVehicleCosts';
-_supportVehiclePictures=FT2_WF_Logic getVariable 'supportVehiclePictures';
-_supportVehicleNames=FT2_WF_Logic getVariable 'supportVehicleNames';
-_supportVehicleTimes=FT2_WF_Logic getVariable 'supportVehicleTimes';
-
 _armorVehicleClasses=FT2_WF_Logic getVariable 'armorVehicleClasses';
 _armorVehicleCosts=FT2_WF_Logic getVariable 'armorVehicleCosts';
 _armorVehiclePictures=FT2_WF_Logic getVariable 'armorVehiclePictures';
@@ -29,13 +23,25 @@ _airVehiclePictures=FT2_WF_Logic getVariable 'airVehiclePictures';
 _airVehicleNames=FT2_WF_Logic getVariable 'airVehicleNames';
 _airVehicleTimes=FT2_WF_Logic getVariable 'airVehicleTimes';
 
+_shipVehicleClasses=FT2_WF_Logic getVariable 'shipVehicleClasses';
+_shipVehicleCosts=FT2_WF_Logic getVariable 'shipVehicleCosts';
+_shipVehiclePictures=FT2_WF_Logic getVariable 'shipVehiclePictures';
+_shipVehicleNames=FT2_WF_Logic getVariable 'shipVehicleNames';
+_shipVehicleTimes=FT2_WF_Logic getVariable 'shipVehicleTimes';
+
+_supportVehicleClasses=FT2_WF_Logic getVariable 'supportVehicleClasses';
+_supportVehicleCosts=FT2_WF_Logic getVariable 'supportVehicleCosts';
+_supportVehiclePictures=FT2_WF_Logic getVariable 'supportVehiclePictures';
+_supportVehicleNames=FT2_WF_Logic getVariable 'supportVehicleNames';
+_supportVehicleTimes=FT2_WF_Logic getVariable 'supportVehicleTimes';
+
 disableSerialization;
 _display = _this select 0;
 
 _lb=3708;
 _ld=3709;
-_fillerIDC = [3700,3701,3702,3703,3704];
-_fillerTypes = ["car","armor","heli","air","support"];
+_fillerIDC = [3700,3701,3702,3703,3711,3704];
+_fillerTypes = ["car","armor","heli","air","ship","support"];
 _lastFiller = Dialog_VehicleFiller;
 _updateFiller=true;
 
@@ -120,7 +126,7 @@ while {alive player && dialog} do
 		if (isClass (configFile >> 'CfgVehicles' >> _currentItem >> 'Library')) then
 		{
 			_txt = getText (configFile >> 'CfgVehicles' >> _currentItem >> 'Library' >> 'libTextDesc');
-			(_display displayCtrl 3709) ctrlSetStructuredText (parseText format["<t size='0.65' align='justify'>%1</t>",_txt]);
+			(_display displayCtrl 3709) ctrlSetStructuredText (parseText format["<t size='0.85' align='justify'>%1</t><br/><br/><t size='0.65' align='justify'>%2</t>",_currentName,_txt]);
 		}
 		else
 		{

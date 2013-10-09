@@ -70,21 +70,6 @@ _add_car_class =
 			['HMMWV_TOW', 1300, 1200] call _add_car_class;
 			['HMMWV_Avenger', 2000, 1200] call _add_car_class;
 
-
-			if !(isNil 'Config_WestAdditionalCars') then
-			{
-				for "_i" from 0 to (count Config_WestAdditionalCars)-1 do
-				{
-					_car_desc=Config_WestAdditionalCars select _i;
-					_car_type=_car_desc select 0;
-					_car_price=_car_desc select 1;
-
-					_v = _v + [_car_type];
-					_c = _c + [_car_price];
-					_t = _t + [600];
-				};
-			};
-
 			_p = [];
 			_d = [];
 			_s = [];
@@ -101,38 +86,6 @@ _add_car_class =
 			FT2_WF_Logic setVariable ['carVehicleTexts',_s];
 			FT2_WF_Logic setVariable ['carVehicleTimes',_t];
 
-			_v = [];
-			_c = [];
-			_t = [];
-
-			['B_Truck_01_Repair_F',  500, 1800] call _add_car_class;
-			['B_Truck_01_ammo_F',    600, 1800] call _add_car_class;
-			['B_Truck_01_fuel_F',    300, 1800] call _add_car_class;
-			['B_Truck_01_medical_F', 400, 1800] call _add_car_class;
-
-			['HMMWV_Ambulance', 150, 1800] call _add_car_class;
-			['MtvrRepair', 700, 1800] call _add_car_class;
-			['MtvrReammo', 700, 1800] call _add_car_class;
-			['HMMWV_Terminal_EP1', 1800, 1800] call _add_car_class;
-			['MQ9PredatorB', 1500, 3600] call _add_car_class;
-			['AH6X_EP1', 2000, 3600] call _add_car_class;
-
-			_p = [];
-			_d = [];
-			_s = [];
-			
-			{
-				_p = _p + [getText(configFile >> 'CfgVehicles' >> _x >> 'picture')];
-				_d = _d + [getText(configFile >> 'CfgVehicles' >> _x >> 'displayName')];
-			} forEach _v;
-
-			FT2_WF_Logic setVariable ['supportVehicleClasses',_v];
-			FT2_WF_Logic setVariable ['supportVehicleCosts',_c];
-			FT2_WF_Logic setVariable ['supportVehiclePictures',_p];
-			FT2_WF_Logic setVariable ['supportVehicleNames',_d];
-			FT2_WF_Logic setVariable ['supportVehicleTexts',_s];
-			FT2_WF_Logic setVariable ['supportVehicleTimes',_t];
-
 //
 			_v = [];
 			_c = [];
@@ -140,7 +93,7 @@ _add_car_class =
 
 			['B_APC_Tracked_01_rcws_F', 2800, 1200] call _add_car_class;
 			['B_APC_Tracked_01_CRV_F',  1500, 1200] call _add_car_class;
-			['B_APC_Tracked_01_AA_F',   6000, 1200] call _add_car_class;
+			['B_APC_Tracked_01_AA_F',   4000, 1200] call _add_car_class;
 			['B_MBT_01_cannon_F',      10000, 1200] call _add_car_class;
 			['B_MBT_01_arty_F',       130000, 1200] call _add_car_class;
 			['B_MBT_01_mlrs_F',       130000, 1200] call _add_car_class;
@@ -224,8 +177,8 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['I_Plane_Fighter_03_CAS_F', 18000, 1200] call _add_car_class;
-			['I_Plane_Fighter_03_AA_F',  17000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_CAS_F', 25000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_AA_F',  16000, 1200] call _add_car_class;
 
 			['MV22', 800, 1200] call _add_car_class;
 			['C130J', 1000, 1200] call _add_car_class;
@@ -249,6 +202,76 @@ _add_car_class =
 			FT2_WF_Logic setVariable ['airVehicleNames',_d];
 			FT2_WF_Logic setVariable ['airVehicleTexts',_s];
 			FT2_WF_Logic setVariable ['airVehicleTimes',_t];
+
+//
+			_v = [];
+			_c = [];
+			_t = [];
+
+			['B_Truck_01_Repair_F',  500, 1800] call _add_car_class;
+			['B_Truck_01_ammo_F',    600, 1800] call _add_car_class;
+			['B_Truck_01_fuel_F',    300, 1800] call _add_car_class;
+			['B_Truck_01_medical_F', 400, 1800] call _add_car_class;
+
+			['HMMWV_Ambulance', 150, 1800] call _add_car_class;
+			['MtvrRepair', 700, 1800] call _add_car_class;
+			['MtvrReammo', 700, 1800] call _add_car_class;
+			['HMMWV_Terminal_EP1', 1800, 1800] call _add_car_class;
+			['MQ9PredatorB', 1500, 3600] call _add_car_class;
+			['AH6X_EP1', 2000, 3600] call _add_car_class;
+
+			_p = [];
+			_d = [];
+			_s = [];
+			
+			{
+				_p = _p + [getText(configFile >> 'CfgVehicles' >> _x >> 'picture')];
+				_d = _d + [getText(configFile >> 'CfgVehicles' >> _x >> 'displayName')];
+			} forEach _v;
+
+			FT2_WF_Logic setVariable ['supportVehicleClasses',_v];
+			FT2_WF_Logic setVariable ['supportVehicleCosts',_c];
+			FT2_WF_Logic setVariable ['supportVehiclePictures',_p];
+			FT2_WF_Logic setVariable ['supportVehicleNames',_d];
+			FT2_WF_Logic setVariable ['supportVehicleTexts',_s];
+			FT2_WF_Logic setVariable ['supportVehicleTimes',_t];
+			
+//
+			_v = [];
+			_c = [];
+			_t = [];
+
+//			['...',  500, 1800] call _add_car_class;
+
+			if !(isNil 'Config_WestAdditionalShips') then
+			{
+				for "_i" from 0 to (count Config_WestAdditionalShips)-1 do
+				{
+					_car_desc=Config_WestAdditionalShips select _i;
+					_car_type=_car_desc select 0;
+					_car_price=_car_desc select 1;
+
+					_v = _v + [_car_type];
+					_c = _c + [_car_price];
+					_t = _t + [600];
+				};
+			};
+
+			_p = [];
+			_d = [];
+			_s = [];
+			
+			{
+				_p = _p + [getText(configFile >> 'CfgVehicles' >> _x >> 'picture')];
+				_d = _d + [getText(configFile >> 'CfgVehicles' >> _x >> 'displayName')];
+			} forEach _v;
+
+			FT2_WF_Logic setVariable ['shipVehicleClasses',_v];
+			FT2_WF_Logic setVariable ['shipVehicleCosts',_c];
+			FT2_WF_Logic setVariable ['shipVehiclePictures',_p];
+			FT2_WF_Logic setVariable ['shipVehicleNames',_d];
+			FT2_WF_Logic setVariable ['shipVehicleTexts',_s];
+			FT2_WF_Logic setVariable ['shipVehicleTimes',_t];
 		};
 		
 		if (((side player == EAST) && (_pa6==0)) || ((side player == WEST) && (_pa6==1))) then {
@@ -292,20 +315,6 @@ _add_car_class =
 			['GAZ_Vodnik', 300, 1200] call _add_car_class;
 			['GAZ_Vodnik_HMG', 1500, 1200] call _add_car_class;
 			['GRAD_RU', 22000, 1200] call _add_car_class;
-
-			if !(isNil 'Config_EastAdditionalCars') then
-			{
-				for "_i" from 0 to (count Config_EastAdditionalCars)-1 do
-				{
-					_car_desc=Config_EastAdditionalCars select _i;
-					_car_type=_car_desc select 0;
-					_car_price=_car_desc select 1;
-
-					_v = _v + [_car_type];
-					_c = _c + [_car_price];
-					_t = _t + [600];
-				};
-			};
 			
 			_p = [];
 			_d = [];
@@ -327,43 +336,9 @@ _add_car_class =
 			_v = [];
 			_c = [];
 			_t = [];
-			
-			['O_Truck_02_box_F',     500, 1800] call _add_car_class;
-			['O_Truck_02_Ammo_F',    600, 1800] call _add_car_class;
-			['O_Truck_02_fuel_F',    300, 1800] call _add_car_class;
-			['O_Truck_02_medical_F', 400, 1800] call _add_car_class;
-
-			['GAZ_Vodnik_MedEvac', 150, 1800] call _add_car_class;
-			['KamazRepair', 700, 1800] call _add_car_class;
-			['KamazReammo', 700, 1800] call _add_car_class;
-			['BRDM2_HQ_TK_GUE_EP1', 2200, 1800] call _add_car_class;
-			['Pchela1T', 2000, 3600] call _add_car_class;
-			['Ka137_PMC', 2000, 3600] call _add_car_class;
-			
-			_p = [];
-			_d = [];
-			_s = [];
-			
-			{
-				_p = _p + [getText(configFile >> 'CfgVehicles' >> _x >> 'picture')];
-				_d = _d + [getText(configFile >> 'CfgVehicles' >> _x >> 'displayName')];
-			} forEach _v;
-
-			FT2_WF_Logic setVariable ['supportVehicleClasses',_v];
-			FT2_WF_Logic setVariable ['supportVehicleCosts',_c];
-			FT2_WF_Logic setVariable ['supportVehiclePictures',_p];
-			FT2_WF_Logic setVariable ['supportVehicleNames',_d];
-			FT2_WF_Logic setVariable ['supportVehicleTexts',_s];
-			FT2_WF_Logic setVariable ['supportVehicleTimes',_t];
-
-
-//
-			_v = [];
-			_c = [];
-			_t = [];
 
 			['O_APC_Tracked_02_cannon_F', 4000, 1200] call _add_car_class;
-			['O_APC_Tracked_02_AA_F',     6000, 1200] call _add_car_class;
+			['O_APC_Tracked_02_AA_F',     4000, 1200] call _add_car_class;
 			['O_MBT_02_cannon_F',        10000, 1200] call _add_car_class;
 			['O_MBT_02_arty_F',         130000, 1200] call _add_car_class;
 
@@ -441,8 +416,8 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['I_Plane_Fighter_03_CAS_F', 18000, 1200] call _add_car_class;
-			['I_Plane_Fighter_03_AA_F',  17000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_CAS_F', 25000, 1200] call _add_car_class;
+			['I_Plane_Fighter_03_AA_F',  16000, 1200] call _add_car_class;
 
 			['An2_TK_EP1', 800, 1200] call _add_car_class;
 			['L39_TK_EP1', 9000, 1200] call _add_car_class;
@@ -465,6 +440,76 @@ _add_car_class =
 			FT2_WF_Logic setVariable ['airVehicleNames',_d];
 			FT2_WF_Logic setVariable ['airVehicleTexts',_s];
 			FT2_WF_Logic setVariable ['airVehicleTimes',_t];
+
 //
+
+			_v = [];
+			_c = [];
+			_t = [];
+			
+			['O_Truck_02_box_F',     500, 1800] call _add_car_class;
+			['O_Truck_02_Ammo_F',    600, 1800] call _add_car_class;
+			['O_Truck_02_fuel_F',    300, 1800] call _add_car_class;
+			['O_Truck_02_medical_F', 400, 1800] call _add_car_class;
+
+			['GAZ_Vodnik_MedEvac', 150, 1800] call _add_car_class;
+			['KamazRepair', 700, 1800] call _add_car_class;
+			['KamazReammo', 700, 1800] call _add_car_class;
+			['BRDM2_HQ_TK_GUE_EP1', 2200, 1800] call _add_car_class;
+			['Pchela1T', 2000, 3600] call _add_car_class;
+			['Ka137_PMC', 2000, 3600] call _add_car_class;
+			
+			_p = [];
+			_d = [];
+			_s = [];
+			
+			{
+				_p = _p + [getText(configFile >> 'CfgVehicles' >> _x >> 'picture')];
+				_d = _d + [getText(configFile >> 'CfgVehicles' >> _x >> 'displayName')];
+			} forEach _v;
+
+			FT2_WF_Logic setVariable ['supportVehicleClasses',_v];
+			FT2_WF_Logic setVariable ['supportVehicleCosts',_c];
+			FT2_WF_Logic setVariable ['supportVehiclePictures',_p];
+			FT2_WF_Logic setVariable ['supportVehicleNames',_d];
+			FT2_WF_Logic setVariable ['supportVehicleTexts',_s];
+			FT2_WF_Logic setVariable ['supportVehicleTimes',_t];
+			
+//
+			_v = [];
+			_c = [];
+			_t = [];
+
+//			['...',  500, 1800] call _add_car_class;
+
+			if !(isNil 'Config_EastAdditionalShips') then
+			{
+				for "_i" from 0 to (count Config_EastAdditionalShips)-1 do
+				{
+					_car_desc=Config_EastAdditionalShips select _i;
+					_car_type=_car_desc select 0;
+					_car_price=_car_desc select 1;
+
+					_v = _v + [_car_type];
+					_c = _c + [_car_price];
+					_t = _t + [600];
+				};
+			};
+
+			_p = [];
+			_d = [];
+			_s = [];
+			
+			{
+				_p = _p + [getText(configFile >> 'CfgVehicles' >> _x >> 'picture')];
+				_d = _d + [getText(configFile >> 'CfgVehicles' >> _x >> 'displayName')];
+			} forEach _v;
+
+			FT2_WF_Logic setVariable ['shipVehicleClasses',_v];
+			FT2_WF_Logic setVariable ['shipVehicleCosts',_c];
+			FT2_WF_Logic setVariable ['shipVehiclePictures',_p];
+			FT2_WF_Logic setVariable ['shipVehicleNames',_d];
+			FT2_WF_Logic setVariable ['shipVehicleTexts',_s];
+			FT2_WF_Logic setVariable ['shipVehicleTimes',_t];
 		};
 	};
