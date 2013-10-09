@@ -336,15 +336,4 @@ STR_H_12C," - If you come close to an enemy infantryman, you will be able to kil
 STR_H_13T,"Hotkeys","Горячие клавиши"
 STR_H_13C,"[1] - select primary weapon<br/>[2] - select rifle-grenadelauncher<br/>[3] - select secondary weapon<br/>[4] - select pistol<br/>[~] - switch off engine<br/>","[1] - выбрать основное оружие<br/>[2] - выбрать подствольный гранатомет<br/>[3] - выбрать второе оружие<br/>[4] - выбрать пистолет<br/>[~] - выключить двигатель<br/>"
 
-str_dn_brdm2_hq,"BRDM-2 (terminal)","БРДМ-2У (терминал)"
-str_ep1_dn_cz_vestpouch_ep1,"Backpack (6 slots)","Рюкзак (6 слотов)",""
-str_ep1_dn_us_assault_pack_ep1,"Backpack (8 slots)","Рюкзак (8 слотов)",""
-str_ep1_dn_us_backpack_ep1,"Backpack (12 slots)","Рюкзак (12 слотов)",""
-str_ep1_dn_cz_backpack_ep1,"Backpack (14 slots)","Рюкзак (14 слотов)",""
-str_ep1_dn_tk_assault_pack_ep1,"Backpack (8 slots)","Рюкзак (8 слотов)",""
-str_ep1_dn_tk_alice_pack_ep1,"Backpack (12 slots)","Рюкзак (12 слотов)",""
-str_ep1_dn_usbasicbag,"Backpack (Medic)","Рюкзак (Санитар.)",""
-str_dn_moscow_bombing_file,"Disposal medkit","Одноразовый медпакет",""
-str_cfg_papabear,"www.hia3.com","www.hia3.com","www.hia3.com"
-
 #include "tips.txt"
