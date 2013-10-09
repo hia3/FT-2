@@ -100,14 +100,11 @@ _assigning_code_array =
 [
 	{
 		removeAllAssignedItems _target;
-		//removeAllContainers _target; too funny to work properly
+		removeAllContainers _target;
 		removeAllItems _target;
 		removeAllWeapons _target;
-		removeBackpack _target;
 		removeGoggles _target;
 		removeHeadgear _target;
-		removeUniform _target;
-		removeVest _target;
 
 		waitUntil { ((vest _target) == "") && ((uniform _target) == "") && ((backpack _target) == "") };
 	}, 
