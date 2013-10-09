@@ -36,7 +36,7 @@
 	{
 		//calculate landing position
 		_pos=getPosATL Local_FriendlyBaseFlag;
-		_pos=[_pos select 0,_pos select 1,[0,Config_RespawnSize]] call Func_Client_CalculateSpawnPos;
+		_pos=[_pos select 0, _pos select 1, [0,Config_RespawnSize], true] call Func_Client_CalculateSpawnPos;
 		_dir=getDir _veh;
 		titleCut["","black out",1];	
 		player action ["LandGear", _veh];
