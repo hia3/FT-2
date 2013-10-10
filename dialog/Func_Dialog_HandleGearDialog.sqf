@@ -2125,6 +2125,26 @@ PERF_BEGIN("_restore_preset")
 	_preset_namespace = if (isNil "Config_PresetNamespace") then { "default" } else { Config_PresetNamespace };
 
 	_inventory = profileNamespace getVariable [format ["FT2_Preset_%1_%2_%3", _preset_namespace, Local_PlayerSide, _preset_index], [] call _get_empty_inventory_from_player];
+	
+	{
+		private ["_item", "_is_valid"];
+		
+		_item = _x;
+		
+		_is_valid = false;
+		
+		{
+			if (isClass(configFile >> _x >> _item)) then
+			{
+				_is_valid = true;
+			};
+		} forEach ["CfgVehicles", "CfgWeapons", "CfgMagazines", "CfgGlasses"];
+		
+		if !(_is_valid) then
+		{
+			[_inventory, [_inventory, _item] call BIS_fnc_findNestedElement, ""] call BIS_fnc_setNestedElement;
+		};
+	} forEach (_inventory call Func_Client_InventoryToArray);
 
 	_inventory = + _inventory;
 
