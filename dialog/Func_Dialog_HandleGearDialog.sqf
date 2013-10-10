@@ -463,6 +463,33 @@ PERF_END("_is_addWeapon_applicable")
 	_result
 };
 
+_get_allowed_slots = 
+{
+	private ["_item"];
+	
+	_item = _this;
+			
+	{
+		private ["_root", "_code", "_config"];
+		
+		_root = _x select 0;
+		_code = _x select 1;
+		
+		_config = configFile >> _root >> _item;
+	
+		if (isClass(_config)) exitWith
+		{
+			_config call _code;
+		};
+	} forEach 
+	[
+		["CfgVehicles",  { if (isArray(_this >> "allowedSlots")) then { getArray(_this >> "allowedSlots") } else { [] } } ], 
+		["CfgWeapons",   { if (isArray(_this >> "WeaponSlotsInfo" >> "allowedSlots")) then { getArray(_this >> "WeaponSlotsInfo" >> "allowedSlots") } else { if (isArray(_this >> "ItemInfo" >> "allowedSlots")) then { getArray(_this >> "ItemInfo" >> "allowedSlots") } else { [701, 801, 901] } } } ], 
+		["CfgMagazines", { if (isArray(_this >> "allowedSlots")) then { getArray(_this >> "allowedSlots") } else { [701, 801, 901] } } ], 
+		["CfgGlasses",   { [701, 801, 901] }]
+	];
+};
+
 _can_add_item_to_uniform =
 {
 PERF_BEGIN("_can_add_item_to_uniform")
@@ -476,7 +503,7 @@ PERF_BEGIN("_can_add_item_to_uniform")
 
 	_result = false;
 
-	if (!(_item call _is_addWeapon_applicable) && (_item != "Medikit")) then
+	if (801 in (_item call _get_allowed_slots)) then
 	{
 		_result = [_uniform, _uniform_items, _item] call _can_add_item_to_container;
 	};
@@ -499,7 +526,7 @@ PERF_BEGIN("_can_add_item_to_vest")
 
 	_result = false;
 
-	if (!(_item call _is_addWeapon_applicable) && (_item != "Medikit")) then
+	if (701 in (_item call _get_allowed_slots)) then
 	{
 		_result = [_vest, _vest_items, _item] call _can_add_item_to_container;
 	};
@@ -520,7 +547,12 @@ PERF_BEGIN("_can_add_item_to_backpack")
 		_backpack       = _inventory select 7;
 		_backpack_items = _inventory select 8;
 
-	_result = [_backpack, _backpack_items, _item] call _can_add_item_to_container;
+	_result = false;
+		
+	if (901 in (_item call _get_allowed_slots)) then
+	{
+		_result = [_backpack, _backpack_items, _item] call _can_add_item_to_container;
+	};
 
 PERF_END("_can_add_item_to_backpack")
 
