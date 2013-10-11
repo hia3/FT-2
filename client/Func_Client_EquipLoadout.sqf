@@ -1,4 +1,4 @@
-private ["_add_weapon_and_stuff", "_is_addMagazine_applicable", "_is_addWeapon_applicable", "_add_stuff_to_container", "_assigning_code_array"];
+private ["_add_weapon_and_stuff", "_is_addWeapon_applicable", "_add_stuff_to_container", "_assigning_code_array"];
 
 _add_weapon_and_stuff = 
 {
@@ -32,17 +32,6 @@ _add_weapon_and_stuff =
 	};
 };
 
-_is_addMagazine_applicable = 
-{
-	private ["_item", "_result"];
-
-	_item = _this;
-
-	_result = isClass(configFile >> "CfgMagazines" >> _item);
-
-	_result
-};
-
 _is_addWeapon_applicable = 
 {
 	private ["_item", "_result"];
@@ -56,43 +45,23 @@ _is_addWeapon_applicable =
 
 _add_stuff_to_container = 
 {
-	private ["_container", "_items", "_maximum_load", "_items_mass", "_i"];
+	private ["_container", "_items"];
 
 	_container = _this select 0;
 	_items	   = _this select 1;
-
-	if (_container != "") then
+	
+	if !(isNull _container) then
 	{
-		_maximum_load = _container call Func_Client_GetContainerMaximumLoad;
-		_items_mass	  = _items	   call Func_Client_GetItemsMass;
-
-		if ((_items_mass != -1) && (_maximum_load >= _items_mass)) then
 		{
+			if ([_x] call Func_Client_IsBackpack) then
 			{
-				if (_x call _is_addMagazine_applicable) then
-				{
-					_target addMagazine _x;
-				}
-				else
-				{
-					if (_x call _is_addWeapon_applicable) then
-					{
-						_target addWeapon _x;
-					}
-					else
-					{
-						_target addItem _x;
-					};
-				};
-			} forEach _items;
-
-			_garbage_count = _garbage_count + (_maximum_load - _items_mass);
-
-			for [{_i=0},{_i<(_maximum_load - _items_mass)},{_i=_i+1}] do
+				_container addBackpackCargoGlobal [_x, 1];
+			}
+			else
 			{
-				_target addItem "ItemWatch";
+				_container addItemCargoGlobal [_x, 1];
 			};
-		};
+		} forEach _items;
 	};
 };
 
@@ -111,43 +80,19 @@ _assigning_code_array =
 
 	{ if (_this == "") then { removeUniform _target } else { _target addUniform _this }; waitUntil { uniform _target == _this }; },
 	{
-		[_inventory select 1, _this] call _add_stuff_to_container;
+		[uniformContainer _target, _this] call _add_stuff_to_container;
 	},
 	{},
 
 	{ if (_this == "") then { removeVest _target } else { _target addVest _this }; waitUntil { vest _target == _this }; },
 	{
-		[_inventory select 4, _this] call _add_stuff_to_container;
+		[vestContainer _target, _this] call _add_stuff_to_container;
 	},
 	{},
 
 	{ if (_this == "") then { removeBackpack _target; waitUntil { backpack _target == _this }; } else { _target addBackpack _this; waitUntil { backpack _target == _this }; clearAllItemsFromBackpack _target; }; },
 	{
-		{
-			if ([_x] call Func_Client_IsBackpack) then
-			{
-				(unitBackpack _target) addBackpackCargoGlobal [_x, 1];
-			}
-			else
-			{
-				if (_x call _is_addMagazine_applicable) then
-				{
-					(unitBackpack _target) addMagazineCargoGlobal [_x, 1];
-				}
-				else
-				{
-					if (_x call _is_addWeapon_applicable) then
-					{
-						(unitBackpack _target) addWeaponCargoGlobal [_x, 1];
-					}
-					else
-					{
-						// (unitBackpack _target) addItemCargo [_x, 1]; won't work with CfgGlasses
-						_target addItem _x;
-					};
-				};
-			};
-		} forEach _this;
+		[backpackContainer _target, _this] call _add_stuff_to_container;
 	},
 	{},
 
@@ -191,12 +136,6 @@ _assigning_code_array =
 	}, 
 
 	{
-		private ["_i"];
-
-		for [{_i=0},{_i<_garbage_count},{_i=_i+1}] do
-		{
-			_target removeItem "ItemWatch";
-		};
 	},
 
 	{ /* rank */ }
@@ -205,14 +144,12 @@ _assigning_code_array =
 
 _assign_inventory = 
 {
-	private ["_target", "_inventory", "_garbage_count", "_assigning_order", "_i"];
+	private ["_target", "_inventory", "_assigning_order", "_i"];
 
 	_target	   = _this select 0;
 	_inventory = _this select 1;
 
 	_target setVariable ["weapons", _inventory, true];
-
-	_garbage_count = 0;
 
 	//hint str _inventory;
 

@@ -142,15 +142,15 @@ _unit = _this select 0;
 /*+00*/		"RESERVED",
 
 /*+01*/		uniform _unit,
-/*+02*/		uniformItems _unit,
+/*+02*/		(if (uniform _unit == "") then { [] } else { (uniformItems _unit) + (backpackCargo (uniformContainer _unit)) }),
 /*+03*/		"RESERVED",
 
 /*+04*/		vest _unit,
-/*+05*/		vestItems _unit,
+/*+05*/		(if (vest _unit == "") then { [] } else { (vestItems _unit) + (backpackCargo (vestContainer _unit)) }),
 /*+06*/		"RESERVED",
 
 /*+07*/		backpack _unit,
-/*+08*/		(if (backpack _unit == "") then { [] } else { (backpackItems _unit) + (backpackCargo unitBackpack _unit) }),
+/*+08*/		(if (backpack _unit == "") then { [] } else { (backpackItems _unit) + (backpackCargo (backpackContainer _unit)) }),
 /*+09*/		"RESERVED",
 
 /*+10*/		assignedItems _unit,
