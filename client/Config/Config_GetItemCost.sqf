@@ -100,7 +100,7 @@ if (isNil "Global_CostMap") then
 		["9Rnd_45ACP_Mag",30],
 		["acc_flashlight",5],
 		["acc_pointer_IR",5],
-		["APERSBoundingMine_Range_Mag",150],
+		["APERSBoundingMine_Range_Mag",200],
 		["APERSMine_Range_Mag",80],
 		["APERSTripMine_Wire_Mag",100],
 		["arifle_Katiba_C_F",60],
