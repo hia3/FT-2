@@ -38,7 +38,6 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 
 	"Public_UnitRegistered" addPublicVariableEventHandler {Server_RegisteredObjects=Server_RegisteredObjects+[_this select 1]};
 	"Public_VehicleLock" addPublicVariableEventHandler {if (local (_this select 1)) then {(_this select 1) lock !((locked (_this select 1))==2)}};
-	"Public_CrewAward" addPublicVariableEventHandler {private["_unit"];_unit=_this select 1; _unit addScore (_unit getVariable "crew_award")};
 	"Public_DeadUnit" addPublicVariableEventHandler {private["_name"];_name=format["body%1",((_this select 1) select 0) getVariable "playername"]; if ((_this select 1) select 1) then {createMarkerLocal[_name,position ((_this select 1) select 0)]} else {deleteMarkerLocal _name}};
 	"Public_PlayerConnected" addPublicVariableEventHandler {call Func_Server_OnPlayerConnected};
 
