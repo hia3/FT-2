@@ -1,3 +1,11 @@
+MISSION_ROOT = call
+{
+    private "_arr";
+    _arr = toArray str missionConfigFile;
+    _arr resize (count _arr - 15);
+    toString _arr
+};
+
 Global_GameEnded=false;
 
 Func_Common_AddHandlers       = compile preprocessFile ("common\Func_Common_AddHandlers.sqf");

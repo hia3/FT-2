@@ -1,6 +1,7 @@
 #include "Func_Client_CosmeticMarkers.sqf";
 #include "Func_Client_Halo.sqf";
 
+Local_helloween = false;
 
 //cosmetic rings around base..
 // West base
@@ -229,7 +230,7 @@ onEachFrame
 		{
 			if ((side _x == side player) && (_x != player)) then
 			{
-				private ["_pos", "_distance", "_text", "_screen", "_color", "_text_size", "_picture"];
+				private ["_pos", "_distance", "_text", "_screen", "_color", "_size", "_text_size", "_picture"];
 
 				_pos = _x modelToWorld (_x selectionPosition "head");
 				_pos = [_pos select 0, _pos select 1, 0.5 + (_pos select 2)];
@@ -237,8 +238,32 @@ onEachFrame
 				_distance = player distance _x;
 				if (_distance < Dialog_ScreenMarkersDistance) then
 				{
-					_picture = if (_x in Local_CurrentPlayersTS) then { "\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa" } else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
-					_color   = if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] };
+					_picture = if (_x in Local_CurrentPlayersTS) then 
+					{
+						if (Local_helloween) then 
+						{
+							private ["_damage", "_score"];
+							_damage = damage _x;
+							_score  = score  _x;
+
+							if (_damage == 0) then
+							{
+								if (_score < 10) then { MISSION_ROOT + "pic\pumpkin\100_10.paa" } else { if (_score < 20) then { MISSION_ROOT + "pic\pumpkin\100_20.paa" } else { MISSION_ROOT + "pic\pumpkin\100_30.paa" }; };
+							}
+							else
+							{
+								private ["_index"];
+								_index = floor (((1 - (_damage)) * 60 + 40) / 10) * 10;
+								if (_index in [40,50,60,70,80,90]) then { format [MISSION_ROOT + "pic\pumpkin\%1.paa", _index] } else { MISSION_ROOT + "pic\pumpkin\40.paa" }
+							};
+						}
+						else
+						{
+							"\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa"
+						}
+					} else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
+					_color   = if (Local_helloween) then { [1,1,1,1] } else { if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] } };
+					_size    = if (Local_helloween) then { 1 } else { 0.5 };
 
 					_text = (str (round _distance)) + "m";
 					_text_size = 0.02;
@@ -256,7 +281,7 @@ onEachFrame
 							_text_size = (0.07 - _screen_distance) min 0.04;
 						};
 
-						drawIcon3D [_picture, _color, _pos, 0.5, 0.5, 0, _text, 1, _text_size, "PuristaMedium"];
+						drawIcon3D [_picture, _color, _pos, _size, _size, 0, _text, 1, _text_size, "PuristaMedium"];
 					};
 				};
 			};
@@ -274,7 +299,11 @@ onEachFrame
 					_pos = _x modelToWorld (_x selectionposition "head");
 					_pos = [_pos select 0, _pos select 1, 0.5 + (_pos select 2)];
 
-					drawIcon3D ["\A3\ui_f\data\map\vehicleicons\pictureHeal_ca.paa", [1,0,0,1], _pos, (1 + (0.2 * sin((400*diag_tickTime) mod 360))), (1 + (0.2 * cos((400*diag_tickTime) mod 360))), 0, (str _distance) + "m", 1, 0.04, "TahomaB"];
+					private ["_image","_color"];
+					_image = if (Local_helloween) then { MISSION_ROOT + "pic\pumpkin\40.paa" } else { "\A3\ui_f\data\map\vehicleicons\pictureHeal_ca.paa" };
+					_color = if (Local_helloween) then { [1,1,1,1] } else { [1,0,0,1] };
+
+					drawIcon3D [_image, _color, _pos, (1 + (0.2 * sin((400*diag_tickTime) mod 360))), (1 + (0.2 * cos((400*diag_tickTime) mod 360))), 0, (str _distance) + "m", 1, 0.04, "TahomaB"];
 				};
 			} forEach allDeadMen;
 		};
