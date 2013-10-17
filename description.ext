@@ -6,7 +6,7 @@
 #include "resource\Params.hpp"
 
 respawn=3;
-respawndelay=0;
+respawndelay=10;
 disabledAI=true;
 respawnDialog = 0;
 onLoadMissionTime=false;
@@ -15,7 +15,7 @@ joinUnassigned  = false;
 onLoadName="www.hia3.com";
 author="sms and mid16";
 onLoadMission="Based on the Valhalla map by WINSE and Roman.val";
-loadScreen="pic\hia3logo.paa";
+//loadScreen="pic\hia3logo.paa";
 
 class Header
 {

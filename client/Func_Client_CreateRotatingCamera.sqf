@@ -15,7 +15,7 @@
 	Local_Camera camSetPos [_position select 0,_position select 1,_CameraAltitude];
 	Local_Camera camCommit 0;
 	waitUntil{camCommitted Local_Camera};
-	while{!Global_GameEnded&&(Dialog_RespawnState!="readytospawn")&&(alive player)}do
+	while{!Global_GameEnded&&(Dialog_RespawnState!="readytospawn")&&(Dialog_RespawnState!="revived")&&(alive player)}do
 	{
 		_Direction=_Direction+_DirectionIncrement;	
 		_position=[_Target,_Direction,_Offset] call Func_Client_GetPosition;		
@@ -23,5 +23,3 @@
 		Local_Camera camCommit 1;
 		waitUntil{camCommitted Local_Camera};
 	};
-
-	

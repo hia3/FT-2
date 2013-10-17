@@ -173,16 +173,14 @@ if (alive player) then
 //		player playMove "aidlpercmstpsraswrfldnon_idlesteady01n";
 	}else{
 		//player was revived
+		player switchMove "amovppnemstpsraswrfldnon";
+		
 		player setPosATL getPosATL _player;
 		player setDir getDir _player;
 
-		/*_defaultCost call Func_Client_ChangePlayerFunds;
-
-		_dead_body_inventory = _player getVariable 'current_weapons';
-		if !(isNil '_dead_body_inventory') then
-		{
-			[player, _dead_body_inventory] call Func_Client_EquipLoadout;
-		};*/
+		_defaultCost=([player] call Func_Client_GetPlayerInventory) call Func_Client_GetInventoryCost;
+		_defaultCost call Func_Client_ChangePlayerFunds;
+		[player, [_player] call Func_Client_GetPlayerInventory] call Func_Client_EquipLoadout;
 
 		//award reviver, if player was killed by enemy
 		if (_killedByEnemy) then
@@ -194,7 +192,6 @@ if (alive player) then
 
 			["message_revivedteammate", _award, Local_ReviverUnit] call Func_Common_SendRemoteCommand;
 		};
-		player playMove "amovppnemstpsraswrfldnon";
 	};
 	player selectWeapon (primaryWeapon player);
 };
@@ -218,12 +215,20 @@ if (_playerWasDead) then
 	//we don`t want old player`s body to stay for a long time, or there will be a lot of dead bodies
 	//if there are 10 players on map, it is ok.. but if there are 120? how many bodies shall we have on map?
 	//so delete dead immediately
-	removeAllWeapons _player;
-	removeAllItems _player;
-	removeBackPack _player;
-
-	hideBody _player;
-	deleteVehicle _player;
+	
+	if (Dialog_RespawnState=="revived") then
+	{
+		hideBody _player;
+	}
+	else
+	{
+		removeAllWeapons _player;
+		removeAllItems _player;
+		removeBackPack _player;
+		
+		hideBody _player;
+		deleteVehicle _player;
+	};
 
 	//don`t want to allow players to mine all the map, so delete all their placed mines after death
 	// better yet, delete only attached mines so there will be explosion
