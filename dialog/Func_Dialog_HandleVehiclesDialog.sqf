@@ -123,9 +123,17 @@ while {alive player && dialog} do
 		_currentPicture = _listPictures select _currentValue;
 		_currentTime = _listTimes select _currentValue;
 
-		if (isClass (configFile >> 'CfgVehicles' >> _currentItem >> 'Library')) then
+		_library_config_desc = configFile >> 'CfgVehicles' >> _currentItem >> 'Library' >> 'libTextDesc';
+		_armory_config_desc = configFile >> 'CfgVehicles' >> _currentItem >> 'Armory'  >> 'description';
+
+		_desc_in_library = isText (_library_config_desc);
+		_desc_in_armory  = isText (_armory_config_desc);
+
+		if (_desc_in_library || _desc_in_armory) then
 		{
-			_txt = getText (configFile >> 'CfgVehicles' >> _currentItem >> 'Library' >> 'libTextDesc');
+			_txt = getText (if (_desc_in_library) then { _library_config_desc } else { _armory_config_desc });
+			_txt_array = toArray(_txt);
+			if (toString [_txt_array select 0] == "$") then { [_txt_array] call BIS_fnc_arrayShift; _txt = localize toString _txt_array; };
 			(_display displayCtrl 3709) ctrlSetStructuredText (parseText format["<t size='0.85' align='justify'>%1</t><br/><br/><t size='0.65' align='justify'>%2</t>",_currentName,_txt]);
 		}
 		else
