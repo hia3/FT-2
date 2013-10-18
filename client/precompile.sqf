@@ -238,7 +238,11 @@ onEachFrame
 				_distance = player distance _x;
 				if (_distance < Dialog_ScreenMarkersDistance) then
 				{
-					_picture = if (_x in Local_CurrentPlayersTS) then 
+					private ["_x_in_TS"];
+
+					_x_in_TS = _x in Local_CurrentPlayersTS;
+
+					_picture = if (_x_in_TS) then 
 					{
 						if (Local_helloween) then 
 						{
@@ -260,10 +264,10 @@ onEachFrame
 						else
 						{
 							"\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa"
-						}
+						};
 					} else { "a3\ui_f\data\map\VehicleIcons\iconexplosiveat_ca.paa" };
-					_color   = if (Local_helloween) then { [1,1,1,1] } else { if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] } };
-					_size    = if (Local_helloween) then { 1 } else { 0.5 };
+					_color   = if (Local_helloween && _x_in_TS) then { [1,1,1,1] } else { if (group _x == group player) then { [damage _x,0.2,0.9,1] } else { [damage _x,0.9,0.2,1] } };
+					_size    = if (Local_helloween && _x_in_TS) then { 1 } else { 0.5 };
 
 					_text = (str (round _distance)) + "m";
 					_text_size = 0.02;
