@@ -26,7 +26,7 @@ class RscRespawnMenu {
 			x = safezoneX;
 			y = safezoneY;
 			w = safezoneW;
-			h = (safezoneH / 13);
+			h = (safezoneH / 9);
 
 			colorText[]={1,1,1,1};
 			colorBackground[]={0,0,0,0.5};
