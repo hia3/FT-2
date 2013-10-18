@@ -58,8 +58,8 @@ class RscReviveRequest {
 			style = 16;
 			lineSpacing=1.0;
 			default = 0;
-			x = 0.2;
-			y = 0.4;
+			x = 0.225;
+			y = 0.42;
 			w = 0.1;
 			h = 0.05;
 			SizeEx = 0.04;
