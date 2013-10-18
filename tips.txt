@@ -5,7 +5,7 @@ STR_TIP_003,"To capture a point, you have to be within the black-shaded zone for
 STR_TIP_004,"Your team instantly receives some additional points to their score, when a Control point is captured.","Ваша команда получает очки за каждую захваченную Контрольную Точку."
 STR_TIP_005,"Every 15 sec. a captured Control point gives additional points to your team.","Через каждые 15 секунд Ваша команда получает очки за каждую захваченную Контрольную Точку."
 STR_TIP_006,"When the round is over, all captured Control points give bonus points to your team.","В конце раунда за каждую захваченную Контрольную Точку Ваша команда получает Бонус."
-STR_TIP_007,"The team with a higher score wins the match.","Команда с наибольшим количеством очков, полученных за захват Контрольных Точек выигрывает раунд."
+STR_TIP_007,"The team with a higher score wins the match.","Команда с наибольшим количеством очков, полученных за захват Контрольных Точек, выигрывает раунд."
 STR_TIP_008,"You can spend your money purchasing more powerful vehicles, weapons and equipement in game.","Вы можете тратить свои деньги на покупку вооружения и техники."
 STR_TIP_009,"Every 60 seconds you receive some funds depending on number of Control points captured at the moment.","Каждые 60 секунд Вы получаете деньги в размере, зависящем от количества захваченных точек Вашей командой."
 STR_TIP_010,"The more Control points you capture, the less money you will get!","Чем больше Контрольных Точек захвачено Вашей командой, тем меньше денег Вы получаете в минуту."
