@@ -464,7 +464,7 @@ class RscListBox
 			0.3
 		};
 		shadow = 0;
-		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
+		thumb = "pic\body.paa";
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
 		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
