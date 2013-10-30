@@ -1,5 +1,4 @@
 
-
 disableSerialization;
 _display = _this select 0;
 
@@ -15,6 +14,7 @@ _pa7 = 1000000;
 _pa8 = 1;
 _pa9 = 1;
 _pa10 = 1;
+_pa11 = 1;
 
 _pat0 = "";
 _pat1 = "";
@@ -27,8 +27,9 @@ _pat7 = "";
 _pat8 = "";
 _pat9 = "";
 _pat10 = "";
+_pat11 = "";
 
-parameterIDC=[7000,7001,7002,7003,7004,7005,7006,7007,7008,7009];
+parameterIDC=[7000,7001,7002,7003,7004,7005,7006,7007,7008,7009,7010,7011];
 if (isMultiplayer) then 
 {
 	_pa0 = paramsArray select 0;
@@ -42,6 +43,7 @@ if (isMultiplayer) then
 	_pa8 = paramsArray select 8;
 	_pa9 = paramsArray select 9;
 	_pa10 = paramsArray select 10;
+	_pa11 = paramsArray select 11;
 };
 
 
@@ -141,16 +143,23 @@ switch(_pa10) do
 	case 1: {_pat10 = localize "STR_P_Enable"};
 };
 
+switch(_pa11) do 
+{
+	case 0: {_pat11 = localize "STR_P_Disable"};
+	case 1: {_pat11 = localize "STR_P_Enable"};
+};
+
 _fmt = "%1 %2";
 
-(_display displayCtrl 7000) ctrlSetText format[_fmt, localize "STR_P_Duration",     _pat0];
-(_display displayCtrl 7001) ctrlSetText format[_fmt, localize "STR_P_Time",         _pat1];
-(_display displayCtrl 7002) ctrlSetText format[_fmt, localize "STR_P_Weather",      _pat2];
-(_display displayCtrl 7003) ctrlSetText format[_fmt, localize "STR_P_Distance",     _pat3];
-(_display displayCtrl 7004) ctrlSetText format[_fmt, localize "STR_P_View",         _pat4];
-(_display displayCtrl 7005) ctrlSetText format[_fmt, localize "STR_P_Markers",      _pat5];
-(_display displayCtrl 7006) ctrlSetText format[_fmt, localize "STR_P_Armament",     _pat6];
-(_display displayCtrl 7007) ctrlSetText format[_fmt, localize "STR_P_StartFunds",   _pat7];
-(_display displayCtrl 7008) ctrlSetText format[_fmt, localize "STR_P_Halo",         _pat8];
-(_display displayCtrl 7009) ctrlSetText format[_fmt, localize "STR_P_Grass",        _pat9];
-(_display displayCtrl 7010) ctrlSetText format[_fmt, localize "STR_P_BicycleAtMHQ", _pat10];
+(_display displayCtrl 7000) ctrlSetText format[_fmt, localize "STR_P_Duration",       _pat0];
+(_display displayCtrl 7001) ctrlSetText format[_fmt, localize "STR_P_Time",           _pat1];
+(_display displayCtrl 7002) ctrlSetText format[_fmt, localize "STR_P_Weather",        _pat2];
+(_display displayCtrl 7003) ctrlSetText format[_fmt, localize "STR_P_Distance",       _pat3];
+(_display displayCtrl 7004) ctrlSetText format[_fmt, localize "STR_P_View",           _pat4];
+(_display displayCtrl 7005) ctrlSetText format[_fmt, localize "STR_P_Markers",        _pat5];
+(_display displayCtrl 7006) ctrlSetText format[_fmt, localize "STR_P_Armament",       _pat6];
+(_display displayCtrl 7007) ctrlSetText format[_fmt, localize "STR_P_StartFunds",     _pat7];
+(_display displayCtrl 7008) ctrlSetText format[_fmt, localize "STR_P_Halo",           _pat8];
+(_display displayCtrl 7009) ctrlSetText format[_fmt, localize "STR_P_Grass",          _pat9];
+(_display displayCtrl 7010) ctrlSetText format[_fmt, localize "STR_P_BicycleAtMHQ",   _pat10];
+(_display displayCtrl 7011) ctrlSetText format[_fmt, localize "STR_P_ThermalImaging", _pat11];

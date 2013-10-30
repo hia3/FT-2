@@ -37,9 +37,6 @@
 		};
 		_veh addEventHandler ['incomingmissile',_handler];
 
-		//disable TI sensors
-		//_veh disableTIEquipment true;
-
 		_veh setVariable ["ft2_wf_side",_side,true];
 		_veh setVariable ["owner_name","",true];
 		_veh setVariable ["kill_award",_award,true];
@@ -52,6 +49,7 @@
 
 		[_veh,true] call Func_System_ClearFlaresAndSmokes;
 
+		_veh disableTIEquipment ((paramsArray select 11) == 0);
 	};
 
 	_respawncheck=

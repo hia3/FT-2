@@ -96,4 +96,12 @@
 		texts[]={$STR_P_Disable,$STR_P_Enable};
 		default=1;
 	};
+	// params array 11
+	class ThermalImaging
+	{		
+		title="$STR_P_ThermalImaging";
+		values[]={0,1};
+		texts[]={$STR_P_Disable,$STR_P_Enable};
+		default=1;
+	};
 };

@@ -69,17 +69,22 @@ class RscParameters {
 			idc = 7009;
 			y = 0.75;
 		};
-		class BicycleMHQ: Duration 
+		class BicycleAtMHQ: Duration 
 		{
 			idc = 7010;
 			y = 0.8;
-		};	
+		};
+		class ThermalImaging: Duration 
+		{
+			idc = 7011;
+			y = 0.85;
+		};
 		class CA_Diff_B_Back : RscShortcutButton {
 			idc = 11007;
 			shortcuts[] = {0x00050000 + 1};
 			default = 0;
 			x = 0.04;
-			y = 0.9;
+			y = 0.95;
 			text = $STR_WF_Close;
 			action = "closeDialog 0;";
 		};		

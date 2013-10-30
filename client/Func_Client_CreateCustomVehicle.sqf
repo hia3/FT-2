@@ -30,9 +30,6 @@ _veh setDir _dir+180;
 //setting ammount of repairkits inside
 _veh setVariable ["rpair_kits",Config_RepairKitsDefault,true];
 
-//disable TI sensors
-//_veh disableTIEquipment true;
-
 _veh lock true;
 _veh setVariable ["owner_name",Local_PlayerName,true];//name of player who bought the vehicle
 _veh setVariable ["kill_award",round(_cost*Config_AwardKillVehicleCoef),true];//award for a person who would kill the vehicle, if would; see Func_Common_DestroyUnitAward
@@ -72,5 +69,7 @@ else
 		_veh addEventHandler ['incomingmissile',_handler];
 	};
 };
+
+_veh disableTIEquipment ((paramsArray select 11) == 0);
 
 _veh
