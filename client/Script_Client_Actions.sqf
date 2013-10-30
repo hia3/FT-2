@@ -276,4 +276,55 @@ switch((_this select 3)select 0)do
 			[_name, localize "STR_HINT_Defused", _pic, 1.0] call Func_Client_ShowCustomMessage;
 		};
 	};
+	
+	case 37:
+	{
+		private ["_dummy"];
+		
+		_dummy = [] spawn
+		{
+			private ["_map_zoom_multiplier"];
+		
+			_map_zoom_multiplier = getNumber(configfile >> "CfgWorlds" >> "Stratis" >> "mapSize") / getNumber(configfile >> "CfgWorlds" >> worldName >> "mapSize");
+
+			openMap [true, true];
+
+			mapAnimAdd [0, Config_RespawnSize / 5000.0 * _map_zoom_multiplier, Local_FriendlyBaseFlag];
+
+			mapAnimCommit;
+
+			waitUntil { mapAnimDone };
+
+			hint localize "STR_HINT_ClickLandingZone";
+
+			onMapSingleClick
+			{
+				private ["_distance"];
+				
+				_distance = _pos distance Local_FriendlyBaseFlag;
+				
+				if ((_distance > 20) && (_distance < Config_RespawnSize)) then 
+				{
+					hint localize "STR_HINT_LandingZoneSelected";
+					
+					Local_PlaneLandingPos = _pos;
+					onMapSingleClick "";
+					openMap [false, false];
+					
+					/*private ["_i"];
+					
+					for "_i" from 0 to 10 do
+					{
+						_sign = "Sign_Circle_F" createVehicleLocal [_pos select 0, _pos select 1, _i * 5];
+						_sign setPos [_pos select 0, _pos select 1, _i * 5];
+						_sign setVectorDirAndUp [[0,0,1],[1,0,0]];
+					};*/
+				}
+				else
+				{
+					hint localize "STR_HINT_LandingZoneNotSelected";
+				};
+			};
+		};
+	};
 };

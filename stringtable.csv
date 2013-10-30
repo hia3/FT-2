@@ -337,4 +337,9 @@ STR_H_12C," - If you come close to an enemy infantryman, you will be able to kil
 STR_H_13T,"Hotkeys","Горячие клавиши"
 STR_H_13C,"[1] - select primary weapon<br/>[2] - select rifle-grenadelauncher<br/>[3] - select secondary weapon<br/>[4] - select pistol<br/>[~] - switch off engine<br/>","[1] - выбрать основное оружие<br/>[2] - выбрать подствольный гранатомет<br/>[3] - выбрать второе оружие<br/>[4] - выбрать пистолет<br/>[~] - выключить двигатель<br/>"
 
+STR_ACT_СhooseLandingZone,"Сhoose the landing zone","Выбрать зону посадки"
+STR_HINT_ClickLandingZone,"Click on shaded area","Кликните в заштрихованной области"
+STR_HINT_LandingZoneSelected,"Landing zone has been selected","Выбрана зона посадки"
+STR_HINT_LandingZoneNotSelected,"You can't land here","Здесь нельзя приземляться"
+
 #include "tips.txt"

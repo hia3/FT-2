@@ -35,8 +35,6 @@
 	else
 	{
 		//calculate landing position
-		_pos=getPosATL Local_FriendlyBaseFlag;
-		_pos=[_pos select 0, _pos select 1, [0,Config_RespawnSize], true] call Func_Client_CalculateSpawnPos;
 		_dir=getDir _veh;
 		titleCut["","black out",1];	
 		player action ["LandGear", _veh];
@@ -44,7 +42,7 @@
 		player action ["engine off",_veh];
 		_veh setVelocity [0,0,0];
 		_veh setDir _dir;
-		_veh setPos _pos;
+		_veh setPos Local_PlaneLandingPos;
 		titleCut["","black in",1];
 		
 		sleep 1;
