@@ -295,7 +295,7 @@ if (isNil "Global_CostMap") then
 		["optic_MRCO",150],
 		["optic_MRD",20],
 		["optic_Nightstalker",2000],
-		["optic_NVS",300],
+		["optic_NVS",150],
 		["optic_SOS",300],
 		["optic_tws",1800],
 		["optic_tws_mg",1500],
