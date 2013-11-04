@@ -97,7 +97,7 @@ if (isNil "Global_CostMap") then
 		["3Rnd_UGL_FlareRed_F",15],
 		["3Rnd_UGL_FlareWhite_F",15],
 		["3Rnd_UGL_FlareYellow_F",15],
-		["5Rnd_127x108_APDS_Mag",10],
+		["5Rnd_127x108_APDS_Mag",65],
 		["5Rnd_127x108_Mag",50],
 		["6Rnd_45ACP_Cylinder",15],
 		["7Rnd_408_Mag",50],
