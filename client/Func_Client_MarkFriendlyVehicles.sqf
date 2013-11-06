@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 	//marks friendly vehicles on the map
 
 	//Local_RegisteredObjects - see client`s precompile.sqf & Func_Client_RegisterCustomVehicle
@@ -88,3 +92,4 @@
 		};		
 	};
 	
+#endif

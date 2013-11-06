@@ -1,3 +1,5 @@
+#include "defines.sqf"
+
 	//function determines who is controlling a control point
 
 	//randomize threads start on different CP`s
@@ -5,6 +7,9 @@
 
 	while{!Global_GameEnded}do
 	{
+
+
+#ifndef FT2_DISABLE_STUFF1
 		_total_west_captured_areas = 0;
 		_total_east_captured_areas = 0;
 		_total_capture_areas_count = count Config_TotalCheckPointData;
@@ -27,6 +32,9 @@
 		};
 
 		_area_capture_sound = if ((_total_capture_areas_count != 1) && ((_total_east_captured_areas == _total_capture_areas_count) || (_total_west_captured_areas == _total_capture_areas_count))) then { "area_capture_all" } else { "area_capture" };
+#else
+		_area_capture_sound = "area_capture";
+#endif
 
 		{
 			_CheckPointName=localize (_x select 1);//displayname of checkpoint
@@ -199,5 +207,9 @@
 				(_flag select 0) setVariable ["owner_color",_MarkerColor,false];
 			};
 		} forEach Config_TotalCheckPointData;
+#ifndef FT2_DISABLE_STUFF1
 		sleep 0.5;
+#else
+		sleep 10;
+#endif
 	};

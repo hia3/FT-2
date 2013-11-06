@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 	//user action: "lock", "unlock"
 	//see Func_Client_AddLockActions
 
@@ -26,4 +30,5 @@
 		Public_VehicleLock=_this;
 		"Public_VehicleLock" call Func_Common_PublicVariable;
 	};
-	
+
+#endif

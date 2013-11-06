@@ -1,3 +1,6 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
 	
 private["_player","_weapon","_ammotype", "_ammomag","_ammo"];
 	
@@ -90,3 +93,5 @@ if (_weapon in ["Put"]) then
 		[Func_Client_TrackShell, _ammo] call Func_Common_Spawn;
 	};
 };
+
+#endif

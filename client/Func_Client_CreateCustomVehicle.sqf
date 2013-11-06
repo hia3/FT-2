@@ -1,3 +1,5 @@
+#include "defines.sqf"
+
 //creates vehicles, players buy
 //vehicles are created on local machines
 
@@ -30,7 +32,10 @@ _veh setDir _dir+180;
 //setting ammount of repairkits inside
 _veh setVariable ["rpair_kits",Config_RepairKitsDefault,true];
 
+#ifndef FT2_DISABLE_STUFF1
 _veh lock true;
+#endif
+
 _veh setVariable ["owner_name",Local_PlayerName,true];//name of player who bought the vehicle
 _veh setVariable ["kill_award",round(_cost*Config_AwardKillVehicleCoef),true];//award for a person who would kill the vehicle, if would; see Func_Common_DestroyUnitAward
 _veh setVariable ["ft2_wf_side",Local_PlayerSide,true];//side of the vehicle to check teamkills; see Func_Common_DestroyUnitAward
@@ -53,6 +58,8 @@ clearMagazineCargoGlobal _veh;
 clearItemCargoGlobal _veh;
 clearBackpackCargoGlobal _veh;
 
+#ifndef FT2_DISABLE_STUFF1
+
 _veh call Func_Common_AddHandlers;
 
 if (_veh isKindOf "Air") then
@@ -71,5 +78,7 @@ else
 };
 
 _veh disableTIEquipment ((paramsArray select 11) == 0);
+
+#endif
 
 _veh

@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 //script activates when player aproaches enemy respawn area
 
 private["_Limit","_safeLimit","_fireLimit"];
@@ -57,3 +61,5 @@ if ((Local_EnteredEnemySafeZone) && ((Local_PlayerVehicle distance Local_EnemyBa
 	Local_EnteredEnemySafeZone=false;
 	//setViewDistance Local_ViewDistance;
 };
+
+#endif

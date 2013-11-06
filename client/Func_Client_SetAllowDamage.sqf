@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 _distance=Config_RespawnSafeZone-Config_RespawnBuferZone;
 {
 	_side=_x getVariable "ft2_wf_side";
@@ -24,3 +28,5 @@ if ((getFatigue player) > 0.6) then
 {
 	player setFatigue 0.6;
 };
+
+#endif

@@ -1,5 +1,6 @@
-/**/
+#include "defines.sqf"
 
+#ifndef FT2_DISABLE_STUFF1
 	
 //adds actions "Lock", "Unlock", "Field repair", "Push crew" to vehicle
 //see Func_Client_CreateSensors
@@ -8,7 +9,7 @@ _param=_this select 0;
 //script is called by the sensor, which activates when player approaches any vehicle
 _veh=nearestObject[player,_param];
 
-//check, if vehicle exsists and if it is not allready handled
+//check, if vehicle exsists and if it is not already handled
 
 if (!(isNull _veh) && !(_veh in Local_UserVehicles)) then
 {
@@ -48,4 +49,5 @@ if (!(isNull _veh) && !(_veh in Local_UserVehicles)) then
 	//register the vehicle not to handle it again
 	Local_UserVehicles=Local_UserVehicles+[_veh];		
 };
-	
+
+#endif

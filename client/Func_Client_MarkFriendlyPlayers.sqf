@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 	//marks friendly players on GPS
 
 	#define MarkerColorGroup "ColorGreen";
@@ -116,3 +120,5 @@
 		
 		Local_NumberOfMarkersUsed = _i;
 	};
+
+#endif

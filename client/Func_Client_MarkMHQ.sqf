@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 //marks friendly MHQ`s on the map
 
 private["_mhq_marker_type"];
@@ -123,3 +127,5 @@ _i=1;
 	};
 	_i=_i+1;
 } forEach ([] call Local_FriendlyMHQ);
+
+#endif

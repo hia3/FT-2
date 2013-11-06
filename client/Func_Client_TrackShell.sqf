@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 	//script of tracking shells to prevent respawn attacks
 	//see Func_Client_PlayerFired
 		
@@ -44,4 +48,4 @@
 		sleep(_DistanceToFlag/2000);
 	};
 
-	
+#endif

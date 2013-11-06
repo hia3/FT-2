@@ -1,3 +1,7 @@
+#include "defines.sqf"
+
+#ifndef FT2_DISABLE_STUFF1
+
 	//create local sensors
 
 
@@ -56,3 +60,5 @@ _sensor setTriggerStatements["(alive player) && ((rating player) < 0)","player a
 _sensor=createTrigger["EmptyDetector",[0,0]];
 _sensor setTriggerActivation ["ANY", "PRESENT", true];
 _sensor setTriggerStatements["!(alive player) || (({(animationState player)==_x} count ['AmovPpneMstpSrasWrflDnon_healed','AinvPknlMstpSlayWrflDnon_healed','AinvPknlMstpSlayWrflDnon_healed2']) > 0)","Local_InjuredByEnemy=false",""];
+
+#endif
