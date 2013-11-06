@@ -6,13 +6,13 @@ if (((side _this)==Local_PlayerSide) || !(alive _this)) exitWith{};
 
 _tracked=_this getVariable ["istracked", false];
 
-//check if this guy is not allready tracked
+//check if this guy is not already tracked
 if !(_tracked) then
 {
 	//warning message - "enemy detected"
 	player sideChat format[localize "STR_MES_EnemyDetected",mapGridPosition (vehicle _this)];
 
-	//mark the enemy as "allready tracked"
+	//mark the enemy as "already tracked"
 	_this setVariable ["istracked",true,false];
 	_marker=format["%1",_this];
 	createmarkerLocal[_marker,position _this];

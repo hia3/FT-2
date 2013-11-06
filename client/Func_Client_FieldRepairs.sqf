@@ -35,7 +35,7 @@
 		//because some persons at one time can spend all of the repair kits
 		//though it will give poor result anyway
 		if (({alive _x} count crew _veh) > 0) exitWith {[_name,localize "STR_HINT_FieldCrew","pic\i_repair_f.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage;_veh setVariable ["fieldrepair",0,true];};
-		if ((time-_time)<_fieldrepairtime) exitWith {[_name,localize "STR_HINT_FieldAllready","pic\i_repair_f.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage};
+		if ((time-_time)<_fieldrepairtime) exitWith {[_name,localize "STR_HINT_FieldAlready","pic\i_repair_f.paa",1.0,"error_sound"] call Func_Client_ShowCustomMessage};
 
 		if (!(isNull _veh)) then
 		{

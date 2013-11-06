@@ -1,3 +1,4 @@
+#include "defines.sqf"
 
 private["_param"];
 
@@ -39,6 +40,8 @@ if (_param) then
 			Local_PlayerVehicle setVariable ["ft2_wf_side", Local_PlayerSide, true];
 		};
 
+#ifndef FT2_DISABLE_STUFF1
+
 		_action=Local_PlayerVehicle addAction ["<t color='#4C4FFF'>"+(localize "STR_ACT_Repair")+"</t>","client\Script_Client_Actions.sqf",[8],96,false,true,"", "(alive player) && (local _target) && ((speed _target)<5) && (((getPosATL _target select 2) < 5) || (_target isKindOf 'StaticWeapon')) && (({((_target distance _x) < Config_ServiceVehicleRange) && (alive _x)} count nearestObjects [_target,Local_FriendlyRepairVehicleTypes,Config_ServiceVehicleRange]>0) || ((_target distance Local_FriendlyBaseFlag)<Config_RespawnSize)) && !(Local_TechnicalService)"];
 		Local_PlayerVehicle setVariable ["FT2_WF_ACT_Repair",_action];
 
@@ -47,15 +50,16 @@ if (_param) then
 
 		_action=Local_PlayerVehicle addAction ["<t color='#4C4FFF'>"+(localize "STR_ACT_Refuel")+"</t>","client\Script_Client_Actions.sqf",[10],94,false,true,"", "(alive player) && (local _target) && ((speed _target)<5) && (((getPosATL _target select 2) < 5) || (_target isKindOf 'StaticWeapon')) && (({((_target distance _x) < Config_ServiceVehicleRange) && (alive _x)} count nearestObjects [_target,Local_FriendlyRefuelVehicleTypes,Config_ServiceVehicleRange]>0) || ((_target distance Local_FriendlyBaseFlag)<Config_RespawnSize)) && !(Local_TechnicalService)"];
 		Local_PlayerVehicle setVariable ["FT2_WF_ACT_Refuel",_action];
+#endif
 
 		_action=Local_PlayerVehicle addAction ["<t color='#FF4A3D'>"+(localize "STR_ACT_BailOut")+"</t>","client\Script_Client_Actions.sqf",[7],100,false,true,"", "(alive _target) && ((locked _target)==2)"];
 		Local_PlayerVehicle setVariable ["FT2_WF_ACT_BailOut",_action];
 
 		_action=Local_PlayerVehicle addAction ["<t color='#FFF37A'>"+(localize "STR_ACT_TakeOff")+"</t>","client\Script_Client_Actions.sqf",[11],99,false,true,"", "(alive player) && ((speed _target)<10) && ((getPosATL _target select 2) < 5) && (player==(driver _target)) && (_target isKindOf 'Plane') && !(Local_TechnicalService) && (isEngineOn _target) && ((_target distance Local_FriendlyBaseFlag) < Config_RespawnSize)"];
 		Local_PlayerVehicle setVariable ["FT2_WF_ACT_TakeOff",_action];
-		
-		_action=Local_PlayerVehicle addAction ["<img image='\A3\ui_f\data\map\markers\nato\c_plane.paa' /><t color='#40F040'>"+(localize "STR_ACT_СhooseLandingZone")+"</t>","client\Script_Client_Actions.sqf",[37],99,false,true,"", "(alive player) && (player==(driver _target)) && (_target isKindOf 'Plane')"];
-		Local_PlayerVehicle setVariable ["FT2_WF_ACT_СhooseLandingZone",_action];
+		                                                                                                                                               
+		_action=Local_PlayerVehicle addAction ["<img image='\A3\ui_f\data\map\markers\nato\c_plane.paa' /><t color='#40F040'>"+(localize "STR_ACT_ChooseLandingZone")+"</t>","client\Script_Client_Actions.sqf",[37],99,false,true,"", "(alive player) && (player==(driver _target)) && (_target isKindOf 'Plane')"];
+		Local_PlayerVehicle setVariable ["FT2_WF_ACT_ChooseLandingZone",_action];
 
 		_action=Local_PlayerVehicle addAction ["<t color='#FFF37A'>"+(localize "STR_ACT_Landing")+"</t>","client\Script_Client_Actions.sqf",[12],99,false,true,"", "(alive player)&& ((speed _target)<300) && ((speed _target)>50) && ((getPos _target select 2) < 150) && ((getPos _target select 2) > 10) && (player==(driver _target)) && ((_target distance Local_FriendlyBaseFlag)<Config_RespawnSize*2) && (_target isKindOf 'Plane') && ((count Local_PlaneLandingPos) == 3)"];
 		Local_PlayerVehicle setVariable ["FT2_WF_ACT_Landing",_action];
@@ -102,7 +106,7 @@ if (_param) then
 }
 else
 {
-	_actions=["FT2_WF_ACT_GpsOn","FT2_WF_ACT_GpsOff","FT2_WF_ACT_BailOut","FT2_WF_ACT_Repair","FT2_WF_ACT_Reammo","FT2_WF_ACT_Refuel","FT2_WF_ACT_TakeOff","FT2_WF_ACT_СhooseLandingZone","FT2_WF_ACT_Landing","FT2_WF_ACT_ClosedPosS","FT2_WF_ACT_ClosedPosC","FT2_WF_ACT_IgnitionOff","FT2_WF_ACT_IgnitionOn","FT2_WF_ACT_LowGearOff","FT2_WF_ACT_LowGearOn","FT2_WF_ACT_RadarGuidanceOff","FT2_WF_ACT_RadarGuidanceOn","STR_ACT_ManualFlareOff","STR_ACT_ManualFlareOn"];
+	_actions=["FT2_WF_ACT_GpsOn","FT2_WF_ACT_GpsOff","FT2_WF_ACT_BailOut","FT2_WF_ACT_Repair","FT2_WF_ACT_Reammo","FT2_WF_ACT_Refuel","FT2_WF_ACT_TakeOff","FT2_WF_ACT_ChooseLandingZone","FT2_WF_ACT_Landing","FT2_WF_ACT_ClosedPosS","FT2_WF_ACT_ClosedPosC","FT2_WF_ACT_IgnitionOff","FT2_WF_ACT_IgnitionOn","FT2_WF_ACT_LowGearOff","FT2_WF_ACT_LowGearOn","FT2_WF_ACT_RadarGuidanceOff","FT2_WF_ACT_RadarGuidanceOn","STR_ACT_ManualFlareOff","STR_ACT_ManualFlareOn"];
 
 	{
 		_action=Local_PlayerVehicle getVariable _x;
