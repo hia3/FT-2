@@ -22,13 +22,11 @@ if (isNull Local_Camera) then
 	Local_Camera cameraEffect ["internal","back"];
 };
 
-_teamspeak_timing=[0,0];
 if (Dialog_RespawnDeathTime==0) then
 {
 	//Dialog_RespawnDeathTime!=0 means player just entered the game and
 	//it is not necessary to delete his body or to launch spectating camera
 	_playerWasDead=true;
-	_teamspeak_timing=player getVariable "ts_message_timing";
 	Dialog_RespawnDeathTime=time;
 
 	[] call Func_Client_CreateRespawnCamera;
@@ -77,8 +75,6 @@ player setVariable ["enemytrack",-Config_EnemyTrackTime,true];//if player attack
 player setVariable ["groupNumber",Local_PlayerGroupNumber,true];//number of player group
 player setVariable ["groupPassword",Local_PlayerGroupPassword,true];//password of player group
 player setVariable ["deafness",0];//deafness effect. e.g. after tank or rpg shot
-player setVariable ["joied_ts",true];//if player is in TS
-player setVariable ["ts_message_timing",_teamspeak_timing];//timer to show TS message
 Local_PlayerVehicle=player;
 
 //add some useractions to player

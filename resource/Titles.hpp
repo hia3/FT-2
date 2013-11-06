@@ -12,7 +12,7 @@ class RscTitles
 		duration=10000;
 		name="gps";
 
-		controls[]={"log_info","txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","OptionsIcon7","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic","TeamSpeak", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
+		controls[]={"log_info","txt_dwn","txt_crw","OptionsIcon0","OptionsIcon1","OptionsIcon2","OptionsIcon3","OptionsIcon4","OptionsIcon5","OptionsIcon6","OptionsIcon7","Players","Score","Funds","ManPic","HeadPic","BodyPic","ArmsPic","LegsPic", "gps_map", "gps_background", "gps_background_title", "gps_background_title_dark", "gps_grid", "gps_time", "gps_heading"};
 
 		onload="uiNamespace setVariable['GUI',_this select 0]; [Func_Client_UpdateGUI, []] call Func_Common_Spawn";
 
@@ -196,15 +196,6 @@ class RscTitles
 				shadow=false;
 			};
 		};
-		class TeamSpeak : RscPicture
-		{
-			idc=6038;
-			x = safeZoneX + SafeZoneW * 0.3;
-			y = SafeZoneY;
-			w = SafeZoneW * 0.4;
-			h = SafeZoneH * 0.3;
-		};
-
 
 		class gps_map : RscMapControl_ext
 		{
