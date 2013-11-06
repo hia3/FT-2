@@ -2,8 +2,6 @@
 //the most shitty and unoptimized script in whole mission
 //hate working with GUI
 
-
-
 disableSerialization;
 _display=uiNamespace getVariable "GUI";
 
@@ -54,9 +52,6 @@ _arms=_display displayCtrl 6036;
 _legs=_display displayCtrl 6037;
 //END: HUMAN DAMAGE INDICATOR
 
-//TS3 TEXT
-_teamspeak=_display displayCtrl 6038;
-
 _dx=SafeZoneW+safeZoneX-0.245;
 _dy=SafeZoneH+safeZoneY-0.2575;
 
@@ -68,8 +63,10 @@ _crewlist ctrlSetPosition [safeZoneX+0.025,SafeZoneY+0.5];
 _playerslist ctrlSetPosition [safeZoneX+0.025,_dy+0.11];
 _scorelist ctrlSetPosition [safeZoneX+0.155,_dy+0.11];
 
+_enable_damage_indicator = (Dialog_GUIType in [2,3]);
+
 //setting position: damage indicator
-if (Dialog_GUIType < 2) then
+if (_enable_damage_indicator) then
 {
 	_man ctrlSetPosition [safeZoneX+0.04,SafeZoneY+0.04];
 	_head ctrlSetPosition [safeZoneX+0.051,SafeZoneY+0.038];
@@ -95,7 +92,7 @@ _show_gps =
 {
 	private ["_is_visible", "_gps_x"];
 
-	_should_visible = ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player));
+	_should_visible = ((Dialog_GUIType in [1,3]) && ("ItemGPS" in assignedItems player));
 	_is_visible = ctrlShown _gps_map;
 
 	_gps_x = if (_should_visible) then { _gps_common_x } else { _gps_common_x + 10 };
@@ -142,7 +139,6 @@ _head ctrlCommit 0;
 _body ctrlCommit 0;
 _arms ctrlCommit 0;
 _legs ctrlCommit 0;
-_teamspeak ctrlCommit 0;
 
 	_gps_map_zoom_multiplier = getNumber(configfile >> "CfgWorlds" >> "Stratis" >> "mapSize") / getNumber(configfile >> "CfgWorlds" >> worldName >> "mapSize");
 	_veh_real_speed = [0, 0, 0] distance (velocity Local_PlayerVehicle);
@@ -155,7 +151,6 @@ _TimerC=0;
 _TimerO=0;
 _TimerP=0;
 _TimerD=0;
-_TimerT=0;
 _TimerL=0;
 _lastdam=0;
 _playerInVehicle=false;
@@ -176,7 +171,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 
 		false call _show_gps;
 
-		if ((Dialog_GUIType in [0,2]) && ("ItemGPS" in assignedItems player)) then
+		if ((Dialog_GUIType in [1,3]) && ("ItemGPS" in assignedItems player)) then
 		{
 			//GPS on
 			_veh_real_speed = [0, 0, 0] distance (velocity Local_PlayerVehicle);
@@ -303,7 +298,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 				_t5="pic\icon_fuel.paa";
 			};
 		};
-		if !(player getVariable "joied_ts") then
+		if !(player getVariable ["joied_ts", true]) then
 		{
 			_t7 = "pic\ts_not_connected.paa";
 		};
@@ -341,7 +336,7 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 
 	//---DAMAGE-INDICATOR-START---
 	_dam=getDammage player;
-	if (((((getDammage player)!=_lastdam) && (_TimerD<=_timing) && !_playerInVehicle) || _updatedam) && (Dialog_GUIType < 2)) then
+	if (((((getDammage player)!=_lastdam) && (_TimerD<=_timing) && !_playerInVehicle) || _updatedam) && (Dialog_GUIType in [2,3])) then
 	{
 		_lastdam=_dam;
 		_updatedam=false;
@@ -408,29 +403,6 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 		_updatedam=true;
 	};
 	//---DAMAGE-INDICATOR-END---
-
-
-	//---TS-MESSAGE-START---
-	if(_TimerT<=_timing)then
-	{
-		_TimerT=_timing+1;
-		if (player getVariable "joied_ts") then
-		{
-			_teamspeak ctrlSetText "";
-		}else{
-			if (((player getVariable "ts_message_timing") select 1) < _timing) then
-			{
-				player setVariable ["ts_message_timing",[_timing+Local_TS_duration,_timing+Local_TS_period]];
-			};
-			if ((((player getVariable "ts_message_timing") select 0) > _timing) && false) then
-			{
-				_teamspeak ctrlSetText "pic\ts_warning.paa";
-			}else{
-				_teamspeak ctrlSetText "";
-			};
-		};
-	};
-	//---TS-MESSAGE-END---
 
 	if (((count Local_LogInfoStrings) == 0) && !_log_info_down) then
 	{
