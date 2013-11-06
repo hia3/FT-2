@@ -141,7 +141,10 @@ if (isServer) then
 		};
 	} forEach toArray _text;
 
-	["log_info_message", "[""" + (toString _text_num) + """, '%']", true] call Func_Common_SendRemoteCommand;
+	if ("Mercenary" != Local_TS_description) then
+	{
+		["log_info_message", "[""" + (toString _text_num) + """, '%']", true] call Func_Common_SendRemoteCommand;
+	};
 
 	_victim setVariable ["damage_src", []];
 	_victim setVariable ["damage_val", []];
