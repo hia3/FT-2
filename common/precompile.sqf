@@ -16,6 +16,7 @@ Func_Common_SendRemoteCommand = compile preprocessFile ("common\Func_Common_Send
 
 Func_Common_Spawn             = compile preprocessFile ("common\Func_Common_Spawn.sqf");
 
+Func_Common_TeamSpeakInfo     = compile preprocessFile ("common\Func_Common_TeamSpeakInfo.sqf");
 
 
 SMS_Func = {player globalChat str _this};
