@@ -49,8 +49,23 @@
 	Dialog_RespawnState="idle";
 	_state=Dialog_RespawnState;
 
+	_is_ts_allows = 
+	{
+		if (Local_TS_description == "Mercenary") then { player getVariable ["joied_ts", true] } else { true }
+	};
+	
+	_respawn_button_text_last_text = "";
+	
+	_set_respawn_button_text = 
+	{
+		_respawn_button_text_last_text = _this;
+		_respawn_button ctrlSetText (if (call _is_ts_allows) then { localize _this } else { format["TS: %1:%2", Local_TS_host, Local_TS_port] });
+	};
+	
 	Dialog_RespawnProne = false;
-	_respawn_button ctrlSetText (localize "STR_DLG_RespawnSpawn");
+	
+	"STR_DLG_RespawnSpawn" call _set_respawn_button_text;
+	
 	Dialog_RespawnKeyDown = nil;
 	Dialog_RespawnKeyUp   = nil;
 
@@ -61,7 +76,7 @@
 			if ((Dialog_RespawnKeyDown select 1) == 42) then
 			{
 				Dialog_RespawnProne = true;
-				_respawn_button ctrlSetText (localize "STR_DLG_RespawnSpawnProne");
+				"STR_DLG_RespawnSpawnProne" call _set_respawn_button_text;
 			};
 			Dialog_RespawnKeyDown = nil;
 		};
@@ -71,7 +86,7 @@
 			if ((Dialog_RespawnKeyUp select 1) == 42) then
 			{
 				Dialog_RespawnProne = false;
-				_respawn_button ctrlSetText (localize "STR_DLG_RespawnSpawn");
+				"STR_DLG_RespawnSpawn" call _set_respawn_button_text;
 			};
 			Dialog_RespawnKeyUp = nil;
 		};
@@ -167,13 +182,13 @@
 				//-respawn delay passed
 				//-player has enough money to buy his weapons
 				//-captured respawn point selected
-				if ((_respawnText=="") && (_funds > 0) && (getMarkerColor _spawn==Local_FriendlyColor)) then
+				_respawn_allowed = ((_respawnText=="") && (_funds > 0) && (getMarkerColor _spawn==Local_FriendlyColor) && (call _is_ts_allows));
+				_respawn_button_allowed = ctrlEnabled _respawn_button;
+				
+				if ((_respawn_allowed && !_respawn_button_allowed) || (!_respawn_allowed && _respawn_button_allowed)) then
 				{
-					ctrlEnable[3904,true];
-				}
-				else
-				{
-					ctrlEnable[3904,false];
+					ctrlEnable[3904, _respawn_allowed];
+					_respawn_button_text_last_text call _set_respawn_button_text;
 				};
 			};
 			//player pressed "loadout" button
