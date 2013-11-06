@@ -67,7 +67,7 @@ lbSetCurSel[13013,_lastMMS];
 
 
 // populate Gui style combo box
-for [{_i=0},{_i<4},{_i=_i+1}] do
+for [{_i=0},{_i<=Dialog_GUITypeMax},{_i=_i+1}] do
 {
 	_str=localize format["STR_WF_GUIStyle0%1",_i];
 	lbAdd[13006,_str];

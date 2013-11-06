@@ -7,7 +7,8 @@ Dialog_MapMarkersPType=1;//0-only marks,1-with names
 Dialog_MapMarkersSType=1;//0-only marks,1-with names	
 Dialog_AutosaveGearType=0;//0-never,1-when respawn,2-allways;	
 
-Dialog_GUIType=0;//0-all,1-no gps,2-no health,3-no health no gps
+Dialog_GUITypeMax = if (Local_TS_description == "Mercenary") then { 0 } else { 3 };
+Dialog_GUIType = Dialog_GUITypeMax; // 00-no health no gps, 01-no health, 10-no gps, 11-all
 Dialog_GUIColor=0; // Default Gui color is almost white
 
 
