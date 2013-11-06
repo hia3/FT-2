@@ -49,36 +49,6 @@ Local_PlayerGroupNumber=-1;
 Local_PlayerGroupPassword="";
 Local_MultiUseString=format ["<t align='center' shadow='true' size='1.5'  color='#dddddd'>%1</t>",localize "STR_NAME_BattleOver"];
 
-waitUntil{!(isNil "Public_TeamSpeakInfo")};
-if (Public_TeamSpeakInfo == "") then
-{
-	Local_TS_host="hia3.net";
-	Local_TS_port="9987";
-
-	Local_TS_period=600;
-	Local_TS_duration=20;
-	Local_TS_color="#FF0000";
-	Local_TS_size="1.1";
-
-	Local_TS_home="http://hia3.com";
-	Local_TS_mail="contact@hia3.com";
-}
-else
-{
-	_ts_info=call compile Public_TeamSpeakInfo; // returns [host,port,period,duration,color,size,home,mail]
-
-	Local_TS_host=_ts_info select 0;
-	Local_TS_port=_ts_info select 1;
-
-	Local_TS_period=_ts_info select 2;
-	Local_TS_duration=_ts_info select 3;
-	Local_TS_color=_ts_info select 4;
-	Local_TS_size=_ts_info select 5;
-
-	Local_TS_home=_ts_info select 6;
-	Local_TS_mail=_ts_info select 7;
-};
-
 Local_MapInfoStrings=
 [
 	"<t align='center' shadow='true' size='2.1' color='#ffffff'>F i g h t   F o r   T h e   T e r r i t o r y   -   L i g h t   L e v e l   M a p</t>",
@@ -125,7 +95,6 @@ Func_Client_CheckPointCaptured=compile preprocessFile ("client\Func_Client_Check
 Func_Client_CommanderSendPosition=compile preprocessFile ("client\Func_Client_CommanderSendPosition.sqf");
 Func_Client_CompileScoreStatistics=compile preprocessFile ("client\Func_Client_CompileScoreStatistics.sqf");
 Func_Client_ConvertToArray=compile preprocessFile ("client\Func_Client_ConvertToArray.sqf");
-Func_Client_ConvertToDirection=compile preprocessFile ("client\Func_Client_ConvertToDirection.sqf");
 Func_Client_ConvertToTime=compile preprocessFile ("client\Func_Client_ConvertToTime.sqf");
 Func_Client_CopyrightsAndLinks=compile preprocessFile ("client\Func_Client_CopyrightsAndLinks.sqf");
 Func_Client_CreateCustomVehicle=compile preprocessFile ("client\Func_Client_CreateCustomVehicle.sqf");
