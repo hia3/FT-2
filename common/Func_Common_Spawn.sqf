@@ -40,6 +40,9 @@ else
 	_result = _params spawn _code;
 };
 
-Local_RunningTasks set [count Local_RunningTasks, [_result, _code_str, scriptDone _result, time + random 1000]];
+if (false) then
+{
+	Local_RunningTasks set [count Local_RunningTasks, [_result, _code_str, scriptDone _result, time + random 1000]];
+};
 
 _result
