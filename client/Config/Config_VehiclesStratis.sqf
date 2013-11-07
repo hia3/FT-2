@@ -21,11 +21,9 @@ _add_car_class =
 };
 
 
-	if (!isServer || local player) then {
-			
-		_pa6=0;
-		if (ismultiplayer) then {_pa6 = paramsArray select 6;};
-		if (((side player == WEST) && (_pa6==0)) || ((side player == EAST) && (_pa6==1))) then {			
+	if (!isServer || local player) then
+	{
+		if (((side player == WEST) && (Local_Param_Armaments==0)) || ((side player == EAST) && (Local_Param_Armaments==1))) then {			
 
 			_v = [];
 			_c = [];
@@ -274,8 +272,8 @@ _add_car_class =
 			FT2_WF_Logic setVariable ['shipVehicleTimes',_t];
 		};
 		
-		if (((side player == EAST) && (_pa6==0)) || ((side player == WEST) && (_pa6==1))) then {
-
+		if (((side player == EAST) && (Local_Param_Armaments==0)) || ((side player == WEST) && (Local_Param_Armaments==1))) then
+		{
 			_v = [];
 			_c = [];
 			_t = [];

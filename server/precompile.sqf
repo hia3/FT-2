@@ -14,6 +14,9 @@ Func_Server_OnPlayerDisconnected=compile preprocessFile ("server\Func_Server_OnP
 Func_Server_RespawnVehicle=compile preprocessFile ("server\Func_Server_RespawnVehicle.sqf");
 Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_WeatherBroadcast.sqf");
 
+[Func_Server_CheckTSUsers, []] call Func_Common_Spawn;
+[] call Func_Common_ParamsArray;
+
 [
 {
 	"Global_GameEnded" call Func_Common_PublicVariable;
@@ -42,12 +45,12 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	"Public_PlayerConnected" addPublicVariableEventHandler {call Func_Server_OnPlayerConnected};
 
 	//param daytime
-	_pa1 = 1.0;
-	if (ismultiplayer) then {_pa1 = (paramsArray select 1);};
-	if (_pa1 !=99) then
+	if (Local_Param_Daytime != 99) then
 	{
-		skipTime _pa1;
-	}else{
+		skipTime Local_Param_Daytime;
+	}
+	else
+	{
 		/*skipTime (4.5+(random 14));*/
 		skipTime (6.0+(random 12));
 	};
@@ -55,9 +58,7 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	//param weather
 	if !(Config_DisableWeatherChange) then
 	{
-		_pa2 = 0;
-		if (ismultiplayer) then {_pa2 = (paramsArray select 2);};
-		if (_pa2 == -1) then
+		if (Local_Param_Weather == -1) then
 		{
 			[Func_Server_DynamicWeather, []] call Func_Common_Spawn;
 			[Func_Server_WeatherBroadcast, []] call Func_Common_Spawn;
@@ -66,10 +67,7 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	};
 
 	//param mission duration
-	_pa0 = 3600;
-
-	if (isMultiplayer) then {_pa0 = paramsArray select 0;};
-	Param_RoundDuration=_pa0+Config_GameStartDelay;
+	Param_RoundDuration = Local_Param_Duration + Config_GameStartDelay;
 	"Param_RoundDuration" call Func_Common_PublicVariable;
 
 	while {isNil 'FT2_WF_Logic'} do {sleep 0.1};
@@ -80,7 +78,6 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	[Func_Server_ClearRegisteredObjects, []] call Func_Common_Spawn;
 	[Func_Server_RespawnVehicle, []] call Func_Common_Spawn;
 	[Func_Server_MissionTiming, []] call Func_Common_Spawn;
-	[Func_Server_CheckTSUsers, []] call Func_Common_Spawn;
 	[Func_Server_Animals, []] call Func_Common_Spawn;
 
 	if ((count ([] call Config_Hospitals)) > 0) then

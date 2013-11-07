@@ -49,7 +49,7 @@
 
 		[_veh,true] call Func_System_ClearFlaresAndSmokes;
 
-		_veh disableTIEquipment ((paramsArray select 11) == 0);
+		_veh disableTIEquipment (Local_Param_ThermalImaging == 0);
 	};
 
 	_respawncheck=

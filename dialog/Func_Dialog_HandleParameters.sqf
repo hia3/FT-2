@@ -2,20 +2,6 @@
 disableSerialization;
 _display = _this select 0;
 
-
-_pa0 = 3600;
-_pa1 = 7.0;
-_pa2 = 0;
-_pa3 = 3000;
-_pa4 = 0;
-_pa5 = 0;
-_pa6 = 0;
-_pa7 = 1000000;
-_pa8 = 1;
-_pa9 = 1;
-_pa10 = 1;
-_pa11 = 1;
-
 _pat0 = "";
 _pat1 = "";
 _pat2 = "";
@@ -30,24 +16,8 @@ _pat10 = "";
 _pat11 = "";
 
 parameterIDC=[7000,7001,7002,7003,7004,7005,7006,7007,7008,7009,7010,7011];
-if (isMultiplayer) then 
-{
-	_pa0 = paramsArray select 0;
-	_pa1 = paramsArray select 1;
-	_pa2 = paramsArray select 2;
-	_pa3 = paramsArray select 3;
-	_pa4 = paramsArray select 4;
-	_pa5 = paramsArray select 5;
-	_pa6 = paramsArray select 6;
-	_pa7 = paramsArray select 7;
-	_pa8 = paramsArray select 8;
-	_pa9 = paramsArray select 9;
-	_pa10 = paramsArray select 10;
-	_pa11 = paramsArray select 11;
-};
 
-
-switch(_pa0) do 
+switch(Local_Param_Duration) do 
 {
 	case 1800  : {_pat0 =  localize "STR_P_Duration30"};
 	case 2700  : {_pat0 =  localize "STR_P_Duration45"};
@@ -58,7 +28,7 @@ switch(_pa0) do
 };
 
 
-switch(_pa1) do 
+switch(Local_Param_Daytime) do 
 {
 	case 4.5 : {_pat1 = localize "STR_P_Time01"};
 	case 7.0 : {_pat1 = localize "STR_P_Time02"};
@@ -68,7 +38,7 @@ switch(_pa1) do
 	case 99 : {_pat1 = localize "STR_P_Time06"};
 };
 
-switch(_pa2) do 
+switch(Local_Param_Weather) do 
 {
 	case 1.0 : {_pat2 = localize "STR_P_Weather01"};
 	case 0.66 : {_pat2 = localize "STR_P_Weather02"};
@@ -82,7 +52,7 @@ if (Config_DisableWeatherChange) then
 	_pat2 = localize "STR_P_Disable";
 };
 
-switch(_pa3) do 
+switch(Local_Param_ViewDistance) do 
 {
 	case  500  : {_pat3 = localize "STR_P_Distance00"};
 	case  750  : {_pat3 = localize "STR_P_Distance01"};
@@ -98,7 +68,7 @@ switch(_pa3) do
 };
 
 
-switch(_pa4) do 
+switch(Local_Param_ExternalView) do 
 {
 	case 0: {_pat4 = localize "STR_P_View01"};
 	case 1: {_pat4 = localize "STR_P_View02"};
@@ -107,7 +77,7 @@ switch(_pa4) do
 };
 
 
-switch(_pa5) do 
+switch(Local_Param_ScreenMarkers) do 
 {
 	case 0 : {_pat5 = localize "STR_WF_SMType00"};
 	case 1 : {_pat5 = localize "STR_WF_SMType01"};
@@ -115,35 +85,35 @@ switch(_pa5) do
 };
 
 
-switch(_pa6) do 
+switch(Local_Param_Armaments) do 
 {
 	case 0 : {_pat6 = localize "STR_P_Armament01"};
 	case 1 : {_pat6 = localize "STR_P_Armament02"};
 
 };
 
-_pat7 = "$" + (str _pa7);
+_pat7 = "$" + (str Local_Param_StartFund);
 
-switch(_pa8) do 
+switch(Local_Param_Halo) do 
 {
 	case 0: {_pat8 = localize "STR_P_Disable"};
 	case 1: {_pat8 = localize "STR_P_Enable"};
 };
 
 
-switch(_pa9) do 
+switch(Local_Param_Grass) do 
 {
 	case 0: {_pat9 = localize "STR_P_Disable"};
 	case 1: {_pat9 = localize "STR_P_Enable"};
 };
 
-switch(_pa10) do 
+switch(Local_Param_BicycleAtMHQ) do 
 {
 	case 0: {_pat10 = localize "STR_P_Disable"};
 	case 1: {_pat10 = localize "STR_P_Enable"};
 };
 
-switch(_pa11) do 
+switch(Local_Param_ThermalImaging) do 
 {
 	case 0: {_pat11 = localize "STR_P_Disable"};
 	case 1: {_pat11 = localize "STR_P_Enable"};

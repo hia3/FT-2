@@ -25,6 +25,7 @@ if(!isServer || local player)then
 	waitUntil{local player};
 	
 	[] call Func_Common_TeamSpeakInfo;
+	[] call Func_Common_ParamsArray;
 	
 	call compile preprocessfile     "dialog\precompile.sqf";
 	call compile preprocessfile "subsystems\precompile.sqf";

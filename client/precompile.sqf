@@ -360,10 +360,10 @@ onEachFrame
 [
 {
 	private["_Item","_NameString","_task","_i","_count"];
-	_pa3 = if (ismultiplayer) then {paramsArray select 3;} else {3000;};
-	_pa9 = paramsArray select 9;
-	Local_ViewDistance= _pa3;
-	Local_Grass=_pa9;
+
+	Local_ViewDistance = Local_Param_ViewDistance;
+	Local_Grass        = Local_Param_Grass;
+	
 	Local_PlayerSide=side player;
 	Local_PlayerName=name player;
 	Local_SpawnPos=getPosATL player;
@@ -451,7 +451,7 @@ onEachFrame
 	_varname=format["FT2_WF_Funds_%1",Local_PlayerName];
 	if (isNil {FT2_WF_Logic getVariable _varname}) then
 	{
-		_count=paramsArray select 7;
+		_count=Local_Param_StartFund;
 		FT2_WF_Logic setVariable [_varname,_count,true];
 	}
 	else
@@ -464,17 +464,15 @@ onEachFrame
 	//---weather system---
 	if !(Config_DisableWeatherChange) then
 	{
-		_pa2 = 0;
-		if (ismultiplayer) then {_pa2 = (paramsArray select 2);};
-		if (_pa2 == -1) then
+		if (Local_Param_Weather == -1) then
 		{
 			if (!isServer) then
 			{
 				"Public_WeatherCode" addPublicVariableEventHandler { 10 setOvercast((_this select 1) select 2); 10 setRain((_this select 1) select 3); };
 			};
 		}else{
-			10 setOvercast _pa2;
-			10 setRain _pa2;
+			10 setOvercast Local_Param_Weather;
+			10 setRain Local_Param_Weather;
 		};
 	};
 	//---

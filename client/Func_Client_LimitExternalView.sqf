@@ -4,9 +4,7 @@
 
 if (difficultyEnabled "3rdPersonView") then
 {
-	_pa4=0;
-	if (ismultiplayer) then { _pa4 = paramsArray select 4; };
-	switch (_pa4) do
+	switch (Local_Param_ExternalView) do
 	{
 		case 1://vehicles only
 		{

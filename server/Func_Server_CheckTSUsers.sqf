@@ -33,33 +33,39 @@ _ts_info_version = "ts-info" callExtension "version";
 
 if (_ts_info_version == "1.2") then
 {
-Public_TeamSpeakInfo="ts-info" callExtension "get-server-info";
-[] call Func_Common_TeamSpeakInfo;
-"Public_TeamSpeakInfo" call Func_Common_PublicVariable;
+	Public_TeamSpeakInfo="ts-info" callExtension "get-server-info";
+	[] call Func_Common_TeamSpeakInfo;
+	"Public_TeamSpeakInfo" call Func_Common_PublicVariable;
 
-while {!(Global_GameEnded)} do
-{
-	//data array structure
-	//['ARMA2-DAO-VH','name #1','name #2']
-
-	_external_data = "ts-info" callExtension "get-player-list";
-
-	_data=call compile _external_data;
-
-	//check data validity
-	if (typeName _data=="ARRAY") then
+	while {!(Global_GameEnded)} do
 	{
-		if ((count _data)>0) then
+		//data array structure
+		//['ARMA2-DAO-VH','name #1','name #2']
+
+		_external_data = "ts-info" callExtension "get-player-list";
+
+		_data=call compile _external_data;
+
+		//check data validity
+		if (typeName _data=="ARRAY") then
 		{
-			//check signature
-			if ((_data select 0)=='ARMA2-DAO-VH') then
-			{				
-				//set messages for players not in ts
-				[_data, allUnits] call _showmessage;
+			if ((count _data)>0) then
+			{
+				//check signature
+				if ((_data select 0)=='ARMA2-DAO-VH') then
+				{				
+					//set messages for players not in ts
+					[_data, allUnits] call _showmessage;
+				}
+				else
+				{
+					diag_log format ["ts-info: %1", _data];
+				};
 			}
 			else
 			{
-				diag_log format ["ts-info: %1", _data];
+				//remove messages for everybody
+				allUnits call _removemessage;
 			};
 		}
 		else
@@ -67,15 +73,8 @@ while {!(Global_GameEnded)} do
 			//remove messages for everybody
 			allUnits call _removemessage;
 		};
-	}
-	else
-	{
-		//remove messages for everybody
-		allUnits call _removemessage;
+		sleep 5;
 	};
-	sleep 5;
-};
-
 }
 else
 {

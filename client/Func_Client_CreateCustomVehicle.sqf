@@ -77,7 +77,7 @@ else
 	};
 };
 
-_veh disableTIEquipment ((paramsArray select 11) == 0);
+_veh disableTIEquipment (Local_Param_ThermalImaging == 0);
 
 #endif
 

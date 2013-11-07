@@ -16,8 +16,8 @@ _lastGC=Dialog_GUIColor;
 _lastAS=Dialog_AutosaveGearType;
 _lastFunds=call Func_Client_GetPlayerFunds;
 
-SliderSetRange[13003,1,paramsArray select 3];
-SliderSetRange[13005,1,paramsArray select 3];
+SliderSetRange[13003, 1, Local_Param_ViewDistance];
+SliderSetRange[13005, 1, Local_Param_ViewDistance];
 SliderSetRange[13015,0,_lastFunds];
 
 SliderSetPosition[13003,Local_ViewDistance];
@@ -36,7 +36,7 @@ _i = 1;
 } forEach Local_CurrentPlayers;
 lbSetCurSel[13016,0];
 
-for [{_i=0},{_i<=(paramsArray select 5)},{_i=_i+1}] do
+for [{_i=0},{_i<=Local_Param_ScreenMarkers},{_i=_i+1}] do
 {
 	_str=localize format["STR_WF_SMType0%1",_i];
 	_j=lbAdd[13007,_str];
@@ -122,6 +122,7 @@ while {alive player && dialog} do
 		_lastViewDistance=_currentVD;
 
 		setViewDistance Local_ViewDistance;
+		setObjectViewDistance [Local_ViewDistance * 0.6, Local_ViewDistance * 0.6];
 	};
 
 	if (_currentMD!=_lastMarkersDistance) then
