@@ -85,5 +85,5 @@ while{!Global_GameEnded}do
 			};	
 		};
 	};		
-	sleep 1;	
+	sleep 10;	
 };
