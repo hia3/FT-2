@@ -272,7 +272,8 @@ switch((_this select 3)select 0)do
 			_pic = getText(configFile >> 'CfgMagazines' >> _mag >> 'picture');
 			_name = getText(configFile >> 'CfgMagazines' >> _mag >> 'displayName');
 		
-			deleteVehicle _mine;
+			player action ["deactivateMine", player];
+			
 			[_name, localize "STR_HINT_Defused", _pic, 1.0] call Func_Client_ShowCustomMessage;
 		};
 	};
