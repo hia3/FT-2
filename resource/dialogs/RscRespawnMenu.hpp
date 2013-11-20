@@ -15,7 +15,7 @@ class RscRespawnMenu {
 			x = 0.17;
 			y = 0.17;
 			w = 0.75;
-			h = 0.7;
+			h = 0.74;
 		};
 	};
 
@@ -73,7 +73,7 @@ class RscRespawnMenu {
 			idc = 15004;
 			text = $STR_DLG_RespawnFunds;
 			SizeEx = 0.030;
-			x = 0.2;
+			x = 0.19;
 			w = 0.7;
 			y = 0.775;
 		};
@@ -81,24 +81,24 @@ class RscRespawnMenu {
 			idc = 15005;
 			text = $STR_DLG_RespawnCost;
 			SizeEx = 0.030;
-			x = 0.2;
+			x = 0.19;
 			w = 0.7;
 			y = 0.805;
 		};
 		class RespawnButton : RscShortcutButton {
 			idc = 3904;
-			x = 0.65;
-			y = 0.79;
-			w = 0.23;
+			x = 0.54;
+			y = 0.84;
+			w = 0.35;
 			h = 0.052;
 			text = $STR_DLG_RespawnSpawn;
 			action = "Dialog_RespawnState='readytospawn'";
 		};
 		class LoadoutsButton : RscShortcutButton {
 			idc = 3905;
-			x = 0.45;
-			y = 0.79;
-			w = 0.185;
+			x = 0.54;
+			y = 0.78;
+			w = 0.35;
 			h = 0.052;
 			text = $STR_DLG_RespawnLoad;
 			action = "Dialog_RespawnState='changeloadout'";

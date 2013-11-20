@@ -58,8 +58,13 @@
 	
 	_set_respawn_button_text = 
 	{
+		private ["_ts_allow"];
+		
+		_ts_allow = if ((count playableUnits) < 27) then { true } else { call _is_ts_allows };
+		
 		_respawn_button_text_last_text = _this;
-		_respawn_button ctrlSetText (if (call _is_ts_allows) then { localize _this } else { format["TS: %1:%2", Local_TS_host, Local_TS_port] });
+		_respawn_button ctrlSetText (if (_ts_allow) then { localize _this } else { if ("9987" == Local_TS_port) then { format["TS: %1", Local_TS_host] } else { format["TS: %1:%2", Local_TS_host, Local_TS_port] } });
+		_respawn_button ctrlSetTooltip (if (_ts_allow) then { "" } else { localize "STR_HINT_TSRequired" });
 	};
 	
 	Dialog_RespawnProne = false;
