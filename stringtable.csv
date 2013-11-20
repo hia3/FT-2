@@ -341,4 +341,6 @@ STR_HINT_ClickLandingZone,"Click on shaded area","Кликните в заштр
 STR_HINT_LandingZoneSelected,"Landing zone has been selected","Выбрана зона посадки"
 STR_HINT_LandingZoneNotSelected,"You can't land here","Здесь нельзя приземляться"
 
+STR_HINT_TSRequired,"Join TeamSpeak to play on this server","Необходимо подключиться к ТимСпику, чтобы играть на этом сервере"
+
 #include "tips.txt"
