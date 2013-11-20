@@ -28,6 +28,7 @@ if (Local_TS_description == "Recruit") then
 {
 	Local_Param_ExternalView = 0;
 	Local_Param_ScreenMarkers = 2;
+	Local_Param_StartFund = Local_Param_StartFund * 2;
 	Local_Param_Halo = 1;
 	Local_Param_BicycleAtMHQ = 1;
 	Local_Param_ThermalImaging = 1;
