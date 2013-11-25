@@ -288,7 +288,7 @@ switch((_this select 3)select 0)do
 		
 			_map_zoom_multiplier = getNumber(configfile >> "CfgWorlds" >> "Stratis" >> "mapSize") / getNumber(configfile >> "CfgWorlds" >> worldName >> "mapSize");
 
-			openMap [true, true];
+			openMap [true, false];
 
 			mapAnimAdd [0, Config_RespawnSize / 5000.0 * _map_zoom_multiplier, Local_FriendlyBaseFlag];
 
@@ -326,6 +326,8 @@ switch((_this select 3)select 0)do
 					hint localize "STR_HINT_LandingZoneNotSelected";
 				};
 			};
+			
+			[{ waitUntil { sleep 1; !visibleMap }; onMapSingleClick ""; }] call Func_Common_Spawn;
 		};
 	};
 };
