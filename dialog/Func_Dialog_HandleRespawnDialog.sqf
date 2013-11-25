@@ -51,7 +51,7 @@
 
 	_is_ts_allows = 
 	{
-		if (Local_TS_description == "Mercenary") then { player getVariable ["joied_ts", true] } else { true }
+		if ((Local_TS_description == "Mercenary") && ((count playableUnits) > 25)) then { player getVariable ["joied_ts", true] } else { true }
 	};
 	
 	_respawn_button_text_last_text = "";
@@ -60,7 +60,7 @@
 	{
 		private ["_ts_allow"];
 		
-		_ts_allow = if ((count playableUnits) < 27) then { true } else { call _is_ts_allows };
+		_ts_allow = call _is_ts_allows;
 		
 		_respawn_button_text_last_text = _this;
 		_respawn_button ctrlSetText (if (_ts_allow) then { localize _this } else { if ("9987" == Local_TS_port) then { format["TS: %1", Local_TS_host] } else { format["TS: %1:%2", Local_TS_host, Local_TS_port] } });
