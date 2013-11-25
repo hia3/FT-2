@@ -3,7 +3,7 @@
 while{!Global_GameEnded}do
 {
 	if ((count Server_RegisteredObjects) > 0) then
-	{	
+	{
 		_timer=serverTime;
 		//first part - tracking and deleting destroyed vehicles
 		if (({!(alive _x)} count Server_RegisteredObjects) > 0) then
@@ -16,29 +16,27 @@ while{!Global_GameEnded}do
 					if (isNil "_time") then
 					{
 						_x setVariable ["deathtime",_timer+Config_DeleteBodiesPeriod];
-						
+
 					}
 					else
 					{
 						if (_time < _timer) then
 						{
 							Server_RegisteredObjects set [Server_RegisteredObjects find _x,objNull];
-							//_x setVehicleInit "";
-							_to_delete=_to_delete+[_x];				
+							_to_delete=_to_delete+[_x];
 						};
-					}				
+					}
 				};
 			} forEach Server_RegisteredObjects;
-			
+
 			if ((count _to_delete) > 0) then
 			{
-				Server_RegisteredObjects=Server_RegisteredObjects-[objNull];		
-				//processInitCommands;		
+				Server_RegisteredObjects=Server_RegisteredObjects-[objNull];
 				{
 
 					deleteVehicle _x;
 				} forEach _to_delete;
-			};	
+			};
 		};
 		//second part - tracking and deleting unmanned vehicles
 		if (({alive _x} count Server_RegisteredObjects) > 0) then
@@ -51,8 +49,8 @@ while{!Global_GameEnded}do
 					{
 						if  ((_x getVariable "lastused")!=-1) then
 						{
-							_x setVariable ["lastused",-1,true];	
-						};					
+							_x setVariable ["lastused",-1,true];
+						};
 					}
 					else
 					{
@@ -67,23 +65,21 @@ while{!Global_GameEnded}do
 							if (_time < _timer) then
 							{
 								Server_RegisteredObjects set [Server_RegisteredObjects find _x,objNull];
-								//_x setVehicleInit "";
-								_to_delete=_to_delete+[_x];				
+								_to_delete=_to_delete+[_x];
 							};
 						}
 					};
 				};
 			} forEach Server_RegisteredObjects;
-			
+
 			if ((count _to_delete) > 0) then
 			{
-				Server_RegisteredObjects=Server_RegisteredObjects-[objNull];		
-				//processInitCommands;		
+				Server_RegisteredObjects=Server_RegisteredObjects-[objNull];
 				{
 					deleteVehicle _x;
 				} forEach _to_delete;
-			};	
+			};
 		};
-	};		
-	sleep 10;	
+	};
+	sleep 10;
 };
