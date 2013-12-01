@@ -101,7 +101,7 @@ else
 	if ((getPosATL _veh select 2)>15) then	
 	{
 		_pos=getPosATL _veh;
-		_chute="NonSteerable_Parachute_F";
+		_chute="I_Parachute_02_F";
 		_chute=_chute createVehicle [0,0,100];
 		_chute setPosATL [_pos select 0,_pos select 1,(_pos select 2)-10];
 
