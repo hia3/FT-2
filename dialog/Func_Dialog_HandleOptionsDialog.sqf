@@ -23,17 +23,17 @@ SliderSetRange[13015,0,_lastFunds];
 SliderSetPosition[13003,Local_ViewDistance];
 SliderSetPosition[13005,Dialog_ScreenMarkersDistance];
 
-_i = 1;
+_currentPlayers = +Local_CurrentPlayers;
+
 {
 	_name=_x getVariable "playername";
 	if (((typeName _x)=="OBJECT") && !(isNil "_name")) then
 	{
-		_index=lbAdd[13016,Format ["[%1] %2",_i,_name]];
+		_index=lbAdd[13016,Format ["[%1] %2",_forEachIndex + 1,_name]];
 		lbSetData[13016,_index,_name];
-		lbSetValue[13016,_index,_i-1];
+		lbSetValue[13016,_index,_forEachIndex];
 	};
-	_i = _i + 1;
-} forEach Local_CurrentPlayers;
+} forEach _currentPlayers;
 lbSetCurSel[13016,0];
 
 for [{_i=0},{_i<=Local_Param_ScreenMarkers},{_i=_i+1}] do
@@ -232,7 +232,7 @@ while {alive player && dialog} do
 		_index=lbCurSel 13016;
 		_name=lbData [13016,_index];
 		_index=lbValue [13016,_index];
-		_unit=Local_CurrentPlayers select _index;
+		_unit=_currentPlayers select _index;
 		if ((typeName _unit)=="OBJECT") then
 		{
 			if ((_transferAmount <= 0) || (_unit==player) || (_transferAmount > (call Func_Client_GetPlayerFunds))) exitWith {};
