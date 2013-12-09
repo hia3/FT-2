@@ -6,7 +6,7 @@ _result = [];
 
 {
 	if ((_inventory select _x) != "") then { _result = _result + [_inventory select _x] };
-} forEach [1, 4, 7, 11, 13, 15, 17];
+} forEach [1, 4, 7, 11, 12, 13, 15, 17];
 
 
 {
