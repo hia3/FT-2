@@ -58,7 +58,7 @@
 					}
 					else
 					{
-						_result=_result+({alive _x} count crew _x);
+						_result=_result+({(alive _x) && (isPlayer _x)} count crew _x);
 					};
 				};
 			};
