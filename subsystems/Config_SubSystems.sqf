@@ -39,7 +39,10 @@ System_ArmoredVehicleTypes=
 	["O_MBT_02_cannon_F",5],
 	["O_MBT_02_arty_F",3],
 	
-	["I_APC_Wheeled_03_cannon_F",2]
+	["I_APC_Wheeled_03_cannon_F",2],
+
+	["I_MBT_03_cannon_F",4],
+	["I_APC_tracked_03_cannon_F",2]
 ];
 
 System_AircraftVehicleTypes=
@@ -48,7 +51,9 @@ System_AircraftVehicleTypes=
 
 	["O_Heli_Light_02_F",3],["O_Heli_Attack_02_F",4],["O_Heli_Attack_02_black_F",4],
 	
-	["I_Plane_Fighter_03_CAS_F",4], ["I_Plane_Fighter_03_AA_F",4]
+	["I_Plane_Fighter_03_CAS_F",4], ["I_Plane_Fighter_03_AA_F",4],
+	
+	["I_Heli_light_03_F",3]
 ];
 
 System_GuidedMissileTypes=[];
