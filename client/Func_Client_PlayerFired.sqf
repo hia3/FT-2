@@ -8,8 +8,7 @@ _player   = _this select 0;
 _weapon   = _this select 1;
 _ammotype = _this select 4;
 _ammomag  = _this select 5;
-
-_ammo = nearestObject[_player,_ammotype];
+_ammo     = _this select 6;
 
 //if player fired at base - see Func_Client_AproachingRespawnArea
 if (Local_PlayerInSafeZone>0) then
