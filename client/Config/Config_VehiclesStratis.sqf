@@ -93,8 +93,8 @@ _add_car_class =
 			['B_APC_Tracked_01_rcws_F',   2800, 1200] call _add_car_class;
 			['I_APC_tracked_03_cannon_F', 3500, 1200] call _add_car_class;
 			['B_APC_Tracked_01_AA_F',     4000, 1200] call _add_car_class;
+			['I_MBT_03_cannon_F',         9000, 1200] call _add_car_class;
 			['B_MBT_01_cannon_F',        10000, 1200] call _add_car_class;
-			['I_MBT_03_cannon_F',        12000, 1200] call _add_car_class;
 			['B_MBT_01_arty_F',         130000, 1200] call _add_car_class;
 			['B_MBT_01_mlrs_F',         130000, 1200] call _add_car_class;
 
@@ -340,8 +340,8 @@ _add_car_class =
 			['I_APC_tracked_03_cannon_F', 3500, 1200] call _add_car_class;
 			['O_APC_Tracked_02_cannon_F', 4000, 1200] call _add_car_class;
 			['O_APC_Tracked_02_AA_F',     4000, 1200] call _add_car_class;
+			['I_MBT_03_cannon_F',         9000, 1200] call _add_car_class;
 			['O_MBT_02_cannon_F',        10000, 1200] call _add_car_class;
-			['I_MBT_03_cannon_F',        12000, 1200] call _add_car_class;
 			['O_MBT_02_arty_F',         130000, 1200] call _add_car_class;
 
 			['BRDM2_INS', 900, 1200] call _add_car_class;
