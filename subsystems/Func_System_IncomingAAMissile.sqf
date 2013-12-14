@@ -9,7 +9,7 @@ if ((_aawarning) && (local _air)) then
 	_ammo = nearestObject [_antiair, _ammotype];
 
 	_attacker_distance = _ammo distance _air;
-	_activate_distance = 300;
+	_activate_distance = 400;
 	
 	//--send _air crew a warning message
 	["message_incoming_missile", "air", crew _air] call Func_Common_SendRemoteCommand;
@@ -56,12 +56,14 @@ if ((_aawarning) && (local _air)) then
 		waitUntil{((_ammo distance _air) < (_activate_distance / 2)) || (isNull _ammo)};
 		if !(isNull _ammo) then
 		{
-			_sparks_count = count ((getPos _air) nearObjects["CMflare_Chaff_Ammo", 100]);
+			_sparks_count = count (_ammo nearObjects["CMflare_Chaff_Ammo", _activate_distance]);
 
+			player globalChat format ["debug: sparks: %1", _sparks_count];
+			
 			if (_sparks_count != 0) then
 			{
 				_missile_missed = ((random 1) > _aa_vehicle_chance);
-				if (_missile_missed) then
+				if (true) then
 				{
 					deleteVehicle _ammo;
 				};
