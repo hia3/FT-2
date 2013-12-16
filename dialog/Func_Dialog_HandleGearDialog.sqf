@@ -415,6 +415,33 @@ _is_uniform =
 	getNumber(configfile >> "CfgWeapons" >> _item >> "ItemInfo" >> "type") == 801
 };
 
+_is_optics = 
+{
+	private ["_item"];
+
+	_item = _this select 0;
+
+	getNumber(configFile >> "CfgWeapons" >> _item >> "ItemInfo" >> "type") == 201
+};
+
+_is_muzzle = 
+{
+	private ["_item"];
+
+	_item = _this select 0;
+
+	getNumber(configFile >> "CfgWeapons" >> _item >> "ItemInfo" >> "type") == 101
+};
+
+_is_acc = 
+{
+	private ["_item"];
+
+	_item = _this select 0;
+
+	getNumber(configFile >> "CfgWeapons" >> _item >> "ItemInfo" >> "type") == 301
+};
+
 _can_add_item_to_container =
 {
 PERF_BEGIN("_can_add_item_to_container")
@@ -1698,7 +1725,7 @@ _show_available_weapons_list_pred =
 {
 PERF_BEGIN("_show_available_weapons_list_pred")
 
-	private ["_param", "_button", "_display", "_weapons_config", "_config_list", "_i"];
+	private ["_param", "_button", "_display", "_pred", "_weapons_config", "_config_list", "_i"];
 
 	_param = _this select 1;
 		_button = _param select 0;
@@ -2417,19 +2444,40 @@ PERF_END("RscGear_onLoad")
     case "Items_button":
     {
 	PERF_BEGIN("Items_button")
+	
+	if (isNil "Config_AllowedItems") then
+	{
+		(_this +
+		[
+			{
+				private ["_config"];
 
-	(_this +
-	[
-		{
-			private ["_config"];
+				_config = configFile >> "CfgWeapons" >> (_this select 0);
 
-			_config = configFile >> "CfgWeapons" >> (_this select 0);
+				(([_config, "ItemCore"] call _is_entity_of_type) || ([_config, "Binocular"] call _is_entity_of_type) || ([_config, "DetectorCore"] call _is_entity_of_type)) &&
+				!((_this call _is_headgear) || (_this call _is_vest) || (_this call _is_uniform) || (_this call _is_optics) || (_this call _is_muzzle) || (_this call _is_acc))
+			}
+		]
+		) call _show_available_weapons_list_pred;
+	}
+	else
+	{
+			private ["_param", "_button", "_display", "_weapons_config", "_config_list"];
 
-			(([_config, "ItemCore"] call _is_entity_of_type) || ([_config, "Binocular"] call _is_entity_of_type) || ([_config, "DetectorCore"] call _is_entity_of_type)) &&
-			!((_this call _is_headgear) || (_this call _is_vest) || (_this call _is_uniform))
-		}
-	]
-	) call _show_available_weapons_list_pred;
+			_param = _this select 1;
+				_button = _param select 0;
+					_display = ctrlParent _button;
+
+			_weapons_config = configFile >> "CfgWeapons";
+
+			_config_list = [];
+
+			{
+				_config_list = _config_list + [_weapons_config >> _x];
+			} forEach Config_AllowedItems;
+
+			[_display, _config_list, ""] call _set_weapons_list;
+	};
 
 	PERF_END("Items_button")
     };
@@ -2474,7 +2522,7 @@ PERF_END("RscGear_onLoad")
     {
 	PERF_BEGIN("Backpacks_button")
 
-	private ["_param", "_button", "_display", "_vehicles_config", "_config_list", "_i"];
+	private ["_param", "_button", "_display", "_vehicles_config", "_allow_uav", "_config_list", "_i"];
 
 	_param = _this select 1;
 		_button = _param select 0;
@@ -2482,7 +2530,16 @@ PERF_END("RscGear_onLoad")
 
 	_vehicles_config = configfile >> "CfgVehicles";
 
-	_config_list = [_vehicles_config >> (if (Local_PlayerSide==east) then { "O_UAV_01_backpack_F" } else { "B_UAV_01_backpack_F" }), _vehicles_config >> "B_Parachute"];
+	_allow_uav = if (isNil "Config_AllowedUAV") then { true } else { Config_AllowedUAV };
+	
+	_config_list = [];
+	
+	if (_allow_uav) then
+	{
+		_config_list = _config_list + [_vehicles_config >> (if (Local_PlayerSide==east) then { "O_UAV_01_backpack_F" } else { "B_UAV_01_backpack_F" })];
+	};
+	
+	_config_list = _config_list + [_vehicles_config >> "B_Parachute"];
 
 	for [{_i = 0},{_i != count _vehicles_config},{_i = _i + 1}] do
 	{
@@ -2544,7 +2601,7 @@ PERF_END("RscGear_onLoad")
     {
 	PERF_BEGIN("Weapons_list_onLBSelChanged")
 
-        private ["_current_row", "_weapon", "_weapon_config", "_set_compatible_magazines", "_compatible_gadgets", "_cows_slot", "_muzzle_slot", "_pointer_slot", "_set_compatible_items"];
+        private ["_current_row", "_weapon", "_weapon_config", "_set_compatible_magazines", "_compatible_gadgets", "_cows_slot", "_cows_slot_filtered", "_muzzle_slot", "_pointer_slot", "_set_compatible_items"];
 
         _current_row = lnbCurSelRow IDC_Weapons_list;
 
@@ -2629,9 +2686,55 @@ PERF_END("RscGear_onLoad")
                 lnbSetCurSelRow [_list, 0];
             };
 
-            [IDC_Obves1_list, _cows_slot]    call _set_compatible_items;
-            [IDC_Obves2_list, _muzzle_slot]  call _set_compatible_items;
-            [IDC_Obves3_list, _pointer_slot] call _set_compatible_items;
+			_cows_slot_filtered = if (isNil "Config_OpticsDisableVisionModes") then { _cows_slot } else
+			{
+				private ["_result", "_allowed_zoom_range", "_zoom_min", "_zoom_max"];
+				
+				_result = _cows_slot;
+				_allowed_zoom_range = if (isNil "Config_OpticsAllowZoomRange") then { [0, 100] } else { Config_OpticsAllowZoomRange };
+				_zoom_min = _allowed_zoom_range select 0;
+				_zoom_max = _allowed_zoom_range select 1;
+			
+				{
+					private ["_optic", "_optics_modes", "_vision_modes", "_zoom_ranges", "_i"];
+					
+					_optic = _x;
+					_optics_modes = configFile >> "CfgWeapons" >> _optic >> "ItemInfo" >> "OpticsModes";
+					_vision_modes = [];
+					_zoom_ranges  = [];
+					
+					for "_i" from 0 to count(_optics_modes) - 1 do
+					{
+						private ["_mode"];
+						
+						_mode = _optics_modes select _i;
+						
+						_vision_modes = _vision_modes + getArray(_mode >> "visionMode");
+						_zoom_ranges  = _zoom_ranges + [[getNumber(_mode >> "opticsZoomMin"), getNumber(_mode >> "opticsZoomMax")]];
+					};
+					
+					{
+						if (_x in _vision_modes) then
+						{
+							_result = _result - [_optic];
+						};
+					} forEach Config_OpticsDisableVisionModes;
+					
+					{
+						if (((_x select 0) < _zoom_min) || ((_x select 1) > _zoom_max)) then
+						{
+							_result = _result - [_optic];
+						};
+					} forEach _zoom_ranges;
+
+				} forEach _cows_slot;
+				
+				_result
+			};
+			
+            [IDC_Obves1_list, _cows_slot_filtered] call _set_compatible_items;
+            [IDC_Obves2_list, _muzzle_slot]        call _set_compatible_items;
+            [IDC_Obves3_list, _pointer_slot]       call _set_compatible_items;
         };
 
 	PERF_END("Weapons_list_onLBSelChanged")
