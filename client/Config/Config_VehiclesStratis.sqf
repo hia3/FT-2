@@ -8,7 +8,26 @@ _add_car_class =
 	_vehicle_cost  = _this select 1;
 	_vehicle_time  = _this select 2;
 
-	_this_vehicle_allowed = if (isNil "Config_AllowedVehicles") then { true } else { _vehicle_class in Config_AllowedVehicles };
+	_this_vehicle_allowed = if (isNil "Config_AllowedVehicles") then { true } else
+	{
+		private ["_found"];
+		_found = false;
+		{
+			switch (typeName _x) do
+			{
+				case "STRING":
+				{
+					if (_x == _vehicle_class) exitWith { _found = true; };
+				};
+				case "ARRAY":
+				{
+					if ((_x select 0) == _vehicle_class) exitWith { _vehicle_cost = _x select 1; _found = true; };
+				};
+			};
+		} forEach Config_AllowedVehicles;
+		
+		_found
+	};
 
 	_this_vehicle_exists = isClass(configFile >> "CfgVehicles" >> _vehicle_class);
 
