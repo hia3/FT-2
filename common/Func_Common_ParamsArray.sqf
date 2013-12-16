@@ -12,9 +12,7 @@ Local_Param_Grass          = paramsArray select 9;
 Local_Param_BicycleAtMHQ   = paramsArray select 10;
 Local_Param_ThermalImaging = paramsArray select 11;
 
-diag_log "waiting for Local_TS_description";
 waitUntil{!(isNil "Local_TS_description")};
-diag_log "got Local_TS_description";
 
 if (Local_TS_description == "Mercenary") then
 {
