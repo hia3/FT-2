@@ -1,5 +1,9 @@
 //sets message to users which are not in TS
 //and remove messages for users in TS
+
+_ts_users_voted_for_map_change = [];
+_change_map_in_progress = false;
+
 /**/
 _showmessage=
 {
@@ -7,13 +11,38 @@ _showmessage=
 
 	_names = _this select 0;
 	_units = _this select 1;
+	_total_ts_users = 0;
 
 	{
 		if ((typeName _x)=="OBJECT") then
 		{
-			_x setVariable ["joied_ts", (_x getVariable "playername") in _names, true];
+			_x_name = _x getVariable "playername";
+			_is_ts_user = _x_name in _names;
+			_x setVariable ["joied_ts", _is_ts_user, true];
+			_total_ts_users = _total_ts_users + (if (_is_ts_user) then { 1 } else { 0 });
+
+			if (_is_ts_user) then
+			{
+				if (_x getVariable ["change_map", false]) then
+				{
+					if !(_x in _ts_users_voted_for_map_change) then
+					{
+						_ts_users_voted_for_map_change = _ts_users_voted_for_map_change + [_x];
+						systemChat format ["Player %1 wants to change the map. %2/%3", _x_name, count _ts_users_voted_for_map_change, _total_ts_users];						
+					};
+				};
+			};
 		};
 	} forEach _units;
+
+	if !(_change_map_in_progress) then
+	{
+		if (count _ts_users_voted_for_map_change > (_total_ts_users / 2)) then
+		{
+			_change_map_in_progress = true;
+			Global_GameEnded=true; "Global_GameEnded" call Func_Common_PublicVariable;
+		};
+	};
 };
 
 //removes messages for everybody

@@ -64,6 +64,14 @@ class RscMenu {
 			text = $STR_WF_Parameters;
 			action = "Dialog_MenuAction = 6";
 		};
+		class Button_G: RscButtonMenu_ext
+		{
+			idc = 11008;
+			x = 0.02;
+			y = 0.885;
+			text = $STR_WF_ChangeMap;
+			action = "Dialog_MenuAction = 7";
+		};
 		class Label: RscText_ext 
 		{
 			idc = 11006;
@@ -76,7 +84,7 @@ class RscMenu {
 			shortcuts[] = {0x00050000 + 1};
 			default = 0;
 			x = 0.13;
-			y = 0.9;
+			y = 1.05;
 			text = $STR_WF_Close;
 			action = "closeDialog 0;";
 		};

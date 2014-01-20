@@ -75,6 +75,7 @@ player setVariable ["enemytrack",-Config_EnemyTrackTime,true];//if player attack
 player setVariable ["groupNumber",Local_PlayerGroupNumber,true];//number of player group
 player setVariable ["groupPassword",Local_PlayerGroupPassword,true];//password of player group
 player setVariable ["deafness",0];//deafness effect. e.g. after tank or rpg shot
+player setVariable ["change_map", Local_ChangeMap, true];
 Local_PlayerVehicle=player;
 
 //add some useractions to player

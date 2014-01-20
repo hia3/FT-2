@@ -19,6 +19,8 @@ while {alive player && dialog} do
 		ctrlEnable [11002,false];
 	};
 
+	ctrlEnable [11008, player getVariable ["joied_ts", true]];
+
 	sleep 0.5;
 
 	if (!dialog || _exited) exitWith {};
@@ -77,6 +79,17 @@ while {alive player && dialog} do
 			Dialog_MenuAction = -1;
 			closeDialog 0;
 			createDialog "RscParameters";
+			_exited = true;
+		};
+
+		//--- Change map.
+		case 7:
+		{
+			Dialog_MenuAction = -1;
+			closeDialog 0;
+			player setVariable ["change_map", true, true];
+			Local_ChangeMap = true;
+			player globalChat "Voted for map change";
 			_exited = true;
 		};
 	};
