@@ -175,7 +175,7 @@ class RscOptions {
 			y = 0.52;
 			w = 0.28;
 		};		
-		// "names".. transfere monet to players combobox
+		// "names".. transfer money to players combobox
 		class CA_TM_Combo: RscCombo_ext {
 			idc = 13016;
 			x = 0.04;
