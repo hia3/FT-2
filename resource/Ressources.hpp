@@ -72,47 +72,21 @@ class RscButtonMenu_ext: RscButtonMenu {
 		align = "false";
 	};
 };
-class RscListBox_ext {
-	idc = -1;
-	type = 5;
-	style = 0 + 0x10;
-	font = "PuristaMedium";
-	sizeEx = 0.04221;
-	color[] = {1, 1, 1, 1};
+class RscListBox_ext : RscListBox {
 	colorText[] = {1, 1, 1, 0.75};
 	colorScrollbar[] = {0.95, 0.95, 0.95, 1};
 	colorSelect[] = {0.95, 0.95, 0.95, 1};
 	colorSelect2[] = {0.95, 0.95, 0.95, 1};
 	colorSelectBackground[] = {0.6, 0.8392, 0.4706, 1.0};
 	colorSelectBackground2[] = {0.6, 0.8392, 0.4706, 1.0};
-	columns[] = {0.1, 0.7, 0.1, 0.1};
-	period = 0;
 	colorBackground[] = {0, 0, 0, 1};
-	maxHistoryDelay = 1.0;
-	autoScrollSpeed = -1;
-	autoScrollDelay = 5;
-	autoScrollRewind = 0;
-	soundSelect[] = {WFBE_SoundPush, 0.09, 1};
-	
-	class ScrollBar {
-		color[] = {1, 1, 1, 0.6};
-		colorActive[] = {1, 1, 1, 1};
-		colorDisabled[] = {1, 1, 1, 0.3};		
-		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
-		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
-		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
-		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
-
-	};
+	period = 0;
 };
 class RscListBoxA_ext : RscListBox_ext {
 	type = 102;
 	lineSpacing = 1;
 	sizeEx = 0.029;
 	rowHeight = 0.03;
-	style = 16;
-	arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
-	arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
 	colorDisabled[] = {0.5,0.5,0.5,0};
 };
 class RscText_ext {
@@ -186,42 +160,18 @@ class RscXSliderH_ext {
 	border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
 	thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
 };
-class RscCombo_ext {
-	idc = -1;
-	type = 4;
+class RscCombo_ext : RscCombo {
 	style = 1;
-	x = 0;
-	y = 0;
-	w = 0.3;
-	h = 0.035;
+
 	colorSelect[] = {0.023529, 0, 0.0313725, 1};
 	colorText[] = {0.023529, 0, 0.0313725, 1};
 	colorBackground[] = {0.95, 0.95, 0.95, 1};
-	colorSelectBackground[] = {0.543, 0.5742, 0.4102, 1.0};
 	colorScrollbar[] = {0.023529, 0, 0.0313725, 1};
-	arrowEmpty = "a3\ui_f\data\gui\RscCommon\RscCombo\arrow_combo_ca.paa";
-	arrowFull = "a3\ui_f\data\gui\RscCommon\RscCombo\arrow_combo_active_ca.paa";
-	wholeHeight = 0.45;
-	color[] = {0, 0, 0, 0.6};
+	colorSelectBackground[] = {0.543, 0.5742, 0.4102, 1.0};
 	colorActive[] = {0, 0, 0, 1};
 	colorDisabled[] = {0, 0, 0, 0.3};
-	font = "PuristaMedium";
+
 	sizeEx = 0.031;
-	soundSelect[] = {WFBE_SoundPush, 0.09, 1};
-	soundExpand[] = {WFBE_SoundPush, 0.09, 1};
-	soundCollapse[] = {WFBE_SoundPush, 0.09, 1};
-	maxHistoryDelay = 1.0;
-
-	class ScrollBar {
-		color[] = {1, 1, 1, 0.6};
-		colorActive[] = {1, 1, 1, 1};
-		colorDisabled[] = {1, 1, 1, 0.3};
-		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
-		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
-		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
-		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
-
-	};
 };
 class RscTextBox_ext {
 	idc = -1;
