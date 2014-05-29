@@ -22,7 +22,7 @@ class RscPicture_ext {
 	text = "";
 };
 class RscButtonMenu_ext: RscButtonMenu {
-	w = 0.3;
+	w = 0.4;
 	h = 0.1;
 	color[] = {0.543, 0.5742, 0.4102, 1.0};
 	colorDisabled[] = {1, 1, 1, 0.25};
@@ -536,5 +536,41 @@ class RscMapControl_ext {
 		importance = 2.5 * 16 * 0.05;
 		coefMin = 0.5;
 		coefMax = 4;
+	};
+	
+	class PowerSolar {
+		icon = "\A3\ui_f\data\map\mapcontrol\powersolar_CA.paa";
+		size = 24;
+		importance = 1;
+		coefMin = 0.850000;
+		coefMax = 1.000000;
+		color[] = {1, 1, 1, 1};
+	};
+
+	class PowerWave {
+		icon = "\A3\ui_f\data\map\mapcontrol\powerwave_CA.paa";
+		size = 24;
+		importance = 1;
+		coefMin = 0.850000;
+		coefMax = 1.000000;
+		color[] = {1, 1, 1, 1};
+	};
+
+	class PowerWind {
+		icon = "\A3\ui_f\data\map\mapcontrol\powerwind_CA.paa";
+		size = 24;
+		importance = 1;
+		coefMin = 0.850000;
+		coefMax = 1.000000;
+		color[] = {1, 1, 1, 1};
+	};
+
+	class ShipWreck {
+		icon = "\A3\ui_f\data\map\mapcontrol\Shipwreck_CA.paa";
+		size = 24;
+		importance = 1;
+		coefMin = 0.850000;
+		coefMax = 1.000000;
+		color[] = {0, 0, 0, 1};
 	};
 };
