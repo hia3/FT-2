@@ -65,13 +65,6 @@ if (Local_PlayerInSafeZone>0) then
 			};
 			[player] call Func_System_BackBlast;
 		};
-	}else{			
-		//handle laser-guidance of some missiles
-		//which are bugged (fall to the ground after start)
-		if ((_weapon in System_GuidedMissileTypes) && (player==(gunner Local_PlayerVehicle))) then
-		{
-			[Func_System_AdjustMissileGuidance, [_weapon,_ammo]] call Func_Common_Spawn;
-		};			
 	};
 };
 	
