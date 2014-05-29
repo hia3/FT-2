@@ -41,6 +41,7 @@ _veh setVariable ["FT2_WF_ACT_Drop",_action];
 
 _loosecargo=false;
 _checktime=0;
+_cable_length = 4.5;
 
 //setpos loop
 //we could use AttachTo command, but i don`t like how attached vehicle behaves
@@ -50,11 +51,16 @@ while{(System_HeliCargoTransportState==1) && (alive _veh) && ((_veh emptyPositio
 	_pos = getposATL _veh;
 	_altitude = (_pos select 2);	
 	_velocity = velocity _veh;
+	
+	if (_cable_length < 17) then
+	{
+		_cable_length = _cable_length + 0.02;
+	};
 
-	if( _altitude > 15) then 
+	if( _altitude > _cable_length) then 
 	{
 		_cargo setdir getdir _veh;
-		_cargo setposATL [(_pos select 0),(_pos select 1),(_pos select 2)-15];		
+		_cargo setposATL [(_pos select 0),(_pos select 1),(_pos select 2)-_cable_length];		
 		_cargo setvelocity _velocity;
 	}
  	else
@@ -66,9 +72,14 @@ while{(System_HeliCargoTransportState==1) && (alive _veh) && ((_veh emptyPositio
 	//from time to time check if heli is flying too inaccurately
 	if (time > _checktime) then
 	{
+		private ["_veh_up", "_up_proj_len"];
+	
 		_checktime=time+0.6;
-		_pitchbank=_veh call Func_System_GetPitchBank;
-		if ((abs(_pitchbank select 0)>40) || (abs(_pitchbank select 1)>40)) then
+	
+		_veh_up = vectorUp _veh;
+		_up_proj_len = [0,0] distance [_veh_up select 0, _veh_up select 1];
+	
+		if (_up_proj_len > 0.64) then
 		{
 			if ((random 1) < 0.35) exitWith
 			{
@@ -91,19 +102,19 @@ if (!(alive _veh) || ((_veh emptyPositions "driver")>0) || _loosecargo) then
 	if ((_pos select 2)>45) then
 	{
 		sleep 5.0;
-		_cargo setDammage 1;	
+		_cargo setDamage 1;
 	};
 }
 else
 {	
 	//cargo was dropped
 	[_name,localize "STR_HINT_Dropped","a3\ui_f\data\gui\Rsc\RscPendingInvitation\desynclow_ca.paa",1.0] call Func_Client_ShowCustomMessage;
-	if ((getPosATL _veh select 2)>15) then	
+	sleep 3; // let it fall freely
+	if (abs (velocity _cargo select 2) > 1) then	
 	{
-		_pos=getPosATL _veh;
-		_chute="I_Parachute_02_F";
-		_chute=_chute createVehicle [0,0,100];
-		_chute setPosATL [_pos select 0,_pos select 1,(_pos select 2)-10];
+		_pos=getPosATL _cargo;
+		_chute="I_Parachute_02_F" createVehicle [0,0,100];
+		_chute setPosATL [_pos select 0,_pos select 1,(_pos select 2)+10];
 
 		_cargo attachTo [_chute,[0,0,-4]];
 		

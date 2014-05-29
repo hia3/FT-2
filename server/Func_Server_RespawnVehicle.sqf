@@ -70,7 +70,7 @@
 		_nearest_man = nearestObject [_veh, "CAManBase"];
 		_nearest_man = if (alive _nearest_man) then { _nearest_man } else { objNull };
 
-		if (((canMove _veh) && (_isMHQ) && !(surfaceIsWater position _veh)) || (({alive _x} count crew _veh)>0) || ((_veh distance _startpos) < 50) || !(isNull _nearest_man)) then
+		if (((canMove _veh) && (_isMHQ) && !(surfaceIsWater position _veh)) || (({alive _x} count crew _veh)>0) || ([0,0,0] distance velocity _veh > 0.2) || ((_veh distance _startpos) < 50) || !(isNull _nearest_man)) then
 		{
 			_lastUsedTime=time;
 			_veh setVariable ["last_used",_lastUsedTime];
@@ -100,7 +100,7 @@
 				_veh setPosATL _startpos;
 			};
 			_veh setDir _startdir;
-			_veh setVelocity [0,0,-10];
+			//_veh setVelocity [0,0,-10];
 
 			_veh setVehicleVarName _varname;
 			_veh call compile format ["%1=_veh; '%1' call Func_Common_PublicVariable;", _varname];
