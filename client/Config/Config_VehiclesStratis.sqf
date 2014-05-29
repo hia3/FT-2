@@ -59,12 +59,12 @@ _add_car_class =
 			['B_Quadbike_01_F',   70, 1200] call _add_car_class;
 
 			['B_MRAP_01_F',      700, 1200] call _add_car_class;
-			['B_MRAP_01_gmg_F', 1000, 1200] call _add_car_class;
-			['B_MRAP_01_hmg_F', 1000, 1200] call _add_car_class;
+			['B_MRAP_01_gmg_F', 1500, 1200] call _add_car_class;
+			['B_MRAP_01_hmg_F', 1500, 1200] call _add_car_class;
 
 			['I_MRAP_03_F',     1000, 1200] call _add_car_class;
-			['I_MRAP_03_gmg_F', 1300, 1200] call _add_car_class;
-			['I_MRAP_03_hmg_F', 1300, 1200] call _add_car_class;
+			['I_MRAP_03_gmg_F', 1600, 1200] call _add_car_class;
+			['I_MRAP_03_hmg_F', 1600, 1200] call _add_car_class;
 			
 			['I_APC_Wheeled_03_cannon_F', 4000, 1200] call _add_car_class;
 			
@@ -108,12 +108,14 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
-			['B_APC_Tracked_01_CRV_F',    1500, 1200] call _add_car_class;
+			['B_APC_Tracked_01_CRV_F',    2000, 1200] call _add_car_class;
 			['B_APC_Tracked_01_rcws_F',   2800, 1200] call _add_car_class;
 			['I_APC_tracked_03_cannon_F', 3500, 1200] call _add_car_class;
-			['B_APC_Tracked_01_AA_F',     4000, 1200] call _add_car_class;
+			['B_APC_Tracked_01_AA_F',     5000, 1200] call _add_car_class;
 			['I_MBT_03_cannon_F',         9000, 1200] call _add_car_class;
 			['B_MBT_01_cannon_F',        10000, 1200] call _add_car_class;
+			['B_MBT_01_TUSK_F',          11500, 1200] call _add_car_class;
+
 			['B_MBT_01_arty_F',         130000, 1200] call _add_car_class;
 			['B_MBT_01_mlrs_F',         130000, 1200] call _add_car_class;
 
@@ -196,6 +198,7 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
+			['B_Plane_CAS_01_F',         28000, 1200] call _add_car_class;
 			['I_Plane_Fighter_03_CAS_F', 25000, 1200] call _add_car_class;
 			['I_Plane_Fighter_03_AA_F',  16000, 1200] call _add_car_class;
 
@@ -310,17 +313,19 @@ _add_car_class =
 			['O_Quadbike_01_F',   70, 1200] call _add_car_class;
 
 			['O_MRAP_02_F',      700, 1200] call _add_car_class;
-			['O_MRAP_02_hmg_F', 1000, 1200] call _add_car_class;
-			['O_MRAP_02_gmg_F', 1000, 1200] call _add_car_class;
+			['O_MRAP_02_hmg_F', 1500, 1200] call _add_car_class;
+			['O_MRAP_02_gmg_F', 1500, 1200] call _add_car_class;
 
 			['I_MRAP_03_F',     1000, 1200] call _add_car_class;
-			['I_MRAP_03_gmg_F', 1300, 1200] call _add_car_class;
-			['I_MRAP_03_hmg_F', 1300, 1200] call _add_car_class;
+			['I_MRAP_03_gmg_F', 1600, 1200] call _add_car_class;
+			['I_MRAP_03_hmg_F', 1600, 1200] call _add_car_class;
 			
 			['I_APC_Wheeled_03_cannon_F', 4000, 1200] call _add_car_class;
 			
 			['O_Truck_02_covered_F',     300, 1200] call _add_car_class;
 			['O_Truck_02_transport_F',   250, 1200] call _add_car_class;
+			['O_Truck_03_covered_F',     450, 1200] call _add_car_class;
+			['O_Truck_03_transport_F',   400, 1200] call _add_car_class;
 			['O_APC_Wheeled_02_rcws_F', 2000, 1200] call _add_car_class;
 
 			['MMT_Civ', 50, 300] call _add_car_class;
@@ -358,7 +363,7 @@ _add_car_class =
 
 			['I_APC_tracked_03_cannon_F', 3500, 1200] call _add_car_class;
 			['O_APC_Tracked_02_cannon_F', 4000, 1200] call _add_car_class;
-			['O_APC_Tracked_02_AA_F',     4000, 1200] call _add_car_class;
+			['O_APC_Tracked_02_AA_F',     5000, 1200] call _add_car_class;
 			['I_MBT_03_cannon_F',         9000, 1200] call _add_car_class;
 			['O_MBT_02_cannon_F',        10000, 1200] call _add_car_class;
 			['O_MBT_02_arty_F',         130000, 1200] call _add_car_class;
@@ -437,6 +442,7 @@ _add_car_class =
 			_c = [];
 			_t = [];
 
+			['O_Plane_CAS_02_F',         30000, 1200] call _add_car_class;
 			['I_Plane_Fighter_03_CAS_F', 25000, 1200] call _add_car_class;
 			['I_Plane_Fighter_03_AA_F',  16000, 1200] call _add_car_class;
 
@@ -472,6 +478,10 @@ _add_car_class =
 			['O_Truck_02_Ammo_F',    600, 1800] call _add_car_class;
 			['O_Truck_02_fuel_F',    300, 1800] call _add_car_class;
 			['O_Truck_02_medical_F', 400, 1800] call _add_car_class;
+			['O_Truck_03_repair_F',  650, 1800] call _add_car_class;
+			['O_Truck_03_ammo_F',    750, 1800] call _add_car_class;
+			['O_Truck_03_fuel_F',    450, 1800] call _add_car_class;
+			['O_Truck_03_medical_F', 550, 1800] call _add_car_class;
 
 			['GAZ_Vodnik_MedEvac', 150, 1800] call _add_car_class;
 			['KamazRepair', 700, 1800] call _add_car_class;
