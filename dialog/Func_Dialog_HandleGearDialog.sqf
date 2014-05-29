@@ -1619,6 +1619,11 @@ _is_weapon_allowed =
 		};
 	};
 
+	if ("FakeWeapon_moduleTracers_F" == configName(_weapon_config)) then
+	{
+		_result = false;
+	};
+
 	_result
 };
 
