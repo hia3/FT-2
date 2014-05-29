@@ -69,7 +69,7 @@
 			{
 				_slow_op_timer = _timer + 2;
 
-				if (_playerInVehicle) then
+				if (_playerInVehicle || (goggles player == "G_Tactical_Clear") || (goggles player == "G_Tactical_Black")) then
 				{
 					Local_LaserSpots = (position Local_PlayerVehicle) nearEntities [_laser_spot_types, 5000];
 				}
