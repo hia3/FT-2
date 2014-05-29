@@ -15,7 +15,6 @@ System_HaveAARadarVehicleDatas=[];
 System_HaveAARadarVehicleRanges=[];
 
 Func_System_AdjustCannonGuidance = compile preprocessFile "SubSystems\Func_System_AdjustCannonGuidance.sqf";
-Func_System_AdjustStingerGuidance = compile preprocessFile "SubSystems\Func_System_AdjustStingerGuidance.sqf";
 Func_System_AttachExplosives = compile preprocessFile "SubSystems\Func_System_AttachExplosives.sqf";
 Func_System_BackBlast = compile preprocessFile "SubSystems\Func_System_BackBlast.sqf";
 Func_System_ClearFlaresAndSmokes = compile preprocessFile "SubSystems\Func_System_ClearFlaresAndSmokes.sqf";
