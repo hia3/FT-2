@@ -32,7 +32,7 @@ if (Localshowintro) then
     };
 
 	sleep 1.0;
-	Local_MultiUseString="<t align='center' size='1.2' color='#787878'>Loading Mission. Please Wait...</t>";
+	Local_MultiUseString=format ["<t align='center' size='1.2' color='#787878'>%1</t>", localize "STR_INT_Loading"];
 	titleRsc ["loading","plain"];
 	sleep 2.6;
 	titleFadeOut 0.3;
@@ -53,36 +53,36 @@ if (Localshowintro) then
 
 	sleep 1.7;
 
-	Local_MultiUseString="<t align='center' size='3.0' color='#dddddd'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#dddddd'>%1</t>", localize "STR_INT_hia3"];
 	titleRsc ["credits","plain"];
 
-	Local_MultiUseString="<t align='center' size='3.0' color='#FF0000'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#FF0000'>%1</t>", localize "STR_INT_hia3"];
 	CutRsc ["credits_r","black"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='center' size='3.0' color='#0000FF'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#0000FF'>%1</t>", localize "STR_INT_hia3"];
 	CutRsc ["credits_b","black"];
 	sleep 0.1;
 
 	cutRsc ["BackBlack","plain"];
 
-	Local_MultiUseString="<t align='center' size='3.0' color='#66FFCC'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#66FFCC'>%1</t>", localize "STR_INT_hia3"];
 	titleRsc ["credits","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='center' size='3.0' color='#dddddd'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#dddddd'>%1</t>", localize "STR_INT_hia3"];
 	titleRsc ["credits","plain"];
 	sleep 0.3;
 
-	Local_MultiUseString="<t align='center' size='3.0' color='#66FFCC'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#66FFCC'>%1</t>", localize "STR_INT_hia3"];
 	titleRsc ["credits","plain"];
 	sleep 0.2;
-	Local_MultiUseString="<t align='center' size='3.0' color='#dddddd'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#dddddd'>%1</t>", localize "STR_INT_hia3"];
 	titleRsc ["credits","plain"];
 	sleep 0.3;
 
-	Local_MultiUseString="<t align='center' size='3.0' color='#0000FF'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#0000FF'>%1</t>", localize "STR_INT_hia3"];
 	CutRsc ["credits_bl","black"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='center' size='3.0' color='#FF0000'>Hi,A3 Project Presents</t>";
+	Local_MultiUseString=format ["<t align='center' size='3.0' color='#FF0000'>%1</t>", localize "STR_INT_hia3"];
 	CutRsc ["credits_rr","black"];
 	sleep 0.1;
 
@@ -105,9 +105,9 @@ if (Localshowintro) then
 
 	sleep 0.6;
 
-	"chromAberration" ppEffectAdjust [0.1,0.1,true];
-	"chromAberration" ppEffectCommit 0;
-	"chromAberration" ppEffectEnable true;
+	// "chromAberration" ppEffectAdjust [0.1,0.1,true];
+	// "chromAberration" ppEffectCommit 0;
+	// "chromAberration" ppEffectEnable true;
 
 	"radialBlur" ppEffectAdjust [0.02,0.02,0.35,0.35];
 	"radialBlur" ppEffectCommit 0;
@@ -127,7 +127,7 @@ if (Localshowintro) then
 	sleep 0.1;
 
 	"radialBlur" ppEffectEnable false;
-	"chromAberration" ppEffectEnable false;
+	// "chromAberration" ppEffectEnable false;
 
 	"dynamicBlur" ppEffectAdjust [0];
 	"dynamicBlur" ppEffectCommit 0;
@@ -145,57 +145,57 @@ if (Localshowintro) then
 
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 
 	"dynamicBlur" ppEffectAdjust [0];
@@ -206,39 +206,39 @@ if (Localshowintro) then
 	"dynamicBlur" ppEffectAdjust [0.8];
 	"dynamicBlur" ppEffectCommit 0;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_3t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_3b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_3t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_3b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>The Enhanced Capture and Hold mode</t></t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_3t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_3b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 	sleep 0.1;
 
-	Local_MultiUseString="<t align='right' size='1.9' color='#484848'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#484848'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_split_3t","plain"];
-	Local_MultiUseString="<t align='right' size='1.9' color='#5d5d5d'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#5d5d5d'>%1</t>", localize "STR_INT_ECH"];
 	CutRsc ["about_split_3b","plain"];
 	sleep 0.1;
-	Local_MultiUseString="<t align='right' size='1.9' color='#000000'>The Enhanced Capture and Hold mode</t>";
+	Local_MultiUseString=format ["<t align='right' size='1.9' color='#000000'>%1</t>", localize "STR_INT_ECH"];
 	titleRsc ["about_end","plain"];
 
 	titleFadeOut 0.1;
@@ -252,7 +252,7 @@ if (Localshowintro) then
 	Local_Camera camSetRelPos [0.0, -0.1, 840];
 	Local_camera camCommitPrepared 0;
 
-	Local_MultiUseString="<t align='left' size='1.8' color='#000000'><t shadow='1' shadowColor='#565656'>Based on Valhalla gamemode sources</t></t><br/><t align='left' size='1.6' color='#000000'><t shadow='1' shadowColor='#565656'>Originally made by WINSE and Roman.Val</t></t>";
+	Local_MultiUseString=format ["<t align='left' size='1.8' color='#000000'><t shadow='1' shadowColor='#565656'>%1</t></t><br/><t align='left' size='1.7' color='#000000'><t shadow='1' shadowColor='#565656'>%2</t></t>", localize "STR_INT_CreditsST1", localize "STR_INT_CreditsST2"];
 	titleRsc ["copyright","plain"];
 
 	"colorCorrections" ppEffectEnable true;
