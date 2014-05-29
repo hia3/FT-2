@@ -237,11 +237,7 @@ while {alive player && dialog} do
 		{
 			if ((_transferAmount <= 0) || (_unit==player) || (_transferAmount > (call Func_Client_GetPlayerFunds))) exitWith {};
 			if ((_unit getVariable "playername")==_name) then
-			{
-				_fundsname=format["FT2_WF_Funds_%1",_name];
-				_funds = FT2_WF_Logic getVariable _fundsname;
-				_funds=_funds+_transferAmount;
-				FT2_WF_Logic setVariable[_fundsname,_funds,true];
+			{	
 				-_transferAmount call Func_Client_ChangePlayerFunds;
 
 				["message_transfer_funds", [player getVariable "playername", _transferAmount], _unit] call Func_Common_SendRemoteCommand;

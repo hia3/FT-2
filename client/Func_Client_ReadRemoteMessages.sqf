@@ -26,6 +26,8 @@ switch (_msg) do
 		_sponsor = _arg select 0;
 		_money   = _arg select 1;
 
+		_money call Func_Client_ChangePlayerFunds;
+		
 		player groupChat format[localize "STR_MES_FundsTransfered", _sponsor, _money];
 		playSound "hint_sound";
 	};
