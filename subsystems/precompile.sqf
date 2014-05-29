@@ -8,7 +8,6 @@ System_SmokeLauncherMagazines=[];
 System_ArmoredVehicleCM=[];
 System_AircraftVehicleCM=[];
 System_CargoChopperCategories=[];
-System_GuidedMissileDatas=[];
 System_DisposableRPGDatas=[];
 System_HaveRadarVehicleDatas=[];
 System_LoadableStaticsDatas=[];
@@ -16,7 +15,6 @@ System_HaveAARadarVehicleDatas=[];
 System_HaveAARadarVehicleRanges=[];
 
 Func_System_AdjustCannonGuidance = compile preprocessFile "SubSystems\Func_System_AdjustCannonGuidance.sqf";
-Func_System_AdjustMissileGuidance = compile preprocessFile "SubSystems\Func_System_AdjustMissileGuidance.sqf";
 Func_System_AdjustStingerGuidance = compile preprocessFile "SubSystems\Func_System_AdjustStingerGuidance.sqf";
 Func_System_AttachExplosives = compile preprocessFile "SubSystems\Func_System_AttachExplosives.sqf";
 Func_System_BackBlast = compile preprocessFile "SubSystems\Func_System_BackBlast.sqf";
@@ -85,15 +83,6 @@ Func_System_TankExploded = compile preprocessFile "SubSystems\Func_System_TankEx
 		_i=_i+1;
 	} forEach System_CargoChopperVehicles;
 	//End Cargo choppers data
-
-	//Interpriting Guided missiles data to be more convenient
-	_i=0;
-	{
-		System_GuidedMissileDatas set [_i,[_x select 1,_x select 2,_x select 3]];
-		System_GuidedMissileTypes set [_i,_x select 0];
-		_i=_i+1;
-	} forEach System_GuidedMissileTypes;
-	//End Guided missiles data
 	
 	//Interpriting Reloadable static weapons data to be more convenient
 	_i=0;
