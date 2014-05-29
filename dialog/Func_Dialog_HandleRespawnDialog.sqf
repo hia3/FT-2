@@ -34,7 +34,7 @@
 	//get a desired respawn marker
 	_spawn=(Local_FriendlySpawnPoints select Dialog_RespawnCurrentPoint) select 0;
 
-	_map ctrlMapAnimAdd [2,0.16,getMarkerPos _spawn];
+	_map ctrlMapAnimAdd [0,0.16,getMarkerPos _spawn];
 	ctrlMapAnimCommit _map;
 
 	//create a rotating yellow marker on the desired respawn position
