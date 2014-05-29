@@ -21,8 +21,14 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 {
 	"Global_GameEnded" call Func_Common_PublicVariable;
 
+	{
+		clearWeaponCargoGlobal _x; 
+		clearMagazineCargoGlobal _x;
+		clearItemCargoGlobal _x;
+	} forEach (call Config_AmmoCrates);
+	
 	/*onPlayerConnected "[Func_Server_OnPlayerConnected, []] call Func_Common_Spawn;";*/
-    onPlayerDisconnected {[Func_Server_OnPlayerDisconnected, _name] call Func_Common_Spawn;};
+	onPlayerDisconnected {[Func_Server_OnPlayerDisconnected, _name] call Func_Common_Spawn;};
 
 	{ private ["_flag", "_texture"]; _flag = _x select 0; _texture = _x select 1; _flag setFlagTexture _texture; } forEach [[Config_EastBaseFlag, Config_EastFlagTexture],[Config_WestBaseFlag, Config_WestFlagTexture]];
 	{_x setVariable ["score",0,true]; _x setVariable ["bonus",0,true]} forEach [Config_EastBaseFlag,Config_WestBaseFlag];
