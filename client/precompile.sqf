@@ -51,7 +51,7 @@ Local_MultiUseString=format ["<t align='center' shadow='true' size='1.5'  color=
 
 Local_MapInfoStrings=
 [
-	"<t align='center' shadow='true' size='2.1' color='#ffffff'>F i g h t   F o r   T h e   T e r r i t o r y   -   L i g h t   L e v e l   M a p</t>",
+	"<t align='center' shadow='true' size='2.1' color='#ffffff'>F i g h t   F o r   T h e   T e r r i t o r y</t>",
 	" ",
 	format ["<t align='center' shadow='true' size='1.5'>Mission engine version: %1</t>",Config_MissionVersion],
 	"<t align='center' shadow='true' size='1.5'>Made by WINSE and Roman.Val</t>",
