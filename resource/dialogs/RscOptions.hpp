@@ -10,7 +10,7 @@ class RscOptions {
 			idc = -1;
 			x = 0.016;
 			y = 0.17;
-			w = 0.62;
+			w = 0.75;
 			h = 0.6;
 		};
 	};
@@ -65,12 +65,13 @@ class RscOptions {
 			text = $STR_WF_MMPlayers;
 			x = 0.35;
 			y = 0.25;
+			w = 0.3 + 0.13;
 			sizeEx = 0.03;
 		};
 		class CA_MMP_Combo: RscCombo_ext {
 			idc = 13009;
 			x = 0.35;
-			w = 0.28;
+			w = 0.28 + 0.13;
 			y = 0.285;
 		};
 		class CA_MMV_Label: RscText_ext {
@@ -78,12 +79,13 @@ class RscOptions {
 			text = $STR_WF_MMVehicles;
 			x = 0.35;
 			y = 0.315;
+			w = 0.3 + 0.13;
 			sizeEx = 0.03;
 		};
 		class CA_MMV_Combo: RscCombo_ext {
 			idc = 13011;
 			x = 0.35;
-			w = 0.28;
+			w = 0.28 + 0.13;
 			y = 0.35;
 		};
 		class CA_MMS_Label: RscText_ext {
@@ -91,12 +93,13 @@ class RscOptions {
 			text = $STR_WF_MMObjects;
 			x = 0.35;
 			y = 0.385;
+			w = 0.3 + 0.13;
 			sizeEx = 0.03;
 		};
 		class CA_MMS_Combo: RscCombo_ext {
 			idc = 13013;
 			x = 0.35;
-			w = 0.28;
+			w = 0.28 + 0.13;
 			y = 0.42;
 		};
 		// Gui style lable
@@ -105,12 +108,13 @@ class RscOptions {
 			text = $STR_WF_GUIStyle;
 			x = 0.35;
 			y = 0.455;
+			w = 0.3 + 0.13;
 			sizeEx = 0.03;
 		};
 		class CA_GS_Combo: RscCombo_ext {
 			idc = 13006;
 			x = 0.35;
-			w = 0.28;
+			w = 0.28 + 0.13;
 			y = 0.49;
 		};
 
@@ -120,14 +124,15 @@ class RscOptions {
 			text = $STR_WF_GUIColor;
 			x = 0.35;
 			y = 0.525;
+			w = 0.3 + 0.13;
 			sizeEx = 0.03;
 		};
 		// Gui color combobox.
-		class CA_GC_Combo_Label: RscCombo_ext {
+		class CA_GC_Combo: RscCombo_ext {
 			idc = 13017;
 			x = 0.35;
 			y = 0.560;
-			w = 0.28;
+			w = 0.28 + 0.13;
 		};
 
 		// Auto save weapon lable
@@ -136,12 +141,13 @@ class RscOptions {
 			text = $STR_WF_Autosave;
 			x = 0.35;
 			y = 0.595;
+			w = 0.3 + 0.13;
 			sizeEx = 0.03;
 		};
 		class CA_ASW_Combo: RscCombo_ext {
 			idc = 13008;
 			x = 0.35;
-			w = 0.28;
+			w = 0.28 + 0.13;
 			y = 0.63;
 		};
 		class CA_SepHL: RscPicture_ext{
@@ -193,8 +199,8 @@ class RscOptions {
 		class CA_FL_Button : RscShortcutButton {
 			idc = -1;
 			x = 0.04;
-			y = 0.71;
-			w = 0.28;
+			y = 0.7;
+			w = 0.38;
 			text = $STR_WF_FlipBtn;
 			action = "Dialog_MenuAction = 2";
 		};		
@@ -202,7 +208,7 @@ class RscOptions {
 		class CA_Close : RscShortcutButton {
 			idc = -1;
 			default = 0;
-			x = 0.445425;
+			x = 0.445 + 0.13;
 			y = 0.7;
 			text = $STR_WF_Close;
 			action = "closeDialog 0";
