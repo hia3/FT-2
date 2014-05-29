@@ -335,8 +335,8 @@ while{!Global_GameEnded&&!visibleMap&&Local_GUIActive&&(alive player)&&!Local_GU
 
 
 	//---DAMAGE-INDICATOR-START---
-	_dam=getDammage player;
-	if (((((getDammage player)!=_lastdam) && (_TimerD<=_timing) && !_playerInVehicle) || _updatedam) && (Dialog_GUIType in [2,3])) then
+	_dam=damage player;
+	if (((((damage player)!=_lastdam) && (_TimerD<=_timing) && !_playerInVehicle) || _updatedam) && (Dialog_GUIType in [2,3])) then
 	{
 		_lastdam=_dam;
 		_updatedam=false;

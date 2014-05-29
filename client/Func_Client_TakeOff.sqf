@@ -24,7 +24,7 @@
 		
 		//dunno why, but planes are able to retract
 		//gear only after setDamage 0 
-		_dam=getDammage _veh;
+		_dam=damage _veh;
 		_veh setDamage 0;
 		_veh setDamage _dam;
 		

@@ -26,7 +26,7 @@ _men=(nearestObjects [_unit,["Man"],_maxdist])-[_unit];
 		_dist=_x distance _unit;
 		_percent=((_maxdist-_dist)/(_maxdist));
 		_dam=_maxdam*_percent;
-		_x setDamage ((getDammage _x)+_dam);
+		_x setDamage ((damage _x)+_dam);
 
 		if (_hands) then {_x setHit ["Hands",1]};
 		if (_legs) then {_x setHit ["Legs",1]};
