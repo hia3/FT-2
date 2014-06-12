@@ -22,7 +22,6 @@ Func_System_Deafness = compile preprocessFile "SubSystems\Func_System_Deafness.s
 Func_System_DropFlares = compile preprocessFile "SubSystems\Func_System_DropFlares.sqf";
 Func_System_FiredNear = compile preprocessFile "SubSystems\Func_System_FiredNear.sqf";
 Func_System_GetFireMode = compile preprocessFile "SubSystems\Func_System_GetFireMode.sqf";
-Func_System_GetPitchBank = compile preprocessFile "SubSystems\Func_System_GetPitchBank.sqf";
 Func_System_GrenadeIntoTank = compile preprocessFile "SubSystems\Func_System_GrenadeIntoTank.sqf";
 Func_System_HeliCargoManager = compile preprocessFile "SubSystems\Func_System_HeliCargoManager.sqf";
 Func_System_HeliCargoPick = compile preprocessFile "SubSystems\Func_System_HeliCargoPick.sqf";
