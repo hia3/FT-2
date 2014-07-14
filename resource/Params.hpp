@@ -24,11 +24,10 @@
 		// STR_P_Weather02,"Bad","Плохая"
 		// STR_P_Weather03,"Calm","Тихая"
 		// STR_P_Weather04,"Perfect","Отличная"
-		// STR_P_Weather05,"Changing","Переменчивая"
 
 		title="$STR_P_Weather";
-		values[]={1.0, 0.66, 0.33, 0, -1.0};
-		texts[]={$STR_P_Weather01, $STR_P_Weather02, $STR_P_Weather03, $STR_P_Weather04, $STR_P_Weather05};
+		values[]={1.0, 0.66, 0.33, 0};
+		texts[]={$STR_P_Weather01, $STR_P_Weather02, $STR_P_Weather03, $STR_P_Weather04};
 		default=0.33;
 	};
 	// params array 3

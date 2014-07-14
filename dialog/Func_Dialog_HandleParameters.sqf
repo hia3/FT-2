@@ -44,7 +44,6 @@ switch(Local_Param_Weather) do
 	case 0.66 : {_pat2 = localize "STR_P_Weather02"};
 	case 0.33 : {_pat2 = localize "STR_P_Weather03"};
 	case 0 : {_pat2 = localize "STR_P_Weather04"};
-	case -1 : {_pat2 = localize "STR_P_Weather05"};
 };
 
 if (Config_DisableWeatherChange) then

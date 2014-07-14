@@ -158,7 +158,7 @@ _worldname = worldName;
 };
 */
 
-onEachFrame
+_on_each_frame = 
 {
 	if (Dialog_ScreenMarkersType != 0) then
 	{
@@ -341,6 +341,7 @@ onEachFrame
 	};
 };
 
+["FT2", "onEachFrame", _on_each_frame, nil] call BIS_fnc_addStackedEventHandler;
 
 {
 	private ["_cp_flags"];
@@ -460,22 +461,6 @@ onEachFrame
 	{
 		Localshowintro = false;
 		Config_GameStartDelay = 0;
-	};
-	//---
-
-	//---weather system---
-	if !(Config_DisableWeatherChange) then
-	{
-		if (Local_Param_Weather == -1) then
-		{
-			if (!isServer) then
-			{
-				"Public_WeatherCode" addPublicVariableEventHandler { 10 setOvercast((_this select 1) select 2); 10 setRain((_this select 1) select 3); };
-			};
-		}else{
-			10 setOvercast Local_Param_Weather;
-			10 setRain Local_Param_Weather;
-		};
 	};
 	//---
 

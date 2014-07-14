@@ -64,12 +64,9 @@ Func_Server_WeatherBroadcast=compile preprocessFile ("server\Func_Server_Weather
 	//param weather
 	if !(Config_DisableWeatherChange) then
 	{
-		if (Local_Param_Weather == -1) then
-		{
-			[Func_Server_DynamicWeather, []] call Func_Common_Spawn;
-			[Func_Server_WeatherBroadcast, []] call Func_Common_Spawn;
-			10 setOvercast (random 1.0);
-		};
+		10 setOvercast Local_Param_Weather;
+		10 setRain Local_Param_Weather;
+		10 setFog 0;
 	};
 
 	//param mission duration
