@@ -20,6 +20,7 @@ if (Local_TS_description == "Mercenary") then
 	Local_Param_ScreenMarkers = 0;
 	Local_Param_Halo = 0;
 	Local_Param_BicycleAtMHQ = 0;
+	Local_Param_ThermalImaging = 0;
 };
 
 if (Local_TS_description == "Recruit") then
